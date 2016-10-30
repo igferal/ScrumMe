@@ -17,6 +17,14 @@ var heroes_component_1 = require('./heroes.component');
 var hero_service_1 = require('./hero.service');
 var dashboard_component_1 = require('./dashboard.component');
 var router_1 = require('@angular/router');
+var angularfire2_1 = require('angularfire2');
+exports.firebaseConfig = {
+    apiKey: "AIzaSyBXNhwkOT_iu_9HIktEw78YGCydAjs6RQ0",
+    authDomain: "angularintegration-3b520.firebaseapp.com",
+    databaseURL: "https://angularintegration-3b520.firebaseio.com",
+    storageBucket: "angularintegration-3b520.appspot.com",
+    messagingSenderId: "87154413034"
+};
 var AppModule = (function () {
     function AppModule() {
     }
@@ -24,7 +32,12 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
+                angularfire2_1.AngularFireModule.initializeApp(exports.firebaseConfig),
                 forms_1.FormsModule, router_1.RouterModule.forRoot([
+                    {
+                        path: 'detail/:id',
+                        component: hero_detail_component_1.HeroDetailComponent
+                    },
                     {
                         path: '',
                         redirectTo: '/dashboard',

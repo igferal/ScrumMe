@@ -7,13 +7,30 @@ import { HeroesComponent } from './heroes.component';
 import { HeroService } from './hero.service';
 import { DashboardComponent } from './dashboard.component'
 import { RouterModule } from '@angular/router';
+import { AngularFireModule } from 'angularfire2';
+
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyBXNhwkOT_iu_9HIktEw78YGCydAjs6RQ0",
+    authDomain: "angularintegration-3b520.firebaseapp.com",
+    databaseURL: "https://angularintegration-3b520.firebaseio.com",
+    storageBucket: "angularintegration-3b520.appspot.com",
+    messagingSenderId: "87154413034"
+};
 
 
 
 @NgModule({
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+
     FormsModule, RouterModule.forRoot([
+      {
+        path: 'detail/:id',
+        component: HeroDetailComponent
+      },
+
       {
         path: '',
         redirectTo: '/dashboard',

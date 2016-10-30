@@ -9,16 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var angularfire2_1 = require('angularfire2');
 var DashboardComponent = (function () {
-    function DashboardComponent() {
+    function DashboardComponent(af) {
+        this.heroes = [];
     }
+    DashboardComponent.prototype.ngOnInit = function () {
+    };
+    DashboardComponent.prototype.gotoDetail = function (hero) { };
     DashboardComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'my-dashboard',
             templateUrl: 'dashboard.component.html',
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [angularfire2_1.AngularFire])
     ], DashboardComponent);
     return DashboardComponent;
 }());
