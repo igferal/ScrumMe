@@ -1,0 +1,17 @@
+<h1>
+  {{title}}
+</h1>
+<ul>
+  <li class="text" *ngFor="let item of items | async">
+   {{item.$key}} = {{item.$value}}
+  </li>
+</ul>
+
+
+<div>
+
+  <input type="text" #name placeholder="Nuevo medicamento" />
+  <input type="number" #newname placeholder="Toma indicada" />
+  <button (click)="save(name.value ,newname.value)">Set Name</button>
+
+</div>
