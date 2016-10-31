@@ -3,15 +3,15 @@
 </h1>
 <ul>
   <li class="text" *ngFor="let item of items | async">
-   {{item.$key}} = {{item.$value}}
+    {{item.$value}}
   </li>
 </ul>
 
 
 <div>
 
-  <input type="text" #name placeholder="Nuevo medicamento" />
-  <input type="number" #newname placeholder="Toma indicada" />
-  <button (click)="save(name.value ,newname.value)">Set Name</button>
+  <input type="text" #nombre placeholder="Nuevo medicamento" />
+  <input type="number" #dosis placeholder="Toma indicada" />
+  <button (click)="save(nombre.value ,dosis.value)">Set Name</button>
 
 </div>

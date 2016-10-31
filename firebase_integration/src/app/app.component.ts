@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFire, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2';
+import { Medicamento} from './medicamento';
 
 
 @Component({
@@ -20,12 +21,9 @@ export class AppComponent {
     this.database = af.database.object("/items");
   }
 
-  save(parameter:string ,newName: string) {
-    this.name =parameter;
-    
-    console.log(this.name + " : " + newName);
-    var json = { newName : newName};
-    this.database.update(json);
+  save(nombre:string , dosis: number) {
+    let medicamento = new Medicamento(nombre,dosis);
+    this.database.update(medicamento);
   }
 
 
