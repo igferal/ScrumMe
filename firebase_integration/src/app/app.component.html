@@ -1,17 +1,20 @@
-<h1>
-  {{title}}
-</h1>
-<ul>
-  <li class="text" *ngFor="let item of items | async">
-    {{item.$value}}
-  </li>
-</ul>
+<div class="row">
+    <div class="small-3 small-centered columns">
+        <h1>
+            {{title}}
+        </h1>
+        <ul>
+            <li class="text" *ngFor="let item of items | async">
+                {{item._nombre}}, {{item._dosis}} pastillas.
+            </li>
+        </ul>
 
+        <div>
 
-<div>
+            <input type="text" #nombre placeholder="Nuevo medicamento" />
+            <input type="number" #dosis placeholder="Toma indicada" />
+            <button class="button" (click)="save(nombre.value ,dosis.value)">Set Name</button>
 
-  <input type="text" #nombre placeholder="Nuevo medicamento" />
-  <input type="number" #dosis placeholder="Toma indicada" />
-  <button (click)="save(nombre.value ,dosis.value)">Set Name</button>
-
+        </div>
+    </div>
 </div>

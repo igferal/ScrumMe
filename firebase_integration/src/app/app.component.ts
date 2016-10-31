@@ -16,14 +16,15 @@ export class AppComponent {
 
 
   constructor(af: AngularFire) {
-    console.log("**********" + "*******************"); 
     this.items = af.database.list('/items');
     this.database = af.database.object("/items");
+    
   }
+
 
   save(nombre:string , dosis: number) {
     let medicamento = new Medicamento(nombre,dosis);
-    this.database.update(medicamento);
+    this.items.push(medicamento);
   }
 
 

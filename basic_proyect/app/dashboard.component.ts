@@ -15,11 +15,11 @@ export class DashboardComponent implements OnInit {
 
     heroes: Hero[] = [];
 
-constructor(af: AngularFire) {
+    constructor(af: AngularFire) {
 
-  }
+    }
     ngOnInit(): void {
-        
+
     }
 
     gotoDetail(hero: Hero): void { /* not implemented yet */ }
