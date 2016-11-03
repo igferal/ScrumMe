@@ -1,35 +1,34 @@
-import {Medicamento} from './medicamento';
+import {PostIt} from './PostIt';
 import {AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {forEach} from "@angular/router/src/utils/collection";
-import {of} from "../../Observable";
 
 
 @Injectable()
 export class ItemService {
-  items: FirebaseListObservable<Medicamento[]>;
-  database: FirebaseObjectObservable<any>;
 
 
-  constructor(af: AngularFire) {
-    this.items = af.database.list('/items');
-    this.database = af.database.object("/items");
+  constructor(public af: AngularFire) {
+  
+
 
   }
 
-  getAll(): FirebaseListObservable<Medicamento> {
+  getAll(): FirebaseListObservable<PostIt[]> {
 
-    return this.items;
+    return this.af.database.list('/items');
 
   }
 
-  get Database() : FirebaseObjectObservable<any>{
+ 
 
-    return this.database;
+  save(medicamento : PostIt){
+
+    
+    this.af.database.list('/items').push(medicamento);
+
   }
-
-
 
 
 }

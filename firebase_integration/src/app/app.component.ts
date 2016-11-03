@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { Medicamento} from './medicamento';
+import { Component , OnInit} from '@angular/core';
+import { PostIt} from './PostIt';
 import { ItemService } from './item.service';
 import { AngularFire, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2';
-import {Observable} from 'rxjs/Observable';
 
 
 
@@ -12,23 +11,27 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./app.component.css'],
   providers: [ItemService],
 })
-export class AppComponent {
+export class AppComponent  implements OnInit{
 
-   items : FirebaseListObservable<Medicamento>;
+   items : FirebaseListObservable<PostIt[]>;
 
     constructor(public itemService: ItemService) {
 
-    this.itemService = itemService;
-      this.items = itemService.getAll();
 
     }
 
 
+ngOnInit(){
 
-  save(nombre:string , dosis: number) {
-    let medicamento = new Medicamento(nombre,dosis);
-    this.itemService.database.push(medicamento);
+    this.items =  this.itemService.getAll();
+
+}
+
+  save(contenido:string,programador:string , horas: number) {
+    let postIt = new PostIt(contenido,programador,horas);
+    this.itemService.save(postIt);
+
   }
 
-  title = 'Lista de medicamentos';
+  title = 'Lista de tareas';
 }
