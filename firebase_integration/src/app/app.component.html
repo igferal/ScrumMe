@@ -15,5 +15,11 @@
             <input type="number" #horas placeholder="Horas de trabajo" />
             <button class="hollow button" (click)="save(contenido.value,programador.value ,horas.value)">Anotar</button>
         </div>
+
+        <div> {{ (af.auth | async)?.uid }} </div>
+        <button class="button" (click)="login()">Login With Twitter</button>
+        <button class="button"  (click)="overrideLogin()">Login Anonymously</button>
+
+
     </div>
 </div>
