@@ -1,48 +1,12 @@
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <h1>
-            {{title}}
-        </h1>
-
-
-        <table>
-            <thead>
-                <tr>
-                    <th width="300">Tarea</th>
-                    <th width="150">Programador</th>
-                    <th width="50">Horas</th>
-                    <th width="150">Borrar</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr *ngFor="let item of (items | async)">
-                    <td> {{item._contenido}} </td>
-                    <td>{{item._programador}}</td>
-                    <td> {{item._horas}} </td>
-                    <td> <button class="alert button" (click)="deleteItem(item)">Borrar tarea</button> </td>
-                </tr>
-
-            </tbody>
-        </table>
-
-        <form>
-            <div class="row">
-                <fieldset class="fieldset">
-                    <legend>Crear nueva tarea</legend>
-
-                    <div class="medium-6 columns">
-
-                        <input type="text" #programador placeholder="Programador que se ocupa" />
-                        <textarea #contenido placeholder="Contenido de la tarea">  </textarea>
-                    </div>
-                    <div class="medium-6 columns">
-                        <input type="number" #horas placeholder="Horas de trabajo" />
-                        <button class="success button" (click)="addItem(contenido.value,programador.value ,horas.value)">Anotar</button>
-                    </div>
-                </fieldset>
-            </div>
-        </form>
-
-    </div>
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">Lista de tareas</li>
+          <li><a routerLink="/list">List</a></li>
+          <li><a routerLink="/form">Forms</a></li>
+    </ul>
+  </div>
 </div>
+
+<router-outlet></router-outlet>
+
