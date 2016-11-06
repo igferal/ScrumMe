@@ -15,7 +15,7 @@ export class AppComponent {
   items: FirebaseListObservable<any>;
   constructor(af: AngularFire) {
     this.items = af.database.list('/items');
-    this.title = "Lista de medicamentos";
+    this.title = "Lista de tareas";
   }
   addItem(contenido: string,programador: string ,horas :number) {
 
