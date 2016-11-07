@@ -19,7 +19,7 @@ export class FormComponent implements OnInit {
 
     ngOnInit() {
 
-        this.items = this.af.database.list('/items');
+        this.items = this.af.database.list('/todo');
 
     }
 

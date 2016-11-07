@@ -5,8 +5,7 @@
         <ul>
             <li class="sinVinyeta" *ngFor="let item of (items | async)" [dragula]='"bag-one"' [dragulaModel]='items'>
                 <div class="note">
-                      <button (click)="deleteItem(item)" class="close-classic"></button>
-                    {{item._programador}} : {{item._contenido}}
+                    <button (click)="deleteItem(item)" class="close-classic"></button> {{item._programador}} : {{item._contenido}}
                 </div>
 
             </li>
@@ -16,12 +15,12 @@
     <div class="medium-6 columns">
 
         <ul>
-            <li class="sinVinyeta" *ngFor="let coso of cosos" [dragula]='"bag-two"' [dragulaModel]='cosos'>
+            <li class="sinVinyeta" *ngFor="let item of (cosos | async)" [dragula]='"bag-two"' [dragulaModel]='items'>
                 <div class="note">
-                    {{coso}}
+                    <button (click)="deleteItem(item)" class="close-classic"></button> {{item._programador}} : {{item._contenido}}
                 </div>
-            </li>
 
+            </li>
         </ul>
     </div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostIt } from './post.it';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
 
 @Component({
     selector: 'list',
@@ -15,14 +16,16 @@ export class ListComponent implements OnInit {
 
 
     items: FirebaseListObservable<any>;
-    cosos: String[];
+    cosos: FirebaseListObservable<any>;
 
-    constructor(private af: AngularFire) {
+    array1: String[];
+    array2: String[];
 
 
+
+    constructor(private af: AngularFire, private dragulaService: DragulaService) {
 
     }
-
 
 
     deleteItem(key: string) {
@@ -31,9 +34,12 @@ export class ListComponent implements OnInit {
 
     ngOnInit() {
 
-        this.items = this.af.database.list('/items');
+        this.items = this.af.database.list('/todo');
         this.title = "Lista de tareas";
-        this.cosos = ["coso","cosito","coson"];
+        this.cosos = this.af.database.list('/inprogress');
+        this.array1 = ["a", "b", "c"];
+        this.array2 = [ "1", "2"];
+
 
     }
 
