@@ -13,8 +13,13 @@ export class ListComponent implements OnInit {
 
     title: string;
 
+
     items: FirebaseListObservable<any>;
+    cosos: String[];
+
     constructor(private af: AngularFire) {
+
+
 
     }
 
@@ -28,6 +33,7 @@ export class ListComponent implements OnInit {
 
         this.items = this.af.database.list('/items');
         this.title = "Lista de tareas";
+        this.cosos = ["coso","cosito","coson"];
 
     }
 

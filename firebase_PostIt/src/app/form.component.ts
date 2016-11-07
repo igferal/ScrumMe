@@ -5,7 +5,6 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 @Component({
     selector: 'form',
     templateUrl: './form.component.html',
-    styleUrls: ['./app.component.css']
 
 })
 
