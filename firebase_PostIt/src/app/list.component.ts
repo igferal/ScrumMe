@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { PostIt } from './post.it';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2';
 import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
+import { FirebaseService } from './database/firebase.service';
+
 
 @Component({
     selector: 'list',
     templateUrl: './list.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    providers: [FirebaseService]
+
 })
-
-
 export class ListComponent implements OnInit {
 
     title: string;
-
-
     items: FirebaseListObservable<any>;
     cosos: FirebaseListObservable<any>;
 
 
-    constructor(private af: AngularFire, private dragulaService: DragulaService) {
+    constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService) {
 
         dragulaService.setOptions('bag-one', {
             revertOnSpill: true
@@ -29,38 +29,27 @@ export class ListComponent implements OnInit {
             revertOnSpill: true
         });
 
-        dragulaService.dropModel.subscribe((value) => {
-            this.onDropModel(value.slice(1));
+        dragulaService.drag.subscribe((value) => {
+
+            console.log(value);
+
         });
-        dragulaService.removeModel.subscribe((value) => {
-            this.onRemoveModel(value.slice(1));
-        });
 
     }
 
-    private onDropModel(args) {
-        console.log(`${args} On drop`);
-        let [el, target, source] = args;
-        // do something else
+    deleteItemToDo(key: string) {
+        this.firebaseService.delete(key, "/todo");
     }
 
-    private onRemoveModel(args) {
-        console.log(`${args} On remove`);
-
-        let [el, source] = args;
-        // do something else
+    deleteItemInProgress(key: string) {
+        this.firebaseService.delete(key, "/inprogress");
     }
 
-    deleteItem(key: string) {
-        this.items.remove(key);
-    }
 
     ngOnInit() {
-
-        this.items = this.af.database.list('/todo');
+        this.items = this.firebaseService.getCollection('/todo');
         this.title = "Lista de tareas";
-        this.cosos = this.af.database.list('/inprogress');
-
+        this.cosos = this.firebaseService.getCollection('/inprogress');
     }
 
 }

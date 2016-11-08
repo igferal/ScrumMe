@@ -6,7 +6,7 @@
         <ul [dragula]='"bag-one"' [dragulaModel]='items'>
             <li class="sinVinyeta" *ngFor="let item of (items | async )">
                 <div class="note">
-                    <button (click)="deleteItem(item)" class="close-classic"></button>
+                    <button (click)="deleteItemToDo(item)" class="close-classic"></button>
                     <span class="label">{{item._programador}}</span>
                     <br/> {{item._contenido}}
                 </div>
@@ -20,7 +20,7 @@
         <ul [dragula]='"bag-two"' [dragulaModel]='cosos'>
             <li class="sinVinyeta" *ngFor="let item of (cosos | async )">
                 <div class="note">
-                    <button (click)="deleteItem(item)" class="close-classic"></button>
+                    <button (click)="deleteItemInProgress(item)" class="close-classic"></button>
                     <span class="label">{{item._programador}}</span>
                     <br/> {{item._contenido}}
                 </div>
