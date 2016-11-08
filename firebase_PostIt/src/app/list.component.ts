@@ -29,12 +29,6 @@ export class ListComponent implements OnInit {
             revertOnSpill: true
         });
 
-        dragulaService.drag.subscribe((value) => {
-
-            console.log(value);
-
-        });
-
     }
 
     deleteItemToDo(key: string) {

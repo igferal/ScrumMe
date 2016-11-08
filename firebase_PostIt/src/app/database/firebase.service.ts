@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Database } from './IDatabase';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-
+import { PostIt } from '../post.it';
 
 @Injectable()
 export class FirebaseService implements Database {
@@ -19,9 +19,9 @@ export class FirebaseService implements Database {
 
     }
 
-    save(item: any, collection: string) {
+    save(item: PostIt, collection: string) {
 
-        this.getCollection(collection).push(item);
+        this.af.database.list("/todo").push(item);
 
     }
 

@@ -19,6 +19,7 @@ export class FormComponent  {
     addItem(contenido: string, programador: string, horas: number) {
         var postIt = new PostIt(contenido, programador, horas);
         this.firebaseService.save(postIt, "/todo");
+
     }
 
 }
