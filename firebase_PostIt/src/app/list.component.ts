@@ -18,15 +18,38 @@ export class ListComponent implements OnInit {
     items: FirebaseListObservable<any>;
     cosos: FirebaseListObservable<any>;
 
-    array1: String[];
-    array2: String[];
-
-
 
     constructor(private af: AngularFire, private dragulaService: DragulaService) {
 
+        dragulaService.setOptions('bag-one', {
+            revertOnSpill: true
+        });
+
+        dragulaService.setOptions('bag-two', {
+            revertOnSpill: true
+        });
+
+        dragulaService.dropModel.subscribe((value) => {
+            this.onDropModel(value.slice(1));
+        });
+        dragulaService.removeModel.subscribe((value) => {
+            this.onRemoveModel(value.slice(1));
+        });
+
     }
 
+    private onDropModel(args) {
+        console.log(`${args} On drop`);
+        let [el, target, source] = args;
+        // do something else
+    }
+
+    private onRemoveModel(args) {
+        console.log(`${args} On remove`);
+
+        let [el, source] = args;
+        // do something else
+    }
 
     deleteItem(key: string) {
         this.items.remove(key);
@@ -37,9 +60,6 @@ export class ListComponent implements OnInit {
         this.items = this.af.database.list('/todo');
         this.title = "Lista de tareas";
         this.cosos = this.af.database.list('/inprogress');
-        this.array1 = ["a", "b", "c"];
-        this.array2 = [ "1", "2"];
-
 
     }
 

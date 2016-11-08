@@ -2,24 +2,28 @@
 
     <div class="medium-6 columns">
 
-        <ul>
-            <li class="sinVinyeta" *ngFor="let item of (items | async)" [dragula]='"bag-one"' [dragulaModel]='items'>
+        <h3>To Do</h3>
+        <ul [dragula]='"bag-one"' [dragulaModel]='items'>
+            <li class="sinVinyeta" *ngFor="let item of (items | async )">
                 <div class="note">
-                    <button (click)="deleteItem(item)" class="close-classic"></button> {{item._programador}} : {{item._contenido}}
+                    <button (click)="deleteItem(item)" class="close-classic"></button>
+                    <span class="label">{{item._programador}}</span>
+                    <br/> {{item._contenido}}
                 </div>
-
             </li>
         </ul>
     </div>
 
     <div class="medium-6 columns">
+        <h3>In progress</h3>
 
-        <ul>
-            <li class="sinVinyeta" *ngFor="let item of (cosos | async)" [dragula]='"bag-two"' [dragulaModel]='items'>
+        <ul [dragula]='"bag-two"' [dragulaModel]='cosos'>
+            <li class="sinVinyeta" *ngFor="let item of (cosos | async )">
                 <div class="note">
-                    <button (click)="deleteItem(item)" class="close-classic"></button> {{item._programador}} : {{item._contenido}}
+                    <button (click)="deleteItem(item)" class="close-classic"></button>
+                    <span class="label">{{item._programador}}</span>
+                    <br/> {{item._contenido}}
                 </div>
-
             </li>
         </ul>
     </div>
