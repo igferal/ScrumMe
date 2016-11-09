@@ -1,2 +1,7 @@
-# PruebasAngular2
-Conjunto de proyectos de prueba para angular2 y typescript
+# ScrumBoard Online
+Proyecto base de un tablero web de scrum con actualización en tiempo real.
+
+Proyecto usando:
+
+Firebase
+Angular2
