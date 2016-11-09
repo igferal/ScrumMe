@@ -15,7 +15,7 @@ import { FirebaseService } from './database/firebase.service';
 export class BoardComponent implements OnInit {
 
     title: string;
-    items: PostIt[];
+    todos: PostIt[];
     cosos: FirebaseListObservable<any>;
 
 
@@ -69,9 +69,13 @@ deleteItemInProgress(key: string) {
 ngOnInit() {
 
 
- this.firebaseService.getCollection("/todo").forEach(
-     (items)=>  this.items=items
+ this.firebaseService.getCollection("/todo").subscribe(
+     (items)=>  this.todos=items
     );
+
+
+    
+    
     this.title = "Lista de tareas";
     this.cosos = this.firebaseService.getCollection('/inprogress');
 }

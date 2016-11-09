@@ -3,7 +3,7 @@
     <div class="medium-6 columns">
         <h3>To do</h3>
 
-        <div   *ngFor="let item of (items  )" [dragula]='"bag-one"' [dragulaModel]='items'>
+        <div   *ngFor="let item of (todos  )" [dragula]='"bag-one"' [dragulaModel]='todos'>
 
             <div class="note">
                 <button (click)="deleteItemToDo(item)" class="close-classic"></button>
