@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './router.component';
 import { AngularFireModule } from 'angularfire2';
 import { FormComponent } from './form.component';
-import { ListComponent } from './list.component';
+import { BoardComponent } from './board.component';
 import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
 
 
@@ -24,7 +24,7 @@ export const firebaseConfig = {
     declarations: [
         AppComponent,
         FormComponent,
-        ListComponent
+        BoardComponent
     ],
     imports: [
         BrowserModule,

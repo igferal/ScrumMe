@@ -1,12 +1,12 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormComponent }   from './form.component';
-import { ListComponent }   from './list.component';
+import { BoardComponent }   from './board.component';
 import { AppComponent }      from './app.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'list', pathMatch: 'full' },
-  { path: 'list',  component: ListComponent },
+  { path: '', redirectTo: 'board', pathMatch: 'full' },
+  { path: 'board',  component: BoardComponent },
   { path: 'form', component: FormComponent },
 ];
 

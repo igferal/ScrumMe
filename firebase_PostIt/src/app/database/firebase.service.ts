@@ -3,6 +3,7 @@ import { Database } from './IDatabase';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { PostIt } from '../post.it';
 
+
 @Injectable()
 export class FirebaseService implements Database {
 
@@ -21,14 +22,16 @@ export class FirebaseService implements Database {
 
     save(item: PostIt, collection: string) {
 
-        this.af.database.list("/todo").push(item);
+        this.af.database.list(collection).push(item);
 
     }
+
 
     delete(key: string, collection: string) {
 
-        this.getCollection(collection).remove(key);
+        this.af.database.list(collection).remove(key);
     }
+
 
 
 }
