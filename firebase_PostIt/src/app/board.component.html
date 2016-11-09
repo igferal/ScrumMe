@@ -3,8 +3,8 @@
     <div class="medium-6 columns">
         <h3>To do</h3>
 
-        <div   *ngFor="let item of (todos  )" [dragula]='"bag-one"' [dragulaModel]='todos'>
-
+        <div *ngFor="let item of (todos  )" [dragula]='"bag-one"' [dragulaModel]='todos'>
+            <br/>
             <div class="note">
                 <button (click)="deleteItemToDo(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
@@ -18,22 +18,24 @@
     <div class="medium-6 columns">
         <h3>In progress</h3>
 
-        <div  *ngFor="let item of (cosos | async )" [dragula]='"bag-one"' [dragulaModel]='cosos'>
-
+        <div *ngFor="let item of (cosos | async )" [dragula]='"bag-one"' [dragulaModel]='todos'>
+            <br/>
             <div class="note">
                 <button (click)="deleteItemInProgress(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
                 <br/> {{item._contenido}}
             </div>
         </div>
- <div class="pene" [dragula]='"bag-one"' [dragulaModel]='items'>
-        aaaaaa
+
+
+        <div [dragula]='"bag-one"' [dragulaModel]='todos'>
+                        <br/>
+
+        </div>
+
     </div>
 
 
-    </div>
-
-   
 
 
 </div>

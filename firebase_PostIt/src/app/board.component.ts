@@ -21,63 +21,72 @@ export class BoardComponent implements OnInit {
 
     constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService) {
 
-       
         dragulaService.drag.subscribe((value) => {
             console.log(`drag: ${value[0]}`);
-            this.onDrag();
+            this.onDrag(value.slice(1));
         });
-        dragulaService.drop.subscribe((value) => {
+        dragulaService.dropModel.subscribe((value) => {
             console.log(`drop: ${value[0]}`);
-            this.onDrop();
+            this.onDrop(value.slice(1));
         });
+
+
+
         dragulaService.over.subscribe((value) => {
             console.log(`over: ${value[0]}`);
-            this.onOver();
+            this.onOver(value.slice(1));
         });
         dragulaService.out.subscribe((value) => {
             console.log(`out: ${value[0]}`);
-            this.onOut();
+            this.onOut(value.slice(1));
         });
+
+        
     }
 
-    private onDrag() {
-        // do something
+    private onDrag(args) {
+        let [e, el] = args;
+
+
     }
 
-    private onDrop() {
-        // do something
+    private onDrop(args) {
+        let [e, el] = args;
+        alert(e);
+        alert(el);
     }
 
-    private onOver() {
-        // do something
+    private onOver(args) {
+        let [e, el, container] = args;
     }
 
-    private onOut() {
-        // do something
+    private onOut(args) {
+        let [e, el, container] = args;
     }
 
 
-deleteItemToDo(key: string) {
-    this.firebaseService.delete(key, "/todo");
-}
 
-deleteItemInProgress(key: string) {
-    this.firebaseService.delete(key, "/inprogress");
-}
+    deleteItemToDo(key: string) {
+        this.firebaseService.delete(key, "/todo");
+    }
 
-
-ngOnInit() {
+    deleteItemInProgress(key: string) {
+        this.firebaseService.delete(key, "/inprogress");
+    }
 
 
- this.firebaseService.getCollection("/todo").subscribe(
-     (items)=>  this.todos=items
-    );
+    ngOnInit() {
 
 
-    
-    
-    this.title = "Lista de tareas";
-    this.cosos = this.firebaseService.getCollection('/inprogress');
-}
+        this.firebaseService.getCollection("/todo").subscribe(
+            (items) => this.todos = items
+        );
+
+
+
+
+        this.title = "Lista de tareas";
+        this.cosos = this.firebaseService.getCollection('/inprogress');
+    }
 
 }
