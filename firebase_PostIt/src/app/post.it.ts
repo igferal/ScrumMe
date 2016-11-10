@@ -2,45 +2,52 @@ export class PostIt {
 
   private _contenido: string;
   private _programador: string;
-  private _horas : number;
-  private _key : string;
+  private _horas: number;
+  private _key: string;
 
-  constructor(contenido : string,programador: string, horas : number,key? :string){
+  constructor(contenido: string, programador: string, horas: number, key?: string) {
 
-    this._contenido=contenido;
-    this._horas=horas;
-    this._programador=programador;
-    this._key = key;
+    this._contenido = contenido;
+    this._horas = horas;
+    this._programador = programador;
+    this.setKey(key);
+  }
+
+  setKey(key: string) {
+
+    if (key != undefined)
+      this._key = key;
+    else this._key = "";
 
   }
-  
- get programador(): string{
-  
-   return this._programador;
 
- }
+  get programador(): string {
 
-get key(){
+    return this._programador;
 
-  return this._key;
-}
+  }
 
- get horas(): number{
+  get key() {
 
-   return this._horas;
+    return this._key;
+  }
 
- }
+  get horas(): number {
 
-get contenido():string{
+    return this._horas;
 
-  return this._contenido;
-}
+  }
+
+  get contenido(): string {
+
+    return this._contenido;
+  }
 
 
-public toString() :string{
+  public toString(): string {
 
-  return `De ${this.contenido}  se encargara ${this.programador}.`;
+    return `De ${this.contenido}  se encargara ${this.programador}.`;
 
-}
+  }
 
 }

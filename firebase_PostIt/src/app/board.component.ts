@@ -17,7 +17,8 @@ export class BoardComponent implements OnInit {
     title: string;
     todos: PostIt[];
     cosos: PostIt[];
-
+    testing: PostIt[];
+    done: PostIt[];
 
     constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService) {
 
@@ -54,7 +55,7 @@ export class BoardComponent implements OnInit {
         console.log(postit);
         this.deleteItemToDo(postItId);
         this.firebaseService.save(postit, "/inprogress")
-        
+
 
     }
 
@@ -77,6 +78,12 @@ export class BoardComponent implements OnInit {
     public deleteItemInProgress(key: string) {
         this.firebaseService.delete(key, "/inprogress");
     }
+    public deleteItemTesting(key: string) {
+        this.firebaseService.delete(key, "/testing");
+    }
+    public deleteItemDone(key: string) {
+        this.firebaseService.delete(key, "/done");
+    }
 
 
     public ngOnInit() {
@@ -90,6 +97,14 @@ export class BoardComponent implements OnInit {
         this.firebaseService.getCollection("/inprogress").subscribe(
             (items) => this.cosos = items
         );
+        this.firebaseService.getCollection("/testing").subscribe(
+            (items) => this.testing = items
+        );
+        this.firebaseService.getCollection("/done").subscribe(
+            (items) => this.done = items
+        );
+
+
     }
 
 }

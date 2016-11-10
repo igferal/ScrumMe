@@ -22,6 +22,7 @@ export class FirebaseService implements Database {
 
     save(item: PostIt, collection: string) {
 
+        console.log(collection);
         this.af.database.list(collection).push(item);
 
     }
@@ -36,16 +37,13 @@ export class FirebaseService implements Database {
     findById(key: string, collection: string) {
 
         var element: any[];
-
         this.af.database.list('/todo/' + key).subscribe((item) => {
 
             element = item;
         });
 
-
-        
-
-        var postit = new PostIt(element[0].$value, element[1].$value, element[2].$value, key);
+        console.log(element);
+        var postit = new PostIt(element[0].$value, element[3].$value, element[1].$value, key);
         return postit;
 
     }
