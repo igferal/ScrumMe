@@ -9,6 +9,7 @@
                 <button (click)="deleteItemToDo(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
                 <br/> {{item._contenido}}
+                   <p style="display:none">{{item.$key}} </p>
             </div>
 
         </div>
@@ -24,12 +25,13 @@
                 <button (click)="deleteItemInProgress(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
                 <br/> {{item._contenido}}
+             
             </div>
         </div>
 
 
         <div [dragula]='"bag-one"' [dragulaModel]='todos'>
-                        <br/>
+            <br/>
 
         </div>
 

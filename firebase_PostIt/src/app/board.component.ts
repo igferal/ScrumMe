@@ -22,26 +22,23 @@ export class BoardComponent implements OnInit {
     constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService) {
 
         dragulaService.drag.subscribe((value) => {
-            console.log(`drag: ${value[0]}`);
+
             this.onDrag(value.slice(1));
         });
-        dragulaService.dropModel.subscribe((value) => {
-            console.log(`drop: ${value[0]}`);
+        dragulaService.drop.subscribe((value) => {
             this.onDrop(value.slice(1));
         });
 
-
-
         dragulaService.over.subscribe((value) => {
-            console.log(`over: ${value[0]}`);
+
             this.onOver(value.slice(1));
         });
         dragulaService.out.subscribe((value) => {
-            console.log(`out: ${value[0]}`);
+
             this.onOut(value.slice(1));
         });
 
-        
+
     }
 
     private onDrag(args) {
@@ -52,16 +49,21 @@ export class BoardComponent implements OnInit {
 
     private onDrop(args) {
         let [e, el] = args;
-        alert(e);
-        alert(el);
+        for(let item of e){
+
+            console.log(e);
+        }
+
     }
 
     private onOver(args) {
         let [e, el, container] = args;
+
     }
 
     private onOut(args) {
         let [e, el, container] = args;
+
     }
 
 
@@ -82,6 +84,7 @@ export class BoardComponent implements OnInit {
             (items) => this.todos = items
         );
 
+        
 
 
 
