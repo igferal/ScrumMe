@@ -38,13 +38,9 @@ export class FirebaseService implements Database {
 
         
         var element: any[];
-        var item:string = `${collection}/${key}`;
-        console.log(item); 
         this.af.database.list(collection +"/"+ key).subscribe((item) => {
-            console.log(item);
             element = item;
         });
-
         console.log(element);
         var postit = new PostIt(element[0].$value, element[3].$value, element[1].$value, key);
         return postit;

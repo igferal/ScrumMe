@@ -15,7 +15,7 @@
     <div class="medium-3 columns">
         <h3>In progress</h3>
         <div id="inprogress" *ngFor="let item of inprogress" [dragula]='"bag-one"' [dragulaModel]='inprogress'>
-            <div class="note">
+            <div id="{{item.$key}}" class="note">
                 <button (click)="deleteItemInProgress(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
                 <br/> {{item._contenido}}
@@ -23,10 +23,10 @@
         </div>
     </div>
 
-    <div id="testing" class="medium-3 columns">
+    <div class="medium-3 columns">
         <h3>Testing</h3>
-        <div *ngFor="let item of testing" [dragula]='"bag-one"' [dragulaModel]='testing'>
-            <div class="note">
+        <div id="testing" *ngFor="let item of testing" [dragula]='"bag-one"' [dragulaModel]='testing'>
+            <div id="{{item.$key}}" class="note">
                 <button (click)="deleteItemTesting(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
                 <br/> {{item._contenido}}
@@ -34,10 +34,10 @@
         </div>
     </div>
 
-    <div id="done" class="medium-3 columns">
+    <div class="medium-3 columns">
         <h3>Done</h3>
-        <div *ngFor="let item of done  " [dragula]='"bag-one"' [dragulaModel]='done'>
-            <div class="note">
+        <div id="done" *ngFor="let item of done  " [dragula]='"bag-one"' [dragulaModel]='done'>
+            <div id="{{item.$key}}" class="note">
                 <button (click)="deleteItemDone(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
                 <br/> {{item._contenido}}

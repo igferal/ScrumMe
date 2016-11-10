@@ -50,7 +50,7 @@ export class BoardComponent implements OnInit {
 
     private onDropModel(args) {
 
-        console.log(args);
+        console.log(args)
         var postItId: string = args[0].id;
         var fromCollection: string = args[2].id;
         var toCollection: string = args[1].id;
@@ -64,7 +64,7 @@ export class BoardComponent implements OnInit {
         console.log(fromCollection);
         console.log(toCollection);
         var postit = this.firebaseService.findById(postItId, fromCollection);
-        this.deleteItemToDo(postItId);
+        this.firebaseService.delete(postItId, fromCollection);
         this.firebaseService.save(postit, toCollection);
 
     }
