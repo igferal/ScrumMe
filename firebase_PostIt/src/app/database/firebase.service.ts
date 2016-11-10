@@ -30,6 +30,22 @@ export class FirebaseService implements Database {
     delete(key: string, collection: string) {
 
         this.af.database.list(collection).remove(key);
+
+    }
+
+    findById(key: string, collection: string) {
+
+        var element: any[];
+
+        this.af.database.list('/todo/' + key).subscribe((item) => {
+    
+            element = item;
+           // element = new PostIt(item[0].$value,item[1].$value,item[2].$value);
+        });
+
+        var postit = new PostIt(element[0].$value,element[1].$value,element[2].$value,key);
+        return postit;
+
     }
 
 

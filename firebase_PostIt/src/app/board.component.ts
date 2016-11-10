@@ -49,10 +49,10 @@ export class BoardComponent implements OnInit {
 
     private onDrop(args) {
         let [e, el] = args;
-        for(let item of e){
-
-            console.log(e);
-        }
+        var postItId: string = args[0].id;
+        var postit = this.firebaseService.findById(postItId, "/todo");
+        this.deleteItemToDo(postItId);
+        this.firebaseService.save(postit,"/inprogress")
 
     }
 
@@ -68,23 +68,23 @@ export class BoardComponent implements OnInit {
 
 
 
-    deleteItemToDo(key: string) {
+    public deleteItemToDo(key: string) {
         this.firebaseService.delete(key, "/todo");
     }
 
-    deleteItemInProgress(key: string) {
+    public deleteItemInProgress(key: string) {
         this.firebaseService.delete(key, "/inprogress");
     }
 
 
-    ngOnInit() {
+    public ngOnInit() {
 
 
         this.firebaseService.getCollection("/todo").subscribe(
             (items) => this.todos = items
         );
 
-        
+
 
 
 

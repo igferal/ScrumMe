@@ -8,6 +8,8 @@ export interface Database {
 
     delete(key: string, collection: string);
 
+    findById(key:string,collection:string);
+
 
 
 }
