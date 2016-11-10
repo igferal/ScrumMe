@@ -16,7 +16,7 @@ export class BoardComponent implements OnInit {
 
     title: string;
     todos: PostIt[];
-    cosos: FirebaseListObservable<any>;
+    cosos: PostIt[];
 
 
     constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService) {
@@ -51,8 +51,10 @@ export class BoardComponent implements OnInit {
         let [e, el] = args;
         var postItId: string = args[0].id;
         var postit = this.firebaseService.findById(postItId, "/todo");
+        console.log(postit);
         this.deleteItemToDo(postItId);
-        this.firebaseService.save(postit,"/inprogress")
+        this.firebaseService.save(postit, "/inprogress")
+        
 
     }
 
@@ -84,12 +86,10 @@ export class BoardComponent implements OnInit {
             (items) => this.todos = items
         );
 
-
-
-
-
         this.title = "Lista de tareas";
-        this.cosos = this.firebaseService.getCollection('/inprogress');
+        this.firebaseService.getCollection("/inprogress").subscribe(
+            (items) => this.cosos = items
+        );
     }
 
 }
