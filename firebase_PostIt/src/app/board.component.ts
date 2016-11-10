@@ -16,29 +16,22 @@ export class BoardComponent implements OnInit {
 
     title: string;
     todos: PostIt[];
-    cosos: PostIt[];
+    inprogress: PostIt[];
     testing: PostIt[];
     done: PostIt[];
 
     constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService) {
 
-        dragulaService.drag.subscribe((value) => {
 
-            this.onDrag(value.slice(1));
-        });
-        dragulaService.drop.subscribe((value) => {
-            this.onDrop(value.slice(1));
-        });
+        this.dragulaSubscriptions(dragulaService);
+    }
 
-        dragulaService.over.subscribe((value) => {
-
-            this.onOver(value.slice(1));
-        });
-        dragulaService.out.subscribe((value) => {
-
-            this.onOut(value.slice(1));
-        });
-
+    private dragulaSubscriptions(dragulaService: DragulaService) {
+        dragulaService.drag.subscribe((value) => { this.onDrag(value.slice(1)); });
+        dragulaService.drop.subscribe((value) => { this.onDrop(value.slice(1)); });
+        dragulaService.over.subscribe((value) => { this.onOver(value.slice(1)); });
+        dragulaService.out.subscribe((value) => { this.onOut(value.slice(1)); });
+        dragulaService.dropModel.subscribe((value) => { this.onDropModel(value.slice(1)) });
 
     }
 
@@ -49,13 +42,30 @@ export class BoardComponent implements OnInit {
     }
 
     private onDrop(args) {
-        let [e, el] = args;
-        var postItId: string = args[0].id;
-        var postit = this.firebaseService.findById(postItId, "/todo");
-        console.log(postit);
-        this.deleteItemToDo(postItId);
-        this.firebaseService.save(postit, "/inprogress")
 
+        console.log()
+        //this.addToAnotherBag(args,"/todo","/inprogress");
+
+    }
+
+    private onDropModel(args) {
+
+        console.log(args);
+        var postItId: string = args[0].id;
+        var fromCollection: string = args[2].id;
+        var toCollection: string = args[1].id;
+        this.addToAnotherBag(postItId, `/${fromCollection}`, `/${toCollection}`);
+
+    }
+
+    private addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
+
+        console.log(postItId);
+        console.log(fromCollection);
+        console.log(toCollection);
+        var postit = this.firebaseService.findById(postItId, fromCollection);
+        this.deleteItemToDo(postItId);
+        this.firebaseService.save(postit, toCollection);
 
     }
 
@@ -95,7 +105,7 @@ export class BoardComponent implements OnInit {
 
         this.title = "Lista de tareas";
         this.firebaseService.getCollection("/inprogress").subscribe(
-            (items) => this.cosos = items
+            (items) => this.inprogress = items
         );
         this.firebaseService.getCollection("/testing").subscribe(
             (items) => this.testing = items

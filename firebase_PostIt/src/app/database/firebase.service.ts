@@ -36,9 +36,12 @@ export class FirebaseService implements Database {
 
     findById(key: string, collection: string) {
 
+        
         var element: any[];
-        this.af.database.list('/todo/' + key).subscribe((item) => {
-
+        var item:string = `${collection}/${key}`;
+        console.log(item); 
+        this.af.database.list(collection +"/"+ key).subscribe((item) => {
+            console.log(item);
             element = item;
         });
 

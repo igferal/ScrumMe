@@ -2,70 +2,47 @@
 
     <div class="medium-3 columns">
         <h3>To do</h3>
-
-        <div *ngFor="let item of (todos  )" [dragula]='"bag-one"' [dragulaModel]='todos'>
-
-            <br/>
+        <div id="todo" *ngFor="let item of todos" [dragula]='"bag-one"' [dragulaModel]='todos'>
             <div id="{{item.$key}}" class="note">
                 <button (click)="deleteItemToDo(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
                 <br/> {{item._contenido}}
             </div>
-
         </div>
     </div>
 
 
     <div class="medium-3 columns">
         <h3>In progress</h3>
-        <div *ngFor="let item of (cosos  )" [dragula]='"bag-one"' [dragulaModel]='todos'>
-
-            <br/>
+        <div id="inprogress" *ngFor="let item of inprogress" [dragula]='"bag-one"' [dragulaModel]='inprogress'>
             <div class="note">
                 <button (click)="deleteItemInProgress(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
                 <br/> {{item._contenido}}
             </div>
-
-        </div>
-        <div [dragula]='"bag-one"' [dragulaModel]='todos'>
-            <br/>
         </div>
     </div>
 
-
-    <div class="medium-3 columns">
+    <div id="testing" class="medium-3 columns">
         <h3>Testing</h3>
-        <div *ngFor="let item of (testing  )" [dragula]='"bag-one"' [dragulaModel]='todos'>
-
-            <br/>
+        <div *ngFor="let item of testing" [dragula]='"bag-one"' [dragulaModel]='testing'>
             <div class="note">
                 <button (click)="deleteItemTesting(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
                 <br/> {{item._contenido}}
             </div>
-
-        </div>
-        <div [dragula]='"bag-one"' [dragulaModel]='todos'>
-            <br/>
         </div>
     </div>
 
-
-    <div class="medium-3 columns">
+    <div id="done" class="medium-3 columns">
         <h3>Done</h3>
-        <div *ngFor="let item of (done  )" [dragula]='"bag-one"' [dragulaModel]='todos'>
-
-            <br/>
+        <div *ngFor="let item of done  " [dragula]='"bag-one"' [dragulaModel]='done'>
             <div class="note">
                 <button (click)="deleteItemDone(item)" class="close-classic"></button>
                 <span class="label">{{item._programador}}</span>
                 <br/> {{item._contenido}}
             </div>
 
-        </div>
-        <div [dragula]='"bag-one"' [dragulaModel]='todos'>
-            <br/>
         </div>
     </div>
 
