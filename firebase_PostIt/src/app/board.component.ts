@@ -60,9 +60,6 @@ export class BoardComponent implements OnInit {
 
     private addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
 
-        console.log(postItId);
-        console.log(fromCollection);
-        console.log(toCollection);
         var postit = this.firebaseService.findById(postItId, fromCollection);
         this.firebaseService.delete(postItId, fromCollection);
         this.firebaseService.save(postit, toCollection);
