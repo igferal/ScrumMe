@@ -1,17 +1,18 @@
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <fieldset class="fieldset">
-            <legend>Crear nueva tarea</legend>
+<div container>
+    <fieldset>
+        <legend>Crear nueva tarea</legend>
 
-            <div class="medium-6 columns">
+        <div column=6>
 
-                <input type="text" #programador placeholder="Programador que se ocupa" />
-                <textarea #contenido placeholder="Contenido de la tarea">  </textarea>
-            </div>
-            <div class="medium-6 columns">
-                <input type="number" #horas placeholder="Horas de trabajo" />
-                <a href="/board" class="success button" (click)="addItem(contenido.value,programador.value ,horas.value)">Anotar</a>
-            </div>
-        </fieldset>
-    </div>
+            <input type="text" #programador placeholder="Programador que se ocupa" />
+            <br/>
+            <textarea #contenido placeholder="Contenido de la tarea">  </textarea>
+            <p class="input--help">Historia de usuario</p>
+        </div>
+        <div column=6>
+            <input type="number" #horas placeholder="Horas de trabajo" />
+            <br/>
+            <a href="/board" class="success button" (click)="addItem(contenido.value,programador.value ,horas.value)">Anotar</a>
+        </div>
+    </fieldset>
 </div>
