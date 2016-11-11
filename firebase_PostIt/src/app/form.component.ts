@@ -17,8 +17,7 @@ export class FormComponent  {
     constructor(private firebaseService: FirebaseService) {}  
 
     addItem(contenido: string, programador: string, horas: number) {
-        var postIt = new PostIt("Migrar la bd", "jorge", 3);
-        //var postIt = new PostIt(contenido, programador, horas);
+        var postIt = new PostIt(contenido, programador, horas);
         this.firebaseService.save(postIt, "/todo");
 
     }
