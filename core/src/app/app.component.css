@@ -4,13 +4,15 @@ body {
     background-size: cover;
 }
 
-.myDiv {
-    width: 160px;
-    height: 160px;
-}
-
 h3 {
     color: white;
+}
+
+.dragHere {
+    height: 2000px;
+    border: dashed;
+    border-color: gray;
+    text-align: center
 }
 
 .note {

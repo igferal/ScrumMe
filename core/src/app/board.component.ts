@@ -44,7 +44,6 @@ export class BoardComponent implements OnInit {
     private onDrop(args) {
 
         console.log()
-        //this.addToAnotherBag(args,"/todo","/inprogress");
 
     }
 
@@ -85,13 +84,16 @@ export class BoardComponent implements OnInit {
 
 
     public ngOnInit() {
+        this.title = "Lista de tareas";
+        this.inicializateCollections();
+    }
 
+    private inicializateCollections() {
 
         this.firebaseService.getCollection("/todo").subscribe(
             (items) => this.todos = items
         );
 
-        this.title = "Lista de tareas";
         this.firebaseService.getCollection("/inprogress").subscribe(
             (items) => this.inprogress = items
         );
@@ -101,7 +103,6 @@ export class BoardComponent implements OnInit {
         this.firebaseService.getCollection("/done").subscribe(
             (items) => this.done = items
         );
-
 
     }
 
