@@ -4,7 +4,7 @@
             <h3>To do</h3>
             <div id="todo" *ngFor="let item of todos" [dragula]='"bag-one"' [dragulaModel]='todos'>
                 <div id="{{item.$key}}" class="note">
-                    <button (click)="deleteItemToDo(item)" class="close-classic"></button>
+                    <a (click)="deleteItem('todo',item)" class="close-classic"></a>
                     <span class="label">{{item._programador}}</span>
                     <br/> {{item._contenido}}
                 </div>
@@ -16,7 +16,7 @@
             <h3>In progress</h3>
             <div id="inprogress" *ngFor="let item of inprogress" [dragula]='"bag-one"' [dragulaModel]='inprogress'>
                 <div id="{{item.$key}}" class="note">
-                    <button (click)="deleteItemInProgress(item)" class="close-classic"></button>
+                    <a (click)="deleteItem('inprogress',item)" class="close-classic"></a>
                     <span class="label">{{item._programador}}</span>
                     <br/> {{item._contenido}}
                 </div>
@@ -27,7 +27,7 @@
             <h3>Testing</h3>
             <div id="testing" *ngFor="let item of testing" [dragula]='"bag-one"' [dragulaModel]='testing'>
                 <div id="{{item.$key}}" class="note">
-                    <button (click)="deleteItemTesting(item)" class="close-classic"></button>
+                    <a (click)="deleteItem('testing',item)" class="close-classic"></a>
                     <span class="label">{{item._programador}}</span>
                     <br/> {{item._contenido}}
                 </div>
@@ -38,7 +38,7 @@
             <h3>Done</h3>
             <div id="done" *ngFor="let item of done  " [dragula]='"bag-one"' [dragulaModel]='done'>
                 <div id="{{item.$key}}" class="note">
-                    <button (click)="deleteItemDone(item)" class="close-classic"></button>
+                    <a (click)="deleteItem('done',item)" class="close-classic"></a>
                     <span class="label">{{item._programador}}</span>
                     <br/> {{item._contenido}}
                 </div>
