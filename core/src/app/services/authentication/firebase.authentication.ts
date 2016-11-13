@@ -33,6 +33,7 @@ export class FirebaseAuthentication implements IAuthentication {
                 resolve(result);
             })
         });
+        return res;
    }
 
     login(email: string, password: string): any {

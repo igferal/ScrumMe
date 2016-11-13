@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,31 +17,39 @@ export class LoginComponent {
     password: string;
     authed: boolean;
 
-    constructor(private firebaseAuth: FirebaseAuthentication) {
+    constructor(private firebaseAuth: FirebaseAuthentication, private router: Router) {
         this.authed = false;
     }
 
 
 
-    signUp(email: string, password: string) {
+    signUp(email: string, password: string, ) {
         this.email = email;
         this.password = password;
         this.firebaseAuth.signUp(this.email, this.password).then((res) => {
-            alert(res);
+
+            this.redirect(res);
+
         });
+    }
+
+    private redirect(res: any) {
+
+        if (res.provider == 4) {
+            this.authed = true
+            this.router.navigate(['/board']);
+        } else {
+            alert("No existe ese usuario, Chavalin!!!");
+        }
+
     }
 
     login(email: string, password: string) {
 
         this.email = email;
         this.password = password;
-
         this.firebaseAuth.login(this.email, this.password).then((res) => {
-            console.log(res);
-            if (res.provider == 4) {
-                this.authed = true
-            }
-
+            this.redirect(res);
         });
     }
 
@@ -50,6 +59,8 @@ export class LoginComponent {
         this.firebaseAuth.logout();
 
     }
+
+
 
 
 
