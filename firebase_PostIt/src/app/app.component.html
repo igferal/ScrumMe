@@ -1,5 +1,11 @@
-<sm-menu title="ScrumMe" class="inverted teal">
-    <a sm-item routerLink="/board">Tablero</a>
-    <a sm-item routerLink="/form">Añadir tarea</a>
-</sm-menu>
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">Lista de tareas</li>
+          <li><a routerLink="/board">Tablero</a></li>
+          <li><a routerLink="/form">Añadir tarea</a></li>
+    </ul>
+  </div>
+</div>
 <router-outlet></router-outlet>
+
