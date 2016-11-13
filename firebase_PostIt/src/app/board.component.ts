@@ -78,20 +78,11 @@ export class BoardComponent implements OnInit {
 
 
 
-    public deleteItemToDo(key: string) {
-        this.firebaseService.delete(key, "/todo");
+    public deleteItem(collection:string ,key: string) {
+        this.firebaseService.delete(key, `${collection}`);
     }
 
-    public deleteItemInProgress(key: string) {
-        this.firebaseService.delete(key, "/inprogress");
-    }
-    public deleteItemTesting(key: string) {
-        this.firebaseService.delete(key, "/testing");
-    }
-    public deleteItemDone(key: string) {
-        this.firebaseService.delete(key, "/done");
-    }
-
+   
 
     public ngOnInit() {
 

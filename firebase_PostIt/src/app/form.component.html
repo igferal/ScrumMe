@@ -1,18 +1,31 @@
-<div container>
+<div class="ui form">
+    <div class="ui two column centered grid">
+        <div class="four column centered row">
+            <h4 class="ui dividing header">Shipping Information</h4>
+            <div class="column">
+                <input type="text" #programador placeholder="Programador que se ocupa" />
+                <p> </p>
+                <textarea #contenido placeholder="Contenido de la tarea">  </textarea>
+            </div>
+            <div class="column">
+                <input type="number" #horas placeholder="Horas de trabajo" />
+                <p> </p>
+                <a href="/board" class="ui secondary button" (click)="addItem(contenido.value,programador.value ,horas.value)">Anotar</a>
 
-    <fieldset class="fieldset">
-        <legend>Crear nueva tarea</legend>
-
-        <div column="6">
-
-            <input type="text" #programador placeholder="Programador que se ocupa" />
-            <p> </p>
-            <textarea #contenido placeholder="Contenido de la tarea">  </textarea>
+            </div>
         </div>
-        <div column="6">
-            <input type="number" #horas placeholder="Horas de trabajo" />
-            <p> </p>
-            <a href="/board" class="success button" (click)="addItem(contenido.value,programador.value ,horas.value)">Anotar</a>
-        </div>
-    </fieldset>
+    </div>
 </div>
+
+
+<button class="ui button primary" (click)="myModalNormal.show({inverted: true})">Click me</button>
+<sm-modal title="Hello from Modal" class="" icon="home" #myModalNormal>
+    <modal-content>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    </modal-content>
+    <modal-actions>
+        <div class="ui buttons">
+            <div class="ui button primary" (click)="myModalNormal.hide()">Close modal</div>
+        </div>
+    </modal-actions>
+</sm-modal>
