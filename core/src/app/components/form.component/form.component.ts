@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PostIt } from '../../model/post.it';
-import { FirebaseService } from '../../database/firebase.service';
+import { FirebaseService } from '../../services/database/firebase.service';
 
 
 @Component({

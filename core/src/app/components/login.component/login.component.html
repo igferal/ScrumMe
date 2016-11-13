@@ -1,0 +1,18 @@
+<div container>
+    <fieldset class="fieldset">
+        <legend>Iniciar sesión</legend>
+
+        <div column="6">
+
+            <input required type="email" #email placeholder="Email" />
+            <p> </p>
+            <input required type="password" #password placeholder="Contraseña" />
+            <hr/>
+            <a class="success button" (click)="login(email.value,password.value)">Inciar</a>
+            <a class="success button" (click)="signUp(email.value,password.value)">Registrar</a>
+
+
+        </div>
+
+    </fieldset>
+</div>

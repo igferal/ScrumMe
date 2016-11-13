@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { FirebaseListObservable } from 'angularfire2';
 import { DragulaModule, DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
-import { FirebaseService } from '../../database/firebase.service';
+import { FirebaseService } from '../../services/database/firebase.service';
 
 
 @Component({
