@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { PostIt } from './post.it';
-import { AppRoutingModule } from './router.component';
+import { PostIt } from '../../model/post.it';
+import { AppRoutingModule } from '../../router/router.component';
 
 @Component({
   selector: 'app-root',

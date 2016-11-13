@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Database } from './IDatabase';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import { PostIt } from '../post.it';
+import { PostIt } from '../model/post.it';
 
 
 @Injectable()

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { PostIt } from './post.it';
+import { PostIt } from '../../model/post.it';
 import { FirebaseListObservable } from 'angularfire2';
-import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
-import { FirebaseService } from './database/firebase.service';
+import { DragulaModule, DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
+import { FirebaseService } from '../../database/firebase.service';
 
 
 @Component({
     selector: 'list',
     templateUrl: './board.component.html',
-    styleUrls: ['./app.component.css'],
+    styleUrls: ['../app.component/app.component.css'],
     providers: [FirebaseService]
 
 })

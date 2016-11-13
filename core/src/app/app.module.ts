@@ -2,11 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './router.component';
+import { AppComponent } from './components/app.component/app.component';
+import { AppRoutingModule } from './router/router.component';
 import { AngularFireModule } from 'angularfire2';
-import { FormComponent } from './form.component';
-import { BoardComponent } from './board.component';
+import { FormComponent } from './components/form.component/form.component';
+import { BoardComponent } from './components/board.component/board.component';
 import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
 
 

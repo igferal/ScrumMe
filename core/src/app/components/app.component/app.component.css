@@ -9,6 +9,7 @@ h3 {
 }
 
 .dragHere {
+    margin: 5px 5px 5px 5px;
     height: 2000px;
     border: dashed;
     border-color: gray;

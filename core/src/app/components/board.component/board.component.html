@@ -1,5 +1,6 @@
 <div class="blackboard">
     <div row>
+
         <div column="3">
             <h3>To do</h3>
             <div id="todo" *ngFor="let item of todos" [dragula]='"bag-one"' [dragulaModel]='todos'>
@@ -11,7 +12,7 @@
 
                 <div *ngIf="item.$key!='none'" id="{{item.$key}}" class="note">
                     <a (click)="deleteItem('todo',item)" class="close-classic"></a>
-                    <span class="label">{{item._programador}}</span>
+                    <span class="label bg--warning">{{item._programador}}</span>
                     <br/> {{item._contenido}}
                 </div>
 
@@ -31,7 +32,7 @@
 
                 <div *ngIf="item.$key!='none'" id="{{item.$key}}" class="note">
                     <a (click)="deleteItem('inprogress',item)" class="close-classic"></a>
-                    <span class="label">{{item._programador}}</span>
+                    <span class="label bg--warning">{{item._programador}}</span>
                     <br/> {{item._contenido}}
                 </div>
 
@@ -48,7 +49,7 @@
 
                 <div *ngIf="item.$key!='none'" id="{{item.$key}}" class="note">
                     <a (click)="deleteItem('testing',item)" class="close-classic"></a>
-                    <span class="label">{{item._programador}}</span>
+                    <span class="label bg--warning">{{item._programador}}</span>
                     <br/> {{item._contenido}}
                 </div>
 
@@ -58,8 +59,6 @@
         <div column="3">
             <h3>Done</h3>
             <div id="done" *ngFor="let item of done  " [dragula]='"bag-one"' [dragulaModel]='done'>
-
-
                 <div class="dragHere" *ngIf="item.$key==='none' && done.length ==1">
                     Drag Here!
                     <br/>
@@ -67,7 +66,7 @@
 
                 <div *ngIf="item.$key!='none'" id="{{item.$key}}" class="note">
                     <a (click)="deleteItem('done',item)" class="close-classic"></a>
-                    <span class="label">{{item._programador}}</span>
+                    <span class="label bg--warning">{{item._programador}}</span>
                     <br/> {{item._contenido}}
                 </div>
 
