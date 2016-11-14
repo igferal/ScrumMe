@@ -7,7 +7,9 @@
         </div>
 
         <div *ngIf="passNotLongEnough" class="alert alert--error">
-            <p><strong>Error!</strong>La longitud de la contraseña ha de ser mayo de 6 caracteres </p>
+            <p><strong>Error!</strong> La longitud de la contraseña ha de ser mayor o igual a 6 caracteres </p>
+            <a href="" class="alert-close">&times;</a>
+
         </div>
 
         <div *ngIf="passNotMAtch" class="alert alert--error">
