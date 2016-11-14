@@ -21,6 +21,11 @@ export class LoginComponent {
         this.authed = false;
     }
 
+    getUser() {
+
+        this.firebaseAuth.getUser();
+
+    }
 
 
     signUp(email: string, password: string, ) {

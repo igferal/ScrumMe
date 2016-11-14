@@ -1,0 +1,19 @@
+<div container>
+    <fieldset class="fieldset">
+        <legend>Crea usuario</legend>
+
+        <div column="6">
+
+            <input required type="text" #name placeholder="Nombre" />
+            <p> </p>
+            <input required type="text" #surname placeholder="Apellido" />
+            <p> </p>
+            <input required type="email" #email placeholder="Email" />
+            <p> </p>
+            <input required type="password" #password placeholder="Contraseña" />
+            <hr/>
+            <button class="bg--success" (click)="signUp(name.value,surname.value,email.value,password.value)">Registrar</button>
+        </div>
+
+    </fieldset>
+</div>

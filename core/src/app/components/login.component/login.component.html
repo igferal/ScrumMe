@@ -8,10 +8,9 @@
             <p> </p>
             <input required type="password" #password placeholder="Contraseña" />
             <hr/>
-            <a class="success button" (click)="login(email.value,password.value)">Inciar</a>
-            <a class="success button" (click)="signUp(email.value,password.value)">Registrar</a>
-            <a class="success button" (click)="logout()">Salir</a>
-
+            <button class="bg--success" (click)="login(email.value,password.value)">Inciar</button>
+            <button class="bg--success" (click)="logout()">Salir</button>
+            <button class="bg--success" (click)="getUser()">GetUser</button>
 
         </div>
 

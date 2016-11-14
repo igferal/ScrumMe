@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Database } from './IDatabase';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { PostIt } from '../../model/post.it';
+import { User } from '../../model/user';
 
 
 @Injectable()
@@ -36,9 +37,9 @@ export class FirebaseService implements Database {
 
     findById(key: string, collection: string) {
 
-        
+
         var element: any[];
-        this.af.database.list(collection +"/"+ key).subscribe((item) => {
+        this.af.database.list(collection + "/" + key).subscribe((item) => {
             element = item;
         });
         console.log(element);
@@ -47,6 +48,10 @@ export class FirebaseService implements Database {
 
     }
 
+    createUser(user: User) {
 
+        this.af.database.list("/users").push(user);
+
+    }
 
 }

@@ -7,7 +7,9 @@ import { AppRoutingModule } from './router/router.component';
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { FormComponent } from './components/form.component/form.component';
 import { BoardComponent } from './components/board.component/board.component';
+import { SignUpComponent } from './components/signup.component/signup.component';
 import { LoginComponent } from './components/login.component/login.component';
+
 import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
 
 
@@ -31,7 +33,8 @@ const myFirebaseAuthConfig = {
         AppComponent,
         FormComponent,
         BoardComponent,
-        LoginComponent
+        LoginComponent,
+        SignUpComponent
     ],
     imports: [
         BrowserModule,

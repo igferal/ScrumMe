@@ -10,6 +10,8 @@ export interface Database {
 
     findById(key:string,collection:string);
 
+    createUser(user: any);
+
 
 
 }

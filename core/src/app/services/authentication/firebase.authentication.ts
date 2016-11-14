@@ -18,7 +18,11 @@ export class FirebaseAuthentication implements IAuthentication {
 
     getUser() {
 
-        return this.user;
+        this.auth.subscribe((auth) => {
+
+            console.log(auth);
+
+        });
     }
 
     logout() {
@@ -26,7 +30,7 @@ export class FirebaseAuthentication implements IAuthentication {
     }
 
 
-    signUp(email: string, password: string):any {
+    signUp(email: string, password: string): any {
         var creds: any = { email: email, password: password };
         var res: Promise<boolean> = new Promise((resolve, reject) => {
             this.auth.createUser(creds).then(result => {
@@ -34,7 +38,7 @@ export class FirebaseAuthentication implements IAuthentication {
             })
         });
         return res;
-   }
+    }
 
     login(email: string, password: string): any {
         var creds: any = { email: email, password: password };
