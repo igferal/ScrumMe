@@ -4,7 +4,7 @@ import { FirebaseService } from '../../services/database/firebase.service';
 
 
 @Component({
-    selector: 'form',
+    selector: 'createTask',
     templateUrl: './form.component.html',
     providers: [FirebaseService]
 

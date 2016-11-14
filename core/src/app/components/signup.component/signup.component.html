@@ -1,19 +1,21 @@
-<div container>
+<form (ngSubmit)="onSubmit()" container #signup="ngForm">
     <fieldset class="fieldset">
         <legend>Crea usuario</legend>
 
         <div column="6">
 
-            <input required type="text" #name placeholder="Nombre" />
+            <input required type="text" required [(ngModel)]="name" name="name" placeholder="Nombre" />
             <p> </p>
-            <input required type="text" #surname placeholder="Apellido" />
+            <input required type="text" required [(ngModel)]="surname" name="surname" placeholder="Apellido" />
             <p> </p>
-            <input required type="email" #email placeholder="Email" />
+            <input required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
             <p> </p>
-            <input required type="password" #password placeholder="Contraseña" />
+            <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
+            <p> </p>
+            <input required type="password" required [(ngModel)]="passwordAgain" name="passwordAgain" placeholder="Repite tu contraseña" />
             <hr/>
             <button class="bg--success" (click)="signUp(name.value,surname.value,email.value,password.value)">Registrar</button>
         </div>
 
     </fieldset>
-</div>
+</form>

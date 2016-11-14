@@ -18,6 +18,9 @@ export class SignUpComponent {
 
     email: string;
     password: string;
+    passwordAgain: string;
+    name: string;
+    surname: string;
     authed: boolean;
 
     constructor(private firebaseAuth: FirebaseAuthentication, private firebaseService: FirebaseService,
@@ -31,6 +34,9 @@ export class SignUpComponent {
 
     }
 
+    onSubmit() { 
+        console.log("vamos mejorando")
+    }
 
     signUp(name: string, surname: string, email: string, password: string) {
         this.email = email;

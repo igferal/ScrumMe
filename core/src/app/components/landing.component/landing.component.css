@@ -16,7 +16,13 @@
     }
 }
 
-.white{
+@media (min-width: 96em) {
+    .portada {
+        padding: 200px 0;
+    }
+}
+
+.white {
     color: white;
 }
 
