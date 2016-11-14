@@ -7,8 +7,6 @@ import { AppRoutingModule } from '../../router/router.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-
-
 export class AppComponent {
   title: string;
 

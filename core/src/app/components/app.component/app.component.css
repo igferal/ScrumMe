@@ -1,116 +1,61 @@
-body {
-    height: 100%;
-    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/50598/concrete-wall-background.jpg) center center fixed;
-    background-size: cover;
+
+
+
+[container] {
+  width: 90%;
+}
+@media (min-width: 48em) {
+  [container] {
+    width: 726px;
+  }
 }
 
-h3 {
-    color: white;
+.siteHeader {
+  border-bottom: 1px solid #eee;
 }
 
-.dragHere {
-    margin: 5px 5px 5px 5px;
-    height: 2000px;
-    border: dashed;
-    border-color: gray;
-    text-align: center
+.logo {
+  font-size: 22px;
 }
 
-.note {
-    background: palegoldenrod;
-    color: black;
-    width: 160px;
-    height: 160px;
-    margin-top: 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
-    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
-    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
-    border: 1px solid rgba(0, 0, 0, .25);
+.nav {
+  margin-top: 15px;
+  text-align: right;
 }
 
-.sinVinyeta {
-    list-style: none;
+.nav li {
+  display: inline;
+  line-height: 2.5;
+  margin-left: 25px;
+}
+.nav li:first-of-type {
+  margin-left: 0;
 }
 
-.sticky1 {
-    transform: rotate(-3.5deg);
-    -webkit-transform: rotate(-3.5deg);
-    -moz-transform: rotate(-3.5deg);
-    background-color: #CBFAFA;
+.feature {
+  background-color: #eee;
+  margin-top: 50px;
+  padding: 35px;
+  text-align: center;
+}
+@media (min-width: 48em) {
+  .feature {
+    padding: 50px;
+  }
 }
 
-.blackboard {
-    position: relative;
-    /*	width: 640px; */
-    padding-bottom: 100%;
-    border: tan solid 12px;
-    border-top: #bda27e solid 12px;
-    border-left: #b19876 solid 12px;
-    border-bottom: #c9ad86 solid 12px;
-    box-shadow: 0px 0px 6px 5px rgba(58, 18, 13, 0), 0px 0px 0px 2px #c2a782, 0px 0px 0px 4px #a58e6f, 3px 4px 8px 5px rgba(0, 0, 0, 0.5);
-    background-image: radial-gradient( circle at left 30%, rgba(34, 34, 34, 0.3), rgba(34, 34, 34, 0.3) 80px, rgba(34, 34, 34, 0.5) 100px, rgba(51, 51, 51, 0.5) 160px, rgba(51, 51, 51, 0.5)), linear-gradient( 215deg, transparent, transparent 100px, #222 260px, #222 320px, transparent), radial-gradient( circle at right, #111, rgba(51, 51, 51, 1));
-    background-color: #333;
+.feature-title {
+  margin-top: 0;
 }
 
-.blackboard:before {
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient( 175deg, transparent, transparent 40px, rgba(120, 120, 120, 0.1) 100px, rgba(120, 120, 120, 0.1) 110px, transparent 220px, transparent), linear-gradient( 200deg, transparent 80%, rgba(50, 50, 50, 0.3)), radial-gradient( ellipse at right bottom, transparent, transparent 200px, rgba(80, 80, 80, 0.1) 260px, rgba(80, 80, 80, 0.1) 320px, transparent 400px, transparent);
-    border: #2c2c2c solid 2px;
-    font-size: 2.2em;
-    color: rgba(238, 238, 238, 0.7);
-    text-align: center;
-    /*	padding-top: 20px; */
+.siteContent {
+  padding: 50px 0;
 }
 
-input[type="submit"] {
-    cursor: pointer;
-    color: rgba(238, 238, 238, 0.7);
-    line-height: 1em;
-    padding: 0;
+.siteFooter {
+  border-top: 1px solid #eee;
+  font-size: .875em;
+  padding-top: 15px;
 }
 
-input[type="submit"]:focus {
-    background: rgba(238, 238, 238, 0.2);
-    color: rgba(238, 238, 238, 0.2);
-}
 
-::-moz-selection {
-    background: rgba(238, 238, 238, 0.2);
-    color: rgba(238, 238, 238, 0.2);
-    text-shadow: none;
-}
-
-::selection {
-    background: rgba(238, 238, 238, 0.4);
-    color: rgba(238, 238, 238, 0.3);
-    text-shadow: none;
-}
-
-[class*='close-'] {
-    color: #777;
-    background: transparent;
-    font: 14px/100% arial, sans-serif;
-    right: -10px;
-    text-decoration: none;
-    text-shadow: 0 1px 0 #fff;
-    top: 5px;
-    float: right;
-    padding-top: -5px;
-}
-
-.close-classic:after {
-    content: 'X';
-    /* ANSI X letter */
-}
-
-.close-thin:after {
-    content: '×';
-    /* UTF-8 symbol */
-}
-
-.close-thik:after {
-    content: '✖';
-    /* UTF-8 symbol */
-}

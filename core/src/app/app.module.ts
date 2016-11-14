@@ -9,7 +9,7 @@ import { FormComponent } from './components/form.component/form.component';
 import { BoardComponent } from './components/board.component/board.component';
 import { SignUpComponent } from './components/signup.component/signup.component';
 import { LoginComponent } from './components/login.component/login.component';
-
+import { LandingComponent } from './components/landing.component/landing.component';
 import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
 
 
@@ -34,7 +34,8 @@ const myFirebaseAuthConfig = {
         FormComponent,
         BoardComponent,
         LoginComponent,
-        SignUpComponent
+        SignUpComponent,
+        LandingComponent
     ],
     imports: [
         BrowserModule,

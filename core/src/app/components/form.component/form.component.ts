@@ -11,10 +11,11 @@ import { FirebaseService } from '../../services/database/firebase.service';
 })
 
 
-export class FormComponent  {
+export class FormComponent {
 
 
-    constructor(private firebaseService: FirebaseService) {}  
+
+    constructor(private firebaseService: FirebaseService) { }
 
     addItem(contenido: string, programador: string, horas: number) {
         var postIt = new PostIt(contenido, programador, horas);
@@ -22,4 +23,8 @@ export class FormComponent  {
 
     }
 
+   
+
 }
+
+// 2000 1 200 200 0 0.02

@@ -8,7 +8,7 @@ import { FirebaseService } from '../../services/database/firebase.service';
 @Component({
     selector: 'list',
     templateUrl: './board.component.html',
-    styleUrls: ['../app.component/app.component.css'],
+    styleUrls: ['./board.component.css'],
     providers: [FirebaseService]
 
 })
