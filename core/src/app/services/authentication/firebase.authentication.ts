@@ -33,11 +33,20 @@ export class FirebaseAuthentication implements IAuthentication {
     signUp(email: string, password: string): any {
         var creds: any = { email: email, password: password };
         var res: Promise<boolean> = new Promise((resolve, reject) => {
-            this.auth.createUser(creds).then(result => {
-                resolve(result);
+            this.auth.createUser(creds).catch((err) => {
+
+                var r = { provider: 3, error: err.message };
+                return r;
             })
+                .then(result => {
+
+                    resolve(result);
+                })
         });
+
+
         return res;
+
     }
 
     login(email: string, password: string): any {

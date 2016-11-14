@@ -21,11 +21,16 @@ export class SignUpComponent {
     passwordAgain: string;
     name: string;
     surname: string;
-    authed: boolean;
+    problemWithSignUp: boolean;
+    passNotMAtch: boolean;
+    issue: string;
+    passNotLongEnough: boolean;
+
+
 
     constructor(private firebaseAuth: FirebaseAuthentication, private firebaseService: FirebaseService,
         private router: Router) {
-        this.authed = false;
+        this.issue = "";
     }
 
     getUser() {
@@ -34,22 +39,57 @@ export class SignUpComponent {
 
     }
 
-    onSubmit() { 
-        console.log("vamos mejorando")
+    onSubmit() {
+
+
+        if (this.passwordLength()) {
+            if (this.passwordMatch()) {
+                this.passNotLongEnough = false;
+                this.signUp(this.name, this.surname, this.email, this.password);
+                this.passNotMAtch = false;
+            }
+            else {
+                this.passNotMAtch = true;
+            }
+        }
+        else {
+
+            this.passNotLongEnough = true;
+
+        }
+        this.clearPassword();
+    }
+
+    clearPassword() {
+        this.password = "";
+        this.passwordAgain = "";
+    }
+
+    passwordLength(): boolean {
+
+        return (this.password.length > 6);
+    }
+
+
+    passwordMatch(): boolean {
+
+        return (this.password === this.passwordAgain);
     }
 
     signUp(name: string, surname: string, email: string, password: string) {
         this.email = email;
         this.password = password;
         this.firebaseAuth.signUp(email, password).then((res) => {
+            console.log(res)
             if (res.provider == 4) {
                 this.createUser(name, surname, email, res.uid);
                 this.redirect(res);
             }
             else {
-                alert("No existe ese usuario, Chavalin!!!");
-            }
 
+                this.issue = res.error;
+                this.problemWithSignUp = true;
+            }
 
         });
     }
@@ -63,7 +103,6 @@ export class SignUpComponent {
 
     private redirect(res: any) {
 
-        this.authed = true
         this.router.navigate(['/board']);
 
     }
