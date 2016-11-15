@@ -1,0 +1,6 @@
+<div *ngIf="note.$key!='none'" id="{{note.$key}}" class="note">
+    <a (click)="deleteItem('todo',note)" class="close-classic"></a>
+    <span class="label bg--warning">{{note._programador}}</span>
+    <br/> {{note._contenido}}
+    <button (click)="click()">Clicka</button>
+</div>

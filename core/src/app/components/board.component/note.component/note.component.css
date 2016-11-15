@@ -1,0 +1,39 @@
+
+[class*='close-'] {
+    color: #777;
+    background: transparent;
+    font: 14px/100% arial, sans-serif;
+    right: -10px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+    top: 5px;
+    float: right;
+    padding-top: -5px;
+}
+
+.close-classic:after {
+    content: 'X';
+    /* ANSI X letter */
+}
+
+.close-thin:after {
+    content: '×';
+    /* UTF-8 symbol */
+}
+
+.close-thik:after {
+    content: '✖';
+    /* UTF-8 symbol */
+}
+
+.note {
+    background: palegoldenrod;
+    color: black;
+    width: 160px;
+    height: 160px;
+    margin-top: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+    border: 1px solid rgba(0, 0, 0, .25);
+}
