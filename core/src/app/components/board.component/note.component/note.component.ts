@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PostIt } from '../../../model/post.it';
 
 
@@ -10,11 +10,18 @@ import { PostIt } from '../../../model/post.it';
 })
 export class NoteComponent {
 
-    @Input() note: PostIt;
+    @Input() note: any;
 
-    click(){
-        console.log(this.note);
-    }
+    @Output() notify = new EventEmitter<string>();
+
+    @Input() currentList: string;
+
+
+
     
 
+    deleteItem() { 
+
+        this.notify.emit(this.note.$key);
+    }
 }

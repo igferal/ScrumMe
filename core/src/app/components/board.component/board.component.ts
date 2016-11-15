@@ -43,7 +43,6 @@ export class BoardComponent implements OnInit {
 
     private onDrop(args) {
 
-        console.log()
 
     }
 
@@ -77,7 +76,7 @@ export class BoardComponent implements OnInit {
 
 
 
-    public deleteItem(collection: string, key: string) {
+    public onNotify(collection: string, key: string) {
         this.firebaseService.delete(key, `/${collection}`);
     }
 

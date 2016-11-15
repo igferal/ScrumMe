@@ -16,6 +16,7 @@ export class LoginComponent {
     email: string;
     password: string;
     authed: boolean;
+    issue: string;
 
     constructor(private firebaseAuth: FirebaseAuthentication, private router: Router) {
         this.authed = false;
@@ -27,16 +28,12 @@ export class LoginComponent {
 
     }
 
+    onSubmit() {
 
-    signUp(email: string, password: string, ) {
-        this.email = email;
-        this.password = password;
-        this.firebaseAuth.signUp(this.email, this.password).then((res) => {
+        this.login();
 
-            this.redirect(res);
-
-        });
     }
+
 
     private redirect(res: any) {
 
@@ -44,15 +41,18 @@ export class LoginComponent {
             this.authed = true
             this.router.navigate(['/board']);
         } else {
-            alert("No existe ese usuario, Chavalin!!!");
+
+            this.authed = true;
+            this.password = "";
+            this.issue = "No existe ese usuario";
+
         }
 
     }
 
-    login(email: string, password: string) {
+    login() {
 
-        this.email = email;
-        this.password = password;
+
         this.firebaseAuth.login(this.email, this.password).then((res) => {
             this.redirect(res);
         });

@@ -4,61 +4,29 @@
         <div column="3">
             <h3>To do</h3>
             <div id="todo" *ngFor="let item of todos" [dragula]='"bag-one"' [dragulaModel]='todos'>
-
                 <div class="dragHere" *ngIf="item.$key==='none' && todos.length ==1">
-                    Drag Here! or create a new task
-                    <br/>
+                    Drag Here!<br/>
                 </div>
-
-                <div *ngIf="item.$key!='none'" id="{{item.$key}}" class="note">
-                    <a (click)="deleteItem('todo',item)" class="close-classic"></a>
-                    <span class="label bg--warning">{{item._programador}}</span>
-                    <br/> {{item._contenido}}
-                </div>
-                
-                <note [note]="item">
-
-                </note>
-
-
-
+                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('todo',$event)" [note]="item"></note>
             </div>
         </div>
-
 
         <div column="3">
             <h3>In progress</h3>
             <div id="inprogress" *ngFor="let item of inprogress" [dragula]='"bag-one"' [dragulaModel]='inprogress'>
-
-
                 <div class="dragHere" *ngIf="item.$key==='none' && inprogress.length ==1">
-                    Drag Here!
-                    <br/>
+                    Drag Here!<br/>
                 </div>
-
-                <div *ngIf="item.$key!='none'" id="{{item.$key}}" class="note">
-                    <a (click)="deleteItem('inprogress',item)" class="close-classic"></a>
-                    <span class="label bg--warning">{{item._programador}}</span>
-                    <br/> {{item._contenido}}
-                </div>
-
+                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('inprogress',$event)" [note]="item"></note>
             </div>
         </div>
         <div column="3">
             <h3>Testing</h3>
             <div id="testing" *ngFor="let item of testing" [dragula]='"bag-one"' [dragulaModel]='testing'>
-
                 <div class="dragHere" *ngIf="item.$key==='none' && testing.length ==1">
-                    Drag Here!
-                    <br/>
+                    Drag Here!<br/>
                 </div>
-
-                <div *ngIf="item.$key!='none'" id="{{item.$key}}" class="note">
-                    <a (click)="deleteItem('testing',item)" class="close-classic"></a>
-                    <span class="label bg--warning">{{item._programador}}</span>
-                    <br/> {{item._contenido}}
-                </div>
-
+                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('testing',$event)" [note]="item"></note>
             </div>
         </div>
 
@@ -66,17 +34,9 @@
             <h3>Done</h3>
             <div id="done" *ngFor="let item of done  " [dragula]='"bag-one"' [dragulaModel]='done'>
                 <div class="dragHere" *ngIf="item.$key==='none' && done.length ==1">
-                    Drag Here!
-                    <br/>
+                    Drag Here!<br/>
                 </div>
-
-                <div *ngIf="item.$key!='none'" id="{{item.$key}}" class="note">
-                    <a (click)="deleteItem('done',item)" class="close-classic"></a>
-                    <span class="label bg--warning">{{item._programador}}</span>
-                    <br/> {{item._contenido}}
-                </div>
-
-
+                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('done',$event)" [note]="item"></note>
             </div>
         </div>
     </div>

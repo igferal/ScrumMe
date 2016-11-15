@@ -1,18 +1,23 @@
-<div container>
+<form (ngSubmit)="onSubmit()" container #login="ngForm">
     <fieldset class="fieldset">
         <legend>Iniciar sesión</legend>
 
-        <div column="6">
+        <div *ngIf="authed" class="alert alert--error">
+            <p><strong>Error! </strong>{{issue}} </p>
+        </div>
 
-            <input required type="email" #email placeholder="Email" />
+
+        <div column="6">
+            <input required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
             <p> </p>
-            <input required type="password" #password placeholder="Contraseña" />
+            <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
+            <p> </p>
             <hr/>
-            <button class="bg--success" (click)="login(email.value,password.value)">Inciar</button>
-            <button class="bg--success" (click)="logout()">Salir</button>
-            <button class="bg--success" (click)="getUser()">GetUser</button>
+            <button class="bg--success">Inciar</button>
+            <button class=" bg--success " (click)="logout() ">Salir</button>
+            <button class="bg--success " (click)="getUser() ">GetUser</button>
 
         </div>
 
     </fieldset>
-</div>
+</form>

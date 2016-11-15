@@ -40,6 +40,7 @@ export class FirebaseAuthentication implements IAuthentication {
             })
                 .then(result => {
 
+                    
                     resolve(result);
                 })
         });
@@ -52,7 +53,12 @@ export class FirebaseAuthentication implements IAuthentication {
     login(email: string, password: string): any {
         var creds: any = { email: email, password: password };
         var res: Promise<boolean> = new Promise((resolve, reject) => {
-            this.auth.login(creds).then(result => {
+            this.auth.login(creds).catch((err) => {
+                var r = { provider: 3, error: err.message };
+                console.log(err);
+                return r;
+
+            }).then(result => {
                 resolve(result);
             })
         });
