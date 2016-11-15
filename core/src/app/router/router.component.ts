@@ -6,6 +6,7 @@ import { LoginComponent } from '../components/login.component/login.component';
 import { LandingComponent } from '../components/landing.component/landing.component';
 import { SignUpComponent } from '../components/signup.component/signup.component';
 import { AppComponent } from '../components/app.component/app.component';
+import { UserDashboardComponent } from '../components/user.dashboard.component/user.dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
@@ -14,6 +15,9 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'form', component: FormComponent },
   { path: 'landing', component: LandingComponent },
+  { path: 'dashboard', component: UserDashboardComponent },
+
+
 
 ];
 

@@ -39,7 +39,7 @@ export class LoginComponent {
 
         if (res.provider == 4) {
             this.authed = true
-            this.router.navigate(['/board']);
+            this.router.navigate(['/dashboard']);
         } else {
 
             this.authed = true;

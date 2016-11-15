@@ -9,6 +9,7 @@ import { FormComponent } from './components/form.component/form.component';
 import { BoardComponent } from './components/board.component/board.component';
 import { SignUpComponent } from './components/signup.component/signup.component';
 import { LoginComponent } from './components/login.component/login.component';
+import { UserDashboardComponent } from './components/user.dashboard.component/user.dashboard.component';
 import { LandingComponent } from './components/landing.component/landing.component';
 import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
 import { NoteComponent } from './components/board.component/note.component/note.component';
@@ -37,7 +38,8 @@ const myFirebaseAuthConfig = {
         LoginComponent,
         SignUpComponent,
         LandingComponent,
-        NoteComponent
+        NoteComponent,
+        UserDashboardComponent
     ],
     imports: [
         BrowserModule,
