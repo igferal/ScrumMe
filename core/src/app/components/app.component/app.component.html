@@ -6,9 +6,10 @@
     </div>
     <nav column=8 class="nav">
         <ul>
-            <li><a routerLink="/login">Iniciar sesión</a></li>
-            <li><a routerLink="/signup">Crear usuario</a></li>
-
+            <li *ngIf="authGuard._allowed"><a routerLink="/board">Tablero</a></li>
+            <li *ngIf="authGuard ._allowed"><a routerLink="/form">Crear tarea</a></li>
+            <li *ngIf="authGuard._allowed"><a routerLink="/login">Iniciar sesión</a></li>
+            <li *ngIf="authGuard._allowed"><a routerLink="/signup">Crear usuario</a></li>
         </ul>
     </nav>
 </header>

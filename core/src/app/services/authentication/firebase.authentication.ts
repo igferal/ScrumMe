@@ -9,20 +9,30 @@ export class FirebaseAuthentication implements IAuthentication {
     user = {};
 
     constructor(
-        public af: AngularFire, public auth: FirebaseAuth
-    ) {
+        public af: AngularFire, public auth: FirebaseAuth) {
         this.af.auth.subscribe(user => {
         });
     }
 
-
     getUser() {
+        this.auth.subscribe((auth) => {
+            return auth;
+        });
+
+    }
+
+
+    isConnected(): boolean {
+
 
         this.auth.subscribe((auth) => {
-
-            console.log(auth);
-
+            if (auth == null) {
+                return false;
+            } else {
+                return true;
+            }
         });
+        return false;
     }
 
     logout() {
@@ -40,7 +50,7 @@ export class FirebaseAuthentication implements IAuthentication {
             })
                 .then(result => {
 
-                    
+
                     resolve(result);
                 })
         });
