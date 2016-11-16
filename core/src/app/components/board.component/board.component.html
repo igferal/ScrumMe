@@ -42,6 +42,7 @@
                 <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('done',$event)" [note]="item"></note>
             </div>
         </div>
+        <createTask></createTask>
     </div>
 </div>
 <router-outlet></router-outlet>

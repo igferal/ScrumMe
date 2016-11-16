@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { FirebaseListObservable } from 'angularfire2';
 import { DragulaModule, DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
@@ -12,7 +12,7 @@ import { FirebaseService } from '../../services/database/firebase.service';
     providers: [FirebaseService]
 
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnChanges {
 
     title: string;
     todos: PostIt[];
@@ -81,6 +81,11 @@ export class BoardComponent implements OnInit {
         this.firebaseService.delete(key, `/${collection}`);
     }
 
+    ngOnChanges() {
+
+        this.inicializateCollections();
+
+    }
 
 
     public ngOnInit() {
@@ -106,4 +111,20 @@ export class BoardComponent implements OnInit {
 
     }
 
+}
+
+export class ModalComponent {
+
+  public visible = false;
+  private visibleAnimate = false;
+
+  public show(): void {
+    this.visible = true;
+    setTimeout(() => this.visibleAnimate = true);
+  }
+
+  public hide(): void {
+    this.visibleAnimate = false;
+    setTimeout(() => this.visible = false, 300);
+  }
 }
