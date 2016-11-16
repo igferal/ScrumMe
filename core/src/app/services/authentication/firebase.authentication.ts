@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods, FirebaseAuth } from 'angularfire2';
 import { IAuthentication } from './IAuthentication';
-
+import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable()
-export class FirebaseAuthentication implements IAuthentication {
+export class FirebaseAuthentication implements IAuthentication, CanActivate {
 
-    user = {};
 
-    constructor(
-        public af: AngularFire, public auth: FirebaseAuth) {
-        this.af.auth.subscribe(user => {
-        });
-    }
+    constructor(public af: AngularFire, public auth: FirebaseAuth, public router: Router) { }
+
+    logged: Observable<boolean>
+
 
     getUser() {
         this.auth.subscribe((auth) => {
@@ -22,22 +23,28 @@ export class FirebaseAuthentication implements IAuthentication {
     }
 
 
-    isConnected(): boolean {
 
 
-        this.auth.subscribe((auth) => {
-            if (auth == null) {
-                return false;
-            } else {
-                return true;
-            }
-        });
-        return false;
-    }
+
 
     logout() {
         this.af.auth.logout();
+        console.log("Logged Out")
     }
+
+    public canActivate(): Observable<boolean> {
+        console.log("canActivate");
+        return this.af.auth.take(1).map(auth => {
+            console.log("auth:" + auth);
+            if (!auth) {
+                this.router.navigateByUrl('/login');
+                return true;
+            }
+            return !!auth;
+        });
+
+    }
+
 
 
     signUp(email: string, password: string): any {

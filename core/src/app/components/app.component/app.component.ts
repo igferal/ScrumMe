@@ -1,28 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { AppRoutingModule } from '../../router/router.component';
-import { AuthenticationGuard } from '../../services/authentication/authentication.guard'
+import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [AuthenticationGuard]
+  providers: [FirebaseAuthentication]
 })
 export class AppComponent implements OnInit {
   title: string;
-  auth: boolean;
+  auth: any;
 
-  constructor(public authGuard: AuthenticationGuard) {
+  constructor(private authservice: FirebaseAuthentication) { }
 
-    console.log(authGuard._allowed);
-    this.auth = authGuard._allowed;
+  logout() {
 
+    this.authservice.logout();
   }
-
 
   ngOnInit() {
 
+    this.authservice.auth.subscribe(
+   (val) => {
+  this.auth = val;
+  console.log(val);
+
+
+    } 
+    
+
+    );
   }
 
 }

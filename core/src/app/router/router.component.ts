@@ -7,29 +7,29 @@ import { LandingComponent } from '../components/landing.component/landing.compon
 import { SignUpComponent } from '../components/signup.component/signup.component';
 import { AppComponent } from '../components/app.component/app.component';
 import { UserDashboardComponent } from '../components/user.dashboard.component/user.dashboard.component';
-import { AuthenticationGuard } from '../services/authentication/authentication.guard'
+import { FirebaseAuthentication } from '../services/authentication/firebase.authentication'
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   {
     path: 'board', component: BoardComponent,
-    canActivate: [AuthenticationGuard]
+    canActivate: [FirebaseAuthentication]
   },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   {
     path: 'form', component: FormComponent,
-    canActivate: [AuthenticationGuard]
+    canActivate: [FirebaseAuthentication]
   },
   { path: 'landing', component: LandingComponent },
   {
     path: 'dashboard', component: UserDashboardComponent,
-    canActivate: [AuthenticationGuard]
+    canActivate: [FirebaseAuthentication]
   },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers : [AuthenticationGuard]
+  providers: [FirebaseAuthentication]
 })
 export class AppRoutingModule { }
