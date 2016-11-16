@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormComponent } from '../components/form.component/form.component';
+import { CreateTaskComponent } from '../components/create.task.component/create.task.component';
 import { BoardComponent } from '../components/board.component/board.component';
 import { LoginComponent } from '../components/login.component/login.component';
 import { LandingComponent } from '../components/landing.component/landing.component';
@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   {
-    path: 'form', component: FormComponent,
+    path: 'createTask', component: CreateTaskComponent,
     canActivate: [FirebaseAuthentication]
   },
   { path: 'landing', component: LandingComponent },
