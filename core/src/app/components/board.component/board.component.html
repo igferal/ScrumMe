@@ -4,11 +4,14 @@
         <div column="3">
             <h3>To do</h3>
             <div id="todo" *ngFor="let item of todos" [dragula]='"bag-one"' [dragulaModel]='todos'>
+
                 <div class="dragHere" *ngIf="item.$key==='none' && todos.length ==1">
                     Drag Here!<br/>
                 </div>
                 <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('todo',$event)" [note]="item"></note>
             </div>
+
+
         </div>
 
         <div column="3">

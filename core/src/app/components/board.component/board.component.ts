@@ -48,7 +48,6 @@ export class BoardComponent implements OnInit {
 
     private onDropModel(args) {
 
-        console.log(args)
         var postItId: string = args[0].id;
         var fromCollection: string = args[2].id;
         var toCollection: string = args[1].id;
@@ -59,6 +58,8 @@ export class BoardComponent implements OnInit {
     private addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
 
         var postit = this.firebaseService.findById(postItId, fromCollection);
+
+        console.log("Voy a cambiar de columna este " + postit)
         this.firebaseService.delete(postItId, fromCollection);
         this.firebaseService.save(postit, toCollection);
 

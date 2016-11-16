@@ -25,12 +25,9 @@
     /* UTF-8 symbol */
 }
 
-
-
 .note {
     min-width: 240px;
-    float: left;
-    position: relative;
+    min-height: 80px;
     width: 18%;
     background: palegoldenrod;
     margin: 10px 1.5% 0 1.5%;
@@ -42,9 +39,10 @@
     word-wrap: break-word;
     /* Internet Explorer 5.5+ */
     white-space: normal;
-    transition: all 200ms ease-in-out;
 }
 
+
+/*
 .note:before {
     position: absolute;
     top: 0;
@@ -54,3 +52,4 @@
     border-right: 20px solid transparent;
     border-bottom: 20px solid #D4A464;
 }
+*/
