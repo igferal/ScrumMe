@@ -9,7 +9,15 @@ body {
 
 .dragHere {
     margin: 5px 5px 5px 5px;
-    height: 2000px;
+    height: 70vh;
+    border: dashed;
+    border-color: gray;
+    text-align: center
+}
+
+.dragHereTodo {
+    margin: 5px 5px 5px 5px;
+    height: 40vh;
     border: dashed;
     border-color: gray;
     text-align: center
@@ -18,7 +26,7 @@ body {
 .blackboard {
     position: relative;
     /*	width: 640px; */
-    padding-bottom: 100%;
+    height: 90vh;
     border: tan solid 12px;
     border-top: #bda27e solid 12px;
     border-left: #b19876 solid 12px;
@@ -39,3 +47,13 @@ body {
     /*	padding-top: 20px; */
 }
 
+.noteContainer {
+    min-width: 284px;
+    min-height: 20vh;
+    border-left: 1% solid #D4A464;
+}
+
+.scrollDiv {
+    overflow: scroll;
+    height: 80vh;
+}

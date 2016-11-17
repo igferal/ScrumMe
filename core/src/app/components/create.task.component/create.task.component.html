@@ -1,21 +1,4 @@
 <form (ngSubmit)="onSubmit()" container #createTask="ngForm">
-
-    <fieldset class="fieldset">
-        <legend>Crear nueva tarea</legend>
-
-        <div column="6">
-
-            <input type="text" required [(ngModel)]="programador" name="programador" placeholder="Programador que se ocupa" />
-            <p> </p>
-            <textarea required [(ngModel)]="contenido" name="contenido" placeholder="Contenido de la tarea">  </textarea>
-        </div>
-        <div column="6">
-            <input type="number" required [(ngModel)]="horas" name="horas" placeholder="Horas de trabajo" />
-            <p> </p>
-            <button href="/board" class=" bg--success ">Anotar</button>
-        </div>
-
-
-
-    </fieldset>
+    <textarea rows="4" required [(ngModel)]="contenido" name="contenido" placeholder="Contenido de la tarea">  </textarea>
+    <button href="/board" class="button--full bg--warning ">Anotar</button>
 </form>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { FirebaseService } from '../../services/database/firebase.service';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
     moduleId: 'createTask',
     selector: 'createTask',
     templateUrl: './create.task.component.html',
+    styleUrls :['./create.task.component.css'],
     providers: [FirebaseService]
 
 })
@@ -19,17 +20,19 @@ export class CreateTaskComponent {
     contenido: string;
     programador: string;
     horas: number;
+    @Output() notify = new EventEmitter<boolean>();
 
     constructor(private firebaseService: FirebaseService, public router: Router) { }
 
 
+
     onSubmit() {
 
-        var postIt = new PostIt(this.contenido, this.programador, this.horas," ");
+        var postIt = new PostIt(this.contenido, "", 2, " ");
+        this.contenido = "";
 
         this.firebaseService.save(postIt, '/todo');
-
-        this.router.navigate(['/board']);
+        this.notify.emit(false);        // this.router.navigate(['/board']);
 
     }
 

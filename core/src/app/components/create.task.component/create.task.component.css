@@ -1,0 +1,11 @@
+textarea {
+    background-color: #333;
+    color: white;
+    border-color: black;
+}
+textarea:focus{
+
+        border-color: transparent;
+    
+
+}

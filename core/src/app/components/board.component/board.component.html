@@ -1,20 +1,26 @@
 <div class="blackboard">
     <div grid style="display:inline">
 
-        <div column="3">
+        <div column="3" class="scrollDiv">
+
             <h3>To do</h3>
             <div id="todo" *ngFor="let item of todos" [dragula]='"bag-one"' [dragulaModel]='todos'>
 
-                <div class="dragHere" *ngIf="item.$key==='none' && todos.length ==1">
+                <div class="dragHereTodo" *ngIf="item.$key==='none' && todos.length ==1">
                     Drag Here!<br/>
                 </div>
                 <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('todo',$event)" [note]="item"></note>
             </div>
 
+            <div class="noteContainer" *ngIf="createTodo">
+                <createTask (notify)="colapseEvent($event)"></createTask>
+            </div>
+            <hr>
+            <button (click)="changeState()" class="button--full bg--warning ">{{createTask}}</button>
 
         </div>
 
-        <div column="3">
+        <div column="3" class="scrollDiv" >
             <h3>In progress</h3>
             <div id="inprogress" *ngFor="let item of inprogress" [dragula]='"bag-one"' [dragulaModel]='inprogress'>
                 <div class="dragHere" *ngIf="item.$key==='none' && inprogress.length ==1">
@@ -23,7 +29,7 @@
                 <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('inprogress',$event)" [note]="item"></note>
             </div>
         </div>
-        <div column="3">
+        <div column="3" class="scrollDiv"> 
             <h3>Testing</h3>
             <div id="testing" *ngFor="let item of testing" [dragula]='"bag-one"' [dragulaModel]='testing'>
                 <div class="dragHere" *ngIf="item.$key==='none' && testing.length ==1">
@@ -33,7 +39,7 @@
             </div>
         </div>
 
-        <div column="3">
+        <div column="3" class="scrollDiv">
             <h3>Done</h3>
             <div id="done" *ngFor="let item of done  " [dragula]='"bag-one"' [dragulaModel]='done'>
                 <div class="dragHere" *ngIf="item.$key==='none' && done.length ==1">
@@ -42,7 +48,8 @@
                 <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('done',$event)" [note]="item"></note>
             </div>
         </div>
-        <createTask></createTask>
     </div>
+
+
 </div>
 <router-outlet></router-outlet>

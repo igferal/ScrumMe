@@ -7,7 +7,6 @@
     <nav column=8 class="nav">
         <ul>
             <li *ngIf="auth!=null"><a routerLink="/board">Tablero</a></li>
-            <li *ngIf="auth!=null"><a routerLink="/createTask">Crear tarea</a></li>
             <li *ngIf="auth==null"><a routerLink="/login">Iniciar sesión</a></li>
             <li *ngIf="auth==null"><a routerLink="/signup">Crear usuario</a></li>
             <li *ngIf="auth!=null" (click)="logout()" ><a routerLink="/landing" >Cerrar sesión</a></li>

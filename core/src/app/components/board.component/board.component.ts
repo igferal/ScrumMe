@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { FirebaseListObservable } from 'angularfire2';
 import { DragulaModule, DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
@@ -12,17 +12,19 @@ import { FirebaseService } from '../../services/database/firebase.service';
     providers: [FirebaseService]
 
 })
-export class BoardComponent implements OnInit, OnChanges {
+export class BoardComponent implements OnInit {
 
     title: string;
     todos: PostIt[];
     inprogress: PostIt[];
     testing: PostIt[];
     done: PostIt[];
+    createTodo: boolean;
+    createTask: string;
 
     constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService) {
 
-
+        this.createTask = "Añadir tarea"
         this.dragulaSubscriptions(dragulaService);
     }
 
@@ -33,6 +35,26 @@ export class BoardComponent implements OnInit, OnChanges {
         dragulaService.out.subscribe((value) => { this.onOut(value.slice(1)); });
         dragulaService.dropModel.subscribe((value) => { this.onDropModel(value.slice(1)) });
 
+    }
+
+    colapseEvent(colapse) {
+
+        
+        this.changeState();
+
+    }
+
+    changeState() {
+        if (this.createTodo) {
+            this.createTask = "Añadir tarea";
+            this.createTodo = !this.createTodo;
+
+        }
+        else {
+            this.createTask = "Colapsar";
+            this.createTodo = !this.createTodo;
+
+        }
     }
 
     private onDrag(args) {
@@ -81,11 +103,6 @@ export class BoardComponent implements OnInit, OnChanges {
         this.firebaseService.delete(key, `/${collection}`);
     }
 
-    ngOnChanges() {
-
-        this.inicializateCollections();
-
-    }
 
 
     public ngOnInit() {
@@ -115,16 +132,16 @@ export class BoardComponent implements OnInit, OnChanges {
 
 export class ModalComponent {
 
-  public visible = false;
-  private visibleAnimate = false;
+    public visible = false;
+    private visibleAnimate = false;
 
-  public show(): void {
-    this.visible = true;
-    setTimeout(() => this.visibleAnimate = true);
-  }
+    public show(): void {
+        this.visible = true;
+        setTimeout(() => this.visibleAnimate = true);
+    }
 
-  public hide(): void {
-    this.visibleAnimate = false;
-    setTimeout(() => this.visible = false, 300);
-  }
+    public hide(): void {
+        this.visibleAnimate = false;
+        setTimeout(() => this.visible = false, 300);
+    }
 }
