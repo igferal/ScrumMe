@@ -37,16 +37,23 @@ export class FirebaseService implements Database {
 
     }
 
+
+
     findById(key: string, collection: string) {
 
         console.log(`Voy a buscar ${key} : ${collection}`)
         var element: any;
 
         this.af.database.object(collection + "/" + key).subscribe((item) => {
-            console.log(item +" soy el item en la bd")
+            console.log(item + " soy el item en la bd")
             element = item;
         });
         console.log("voy a cambiar a un postit " + element)
+
+        if (collection === "/todo") {
+            return new PostIt(element._contenido, this.getCurrentDeveloper(), element._horas, element.$key)
+        }
+
         return new PostIt(element._contenido, element._programador, element._horas, element.$key);
     }
 
@@ -54,6 +61,26 @@ export class FirebaseService implements Database {
 
         this.af.database.list("/users").push(user);
 
+    }
+
+    getCurrentDeveloper(): string {
+
+        let currentUser;
+        this.af.auth.subscribe((user) => {
+            currentUser = user.uid;
+        })
+
+        console.log("currentUser " + currentUser)
+
+        let currentDeveloperName = this.af.database.list('/users', {
+            query: {
+                equalTo: currentUser,
+            }
+        }).subscribe((name) =>
+            console.log(name));
+        console.log("nuevo name" + currentDeveloperName)
+
+        return "";
     }
 
 }

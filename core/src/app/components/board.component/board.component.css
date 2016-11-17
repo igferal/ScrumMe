@@ -54,6 +54,8 @@ body {
 }
 
 .scrollDiv {
+    overflow-x: hidden;
+    overflow-y: hidden;
     overflow: scroll;
     height: 80vh;
 }
