@@ -13,10 +13,10 @@ import { Router } from '@angular/router';
 
 export class LoginComponent {
 
-    email: string;
-    password: string;
-    authed: boolean;
-    issue: string;
+    private email: string;
+    private password: string;
+    private authed: boolean;
+    private issue: string;
 
     constructor(private firebaseAuth: FirebaseAuthentication, private router: Router) {
         this.authed = false;
@@ -39,7 +39,7 @@ export class LoginComponent {
 
         if (res.provider == 4) {
             this.authed = true
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/board']);
         } else {
 
             this.authed = true;

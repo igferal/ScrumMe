@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
     moduleId: 'createTask',
     selector: 'createTask',
     templateUrl: './create.task.component.html',
-    styleUrls :['./create.task.component.css'],
+    styleUrls: ['./create.task.component.css'],
     providers: [FirebaseService]
 
 })
@@ -17,9 +17,9 @@ import { Router } from '@angular/router';
 export class CreateTaskComponent {
 
 
-    contenido: string;
-    programador: string;
-    horas: number;
+    private contenido: string;
+    private programador: string;
+    private horas: number;
     @Output() notify = new EventEmitter<boolean>();
 
     constructor(private firebaseService: FirebaseService, public router: Router) { }

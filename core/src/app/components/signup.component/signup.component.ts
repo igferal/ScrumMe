@@ -16,15 +16,15 @@ import { FirebaseService } from '../../services/database/firebase.service';
 
 export class SignUpComponent {
 
-    email: string;
-    password: string;
-    passwordAgain: string;
-    name: string;
-    surname: string;
-    problemWithSignUp: boolean;
-    passNotMAtch: boolean;
-    issue: string;
-    passNotLongEnough: boolean;
+   private email: string;
+   private password: string;
+   private passwordAgain: string;
+   private name: string;
+   private surname: string;
+   private problemWithSignUp: boolean;
+   private passNotMAtch: boolean;
+   private issue: string;
+   private passNotLongEnough: boolean;
 
 
 

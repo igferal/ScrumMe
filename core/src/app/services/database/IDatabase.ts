@@ -8,9 +8,11 @@ export interface Database {
 
     delete(key: string, collection: string);
 
-    findById(key:string,collection:string);
+    findById(key: string, collection: string);
 
     createUser(user: any);
+
+    addToOtherBag(postItId: string, fromCollection: string, toCollection: string, programmer: string): void
 
 
 

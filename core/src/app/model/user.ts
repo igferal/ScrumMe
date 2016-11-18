@@ -6,6 +6,7 @@ export class User {
     private _surmame: string;
     private _uid: string;
     private _email: string;
+    
 
     constructor(name: string, surname: string, email: string, uid: string) {
 

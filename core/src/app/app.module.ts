@@ -18,12 +18,13 @@ import { ComponentComponent } from './components/component/component.component';
 
 
 
+
 export const firebaseConfig = {
-    apiKey: "AIzaSyBXNhwkOT_iu_9HIktEw78YGCydAjs6RQ0",
-    authDomain: "angularintegration-3b520.firebaseapp.com",
-    databaseURL: "https://angularintegration-3b520.firebaseio.com",
-    storageBucket: "angularintegration-3b520.appspot.com",
-    messagingSenderId: "87154413034"
+    apiKey: 'AIzaSyBXNhwkOT_iu_9HIktEw78YGCydAjs6RQ0',
+    authDomain: 'angularintegration-3b520.firebaseapp.com',
+    databaseURL: 'https://angularintegration-3b520.firebaseio.com',
+    storageBucket: 'angularintegration-3b520.appspot.com',
+    messagingSenderId: '87154413034'
 };
 
 const myFirebaseAuthConfig = {

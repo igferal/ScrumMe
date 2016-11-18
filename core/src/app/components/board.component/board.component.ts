@@ -3,6 +3,7 @@ import { PostIt } from '../../model/post.it';
 import { FirebaseListObservable } from 'angularfire2';
 import { DragulaModule, DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
 import { FirebaseService } from '../../services/database/firebase.service';
+import { User } from './../../model/user';
 
 
 @Component({
@@ -14,13 +15,13 @@ import { FirebaseService } from '../../services/database/firebase.service';
 })
 export class BoardComponent implements OnInit {
 
-    title: string;
-    todos: PostIt[];
-    inprogress: PostIt[];
-    testing: PostIt[];
-    done: PostIt[];
-    createTodo: boolean;
-    createTask: string;
+    private todos: PostIt[];
+    private inprogress: PostIt[];
+    private testing: PostIt[];
+    private done: PostIt[];
+    private createTodo: boolean;
+    private createTask: string;
+    private currentUser: User;
 
     constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService) {
 
@@ -29,44 +30,10 @@ export class BoardComponent implements OnInit {
     }
 
     private dragulaSubscriptions(dragulaService: DragulaService) {
-        dragulaService.drag.subscribe((value) => { this.onDrag(value.slice(1)); });
-        dragulaService.drop.subscribe((value) => { this.onDrop(value.slice(1)); });
-        dragulaService.over.subscribe((value) => { this.onOver(value.slice(1)); });
-        dragulaService.out.subscribe((value) => { this.onOut(value.slice(1)); });
         dragulaService.dropModel.subscribe((value) => { this.onDropModel(value.slice(1)) });
 
     }
 
-    colapseEvent(colapse) {
-
-        
-        this.changeState();
-
-    }
-
-    changeState() {
-        if (this.createTodo) {
-            this.createTask = "Añadir tarea";
-            this.createTodo = !this.createTodo;
-
-        }
-        else {
-            this.createTask = "Colapsar";
-            this.createTodo = !this.createTodo;
-
-        }
-    }
-
-    private onDrag(args) {
-        let [e, el] = args;
-
-
-    }
-
-    private onDrop(args) {
-
-
-    }
 
     private onDropModel(args) {
 
@@ -79,21 +46,7 @@ export class BoardComponent implements OnInit {
 
     private addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
 
-        var postit = this.firebaseService.findById(postItId, fromCollection);
-
-        console.log("Voy a cambiar de columna este " + postit)
-        this.firebaseService.delete(postItId, fromCollection);
-        this.firebaseService.save(postit, toCollection);
-
-    }
-
-    private onOver(args) {
-        let [e, el, container] = args;
-
-    }
-
-    private onOut(args) {
-        let [e, el, container] = args;
+        this.firebaseService.addToOtherBag(postItId, fromCollection, toCollection, this.currentUser.name)
 
     }
 
@@ -105,9 +58,37 @@ export class BoardComponent implements OnInit {
 
 
 
+    private colapseEvent(colapse) {
+
+        this.changeState();
+
+    }
+
+    private changeState() {
+        if (this.createTodo) {
+            this.createTask = "Añadir tarea";
+            this.createTodo = !this.createTodo;
+
+        }
+        else {
+            this.createTask = "Colapsar";
+            this.createTodo = !this.createTodo;
+
+        }
+    }
+
+
+
     public ngOnInit() {
-        this.title = "Lista de tareas";
+        this.suscribeUser();
         this.inicializateCollections();
+    }
+
+
+    private suscribeUser() {
+        this.firebaseService.getCurrentDeveloper().subscribe((user) => {
+            this.currentUser = new User(user._name, user._surname, user._email, user._uid);
+        });
     }
 
     private inicializateCollections() {
@@ -130,18 +111,3 @@ export class BoardComponent implements OnInit {
 
 }
 
-export class ModalComponent {
-
-    public visible = false;
-    private visibleAnimate = false;
-
-    public show(): void {
-        this.visible = true;
-        setTimeout(() => this.visibleAnimate = true);
-    }
-
-    public hide(): void {
-        this.visibleAnimate = false;
-        setTimeout(() => this.visible = false, 300);
-    }
-}

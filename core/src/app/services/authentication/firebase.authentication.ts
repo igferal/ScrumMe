@@ -45,6 +45,7 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
 
     }
 
+ 
 
 
     signUp(email: string, password: string): any {

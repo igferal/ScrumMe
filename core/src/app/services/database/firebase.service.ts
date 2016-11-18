@@ -1,8 +1,8 @@
+import { User } from './../../model/user';
 import { Injectable } from '@angular/core';
 import { Database } from './IDatabase';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { PostIt } from '../../model/post.it';
-import { User } from '../../model/user';
 
 
 @Injectable()
@@ -10,10 +10,7 @@ export class FirebaseService implements Database {
 
 
 
-    constructor(private af: AngularFire) {
-
-
-    }
+    constructor(private af: AngularFire) { }
 
     getCollection(name: string): FirebaseListObservable<any> {
 
@@ -22,12 +19,8 @@ export class FirebaseService implements Database {
     }
 
     save(item: PostIt, collection: string) {
-
         console.log(collection);
         this.af.database.list(collection).push(item);
-
-
-
     }
 
 
@@ -41,29 +34,22 @@ export class FirebaseService implements Database {
 
     findById(key: string, collection: string) {
 
-        console.log(`Voy a buscar ${key} : ${collection}`)
         var element: any;
 
         this.af.database.object(collection + "/" + key).subscribe((item) => {
-            console.log(item + " soy el item en la bd")
             element = item;
         });
-        console.log("voy a cambiar a un postit " + element)
-
-        if (collection === "/todo") {
-            return new PostIt(element._contenido, this.getCurrentDeveloper(), element._horas, element.$key)
-        }
 
         return new PostIt(element._contenido, element._programador, element._horas, element.$key);
     }
 
     createUser(user: User) {
 
-        this.af.database.list("/users").push(user);
+        this.af.database.object(`/users/${user.uid}`).set(user);
 
     }
 
-    getCurrentDeveloper(): string {
+    getCurrentDeveloper(): FirebaseObjectObservable<any> {
 
         let currentUser;
         this.af.auth.subscribe((user) => {
@@ -72,15 +58,29 @@ export class FirebaseService implements Database {
 
         console.log("currentUser " + currentUser)
 
-        let currentDeveloperName = this.af.database.list('/users', {
-            query: {
-                equalTo: currentUser,
-            }
-        }).subscribe((name) =>
-            console.log(name));
-        console.log("nuevo name" + currentDeveloperName)
+        return this.af.database.object(`users/${currentUser}`);
 
-        return "";
     }
+
+    public addToOtherBag(postItId: string, fromCollection: string, toCollection: string, programmer: string): void {
+
+        var postit = this.findById(postItId, fromCollection);
+        this.addProgrammerLabel(postit, toCollection, programmer);
+        this.delete(postItId, fromCollection);
+        this.save(postit, toCollection);
+
+    }
+
+
+    private addProgrammerLabel(postIt: PostIt, toCollection: string, programmer: string) {
+
+        if (toCollection != '/todo') {
+            postIt.progamador = programmer;
+        }
+        else {
+            postIt.progamador = "";
+        }
+    }
+
 
 }
