@@ -26,13 +26,13 @@ export class CreateTaskComponent {
 
 
 
-    onSubmit() {
+    public onSubmit() {
 
         var postIt = new PostIt(this.contenido, "", 2, " ");
         this.contenido = "";
 
         this.firebaseService.save(postIt, '/todo');
-        this.notify.emit(false);        // this.router.navigate(['/board']);
+        this.notify.emit(false);
 
     }
 

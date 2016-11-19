@@ -15,23 +15,17 @@ export class AppComponent implements OnInit {
 
   constructor(private authservice: FirebaseAuthentication) { }
 
-  logout() {
+  public logout() {
 
     this.authservice.logout();
   }
 
-  ngOnInit() {
+  public ngOnInit() {
 
     this.authservice.auth.subscribe(
-   (val) => {
-  this.auth = val;
-  console.log(val);
-
-
-    } 
-    
-
-    );
+      (user) => {
+        this.auth = user;
+      });
   }
 
 }

@@ -22,16 +22,19 @@ export class LoginComponent {
         this.authed = false;
     }
 
-    getUser() {
 
-        this.firebaseAuth.getUser();
 
-    }
-
-    onSubmit() {
+    public onSubmit() {
 
         this.login();
 
+    }
+
+    public login() {
+
+        this.firebaseAuth.login(this.email, this.password).then((res) => {
+            this.redirect(res);
+        });
     }
 
 
@@ -41,29 +44,13 @@ export class LoginComponent {
             this.authed = true
             this.router.navigate(['/board']);
         } else {
-
             this.authed = true;
             this.password = "";
             this.issue = "No existe ese usuario";
-
         }
-
-    }
-
-    login() {
-
-
-        this.firebaseAuth.login(this.email, this.password).then((res) => {
-            this.redirect(res);
-        });
     }
 
 
-    logout() {
-
-        this.firebaseAuth.logout();
-
-    }
 
 
 

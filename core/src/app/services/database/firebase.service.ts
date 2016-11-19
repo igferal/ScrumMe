@@ -12,19 +12,19 @@ export class FirebaseService implements Database {
 
     constructor(private af: AngularFire) { }
 
-    getCollection(name: string): FirebaseListObservable<any> {
+    public getCollection(name: string): FirebaseListObservable<any> {
 
         return this.af.database.list(name);
 
     }
 
-    save(item: PostIt, collection: string) {
+    public save(item: PostIt, collection: string) {
         console.log(collection);
         this.af.database.list(collection).push(item);
     }
 
 
-    delete(key: string, collection: string) {
+    public delete(key: string, collection: string) {
 
         this.af.database.list(collection).remove(key);
 
@@ -32,7 +32,7 @@ export class FirebaseService implements Database {
 
 
 
-    findById(key: string, collection: string) {
+    public findById(key: string, collection: string) {
 
         var element: any;
 
@@ -43,22 +43,9 @@ export class FirebaseService implements Database {
         return new PostIt(element._contenido, element._programador, element._horas, element.$key);
     }
 
-    createUser(user: User) {
+    public createUser(user: User) {
 
         this.af.database.object(`/users/${user.uid}`).set(user);
-
-    }
-
-    getCurrentDeveloper(): FirebaseObjectObservable<any> {
-
-        let currentUser;
-        this.af.auth.subscribe((user) => {
-            currentUser = user.uid;
-        })
-
-        console.log("currentUser " + currentUser)
-
-        return this.af.database.object(`users/${currentUser}`);
 
     }
 
@@ -71,6 +58,16 @@ export class FirebaseService implements Database {
 
     }
 
+    public getCurrentDeveloper(): FirebaseObjectObservable<any> {
+
+        let currentUser;
+        this.af.auth.subscribe((user) => {
+            currentUser = user.uid;
+        })
+
+        return this.af.database.object(`users/${currentUser}`);
+
+    }
 
     private addProgrammerLabel(postIt: PostIt, toCollection: string, programmer: string) {
 

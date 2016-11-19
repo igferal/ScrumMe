@@ -16,7 +16,7 @@ const routes: Routes = [
     canActivate: [FirebaseAuthentication]
   },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignUpComponent }, 
+  { path: 'signup', component: SignUpComponent },
   { path: 'landing', component: LandingComponent },
   {
     path: 'dashboard', component: UserDashboardComponent,

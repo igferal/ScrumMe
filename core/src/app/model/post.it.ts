@@ -13,13 +13,6 @@ export class PostIt {
     this.setKey(key);
   }
 
-  setKey(key: string) {
-
-    if (key != undefined)
-      this._key = key;
-    else this._key = "";
-
-  }
 
 
   set progamador(newProgrammer: string) {
@@ -47,6 +40,15 @@ export class PostIt {
 
     return this._contenido;
   }
+
+  private setKey(key: string) {
+
+    if (key != undefined)
+      this._key = key;
+    else this._key = "";
+
+  }
+
 
 
   public toString(): string {

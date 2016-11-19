@@ -18,9 +18,9 @@ export class NoteComponent {
 
 
 
-    
 
-    deleteItem() { 
+
+    private deleteItem() {
 
         this.notify.emit(this.note.$key);
     }

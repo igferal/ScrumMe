@@ -16,15 +16,15 @@ import { FirebaseService } from '../../services/database/firebase.service';
 
 export class SignUpComponent {
 
-   private email: string;
-   private password: string;
-   private passwordAgain: string;
-   private name: string;
-   private surname: string;
-   private problemWithSignUp: boolean;
-   private passNotMAtch: boolean;
-   private issue: string;
-   private passNotLongEnough: boolean;
+    private email: string;
+    private password: string;
+    private passwordAgain: string;
+    private name: string;
+    private surname: string;
+    private problemWithSignUp: boolean;
+    private passNotMAtch: boolean;
+    private issue: string;
+    private passNotLongEnough: boolean;
 
 
 
@@ -33,14 +33,9 @@ export class SignUpComponent {
         this.issue = "";
     }
 
-    getUser() {
 
-        this.firebaseAuth.getUser();
 
-    }
-
-    onSubmit() {
-
+    public onSubmit() {
 
         if (this.passwordLength()) {
             if (this.passwordMatch()) {
@@ -53,30 +48,30 @@ export class SignUpComponent {
             }
         }
         else {
-
             this.passNotLongEnough = true;
-
         }
         this.clearPassword();
     }
 
-    clearPassword() {
+
+
+    private clearPassword() {
         this.password = "";
         this.passwordAgain = "";
     }
 
-    passwordLength(): boolean {
+    private passwordLength(): boolean {
 
         return (this.password.length >= 6);
     }
 
 
-    passwordMatch(): boolean {
+    private passwordMatch(): boolean {
 
         return (this.password === this.passwordAgain);
     }
 
-    signUp(name: string, surname: string, email: string, password: string) {
+    private signUp(name: string, surname: string, email: string, password: string) {
         this.email = email;
         this.password = password;
         this.firebaseAuth.signUp(email, password).then((res) => {
@@ -94,7 +89,7 @@ export class SignUpComponent {
         });
     }
 
-    createUser(name: string, surname: string, email: string, uid: string) {
+    private createUser(name: string, surname: string, email: string, uid: string) {
 
         var user: User = new User(name, surname, email, uid);
         this.firebaseService.createUser(user);

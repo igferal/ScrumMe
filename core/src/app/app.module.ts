@@ -13,7 +13,6 @@ import { UserDashboardComponent } from './components/user.dashboard.component/us
 import { LandingComponent } from './components/landing.component/landing.component';
 import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
 import { NoteComponent } from './components/board.component/note.component/note.component';
-import { ComponentComponent } from './components/component/component.component';
 
 
 
@@ -42,7 +41,6 @@ const myFirebaseAuthConfig = {
         LandingComponent,
         NoteComponent,
         UserDashboardComponent,
-        ComponentComponent
     ],
     imports: [
         BrowserModule,
