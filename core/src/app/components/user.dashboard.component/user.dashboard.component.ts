@@ -1,6 +1,6 @@
 import { FirebaseService } from './../../services/database/firebase.service';
 import { Board } from './../../model/board';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
 import { Router } from '@angular/router';
 
@@ -15,12 +15,13 @@ import { Router } from '@angular/router';
 })
 
 
-export class UserDashboardComponent implements OnInit {
+export class UserDashboardComponent implements OnInit, OnDestroy {
 
 
     private createBoard: string;
     private colapse: boolean;
     private boards: Board[];
+    private subscription: any;
 
     constructor(private firebaseService: FirebaseService, private router: Router) {
 
@@ -31,7 +32,7 @@ export class UserDashboardComponent implements OnInit {
 
 
     public goToBoard(boardId: string) {
-    
+
         this.router.navigate(['/board', boardId]);
 
     }
@@ -42,6 +43,8 @@ export class UserDashboardComponent implements OnInit {
         this.onColapse();
 
     }
+
+
 
     private onColapse() {
         if (this.colapse) {
@@ -56,9 +59,14 @@ export class UserDashboardComponent implements OnInit {
         }
     }
 
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+
+    }
     ngOnInit() {
 
-        this.firebaseService.getUser_Boards().subscribe(
+        this.subscription = this.firebaseService.getUser_Boards().subscribe(
             (boards) => this.boards = boards
         )
 

@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Board } from './../../model/board';
 import { User } from './../../model/user';
 import { Injectable } from '@angular/core';
@@ -28,12 +29,10 @@ export class FirebaseService implements Database {
     }
 
     public saveTask(item: PostIt, collection: string) {
-        console.log(collection);
         this.af.database.list(collection).push(item);
     }
 
     public saveBoard(board: Board) {
-        console.log(board.todo.length);
         let key = this.af.database.list("boards/").push(board).key;
         let boardInfo = {
             name: board.name,
@@ -78,11 +77,14 @@ export class FirebaseService implements Database {
 
     public findById(board: string, key: string, collection: string) {
 
-        var element: any;
+        let element: any;
+        let subscription:any;
 
-        this.af.database.object(`boards/${board}/${collection}/${key}`).subscribe((item) => {
+        subscription = this.af.database.object(`boards/${board}${collection}/${key}`).subscribe((item) => {
             element = item;
+            console.log(item);
         });
+        subscription.unsubscribe();
 
         return new PostIt(element._contenido, element._programador, element._horas, element.$key);
     }
@@ -95,7 +97,8 @@ export class FirebaseService implements Database {
 
     public addToOtherBag(board: string, postItId: string, fromCollection: string, toCollection: string, programmer: string): void {
 
-        var postit = this.findById(board, postItId, fromCollection);
+        //console.log("Add to other baga AGAIN")
+        let postit = this.findById(board, postItId, fromCollection);
         this.addProgrammerLabel(postit, toCollection, programmer);
         this.delete(postItId, `boards/${board}${fromCollection}`);
         this.saveTask(postit, `boards/${board}${toCollection}`);

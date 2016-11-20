@@ -14,16 +14,23 @@ export class Board {
 
         this._name = name;
         this._date = date;
-        this._todo = [];
-        this._testing = [];
-        this._inprogress = [];
-        this._done = [];
+        this.inicializateBoard(this._todo, todo);
+        this.inicializateBoard(this._inprogress, inprogress);
+        this.inicializateBoard(this._testing, testing);
+        this.inicializateBoard(this._done, done);
+
 
     }
 
-    private incializateBoard(board: PostIt[]) {
 
-        board.push(new PostIt("none", "none", 0, "none"))
+
+    private inicializateBoard(myBoard: PostIt[], newBoard: PostIt[]) {
+
+        if (newBoard === null) {
+            myBoard = []
+        }
+        myBoard = newBoard;
+
     }
 
 
