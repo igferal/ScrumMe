@@ -12,7 +12,7 @@ import { FirebaseAuthentication } from '../services/authentication/firebase.auth
 const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   {
-    path: 'board', component: BoardComponent,
+    path: 'board/:id', component: BoardComponent,
     canActivate: [FirebaseAuthentication]
   },
   { path: 'login', component: LoginComponent },

@@ -1,3 +1,4 @@
+import { Board } from './../../model/board';
 import { User } from './../../model/user';
 import { Injectable } from '@angular/core';
 import { Database } from './IDatabase';
@@ -9,8 +10,16 @@ import { PostIt } from '../../model/post.it';
 export class FirebaseService implements Database {
 
 
+    private currentUser: string;
 
-    constructor(private af: AngularFire) { }
+
+    constructor(private af: AngularFire) {
+        this.af.auth.subscribe((user) => {
+            if (user != null) {
+                this.currentUser = user.uid;
+            }
+        });
+    }
 
     public getCollection(name: string): FirebaseListObservable<any> {
 
@@ -18,10 +27,45 @@ export class FirebaseService implements Database {
 
     }
 
-    public save(item: PostIt, collection: string) {
+    public saveTask(item: PostIt, collection: string) {
         console.log(collection);
         this.af.database.list(collection).push(item);
     }
+
+    public saveBoard(board: Board) {
+        console.log(board.todo.length);
+        let key = this.af.database.list("boards/").push(board).key;
+        let boardInfo = {
+            name: board.name,
+            date: board.date
+        }
+        this.af.database.object(`user_board/${this.currentUser}/${key}`).set(boardInfo);
+        this.inicializateBoard(key);
+    }
+
+
+    public getUser_Boards(): FirebaseListObservable<any> {
+
+        return this.af.database.list(`user_board/${this.currentUser}`);
+
+    }
+
+
+    private inicializateBoard(boardKey: string) {
+
+        this.incializateBoardColumns(boardKey, "_todo");
+        this.incializateBoardColumns(boardKey, "_inprogress");
+        this.incializateBoardColumns(boardKey, "_testing");
+        this.incializateBoardColumns(boardKey, "_done");
+    }
+
+
+    private incializateBoardColumns(boardKey: string, column: string) {
+
+        this.af.database.object(`boards/${boardKey}/${column}/none`).set(new PostIt("none", "none", 0, "none"));
+
+    }
+
 
 
     public delete(key: string, collection: string) {
@@ -32,11 +76,11 @@ export class FirebaseService implements Database {
 
 
 
-    public findById(key: string, collection: string) {
+    public findById(board: string, key: string, collection: string) {
 
         var element: any;
 
-        this.af.database.object(collection + "/" + key).subscribe((item) => {
+        this.af.database.object(`boards/${board}/${collection}/${key}`).subscribe((item) => {
             element = item;
         });
 
@@ -49,29 +93,24 @@ export class FirebaseService implements Database {
 
     }
 
-    public addToOtherBag(postItId: string, fromCollection: string, toCollection: string, programmer: string): void {
+    public addToOtherBag(board: string, postItId: string, fromCollection: string, toCollection: string, programmer: string): void {
 
-        var postit = this.findById(postItId, fromCollection);
+        var postit = this.findById(board, postItId, fromCollection);
         this.addProgrammerLabel(postit, toCollection, programmer);
-        this.delete(postItId, fromCollection);
-        this.save(postit, toCollection);
+        this.delete(postItId, `boards/${board}${fromCollection}`);
+        this.saveTask(postit, `boards/${board}${toCollection}`);
 
     }
 
     public getCurrentDeveloper(): FirebaseObjectObservable<any> {
 
-        let currentUser;
-        this.af.auth.subscribe((user) => {
-            currentUser = user.uid;
-        })
-
-        return this.af.database.object(`users/${currentUser}`);
+        return this.af.database.object(`users/${this.currentUser}`);
 
     }
 
     private addProgrammerLabel(postIt: PostIt, toCollection: string, programmer: string) {
 
-        if (toCollection != '/todo') {
+        if (toCollection != '/_todo') {
             postIt.progamador = programmer;
         }
         else {

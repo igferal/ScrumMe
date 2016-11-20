@@ -98,7 +98,7 @@ export class SignUpComponent {
 
     private redirect(res: any) {
 
-        this.router.navigate(['/board']);
+        this.router.navigate(['/dashboard']);
 
     }
 

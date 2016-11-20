@@ -1,9 +1,12 @@
+import { Board } from './../../model/board';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { FirebaseListObservable } from 'angularfire2';
 import { DragulaModule, DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
 import { FirebaseService } from '../../services/database/firebase.service';
 import { User } from './../../model/user';
+import 'rxjs/add/operator/switchMap';
 
 
 @Component({
@@ -22,8 +25,10 @@ export class BoardComponent implements OnInit {
     private createTodo: boolean;
     private createTask: string;
     private currentUser: User;
+    private board: string;
 
-    constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService) {
+
+    constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService, private route: ActivatedRoute) {
 
         this.createTask = "Añadir tarea"
         this.dragulaSubscriptions(dragulaService);
@@ -46,7 +51,7 @@ export class BoardComponent implements OnInit {
 
     private addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
 
-        this.firebaseService.addToOtherBag(postItId, fromCollection, toCollection, this.currentUser.name)
+        this.firebaseService.addToOtherBag(this.board,postItId, fromCollection, toCollection, this.currentUser.name)
 
     }
 
@@ -93,19 +98,26 @@ export class BoardComponent implements OnInit {
 
     private inicializateCollections() {
 
-        this.firebaseService.getCollection("/todo").subscribe(
+        this.route.params
+            .switchMap((params: Params) => this.board=params['id'])
+            .subscribe((board) => {
+            });
+        
+
+        this.firebaseService.getCollection(`boards/${this.board}/_todo`).subscribe(
             (items) => this.todos = items
         );
 
-        this.firebaseService.getCollection("/inprogress").subscribe(
+        this.firebaseService.getCollection(`boards/${this.board}/_inprogress`).subscribe(
             (items) => this.inprogress = items
         );
-        this.firebaseService.getCollection("/testing").subscribe(
+        this.firebaseService.getCollection(`boards/${this.board}/_testing`).subscribe(
             (items) => this.testing = items
         );
-        this.firebaseService.getCollection("/done").subscribe(
+        this.firebaseService.getCollection(`boards/${this.board}/_done`).subscribe(
             (items) => this.done = items
         );
+
 
     }
 

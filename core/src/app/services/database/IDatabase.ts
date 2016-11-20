@@ -4,15 +4,15 @@ export interface Database {
 
     getCollection(name: string);
 
-    save(item: any, collection: string);
+    saveTask(item: any, collection: string);
 
     delete(key: string, collection: string);
 
-    findById(key: string, collection: string);
+    findById(board: string, key: string, collection: string);
 
     createUser(user: any);
 
-    addToOtherBag(postItId: string, fromCollection: string, toCollection: string, programmer: string): void
+    addToOtherBag(board: string, postItId: string, fromCollection: string, toCollection: string, programmer: string): void
 
 
 

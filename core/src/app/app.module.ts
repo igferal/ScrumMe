@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CreateBoardComponent } from './components/user.dashboard.component/create.board.component/create.board.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './components/app.component/app.component';
@@ -41,6 +42,7 @@ const myFirebaseAuthConfig = {
         LandingComponent,
         NoteComponent,
         UserDashboardComponent,
+        CreateBoardComponent
     ],
     imports: [
         BrowserModule,

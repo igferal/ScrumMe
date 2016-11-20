@@ -1,0 +1,13 @@
+<form (ngSubmit)="onSubmit()" container #createBoard="ngForm">
+    <fieldset class="fieldset">
+        <legend>Crea tablero</legend>
+        <div column="6">
+            <input required type="text" required [(ngModel)]="name" name="name" placeholder="Nombre del tablero" />
+            <p> </p>
+            <input required type="date" required [(ngModel)]="date" name="date" placeholder="Fecha de vencimiento" />
+            <p> </p>
+            <hr/>
+            <button class="bg--warning">Crear tablero</button>
+        </div>
+    </fieldset>
+</form>
