@@ -59,6 +59,12 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
         }
     }
 
+    private deleteBoard(key: string) {
+
+        this.firebaseService.deleteBoard(key);
+
+    }
+
 
     ngOnDestroy() {
         this.subscription.unsubscribe();

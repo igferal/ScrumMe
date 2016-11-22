@@ -79,6 +79,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
 
     private changeState() {
+
+
+        this.firebaseService.getBoard("boards/" + this.board);
+
         if (this.createTodo) {
             this.createTask = "Añadir tarea";
             this.createTodo = !this.createTodo;
@@ -107,7 +111,6 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
 
-        console.log("ON DESTROY")
 
         this.subscription.unsubscribe();
         this.subscription2.unsubscribe();

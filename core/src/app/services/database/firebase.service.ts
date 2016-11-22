@@ -14,6 +14,7 @@ export class FirebaseService implements Database {
     private currentUser: string;
 
 
+
     constructor(private af: AngularFire) {
         this.af.auth.subscribe((user) => {
             if (user != null) {
@@ -21,6 +22,22 @@ export class FirebaseService implements Database {
             }
         });
     }
+
+
+    /*
+    
+    Veo indicencias en area mis incidencias
+    Cuando se hace un pedido se verán los pedientes.
+    Si es imprenta, se va avisando, y se va viendo el asunto..
+    
+    */
+    public getBoard(name: string) {
+
+        this.af.database.list(name).subscribe((itemz) => console.log(itemz));;
+
+    }
+
+
 
     public getCollection(name: string): FirebaseListObservable<any> {
 
@@ -73,12 +90,20 @@ export class FirebaseService implements Database {
 
     }
 
+    public deleteBoard(key: string) {
+
+
+        this.af.database.list('boards').remove(key)
+        this.af.database.list(`user_board/${this.currentUser}`).remove(key);
+
+    }
+
 
 
     public findById(board: string, key: string, collection: string) {
 
         let element: any;
-        let subscription:any;
+        let subscription: any;
 
         subscription = this.af.database.object(`boards/${board}${collection}/${key}`).subscribe((item) => {
             element = item;

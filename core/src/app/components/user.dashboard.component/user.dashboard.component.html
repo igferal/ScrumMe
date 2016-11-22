@@ -7,6 +7,8 @@
                     <th scope="col">Nombre tablero</th>
                     <th scope="col">Fecha vencimiento</th>
                     <th scope="col">Ir al tablero</th>
+                    <th scope="col">Borrar tablero</th>
+
                 </tr>
             </thead>
 
@@ -15,7 +17,7 @@
                     <td>{{board.name}}</td>
                     <td>{{board.date}}</td>
                     <td> <button (click)="goToBoard(board.$key)" class="bg--warning ">Ir al tablón</button>
-                    </td>
+                        <td> <button (click)="deleteBoard(board.$key)" class="bg--error ">Borrar tablero</button></td>
                 </tr>
             </tbody>
         </table>
