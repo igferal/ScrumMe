@@ -22,6 +22,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     private colapse: boolean;
     private boards: Board[];
     private subscription: any;
+    private currentUser:string;
 
     constructor(private firebaseService: FirebaseService, private router: Router) {
 
@@ -47,6 +48,10 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
 
     private onColapse() {
+
+        console.log(`
+        ${this.currentUser}
+        `);
         if (this.colapse) {
             this.createBoard = "Añadir tablero";
             this.colapse = !this.colapse;
@@ -65,6 +70,11 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
     }
 
+    private stopColaboration(key:string){
+
+        this.firebaseService.deleteColaboration(key);
+    }
+
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
@@ -75,6 +85,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
         this.subscription = this.firebaseService.getUser_Boards().subscribe(
             (boards) => this.boards = boards
         )
+        this.currentUser =this.firebaseService.currentUser;
 
     }
 

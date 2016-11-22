@@ -11,7 +11,8 @@ import { PostIt } from '../../model/post.it';
 export class FirebaseService implements Database {
 
 
-    private currentUser: string;
+    public currentUser: string;
+
 
 
 
@@ -21,6 +22,8 @@ export class FirebaseService implements Database {
                 this.currentUser = user.uid;
             }
         });
+
+        console.log("Me creo");
     }
 
 
@@ -50,10 +53,12 @@ export class FirebaseService implements Database {
     }
 
     public saveBoard(board: Board) {
+        board.owner = this.currentUser;
         let key = this.af.database.list("boards/").push(board).key;
         let boardInfo = {
             name: board.name,
-            date: board.date
+            date: board.date,
+            boardOwner: this.currentUser
         }
         this.af.database.object(`user_board/${this.currentUser}/${key}`).set(boardInfo);
         this.inicializateBoard(key);
@@ -64,6 +69,11 @@ export class FirebaseService implements Database {
 
         return this.af.database.list(`user_board/${this.currentUser}`);
 
+    }
+
+    public deleteColaboration(key: string) {
+
+        this.af.database.list(`user_board/${this.currentUser}`).remove(key);
     }
 
 

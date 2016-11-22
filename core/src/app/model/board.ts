@@ -9,6 +9,7 @@ export class Board {
     private _inprogress: PostIt[];
     private _testing: PostIt[];
     private _done: PostIt[];
+    private _owner: string;
 
     constructor(name: string, date: Date, todo?: PostIt[], inprogress?: PostIt[], testing?: PostIt[], done?: PostIt[]) {
 
@@ -30,6 +31,12 @@ export class Board {
             myBoard = []
         }
         myBoard = newBoard;
+
+    }
+
+    public set owner(owner: string) {
+
+        this._owner = owner;
 
     }
 

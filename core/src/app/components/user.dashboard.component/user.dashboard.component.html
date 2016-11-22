@@ -1,30 +1,49 @@
-<div container>
+<div row>
 
-    <div class="table--full">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Nombre tablero</th>
-                    <th scope="col">Fecha vencimiento</th>
-                    <th scope="col">Ir al tablero</th>
-                    <th scope="col">Borrar tablero</th>
-
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr *ngFor="let board of boards">
-                    <td>{{board.name}}</td>
-                    <td>{{board.date}}</td>
-                    <td> <button (click)="goToBoard(board.$key)" class="bg--warning ">Ir al tablón</button>
-                        <td> <button (click)="deleteBoard(board.$key)" class="bg--error ">Borrar tablero</button></td>
-                </tr>
-            </tbody>
-        </table>
+    <div column="1">
+        <br/>
     </div>
-    <div *ngIf="colapse">
-        <createBoard (notify)="colapseEvent($event)"></createBoard>
+
+    <div column="10">
+        <div class="table--full">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre tablero</th>
+                        <th scope="col">Fecha vencimiento</th>
+                        <th scope="col">Ir al tablero</th>
+                        <th scope="col">Compartir/Borrar</th>
+                        <th scope="col">Dueño tablero</th>
+
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let board of boards">
+                        <td>{{board.name}}</td>
+                        <td>{{board.date}}</td>
+                        <td> <button (click)="goToBoard(board.$key)" class=" bg--warning ">Ir al tablón</button>
+                            <td *ngIf="currentUser === board.boardOwner"> <button (click)="deleteBoard(board.$key)" class="bg--error ">Borrar tablero</button></td>
+                            <td *ngIf="currentUser != board.boardOwner"> <button (click)="stopColaboration(board.$key)" class="bg--error ">Dejar de colaborar</button></td>
+                            <td *ngIf="currentUser === board.boardOwner"> <span class="label bg--success">Propieterio</span></td>
+                            <td *ngIf="currentUser != board.boardOwner"> <span class="label">Colaborador</span> </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="colapse">
+                <createBoard (notify)="colapseEvent($event)"></createBoard>
+            </div>
+            <button (click)="onColapse()" class="button--full bg--warning ">{{createBoard}}</button>
+
+        </div>
     </div>
-    <button (click)="onColapse()" class="button--full bg--warning ">{{createBoard}}</button>
+
+    <div column="1">
+        <br/>
+    </div>
+
+
 
 </div>
