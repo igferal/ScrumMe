@@ -67,7 +67,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 
     public onNotify(collection: string, key: string) {
-        this.firebaseService.delete(key, `/${collection}`);
+        this.firebaseService.delete(key, `boards/${this.board}/${collection}`);
     }
 
 

@@ -9,7 +9,7 @@
                 <div class="dragHereTodo" *ngIf="item.$key==='none' && todos.length ==1">
                     Drag Here!<br/>
                 </div>
-                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('todo',$event)" [note]="item"></note>
+                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('_todo',$event)" [note]="item"></note>
             </div>
 
             <div class="noteContainer" *ngIf="createTodo">
@@ -26,7 +26,7 @@
                 <div class="dragHere" *ngIf="item.$key==='none' && inprogress.length ==1">
                     Drag Here!<br/>
                 </div>
-                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('inprogress',$event)" [note]="item"></note>
+                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('_inprogress',$event)" [note]="item"></note>
             </div>
         </div>
         <div column="3" class="scrollDiv"> 
@@ -35,7 +35,7 @@
                 <div class="dragHere" *ngIf="item.$key==='none' && testing.length ==1">
                     Drag Here!<br/>
                 </div>
-                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('testing',$event)" [note]="item"></note>
+                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('_testing',$event)" [note]="item"></note>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
                 <div class="dragHere" *ngIf="item.$key==='none' && done.length ==1">
                     Drag Here!<br/>
                 </div>
-                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('done',$event)" [note]="item"></note>
+                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('_done',$event)" [note]="item"></note>
             </div>
         </div>
     </div>
