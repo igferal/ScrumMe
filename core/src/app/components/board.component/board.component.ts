@@ -93,7 +93,6 @@ export class BoardComponent implements OnInit, OnDestroy {
      * Metodo que nos gestiona el cambio del panel colapsable
      */
     private changeState() {
-        this.firebaseService.getBoard("boards/" + this.board);
         if (this.createTodo) {
             this.createTask = "Añadir tarea";
             this.createTodo = !this.createTodo;
