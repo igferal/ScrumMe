@@ -1,77 +1,55 @@
-.portada {
-    background: url(http://programacion.jias.es/wp-content/uploads/2015/05/fairydustboard_20110324.jpg) no-repeat fixed center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    padding: 50px 0;
-    height: 100%;
+.text-inverse {
+    color: white;
+}
+
+.section {
+    position: relative;
+}
+
+.section-fill-height {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+}
+
+.section .background-image {
+    z-index: -1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
     width: 100%;
-    text-align: center;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
 }
 
-@media (min-width: 48em) {
-    .portada {
-        padding: 100px 0;
-    }
+.section .background-image.background-image-fixed {
+    background-attachment: fixed;
 }
 
-@media (min-width: 96em) {
-    .portada {
-        padding: 200px 0;
-    }
+.section.section-opaque-dark {
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
-.white {
-    color: white;
+.section .background-video-holder {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
 }
 
-.text {
-    margin: 30px 0px 30px 0px;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.25);
-    display: inline-block;
+.section .background-video-holder .background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.btn {
-    /*border-radius: 4px;*/
-    /*transition: all .3s;*/
+.section.section-opaque-dark {
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
-.siteHeader {
-    border-bottom: 1px solid #eee;
-}
-
-.logo {
-    font-size: 22px;
-    margin-bottom: 0;
-}
-
-.nav {
-    text-align: right;
-}
-
-.nav li {
-    display: inline;
-    line-height: 4;
-    margin-left: 25px;
-}
-
-.nav li:first-of-type {
-    margin-left: 0;
-}
-
-.masthead-title {
-    margin-top: 0;
-    color: white;
-}
-
-.siteContent {
-    padding: 50px 0;
-}
-
-.siteFooter {
-    border-top: 1px solid #eee;
-    font-size: .875em;
-    padding-top: 15px;
+.section.section-opaque-light {
+    background-color: rgba(255, 255, 255, 0.7);
 }

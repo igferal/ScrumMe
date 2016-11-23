@@ -14,7 +14,7 @@ import { UserDashboardComponent } from './components/user.dashboard.component/us
 import { LandingComponent } from './components/landing.component/landing.component';
 import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
 import { NoteComponent } from './components/board.component/note.component/note.component';
-
+import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 
 
@@ -50,6 +50,7 @@ const myFirebaseAuthConfig = {
         HttpModule,
         DragulaModule,
         AppRoutingModule,
+        AlertModule,
         AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
 
     ],

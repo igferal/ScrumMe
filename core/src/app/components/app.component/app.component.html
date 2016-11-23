@@ -1,17 +1,20 @@
-<header row class="siteHeader">
-    <div column=4>
-        <a routerLink="/">
-            <h1 class="logo">ScrumMe</h1>
-        </a>
-    </div>
-    <nav column=8 class="nav">
-        <ul>
-            <li *ngIf="auth!=null"><a routerLink="/dashboard">Dashboard</a></li>
-            <li *ngIf="auth==null"><a routerLink="/login">Iniciar sesión</a></li>
-            <li *ngIf="auth==null"><a routerLink="/signup">Crear usuario</a></li>
-            <li *ngIf="auth!=null" (click)="logout()" ><a routerLink="/landing" >Cerrar sesión</a></li>
+<nav class="navbar navbar-full navbar-light bg-faded">
+    <a class="navbar-brand" routerLink="/">ScrumMe</a>
+    <ul class="nav navbar-nav pull-right">
+        <li *ngIf="auth!=null" class="nav-item">
+            <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="auth==null">
+            <a class=" nav-link" routerLink="/login" href="# ">Iniciar sesión</a>
+        </li>
+        <li class="nav-item " *ngIf="auth==null ">
+            <a class="nav-link" routerLink="/signup">Crear usuario</a>
+        </li>
+        <li class="nav-item " *ngIf="auth!=null" (click)="logout() ">
+            <a class="nav-link">Cerrar sesión</a>
+        </li>
+    </ul>
+</nav>
 
-        </ul>
-    </nav>
-</header>
+
 <router-outlet></router-outlet>

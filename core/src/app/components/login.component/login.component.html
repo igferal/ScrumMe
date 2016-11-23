@@ -1,21 +1,23 @@
-<form (ngSubmit)="onSubmit()" container #login="ngForm">
-    <fieldset class="fieldset">
-        <legend>Iniciar sesión</legend>
+<div class="container">
+    <form (ngSubmit)="onSubmit()" class="form" #login="ngForm">
+        <fieldset class="fieldset">
+            <legend>Iniciar sesión</legend>
 
-        <div *ngIf="authed" class="alert alert--error">
-            <p><strong>Error! </strong>{{issue}} </p>
-        </div>
+            <div *ngIf="authed" class="alert alert--error">
+                <p><strong>Error! </strong>{{issue}} </p>
+            </div>
 
-        <div column="6">
-            <input required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
-            <p> </p>
-            <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
-            <p> </p>
-            <hr/>
-            <button class="bg--success">Iniciar</button>
-         
+            <div column="6">
+                <input class="form-control" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
+                <p> </p>
+                <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
+                <p> </p>
+                <hr/>
+                <button class="btn btn-warning">Iniciar</button>
 
-        </div>
 
-    </fieldset>
-</form>
+            </div>
+
+        </fieldset>
+    </form>
+</div>

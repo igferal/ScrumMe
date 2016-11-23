@@ -1,36 +1,37 @@
-<form (ngSubmit)="onSubmit()" container #signup="ngForm">
-    <fieldset class="fieldset">
-        <legend>Crea usuario</legend>
+<div class="container">
+    <form (ngSubmit)="onSubmit()" class="form" #signup="ngForm">
+        <fieldset class="fieldset">
+            <legend>Crea usuario</legend>
 
-        <div *ngIf="problemWithSignUp" class="alert alert--error">
-            <p><strong>Error!</strong>{{issue}} </p>
-        </div>
+            <div *ngIf="problemWithSignUp" class="alert alert--error">
+                <p><strong>Error!</strong>{{issue}} </p>
+            </div>
 
-        <div *ngIf="passNotLongEnough" class="alert alert--error">
-            <p><strong>Error!</strong> La longitud de la contraseña ha de ser mayor o igual a 6 caracteres </p>
-            <a href="" class="alert-close">&times;</a>
+            <div *ngIf="passNotLongEnough" class="alert alert--error">
+                <p><strong>Error!</strong> La longitud de la contraseña ha de ser mayor o igual a 6 caracteres </p>
+                <a href="" class="alert-close">&times;</a>
 
-        </div>
+            </div>
 
-        <div *ngIf="passNotMAtch" class="alert alert--error">
-            <p><strong>Error!</strong> Las contraseñas no coinciden </p>
-        </div>
+            <div *ngIf="passNotMAtch" class="alert alert--error">
+                <p><strong>Error!</strong> Las contraseñas no coinciden </p>
+            </div>
 
-        <div column="6">
+            <div column="6">
 
-            <input required type="text" required [(ngModel)]="name" name="name" placeholder="Nombre" />
-            <p> </p>
-            <input required type="text" required [(ngModel)]="surname" name="surname" placeholder="Apellido" />
-            <p> </p>
-            <input required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
-            <p> </p>
-            <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
-            <p> </p>
-            <input required type="password" required [(ngModel)]="passwordAgain" name="passwordAgain" placeholder="Repite tu contraseña"
-            />
-            <hr/>
-            <button class="bg--success">Registrar</button>
-        </div>
+                <input class="form-control" required type="text" required [(ngModel)]="name" name="name" placeholder="Nombre" />
+                <p> </p>
+                <input class="form-control" required type="text" required [(ngModel)]="surname" name="surname" placeholder="Apellido" />
+                <p> </p>
+                <input class="form-control" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
+                <p> </p>
+                <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
+                <p> </p>
+                <input class="form-control" required type="password" required [(ngModel)]="passwordAgain" name="passwordAgain" placeholder="Repite tu contraseña" />
+                <hr/>
+                <button class="btn btn-warning">Registrar</button>
+            </div>
 
-    </fieldset>
-</form>
+        </fieldset>
+    </form>
+</div>
