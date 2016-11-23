@@ -11,8 +11,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
     providers: [FirebaseService]
 
 })
-
-
 export class CreateBoardComponent {
 
 
@@ -23,7 +21,9 @@ export class CreateBoardComponent {
     constructor(private firebaseService: FirebaseService) { }
 
 
-
+    /**
+     * Metodo que gestiona la creación de tablones
+     */
     public onSubmit() {
 
         this.firebaseService.saveBoard(new Board(this.name, this.date));

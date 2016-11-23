@@ -6,13 +6,19 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
+
+/**
+ * 
+ * Clase pendiente de refactorización 
+ * Promesas en angular2 => WRONG!  
+ * Cambiar para usar observables
+ */
 @Injectable()
 export class FirebaseAuthentication implements IAuthentication, CanActivate {
 
 
     constructor(public af: AngularFire, public auth: FirebaseAuth, public router: Router) { }
 
-    logged: Observable<boolean>
 
 
     public getUser() {

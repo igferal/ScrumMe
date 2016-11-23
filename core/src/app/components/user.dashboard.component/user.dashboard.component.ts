@@ -13,8 +13,6 @@ import { Router } from '@angular/router';
     providers: [FirebaseService]
 
 })
-
-
 export class UserDashboardComponent implements OnInit, OnDestroy {
 
 
@@ -22,7 +20,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     private colapse: boolean;
     private boards: Board[];
     private subscription: any;
-    private currentUser:string;
+    private currentUser: string;
 
     constructor(private firebaseService: FirebaseService, private router: Router) {
 
@@ -31,14 +29,19 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     }
 
 
-
+    /**
+     * Metodo que nos redirige al tablero que seleccionamos
+     */
     public goToBoard(boardId: string) {
 
         this.router.navigate(['/board', boardId]);
 
     }
 
-
+    
+    /**
+     * Metodo que nos indica si se ha creado 
+     */
     private colapseEvent(colapse) {
 
         this.onColapse();
@@ -46,12 +49,10 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     }
 
 
-
+    /**
+     * Metodo que nos gestiona el elemento colapsable
+     */
     private onColapse() {
-
-        console.log(`
-        ${this.currentUser}
-        `);
         if (this.colapse) {
             this.createBoard = "Añadir tablero";
             this.colapse = !this.colapse;
@@ -64,28 +65,43 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Metodo que nos borra un tablero del cual se es dueño
+     */
     private deleteBoard(key: string) {
 
         this.firebaseService.deleteBoard(key);
 
     }
 
-    private stopColaboration(key:string){
+    /**
+     * Metodo que cancela una colaboración en un tablero
+     */
+    private stopColaboration(key: string) {
 
         this.firebaseService.deleteColaboration(key);
     }
 
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
 
-    }
+    /**
+     * Metodo que se inicia al crear el componente y obtiene nuestro usuario actual y los tableros 
+     * en los que esta colaborando o de los que es dueño, se realiza una suscripcion para ello
+     */
     ngOnInit() {
 
         this.subscription = this.firebaseService.getUser_Boards().subscribe(
             (boards) => this.boards = boards
         )
-        this.currentUser =this.firebaseService.currentUser;
+        this.currentUser = this.firebaseService.currentUser;
+
+    }
+
+    /**
+     * Metodo que se ejecuta al destruit el componente y nos desuscribe de los observers correspondientes
+     */
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
 
     }
 
