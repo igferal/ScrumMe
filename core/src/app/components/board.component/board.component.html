@@ -3,7 +3,7 @@
 
         <div  class="col-sm-3 scrollDiv">
 
-            <h3>To do</h3>
+            <h3>To Do</h3>
             <div id="_todo" *ngFor="let item of todos" [dragula]='"bag-one"' [dragulaModel]='todos'>
 
                 <div class="dragHereTodo" *ngIf="item.$key==='none' && todos.length ==1">
@@ -21,7 +21,7 @@
         </div>
 
         <div  class="col-sm-3 scrollDiv" >
-            <h3>In progress</h3>
+            <h3>In Progress</h3>
             <div id="_inprogress" *ngFor="let item of inprogress" [dragula]='"bag-one"' [dragulaModel]='inprogress'>
                 <div class="dragHere" *ngIf="item.$key==='none' && inprogress.length ==1">
                     Drag Here!<br/>

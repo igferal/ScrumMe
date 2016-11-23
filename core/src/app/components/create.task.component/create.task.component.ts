@@ -21,13 +21,15 @@ export class CreateTaskComponent {
     private programador: string;
     private horas: number;
     @Input() board: any;
-
     @Output() notify = new EventEmitter<boolean>();
 
     constructor(private firebaseService: FirebaseService, public router: Router) { }
 
 
-
+    /**
+     * Metodo que nos inserta un nuevo postIt en la base de datos, además notifica al 
+     * tablero de que la tarea ha sido creada
+     */
     public onSubmit() {
 
         var postIt = new PostIt(this.contenido, "", 2, " ");

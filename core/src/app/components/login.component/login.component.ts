@@ -22,14 +22,14 @@ export class LoginComponent {
         this.authed = false;
     }
 
-
-
     public onSubmit() {
 
         this.login();
-
     }
 
+    /** 
+    * Método que envia el usuario y la contraseña al servicio de autenticación 
+    */
     public login() {
 
         this.firebaseAuth.login(this.email, this.password).then((res) => {
@@ -37,7 +37,9 @@ export class LoginComponent {
         });
     }
 
-
+    /**
+     * Metodo que nos gestiona la respuesta que nos devuelve el servicio de autenticación
+     */
     private redirect(res: any) {
 
         if (res.provider == 4) {
