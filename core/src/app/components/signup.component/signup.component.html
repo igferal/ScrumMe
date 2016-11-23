@@ -3,19 +3,11 @@
         <fieldset class="fieldset">
             <legend>Crea usuario</legend>
 
-            <div *ngIf="problemWithSignUp" class="alert alert--error">
-                <p><strong>Error!</strong>{{issue}} </p>
-            </div>
 
-            <div *ngIf="passNotLongEnough" class="alert alert--error">
-                <p><strong>Error!</strong> La longitud de la contraseña ha de ser mayor o igual a 6 caracteres </p>
-                <a href="" class="alert-close">&times;</a>
+            <alert *ngIf="problemWithSignUp" type='danger' dismissible='true'>{{issue}}</alert>
+            <alert *ngIf="passNotLongEnough" type='danger' dismissible='true'>La longitud de la contraseña ha de ser mayor o igual a 6 caracteres </alert>
+            <alert *ngIf="passNotMAtch" type='danger' dismissible='true'>Las contraseñas no coinciden</alert>
 
-            </div>
-
-            <div *ngIf="passNotMAtch" class="alert alert--error">
-                <p><strong>Error!</strong> Las contraseñas no coinciden </p>
-            </div>
 
             <div column="6">
 
@@ -25,9 +17,11 @@
                 <p> </p>
                 <input class="form-control" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
                 <p> </p>
-                <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
+                <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña"
+                />
                 <p> </p>
-                <input class="form-control" required type="password" required [(ngModel)]="passwordAgain" name="passwordAgain" placeholder="Repite tu contraseña" />
+                <input class="form-control" required type="password" required [(ngModel)]="passwordAgain" name="passwordAgain" placeholder="Repite tu contraseña"
+                />
                 <hr/>
                 <button class="btn btn-warning">Registrar</button>
             </div>

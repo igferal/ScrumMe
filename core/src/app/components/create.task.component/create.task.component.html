@@ -1,4 +1,4 @@
 <form (ngSubmit)="onSubmit()" container #createTask="ngForm">
-    <textarea rows="4" required [(ngModel)]="contenido" name="contenido" placeholder="Contenido de la tarea">  </textarea>
-    <button href="/board" class="button--full bg--warning ">Anotar</button>
+    <textarea class="form-control form-control-lg"  required [(ngModel)]="contenido" name="contenido" placeholder="Contenido de la tarea">  </textarea>
+    <button href="/board" class="btn btn-warning btn-lg btn-block">Anotar</button>
 </form>

@@ -1,7 +1,7 @@
 <div class="blackboard">
-    <div grid style="display:inline">
+  <div class="row">
 
-        <div column="3" class="scrollDiv">
+        <div  class="col-sm-3 scrollDiv">
 
             <h3>To do</h3>
             <div id="_todo" *ngFor="let item of todos" [dragula]='"bag-one"' [dragulaModel]='todos'>
@@ -16,11 +16,11 @@
                 <createTask [board]="board" (notify)="colapseEvent($event)"></createTask>
             </div>
             <hr>
-            <button (click)="changeState()" class="button--full bg--warning ">{{createTask}}</button>
+            <button (click)="changeState()" class="btn btn-warning btn-lg btn-block" >{{createTask}}</button>
 
         </div>
 
-        <div column="3" class="scrollDiv" >
+        <div  class="col-sm-3 scrollDiv" >
             <h3>In progress</h3>
             <div id="_inprogress" *ngFor="let item of inprogress" [dragula]='"bag-one"' [dragulaModel]='inprogress'>
                 <div class="dragHere" *ngIf="item.$key==='none' && inprogress.length ==1">
@@ -29,7 +29,8 @@
                 <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('_inprogress',$event)" [note]="item"></note>
             </div>
         </div>
-        <div column="3" class="scrollDiv"> 
+
+        <div  class="col-sm-3 scrollDiv "> 
             <h3>Testing</h3>
             <div id="_testing" *ngFor="let item of testing" [dragula]='"bag-one"' [dragulaModel]='testing'>
                 <div class="dragHere" *ngIf="item.$key==='none' && testing.length ==1">
@@ -39,7 +40,7 @@
             </div>
         </div>
 
-        <div column="3" class="scrollDiv">
+        <div column="3" class="col-sm-3 scrollDiv">
             <h3>Done</h3>
             <div id="_done" *ngFor="let item of done  " [dragula]='"bag-one"' [dragulaModel]='done'>
                 <div class="dragHere" *ngIf="item.$key==='none' && done.length ==1">
