@@ -1,6 +1,6 @@
 import { FirebaseService } from './../../services/database/firebase.service';
 import { Board } from './../../model/board';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
 import { Router } from '@angular/router';
 
@@ -21,10 +21,13 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     private boards: Board[];
     private subscription: any;
     private currentUser: string;
+    private viewContainerRef: ViewContainerRef;
 
-    constructor(private firebaseService: FirebaseService, private router: Router) {
+
+    constructor(private firebaseService: FirebaseService, private router: Router, viewContainerRef: ViewContainerRef) {
 
         this.createBoard = "Añadir tablero";
+        this.viewContainerRef = viewContainerRef;
 
     }
 
@@ -38,7 +41,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
     }
 
-    
+
     /**
      * Metodo que nos indica si se ha creado 
      */

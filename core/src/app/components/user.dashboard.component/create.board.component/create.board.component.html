@@ -1,7 +1,6 @@
 <div class="container">
     <form (ngSubmit)="onSubmit()" class="form" #createBoard="ngForm">
         <fieldset class="fieldset">
-            <legend>Crear tablero</legend>
             <div column="6">
                 <input class="form-control" required type="text" required [(ngModel)]="name" name="name" placeholder="Nombre del tablero" />
                 <p> </p>

@@ -8,6 +8,7 @@
                     <th scope="col">Ir al tablero</th>
                     <th scope="col">Compartir/Borrar</th>
                     <th scope="col">Dueño tablero</th>
+                    <th scope="col">Busca Colaboración</th>
                 </tr>
             </thead>
 
@@ -20,14 +21,28 @@
                         <td *ngIf="currentUser != board.boardOwner"> <button (click)="stopColaboration(board.$key)" class="btn btn-danger">Dejar de colaborar</button></td>
                         <td *ngIf="currentUser === board.boardOwner"><span class="tag tag-primary">Creador</span></td>
                         <td *ngIf="currentUser != board.boardOwner"><span class="tag tag-info">Colaborador</span></td>
+                        <td *ngIf="currentUser === board.boardOwner">Busca colaboradores </td>
+                        <td *ngIf="currentUser != board.boardOwner">Ya estas colaborando</td>
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="colapse">
-            <createBoard (notify)="colapseEvent($event)"></createBoard>
-        </div>
-        <button (click)="onColapse()" class="btn btn-warning btn-lg btn-block">{{createBoard}}</button>
-<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    </div>
 
-</div>
+        <button (click)="lgModal.show()" class="btn btn-warning btn-lg btn-block">Crear tablero</button>
+
+        <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Crear Tablero</h4>
+                    </div>
+                    <div class="modal-body">
+                        <createBoard (notify)="lgModal.hide()"></createBoard>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
