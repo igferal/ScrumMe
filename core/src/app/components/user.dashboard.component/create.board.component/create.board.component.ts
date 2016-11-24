@@ -17,6 +17,7 @@ export class CreateBoardComponent {
     private name: string;
     private date: Date;
     @Output() notify = new EventEmitter<boolean>();
+    private mails: string;
 
     constructor(private firebaseService: FirebaseService) { }
 
@@ -26,7 +27,8 @@ export class CreateBoardComponent {
      */
     public onSubmit() {
 
-        this.firebaseService.saveBoard(new Board(this.name, this.date));
+        let splitted: string[] = this.mails.split(",");
+        this.firebaseService.saveBoard(new Board(this.name, this.date),splitted);
         this.notify.emit(true);
 
 

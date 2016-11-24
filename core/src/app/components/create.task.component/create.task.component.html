@@ -1,4 +1,10 @@
+<alert *ngIf="incorrect" type='danger' dismissible='true'>Las horas estimadas han de ser un número mayor de 0</alert>
 <form (ngSubmit)="onSubmit()" container #createTask="ngForm">
-    <textarea class="form-control form-control-lg"  required [(ngModel)]="contenido" name="contenido" placeholder="Contenido de la tarea">  </textarea>
-    <button href="/board" class="btn btn-warning btn-lg btn-block">Anotar</button>
+    <label>Estima tu tarea, en días de trabajo</label>
+    <input class="form-control" required type="number" required [(ngModel)]="horas" name="horas" placeholder="Horas de trabajo">
+    <p> </p>
+    <label>Contenido de la tarea</label>
+    <textarea class="form-control form-control-lg" required [(ngModel)]="contenido" name="contenido" placeholder="Contenido de la tarea">  </textarea>
+    <hr/>
+    <button href="/board" class="btn btn-warning btn-block">Anotar</button>
 </form>

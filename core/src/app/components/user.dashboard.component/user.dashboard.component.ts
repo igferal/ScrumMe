@@ -43,32 +43,6 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
 
     /**
-     * Metodo que nos indica si se ha creado 
-     */
-    private colapseEvent(colapse) {
-
-        this.onColapse();
-
-    }
-
-
-    /**
-     * Metodo que nos gestiona el elemento colapsable
-     */
-    private onColapse() {
-        if (this.colapse) {
-            this.createBoard = "Añadir tablero";
-            this.colapse = !this.colapse;
-
-        }
-        else {
-            this.createBoard = "Colapsar";
-            this.colapse = !this.colapse;
-
-        }
-    }
-
-    /**
      * Metodo que nos borra un tablero del cual se es dueño
      */
     private deleteBoard(key: string) {
@@ -101,7 +75,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Metodo que se ejecuta al destruit el componente y nos desuscribe de los observers correspondientes
+     * Metodo que se ejecuta al destruit el componente y nos des-suscribe de los observers correspondientes
      */
     ngOnDestroy() {
         this.subscription.unsubscribe();

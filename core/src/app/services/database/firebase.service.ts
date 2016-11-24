@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Database } from './IDatabase';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, AuthProviders } from 'angularfire2';
 import { PostIt } from '../../model/post.it';
+import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
@@ -26,7 +27,6 @@ export class FirebaseService implements Database {
             }
         });
 
-        console.log("Me creo");
     }
 
 
@@ -55,7 +55,7 @@ export class FirebaseService implements Database {
      * user_board, que actua como tabla de realacion 1-n
      * 
      */
-    public saveBoard(board: Board) {
+    public saveBoard(board: Board, collabs: string[]) {
         board.owner = this.currentUser;
         let key = this.af.database.list("boards/").push(board).key;
         let boardInfo = {
@@ -65,6 +65,10 @@ export class FirebaseService implements Database {
         }
         this.af.database.object(`user_board/${this.currentUser}/${key}`).set(boardInfo);
         this.inicializateBoard(key);
+        if (collabs.length > 0) {
+            this.addColaborators(collabs, boardInfo, key);
+            console.log(collabs +" " + boardInfo );
+        }
     }
 
 
@@ -196,6 +200,48 @@ export class FirebaseService implements Database {
             postIt.progamador = "";
         }
     }
+
+
+    /**
+     * Metodo que inserta un nuevo colaborador 
+     */
+    private addColaborator(uid: string, boardInfo: any, key: string) {
+
+        this.af.database.object(`user_board/${uid}/${key}`).set(boardInfo);
+
+    }
+
+
+
+    /**
+     * Metodo que gestiona la inserción de los colaboradores que le pasamos
+     */
+    private addColaborators(email: string[], boardInfo: any, boardKey: string) {
+        let suscription;
+        let subject = new Subject();
+
+
+
+        suscription = this.af.database.list('users', {
+            query: {
+                orderByChild: '_email',
+                equalTo: subject,
+            }
+        }).subscribe(item => {
+
+            console.log(item);
+            this.addColaborator(item[0]._uid, boardInfo, boardKey);
+
+        });
+
+
+        email.forEach(element => {
+            subject.next(element)
+        });
+        subject.complete();
+
+    }
+
 
 
 }

@@ -22,8 +22,11 @@ export class CreateTaskComponent {
     private horas: number;
     @Input() board: any;
     @Output() notify = new EventEmitter<boolean>();
+    private incorrect: boolean;
 
-    constructor(private firebaseService: FirebaseService, public router: Router) { }
+    constructor(private firebaseService: FirebaseService, public router: Router) {
+        this.horas = 0;
+    }
 
 
     /**
@@ -32,13 +35,26 @@ export class CreateTaskComponent {
      */
     public onSubmit() {
 
-        var postIt = new PostIt(this.contenido, "", 2, " ");
-        this.contenido = "";
-
-        this.firebaseService.saveTask(postIt, `boards/${this.board}/_todo`);
-        this.notify.emit(false);
+        if (this.isDataCorrrect()) {
+            this.incorrect = false;
+            var postIt = new PostIt(this.contenido, "", this.horas, " ");
+            this.contenido = "";
+            this.firebaseService.saveTask(postIt, `boards/${this.board}/_todo`);
+            this.notify.emit(false);
+        }
+        else {
+            this.incorrect = true;
+            this.horas = 0;
+        }
 
     }
 
+    /**
+     * Metodo auxiliar de comprobación del formulario
+     */
+    private isDataCorrrect(): boolean {
+
+        return this.horas >= 0 && this.contenido != "";
+    }
 }
 

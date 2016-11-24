@@ -11,6 +11,7 @@ body {
     margin: 5px 5px 5px 5px;
     height: 70vh;
     border: dashed;
+    color: gray;
     border-color: gray;
     text-align: center
 }
@@ -19,6 +20,7 @@ body {
     margin: 5px 5px 5px 5px;
     height: 40vh;
     border: dashed;
+    color: gray;
     border-color: gray;
     text-align: center
 }
