@@ -28,7 +28,7 @@
 }
 
 .section.section-opaque-dark {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 10.7);
 }
 
 .section .background-video-holder {
@@ -46,10 +46,6 @@
     object-fit: cover;
 }
 
-.section.section-opaque-dark {
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.section.section-opaque-light {
+. .section.section-opaque-light {
     background-color: rgba(255, 255, 255, 0.7);
 }
