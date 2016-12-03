@@ -65,10 +65,13 @@ export class FirebaseService implements Database {
         }
         this.af.database.object(`user_board/${this.currentUser}/${key}`).set(boardInfo);
         this.inicializateBoard(key);
-        if (collabs.length > 0) {
+
+
+        if (collabs != undefined) {
             this.addColaborators(collabs, boardInfo, key);
-            console.log(collabs +" " + boardInfo );
+            console.log(collabs + " " + boardInfo);
         }
+
     }
 
 
@@ -229,9 +232,10 @@ export class FirebaseService implements Database {
             }
         }).subscribe(item => {
 
-            console.log(item);
-            this.addColaborator(item[0]._uid, boardInfo, boardKey);
-
+            if (item != null) {
+                console.log(item);
+                this.addColaborator(item[0]._uid, boardInfo, boardKey);
+            }
         });
 
 

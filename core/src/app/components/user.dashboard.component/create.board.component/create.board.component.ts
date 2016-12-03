@@ -19,16 +19,20 @@ export class CreateBoardComponent {
     @Output() notify = new EventEmitter<boolean>();
     private mails: string;
 
-    constructor(private firebaseService: FirebaseService) { }
+    constructor(private firebaseService: FirebaseService) { 
+        this.mails="";
+    }
 
 
     /**
      * Metodo que gestiona la creación de tablones
      */
     public onSubmit() {
-
-        let splitted: string[] = this.mails.split(",");
-        this.firebaseService.saveBoard(new Board(this.name, this.date),splitted);
+        let splitted: string[];
+        if (this.mails.length > 0) {
+            splitted = this.mails.split(",");
+        }
+        this.firebaseService.saveBoard(new Board(this.name, this.date), splitted);
         this.notify.emit(true);
 
 

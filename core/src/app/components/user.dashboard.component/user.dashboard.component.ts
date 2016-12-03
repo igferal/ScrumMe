@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
     styleUrls: ['../app.component/app.component.css'],
 
     providers: [FirebaseService]
-
+   
 })
 export class UserDashboardComponent implements OnInit, OnDestroy {
 
