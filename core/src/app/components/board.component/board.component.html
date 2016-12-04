@@ -2,70 +2,41 @@
     <div class="row">
 
         <div class="col-sm-3 scrollDiv">
-
-            <h3>To Do</h3>
-            <div id="_todo" *ngFor="let item of todos" [dragula]='"bag-one"' [dragulaModel]='todos'>
-
-                <div class="dragHereTodo" *ngIf="item.$key==='none' && todos.length ==1">
-                    Drag Here!<br/>
-                </div>
-                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('_todo',$event)" [note]="item"></note>
-            </div>
-
-            <div class="noteContainer" *ngIf="createTodo">
-                <createTask [board]="board" (notify)="colapseEvent($event)"></createTask>
-            </div>
-            <hr>
+            <app-column [name]="'To Do'" [columnName]="'_todo'" [notes]="todos"> </app-column>
+            <hr/>
             <button (click)="lgModal.show()" class="btn btn-warning btn-lg btn-block">{{createTask}}</button>
-
         </div>
 
         <div class="col-sm-3 scrollDiv">
-            <h3>In Progress</h3>
-            <div id="_inprogress" *ngFor="let item of inprogress" [dragula]='"bag-one"' [dragulaModel]='inprogress'>
-                <div class="dragHere" *ngIf="item.$key==='none' && inprogress.length ==1">
-                    Drag Here!<br/>
-                </div>
-                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('_inprogress',$event)" [note]="item"></note>
-            </div>
+            <app-column [name]="'In Progress'" [columnName]="'_inprogress'" [notes]="inprogress"> </app-column>
         </div>
 
-        <div class="col-sm-3 scrollDiv ">
-            <h3>Testing</h3>
-            <div id="_testing" *ngFor="let item of testing" [dragula]='"bag-one"' [dragulaModel]='testing'>
-                <div class="dragHere" *ngIf="item.$key==='none' && testing.length ==1">
-                    Drag Here!<br/>
-                </div>
-                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('_testing',$event)" [note]="item"></note>
-            </div>
+        <div class="col-sm-3 scrollDiv">
+            <app-column [name]="'Testing'" [columnName]="'_testing'" [notes]="testing"> </app-column>
         </div>
 
-        <div column="3" class="col-sm-3 scrollDiv">
-            <h3>Done</h3>
-            <div id="_done" *ngFor="let item of done  " [dragula]='"bag-one"' [dragulaModel]='done'>
-                <div class="dragHere" *ngIf="item.$key==='none' && done.length ==1">
-                    Drag Here!<br/>
-                </div>
-                <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify('_done',$event)" [note]="item"></note>
-            </div>
+        <div class="col-sm-3 scrollDiv">
+            <app-column [name]="'Done'" [columnName]="'_done'" [notes]="done"> </app-column>
         </div>
-    </div>
 
-    <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+
+
+        <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    <h4 class="modal-title">Crear Tarea</h4>
-                </div>
-                <div class="modal-body">
-                    <createTask [board]="board" (notify)="lgModal.hide()"></createTask>
+                        <h4 class="modal-title">Crear Tarea</h4>
+                    </div>
+                    <div class="modal-body">
+                        <createTask [board]="board" (notify)="lgModal.hide()"></createTask>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
 </div>
 <router-outlet></router-outlet>

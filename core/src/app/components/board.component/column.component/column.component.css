@@ -1,0 +1,40 @@
+h3 {
+    color: white;
+}
+
+body {
+    height: 100%;
+    background-size: cover;
+}
+
+.dragHere {
+    margin: 5px 5px 5px 5px;
+    height: 70vh;
+    border: dashed;
+    color: gray;
+    border-color: gray;
+    text-align: center
+}
+
+.dragHereTodo {
+    margin: 5px 5px 5px 5px;
+    height: 62vh;
+    border: dashed;
+    color: gray;
+    border-color: gray;
+    text-align: center
+}
+
+
+.noteContainer {
+    min-width: 284px;
+    min-height: 20vh;
+    border-left: 1% solid #D4A464;
+}
+
+.scrollDiv {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: scroll;
+    height: 80vh;
+}

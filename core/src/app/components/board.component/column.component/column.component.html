@@ -1,0 +1,7 @@
+<h3>{{name}}</h3>
+<div id="{{columnName}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
+    <div class="dragHereTodo" *ngIf="item.$key==='none' && notes.length ==1">
+        Drag Here!<br/>
+    </div>
+    <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify(columnName,$event)" [note]="item"></note>
+</div>

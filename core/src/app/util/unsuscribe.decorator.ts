@@ -15,7 +15,6 @@ export function DestroySubscribers() {
                 // saving the result of ngOnDestroy performance to the variable superData 
                 let superData = f ? f.apply(this, arguments) : null;
                 // unsubscribing
-                console.log(this.subscribers);
                 for (let subscriberKey in this.subscribers) {
                     let subscriber = this.subscribers[subscriberKey];
                     subscriber.unsubscribe();

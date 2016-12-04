@@ -1,3 +1,4 @@
+import { ColumnComponent } from './components/board.component/column.component/column.component';
 import { NgModule } from '@angular/core';
 import { CreateBoardComponent } from './components/user.dashboard.component/create.board.component/create.board.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +17,7 @@ import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng
 import { NoteComponent } from './components/board.component/note.component/note.component';
 import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+
 
 
 
@@ -43,7 +45,8 @@ const myFirebaseAuthConfig = {
         LandingComponent,
         NoteComponent,
         UserDashboardComponent,
-        CreateBoardComponent
+        CreateBoardComponent,
+        ColumnComponent,
     ],
     imports: [
         BrowserModule,
