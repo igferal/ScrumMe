@@ -2,6 +2,7 @@ import { FirebaseService } from './../../services/database/firebase.service';
 import { Board } from './../../model/board';
 import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 
 
 @Component({
@@ -11,12 +12,13 @@ import { Router } from '@angular/router';
 
     providers: [FirebaseService]
 })
+@DestroySubscribers()
 export class UserDashboardComponent implements OnInit, OnDestroy {
 
 
     private createBoard: string;
     private boards: Board[];
-    private subscription: any;
+    public subscribers: any = {};
     private currentUser: string;
     private viewContainerRef: ViewContainerRef;
 
@@ -64,18 +66,17 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
      */
     ngOnInit() {
 
-        this.subscription = this.firebaseService.getUser_Boards().subscribe(
+        this.subscribers.subscription = this.firebaseService.getUser_Boards().subscribe(
             (boards) => this.boards = boards
-        )
+        );
         this.currentUser = this.firebaseService.currentUser;
 
     }
 
     /**
-     * Metodo que se ejecuta al destruit el componente y nos des-suscribe de los observers correspondientes
+     * Metodo que se ejecuta al destruir el componente y nos des-suscribe de los observers correspondientes
      */
     ngOnDestroy() {
-        this.subscription.unsubscribe();
 
     }
 

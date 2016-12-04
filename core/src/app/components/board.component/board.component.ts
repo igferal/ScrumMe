@@ -1,11 +1,14 @@
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostIt } from '../../model/post.it';
-import {  DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
+import { DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
 import { FirebaseService } from '../../services/database/firebase.service';
 import { User } from './../../model/user';
 import 'rxjs/add/operator/switchMap';
-
+import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 
 @Component({
     selector: 'list',
@@ -14,6 +17,7 @@ import 'rxjs/add/operator/switchMap';
     providers: [FirebaseService]
 
 })
+@DestroySubscribers()
 export class BoardComponent implements OnInit, OnDestroy {
 
     private todos: PostIt[];
@@ -23,13 +27,8 @@ export class BoardComponent implements OnInit, OnDestroy {
     private createTask: string;
     private currentUser: User;
     private board: string;
-    private subscription: any;
-    private subscription2: any;
-    private subscription3: any;
-    private subscription4: any;
-    private userSubscription: any;
-    private routerSubscription: any;
-    private dragulaSubscription: any;
+    public subscribers: any = {};
+
 
 
 
@@ -43,7 +42,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      * Metodo que nos gestiona las suscripciones drag & drop de dragula
      */
     private dragulaSubscriptions(dragulaService: DragulaService) {
-        this.dragulaSubscription = dragulaService.dropModel.subscribe((value) => { this.onDropModel(value.slice(1)) });
+        this.subscribers.dragulaSubscription = dragulaService.dropModel.subscribe((value) => { this.onDropModel(value.slice(1)) });
 
     }
 
@@ -52,9 +51,9 @@ export class BoardComponent implements OnInit, OnDestroy {
      * el contenedor de inicio y el contenedor de destino
      */
     private onDropModel(args) {
-        var postItId: string = args[0].id;
-        var fromCollection: string = args[2].id;
-        var toCollection: string = args[1].id;
+        let postItId: string = args[0].id;
+        let fromCollection: string = args[2].id;
+        let toCollection: string = args[1].id;
         this.addToAnotherBag(postItId, `/${fromCollection}`, `/${toCollection}`);
 
     }
@@ -94,15 +93,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     ngOnDestroy() {
 
-
-        this.subscription.unsubscribe();
-        this.subscription2.unsubscribe();
-        this.subscription3.unsubscribe();
-        this.subscription4.unsubscribe();
-        this.userSubscription.unsubscribe();
-        this.routerSubscription.unsubscribe();
-        this.dragulaSubscription.unsubscribe();
-
+        // currently withoutUse
 
     }
 
@@ -110,7 +101,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      * Método en el que obtemos la información sobre el usuario actual 
      */
     private suscribeUser() {
-        this.userSubscription = this.firebaseService.getCurrentDeveloper().subscribe((user) => {
+        this.subscribers.userSubscription = this.firebaseService.getCurrentDeveloper().subscribe((user) => {
             this.currentUser = new User(user._name, user._surname, user._email, user._uid);
         });
 
@@ -121,7 +112,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      * Metodo que nos obtiene el id del tablero actual a traves de la url
      */
     private inicializateRoute() {
-        this.routerSubscription = this.route.params
+        this.subscribers.routerSubscription = this.route.params
             .switchMap((params: Params) => this.board = params['id'])
             .subscribe((board) => {
             });
@@ -136,17 +127,17 @@ export class BoardComponent implements OnInit, OnDestroy {
     private inicializateCollections() {
 
 
-        this.subscription = this.firebaseService.getCollection(`boards/${this.board}/_todo`).subscribe(
+        this.subscribers.subscription = this.firebaseService.getCollection(`boards/${this.board}/_todo`).subscribe(
             (items) => this.todos = items
         );
 
-        this.subscription2 = this.firebaseService.getCollection(`boards/${this.board}/_inprogress`).subscribe(
+        this.subscribers.subscription2 = this.firebaseService.getCollection(`boards/${this.board}/_inprogress`).subscribe(
             (items) => this.inprogress = items
         );
-        this.subscription3 = this.firebaseService.getCollection(`boards/${this.board}/_testing`).subscribe(
+        this.subscribers.subscription3 = this.firebaseService.getCollection(`boards/${this.board}/_testing`).subscribe(
             (items) => this.testing = items
         );
-        this.subscription4 = this.firebaseService.getCollection(`boards/${this.board}/_done`).subscribe(
+        this.subscribers.subscription4 = this.firebaseService.getCollection(`boards/${this.board}/_done`).subscribe(
             (items) => this.done = items
         );
 
