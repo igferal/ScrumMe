@@ -1,7 +1,19 @@
 # ScrumBoard Online
-Proyecto base de un tablero web de scrum con actualización en tiempo real.
+Proyecto base de un tablero de Scrum online.
+Actualmente desplegado en 
 
-Proyecto usando:
+https://angularintegration-3b520.firebaseapp.com/landing
 
-Firebase
-Angular2
+## Features
+
+* Realtime
+* Colaborativo
+* Privado
+
+## Tecnologías
+
+* Angular2
+* Firebase
+* ng-Bootstrap
+* Dragula
+
