@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods, FirebaseAuth } from 'angularfire2';
+import { AngularFire, FirebaseAuth } from 'angularfire2';
 import { IAuthentication } from './IAuthentication';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, Router, } from '@angular/router';
 
 
 /**
@@ -26,17 +26,17 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
             return auth;
         });
     }
-
+ 
 
     public signUp(email: string, password: string): any {
-        var creds: any = { email: email, password: password };
-        var res: Promise<boolean> = new Promise((resolve, reject) => {
+        let creds: any = { email: email, password: password };
+        let res: Promise<boolean> = new Promise((resolve, reject) => {
             this.auth.createUser(creds).catch((err) => {
-                var r = { provider: 3, error: err.message };
+                let r = { provider: 3, error: err.message };
                 return r;
             }).then(result => {
                     resolve(result);
-                })
+                });
         });
         return res;
 
@@ -46,12 +46,12 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
         let creds: any = { email: email, password: password };
         let res: Promise<boolean> = new Promise((resolve, reject) => {
             this.auth.login(creds).catch((err) => {
-                var r = { provider: 3, error: err.message };
+                let r = { provider: 3, error: err.message };
                 console.log(err);
                 return r;
             }).then(result => {
                 resolve(result);
-            })
+            });
         });
         return res;
     }
@@ -72,14 +72,5 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
         });
 
     }
-
-
-
-
-
-
-
-
-
 
 }

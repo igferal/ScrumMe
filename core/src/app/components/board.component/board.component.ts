@@ -1,9 +1,7 @@
-import { Board } from './../../model/board';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostIt } from '../../model/post.it';
-import { FirebaseListObservable } from 'angularfire2';
-import { DragulaModule, DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
+import {  DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
 import { FirebaseService } from '../../services/database/firebase.service';
 import { User } from './../../model/user';
 import 'rxjs/add/operator/switchMap';
@@ -22,7 +20,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     private inprogress: PostIt[];
     private testing: PostIt[];
     private done: PostIt[];
-    private createTodo: boolean;
     private createTask: string;
     private currentUser: User;
     private board: string;
@@ -38,7 +35,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService, private route: ActivatedRoute) {
 
-        this.createTask = "Añadir tarea";
+        this.createTask = 'Añadir tarea';
         this.dragulaSubscriptions(dragulaService);
     }
 
@@ -66,7 +63,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     private addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
 
-        this.firebaseService.addToOtherBag(this.board, postItId, fromCollection, toCollection, this.currentUser.name)
+        this.firebaseService.addToOtherBag(this.board, postItId, fromCollection, toCollection, this.currentUser.name);
 
     }
 
@@ -79,29 +76,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
 
 
-    /**
-     * Método que nos notifica que ha habido una creación de una tarea, haciendo que colapsemos el panel
-     * colapsable
-     */
-    private colapseEvent(colapse) {
-
-        this.changeState();
-
-    }
-
-    /**
-     * Metodo que nos gestiona el cambio del panel colapsable
-     */
-    private changeState() {
-        if (this.createTodo) {
-            this.createTask = "Añadir tarea";
-            this.createTodo = !this.createTodo;
-        }
-        else {
-            this.createTask = "Colapsar";
-            this.createTodo = !this.createTodo;
-        }
-    }
 
 
     /**

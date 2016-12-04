@@ -1,7 +1,6 @@
 import { FirebaseService } from './../../services/database/firebase.service';
 import { Board } from './../../model/board';
 import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
-import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
 import { Router } from '@angular/router';
 
 
@@ -11,13 +10,11 @@ import { Router } from '@angular/router';
     styleUrls: ['../app.component/app.component.css'],
 
     providers: [FirebaseService]
-   
 })
 export class UserDashboardComponent implements OnInit, OnDestroy {
 
 
     private createBoard: string;
-    private colapse: boolean;
     private boards: Board[];
     private subscription: any;
     private currentUser: string;
@@ -26,7 +23,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
     constructor(private firebaseService: FirebaseService, private router: Router, viewContainerRef: ViewContainerRef) {
 
-        this.createBoard = "Añadir tablero";
+        this.createBoard = 'Añadir tablero';
         this.viewContainerRef = viewContainerRef;
 
     }

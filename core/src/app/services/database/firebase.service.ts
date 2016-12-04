@@ -1,5 +1,3 @@
-import { firebaseConfig } from './../../app.module';
-import { element } from 'protractor';
 import { Board } from './../../model/board';
 import { User } from './../../model/user';
 import { Injectable } from '@angular/core';
@@ -67,9 +65,8 @@ export class FirebaseService implements Database {
         this.inicializateBoard(key);
 
 
-        if (collabs != undefined) {
+        if (collabs !== undefined) {
             this.addColaborators(collabs, boardInfo, key);
-            console.log(collabs + " " + boardInfo);
         }
 
     }
@@ -83,10 +80,10 @@ export class FirebaseService implements Database {
       */
     private inicializateBoard(boardKey: string) {
 
-        this.incializateBoardColumns(boardKey, "_todo");
-        this.incializateBoardColumns(boardKey, "_inprogress");
-        this.incializateBoardColumns(boardKey, "_testing");
-        this.incializateBoardColumns(boardKey, "_done");
+        this.incializateBoardColumns(boardKey, '_todo');
+        this.incializateBoardColumns(boardKey, '_inprogress');
+        this.incializateBoardColumns(boardKey, '_testing');
+        this.incializateBoardColumns(boardKey, '_done');
     }
 
 
@@ -95,7 +92,7 @@ export class FirebaseService implements Database {
        */
     private incializateBoardColumns(boardKey: string, column: string) {
 
-        this.af.database.object(`boards/${boardKey}/${column}/none`).set(new PostIt("none", "none", 0, "none"));
+        this.af.database.object(`boards/${boardKey}/${column}/none`).set(new PostIt('none', 'none', 0, 'none'));
 
     }
 
@@ -156,7 +153,6 @@ export class FirebaseService implements Database {
      */
     public addToOtherBag(board: string, postItId: string, fromCollection: string, toCollection: string, programmer: string): void {
 
-        //console.log("Add to other baga AGAIN")
         let postit = this.findById(board, postItId, fromCollection);
         this.addProgrammerLabel(postit, toCollection, programmer);
         this.delete(postItId, `boards/${board}${fromCollection}`);
@@ -196,11 +192,10 @@ export class FirebaseService implements Database {
      */
     private addProgrammerLabel(postIt: PostIt, toCollection: string, programmer: string) {
 
-        if (toCollection != '/_todo') {
+        if (toCollection !== '/_todo') {
             postIt.progamador = programmer;
-        }
-        else {
-            postIt.progamador = "";
+        }  else {
+            postIt.progamador = '';
         }
     }
 

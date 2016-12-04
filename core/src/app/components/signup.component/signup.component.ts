@@ -1,4 +1,3 @@
-import { UserDashboardComponent } from './../user.dashboard.component/user.dashboard.component';
 import { Component } from '@angular/core';
 import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
 import { Router } from '@angular/router';
@@ -30,7 +29,7 @@ export class SignUpComponent {
 
     constructor(private firebaseAuth: FirebaseAuthentication, private firebaseService: FirebaseService,
         private router: Router) {
-        this.issue = "";
+        this.issue = '';
     }
 
 
@@ -44,12 +43,10 @@ export class SignUpComponent {
                 this.passNotLongEnough = false;
                 this.signUp(this.name, this.surname, this.email, this.password);
                 this.passNotMAtch = false;
-            }
-            else {
+            } else {
                 this.passNotMAtch = true;
             }
-        }
-        else {
+        }else {
             this.passNotLongEnough = true;
         }
         this.clearPassword();
@@ -60,8 +57,8 @@ export class SignUpComponent {
      *  Limpia los campos de contraseñas
      */
     private clearPassword() {
-        this.password = "";
-        this.passwordAgain = "";
+        this.password = '';
+        this.passwordAgain = '';
     }
 
     /**
@@ -72,7 +69,6 @@ export class SignUpComponent {
         return (this.password.length >= 6);
     }
 
-    
     /**
      * Comprueba si las contraseñas coinciden
      */
@@ -90,12 +86,10 @@ export class SignUpComponent {
         this.email = email;
         this.password = password;
         this.firebaseAuth.signUp(email, password).then((res) => {
-            console.log(res)
-            if (res.provider == 4) {
+            if (res.provider === 4) {
                 this.createUser(name, surname, email, res.uid);
                 this.redirect(res);
-            }
-            else {
+            } else {
 
                 this.issue = res.error;
                 this.problemWithSignUp = true;
@@ -109,11 +103,10 @@ export class SignUpComponent {
       */
     private createUser(name: string, surname: string, email: string, uid: string) {
 
-        var user: User = new User(name, surname, email, uid);
+        let user: User = new User(name, surname, email, uid);
         this.firebaseService.createUser(user);
 
     }
-    
     /**
      * Metodo que redirige al dashboard se usuario
      */
@@ -122,11 +115,5 @@ export class SignUpComponent {
         this.router.navigate(['/dashboard']);
 
     }
-
-
-
-
-
-
 
 }

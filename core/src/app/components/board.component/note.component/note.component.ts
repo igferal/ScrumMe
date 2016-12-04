@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PostIt } from '../../../model/post.it';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 
 @Component({

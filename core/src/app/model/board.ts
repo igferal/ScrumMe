@@ -66,7 +66,4 @@ export class Board {
         return this._done;
     }
 
-
-
-
 }

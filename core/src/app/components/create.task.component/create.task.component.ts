@@ -18,7 +18,6 @@ export class CreateTaskComponent {
 
 
     private contenido: string;
-    private programador: string;
     private horas: number;
     @Input() board: any;
     @Output() notify = new EventEmitter<boolean>();
@@ -37,12 +36,11 @@ export class CreateTaskComponent {
 
         if (this.isDataCorrrect()) {
             this.incorrect = false;
-            var postIt = new PostIt(this.contenido, "", this.horas, " ");
-            this.contenido = "";
+            let postIt = new PostIt(this.contenido, '', this.horas, '');
+            this.contenido = '';
             this.firebaseService.saveTask(postIt, `boards/${this.board}/_todo`);
             this.notify.emit(false);
-        }
-        else {
+        } else {
             this.incorrect = true;
             this.horas = 0;
         }
@@ -54,7 +52,7 @@ export class CreateTaskComponent {
      */
     private isDataCorrrect(): boolean {
 
-        return this.horas >= 0 && this.contenido != "";
+        return this.horas >= 0 && this.contenido !== '';
     }
 }
 

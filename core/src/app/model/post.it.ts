@@ -43,9 +43,11 @@ export class PostIt {
 
   private setKey(key: string) {
 
-    if (key != undefined)
+    if (key !== undefined) {
       this._key = key;
-    else this._key = "";
+    } else {
+      this._key = '';
+    }
 
   }
 

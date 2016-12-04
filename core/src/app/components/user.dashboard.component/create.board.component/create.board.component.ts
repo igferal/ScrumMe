@@ -20,7 +20,7 @@ export class CreateBoardComponent {
     private mails: string;
 
     constructor(private firebaseService: FirebaseService) { 
-        this.mails="";
+        this.mails='';
     }
 
 

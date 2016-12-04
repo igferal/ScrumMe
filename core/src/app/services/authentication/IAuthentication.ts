@@ -5,7 +5,7 @@ export interface IAuthentication {
     login(email: string, password: string);
 
     logout();
-    
+
     getUser(): any;
 
 }

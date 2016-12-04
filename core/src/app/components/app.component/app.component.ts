@@ -1,7 +1,5 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { PostIt } from '../../model/post.it';
-import { AppRoutingModule } from '../../router/router.component';
 import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
 
 @Component({
@@ -29,7 +27,7 @@ export class AppComponent implements OnInit {
      Si el usuario no es null, tendremos acceso a las zonas registradas por cada usuario
    */
   public ngOnInit() {
-    //Subscripción 
+    // Subscripción 
     this.authservice.auth.subscribe((user) => {
       this.auth = user;
     });

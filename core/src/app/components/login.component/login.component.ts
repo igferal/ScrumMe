@@ -42,20 +42,15 @@ export class LoginComponent {
      */
     private redirect(res: any) {
 
-        if (res.provider == 4) {
-            this.authed = true
+        if (res.provider === 4) {
+            this.authed = true;
             this.router.navigate(['/dashboard']);
         } else {
             this.authed = true;
-            this.password = "";
-            this.issue = "No existe ese usuario";
+            this.password = '';
+            this.issue = 'No existe ese usuario';
         }
     }
-
-
-
-
-
 
 
 }
