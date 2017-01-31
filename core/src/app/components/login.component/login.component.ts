@@ -35,6 +35,7 @@ export class LoginComponent {
         this.firebaseAuth.login(this.email, this.password).then((res) => {
             this.redirect(res);
         });
+        
     }
 
     /**

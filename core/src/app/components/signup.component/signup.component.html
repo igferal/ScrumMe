@@ -3,11 +3,17 @@
         <fieldset class="fieldset">
             <legend>Crea usuario</legend>
 
+            <ngb-alert *ngIf="problemWithSignUp" type="danger" (close)="problemWithSignUp = false">
+                <strong>Error!</strong> {{issue}}
+            </ngb-alert>
 
-            <alert *ngIf="problemWithSignUp" type='danger' dismissible='true'>{{issue}}</alert>
-            <alert *ngIf="passNotLongEnough" type='danger' dismissible='true'>La longitud de la contraseña ha de ser mayor o igual a 6 caracteres </alert>
-            <alert *ngIf="passNotMAtch" type='danger' dismissible='true'>Las contraseñas no coinciden</alert>
+            <ngb-alert *ngIf="passNotLongEnough" type="danger" (close)="passNotLongEnough = false">
+                <strong>Error!</strong> La longitud de la contraseña ha de ser mayor o igual a 6 caracteres
+            </ngb-alert>
 
+            <ngb-alert *ngIf="passNotMAtch" type="danger" (close)="passNotMAtch = false">
+                <strong>Error!</strong> Las contraseñas no coinciden
+            </ngb-alert>
 
             <div column="6">
 

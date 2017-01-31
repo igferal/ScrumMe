@@ -3,14 +3,15 @@
         <fieldset class="fieldset">
             <legend>Iniciar sesión</legend>
 
-
-            <alert *ngIf="authed" type='danger' dismissible='true'>{{issue}}</alert>
-
+            <ngb-alert *ngIf="authed" type="danger" [dismissible]="true" (close)="authed = false">
+                <strong>Error!</strong> {{issue}}
+            </ngb-alert>
 
             <div column="6">
                 <input class="form-control" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
                 <p> </p>
-                <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
+                <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña"
+                />
                 <p> </p>
                 <hr/>
                 <button class="btn btn-warning">Iniciar</button>

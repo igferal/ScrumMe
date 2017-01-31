@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseAuth } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { IAuthentication } from './IAuthentication';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -17,21 +17,21 @@ import { CanActivate, Router, } from '@angular/router';
 export class FirebaseAuthentication implements IAuthentication, CanActivate {
 
 
-    constructor(public af: AngularFire, public auth: FirebaseAuth, public router: Router) { }
+    constructor(public af: AngularFire, public router: Router) { }
 
 
 
     public getUser() {
-        this.auth.subscribe((auth) => {
+        this.af.auth.subscribe((auth) => {
             return auth;
         });
     }
- 
+
 
     public signUp(email: string, password: string): any {
         let creds: any = { email: email, password: password };
         let res: Promise<boolean> = new Promise((resolve, reject) => {
-            this.auth.createUser(creds).catch((err) => {
+            this.af.auth.createUser(creds).catch((err) => {
                 let r = { provider: 3, error: err.message };
                 return r;
             }).then(result => {
@@ -45,7 +45,7 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
     public login(email: string, password: string): any {
         let creds: any = { email: email, password: password };
         let res: Promise<boolean> = new Promise((resolve, reject) => {
-            this.auth.login(creds).catch((err) => {
+            this.af.auth.login(creds).catch((err) => {
                 let r = { provider: 3, error: err.message };
                 console.log(err);
                 return r;

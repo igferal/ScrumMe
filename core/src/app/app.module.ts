@@ -13,10 +13,10 @@ import { SignUpComponent } from './components/signup.component/signup.component'
 import { LoginComponent } from './components/login.component/login.component';
 import { UserDashboardComponent } from './components/user.dashboard.component/user.dashboard.component';
 import { LandingComponent } from './components/landing.component/landing.component';
-import { DragulaModule, DragulaService } from '../../node_modules/ng2-dragula/ng2-dragula';
+import { DragulaModule } from '../../node_modules/ng2-dragula/ng2-dragula';
 import { NoteComponent } from './components/board.component/note.component/note.component';
-import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { AlertModule, ModalModule } from 'ng2-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -56,6 +56,7 @@ const myFirebaseAuthConfig = {
         AppRoutingModule,
         AlertModule,
         ModalModule,
+        NgbModule.forRoot(),
         AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
 
     ],
