@@ -29,7 +29,7 @@
 
         <button (click)="showDialog()" class="btn btn-warning btn-lg btn-block">Crear tablero</button>
 
-        <p-dialog header="Crear tablero" [(visible)]="showModal">
+        <p-dialog [draggable]="false" [modal]="true" header="Crear tablero" [(visible)]="showModal">
             <createBoard (notify)="closeDialog()"></createBoard>
         </p-dialog>
 

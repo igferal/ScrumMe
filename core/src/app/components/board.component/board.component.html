@@ -19,7 +19,7 @@
             <app-column [name]="'Done'" [columnName]="'_done'" [notes]="done"> </app-column>
         </div>
 
-        <p-dialog header="Crear tarea" [(visible)]="showModal">
+        <p-dialog [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
             <createTask [board]="board" (notify)="closeDialog()"></createTask>
         </p-dialog>
 

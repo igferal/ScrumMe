@@ -46,6 +46,6 @@
     object-fit: cover;
 }
 
-. .section.section-opaque-light {
+ .section.section-opaque-light {
     background-color: rgba(255, 255, 255, 0.7);
 }

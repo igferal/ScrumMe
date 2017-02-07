@@ -1,20 +1,22 @@
-<nav class="navbar navbar-full navbar-light bg-faded">
-    <a class="navbar-brand" routerLink="/">ScrumMe</a>
-    <ul class="nav navbar-nav pull-right">
-        <li *ngIf="auth!=null" class="nav-item">
-            <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-        </li>
-        <li class="nav-item" *ngIf="auth==null">
-            <a class=" nav-link" routerLink="/login" href="# ">Iniciar sesión</a>
-        </li>
-        <li class="nav-item " *ngIf="auth==null ">
-            <a class="nav-link" routerLink="/signup">Crear usuario</a>
-        </li>
-        <li class="nav-item " *ngIf="auth!=null">
-            <a class="nav-link" (click)="logout()" routerLink="/" >Cerrar sesión</a>
-        </li>
-    </ul>
-</nav>
+<ul class="topnav">
 
+    <li> <a routerLink="/">ScrumMe</a> </li>
+    <li *ngIf="auth!=null">
+        <a routerLink="/dashboard">Dashboard</a>
+    </li>
+    <li *ngIf="auth==null">
+        <a routerLink="/login" href="# ">Iniciar sesión</a>
+    </li>
+    <li *ngIf="auth==null ">
+        <a class="nav-link" routerLink="/signup">Crear usuario</a>
+    </li>
+    <li *ngIf="auth!=null">
+        <a (click)="logout()" routerLink="/">Cerrar sesión</a>
+    </li>
+</ul>
 
-<router-outlet></router-outlet>
+<div class="main">
+
+    <router-outlet></router-outlet>
+
+</div>

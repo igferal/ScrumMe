@@ -1,6 +1,3 @@
-h3 {
-    color: white;
-}
 
 body {
     height: 100%;
@@ -35,6 +32,8 @@ body {
 .scrollDiv {
     overflow-x: hidden;
     overflow-y: hidden;
-    overflow: scroll;
+    overflow: hidden;
     height: 80vh;
+    
 }
+
