@@ -4,7 +4,7 @@
         <div class="col-sm-3 scrollDiv">
             <app-column [name]="'To Do'" [columnName]="'_todo'" [notes]="todos"> </app-column>
             <hr/>
-            <button (click)="lgModal.show()" class="btn btn-warning btn-lg btn-block">{{createTask}}</button>
+            <button  (click)="showDialog()" class="btn btn-warning btn-lg btn-block">{{createTask}}</button>
         </div>
 
         <div class="col-sm-3 scrollDiv">
@@ -19,23 +19,9 @@
             <app-column [name]="'Done'" [columnName]="'_done'" [notes]="done"> </app-column>
         </div>
 
-
-
-        <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title">Crear Tarea</h4>
-                    </div>
-                    <div class="modal-body">
-                        <createTask [board]="board" (notify)="lgModal.hide()"></createTask>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <p-dialog header="Crear tarea" [(visible)]="showModal">
+            <createTask [board]="board" (notify)="closeDialog()"></createTask>
+        </p-dialog>
 
     </div>
 </div>

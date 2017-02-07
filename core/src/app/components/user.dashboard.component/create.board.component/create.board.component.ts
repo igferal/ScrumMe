@@ -19,8 +19,8 @@ export class CreateBoardComponent {
     @Output() notify = new EventEmitter<boolean>();
     private mails: string;
 
-    constructor(private firebaseService: FirebaseService) { 
-        this.mails='';
+    constructor(private firebaseService: FirebaseService) {
+        this.mails = '';
     }
 
 
@@ -34,7 +34,15 @@ export class CreateBoardComponent {
         }
         this.firebaseService.saveBoard(new Board(this.name, this.date), splitted);
         this.notify.emit(true);
+        this.cleanFields();
 
+    }
+
+    private cleanFields() {
+
+        this.name = '';
+        this.date = null;
+        this.mails = '';
 
     }
 

@@ -27,22 +27,11 @@
             </tbody>
         </table>
 
-        <button (click)="lgModal.show()" class="btn btn-warning btn-lg btn-block">Crear tablero</button>
+        <button (click)="showDialog()" class="btn btn-warning btn-lg btn-block">Crear tablero</button>
 
-        <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title">Crear Tablero</h4>
-                    </div>
-                    <div class="modal-body">
-                        <createBoard (notify)="lgModal.hide()"></createBoard>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <p-dialog header="Crear tablero" [(visible)]="showModal">
+            <createBoard (notify)="closeDialog()"></createBoard>
+        </p-dialog>
+
 
     </div>

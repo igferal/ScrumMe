@@ -3,9 +3,8 @@
         <fieldset class="fieldset">
             <legend>Iniciar sesión</legend>
 
-            <ngb-alert *ngIf="authed" type="danger" [dismissible]="true" (close)="authed = false">
-                <strong>Error!</strong> {{issue}}
-            </ngb-alert>
+            <p-messages [value]="msgs"></p-messages>
+
 
             <div column="6">
                 <input class="form-control" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />

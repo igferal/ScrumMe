@@ -1,4 +1,3 @@
-<alert *ngIf="incorrect" type='danger' dismissible='true'>Las horas estimadas han de ser un número mayor de 0</alert>
 <form (ngSubmit)="onSubmit()" container #createTask="ngForm">
     <label>Estima tu tarea, en días de trabajo</label>
     <input class="form-control" required type="number" required [(ngModel)]="horas" name="horas" placeholder="Horas de trabajo">

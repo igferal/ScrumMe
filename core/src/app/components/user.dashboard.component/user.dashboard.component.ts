@@ -21,6 +21,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     public subscribers: any = {};
     private currentUser: string;
     private viewContainerRef: ViewContainerRef;
+    private showModal: boolean;
 
 
     constructor(private firebaseService: FirebaseService, private router: Router, viewContainerRef: ViewContainerRef) {
@@ -38,6 +39,14 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
         this.router.navigate(['/board', boardId]);
 
+    }
+
+    private showDialog() {
+        this.showModal = true;
+    }
+
+    private closeDialog() {
+        this.showModal = false;
     }
 
 

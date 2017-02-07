@@ -28,6 +28,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     private currentUser: User;
     private board: string;
     public subscribers: any = {};
+    private showModal: boolean;
+
+
 
 
 
@@ -47,6 +50,16 @@ export class BoardComponent implements OnInit, OnDestroy {
         });
 
     }
+
+
+    private showDialog() {
+        this.showModal = true;
+    }
+
+    private closeDialog() {
+        this.showModal = false;
+    }
+
 
     /**
      * Metodo que nos gestiona el drop de elementos, además nos obtiene el id del postIt a mover

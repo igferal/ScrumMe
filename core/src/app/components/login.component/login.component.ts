@@ -17,6 +17,7 @@ export class LoginComponent {
     private password: string;
     private authed: boolean;
     private issue: string;
+    private msgs = [];
 
     constructor(private firebaseAuth: FirebaseAuthentication, private router: Router) {
         this.authed = false;
@@ -38,6 +39,11 @@ export class LoginComponent {
         
     }
 
+    showInfo() {
+        this.msgs = [];
+        this.msgs.push({severity:'error', summary:'Error!', detail:'No existe ese usuario'});
+    }
+
     /**
      * Metodo que nos gestiona la respuesta que nos devuelve el servicio de autenticación
      */
@@ -49,7 +55,7 @@ export class LoginComponent {
         } else {
             this.authed = true;
             this.password = '';
-            this.issue = 'No existe ese usuario';
+            this.showInfo();
         }
     }
 

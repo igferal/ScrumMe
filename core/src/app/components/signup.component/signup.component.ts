@@ -21,15 +21,11 @@ export class SignUpComponent {
     private passwordAgain: string;
     private name: string;
     private surname: string;
-    private problemWithSignUp: boolean;
-    private passNotMAtch: boolean;
-    private issue: string;
-    private passNotLongEnough: boolean;
+    private msgs = [];
 
 
     constructor(private firebaseAuth: FirebaseAuthentication, private firebaseService: FirebaseService,
         private router: Router) {
-        this.issue = '';
     }
 
 
@@ -40,14 +36,12 @@ export class SignUpComponent {
 
         if (this.passwordLength()) {
             if (this.passwordMatch()) {
-                this.passNotLongEnough = false;
                 this.signUp(this.name, this.surname, this.email, this.password);
-                this.passNotMAtch = false;
             } else {
-                this.passNotMAtch = true;
+                 this.showError("Las contraseñas no coinciden");
             }
-        }else {
-            this.passNotLongEnough = true;
+        } else {
+            this.showError("La contraseña ha de tener una longitud mayor o igual de 6 caracteres")
         }
         this.clearPassword();
     }
@@ -91,16 +85,15 @@ export class SignUpComponent {
                 this.redirect(res);
             } else {
 
-                this.issue = res.error;
-                this.problemWithSignUp = true;
+                this.showError(res.error);
             }
 
         });
     }
 
-     /**
-      * Crea el objeto usuario que será llevado a la base de datos
-      */
+    /**
+     * Crea el objeto usuario que será llevado a la base de datos
+     */
     private createUser(name: string, surname: string, email: string, uid: string) {
 
         let user: User = new User(name, surname, email, uid);
@@ -114,6 +107,10 @@ export class SignUpComponent {
 
         this.router.navigate(['/dashboard']);
 
+    }
+    private showError(errorMessage: string) {
+        this.msgs = [];
+        this.msgs.push({ severity: 'error', summary: 'Error!', detail: errorMessage });
     }
 
 }

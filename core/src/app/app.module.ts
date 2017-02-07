@@ -15,9 +15,8 @@ import { UserDashboardComponent } from './components/user.dashboard.component/us
 import { LandingComponent } from './components/landing.component/landing.component';
 import { DragulaModule } from '../../node_modules/ng2-dragula/ng2-dragula';
 import { NoteComponent } from './components/board.component/note.component/note.component';
-import { AlertModule, ModalModule } from 'ng2-bootstrap';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { MessagesModule} from 'primeng/primeng';
+import { DialogModule }  from 'primeng/primeng';
 
 
 
@@ -47,6 +46,7 @@ const myFirebaseAuthConfig = {
         UserDashboardComponent,
         CreateBoardComponent,
         ColumnComponent,
+        
     ],
     imports: [
         BrowserModule,
@@ -54,9 +54,8 @@ const myFirebaseAuthConfig = {
         HttpModule,
         DragulaModule,
         AppRoutingModule,
-        AlertModule,
-        ModalModule,
-        NgbModule.forRoot(),
+        MessagesModule,
+        DialogModule,
         AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
 
     ],
