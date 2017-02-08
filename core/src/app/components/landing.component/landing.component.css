@@ -1,51 +1,43 @@
-.text-inverse {
-    color: white;
-}
 
-.section {
+
+.mouse-icon {
+    border: 2px solid #f5a70a;
+    border-radius: 16px;
+    height: 50px;
+    margin: -100px auto 50px;
     position: relative;
+    width: 30px;
+    z-index: 10;
 }
-
-.section-fill-height {
-    display: flex;
-    height: 100vh;
-    align-items: center;
+.mouse-icon .scroll {
+    animation-delay: 0s;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: scrolling;
+    animation-play-state: running;
+    animation-timing-function: linear;
 }
-
-.section .background-image {
-    z-index: -1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
+.mouse-icon .scroll {
+    background: #f5a70a none repeat scroll 0 0;
+    border-radius: 10px;
+    height: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 4px;
+    width: 4px;
 }
-
-.section .background-image.background-image-fixed {
-    background-attachment: fixed;
+@keyframes scrolling {
+0% {
+    opacity: 0;
+    top: 5px;
 }
-
-.section.section-opaque-dark {
-    background-color: rgba(0, 0, 0, 10.7);
+30% {
+    opacity: 1;
+    top: 10px;
 }
-
-.section .background-video-holder {
-    overflow: hidden;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
+100% {
+    opacity: 0;
+    top: 25px;
 }
-
-.section .background-video-holder .background-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
- .section.section-opaque-light {
-    background-color: rgba(255, 255, 255, 0.7);
 }

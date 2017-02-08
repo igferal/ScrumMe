@@ -1,12 +1,22 @@
-<div class="container">
-    <form (ngSubmit)="onSubmit()" class="form" #login="ngForm">
-        <fieldset class="fieldset">
-            <legend>Iniciar sesión</legend>
-
-            <p-messages [value]="msgs"></p-messages>
+<!-- Meter una clase de css para centrar en la pantalla  -->
+<br/>
+<br/>
+<br/>
 
 
-            <div column="6">
+<div class="ui-g">
+
+    <div class="ui-g-3"> </div>
+
+
+    <div class="ui-g-6">
+
+        <form (ngSubmit)="onSubmit()" class="form" #login="ngForm">
+            <fieldset class="fieldset">
+                <legend>Iniciar sesión</legend>
+                <hr/>
+
+                <p-messages [value]="msgs"></p-messages>
                 <input class="form-control" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
                 <p> </p>
                 <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña"
@@ -16,9 +26,7 @@
                 <button class="btn btn-warning">Iniciar</button>
                 <a routerLink="/signup" class="btn btn-link"> <small class="form-text text-muted">¿Aún no tienes cuenta? Registrate siguiendo este enlace </small></a>
 
-
-            </div>
-
-        </fieldset>
-    </form>
+            </fieldset>
+        </form>
+    </div>
 </div>

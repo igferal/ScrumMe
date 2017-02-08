@@ -4,7 +4,7 @@
         <div class="col-sm-3 scrollDiv">
             <app-column [name]="'To Do'" [columnName]="'_todo'" [notes]="todos"> </app-column>
             <hr/>
-            <button  (click)="showDialog()" class="btn btn-warning btn-lg btn-block">{{createTask}}</button>
+            <button (click)="showDialog()" class="btn btn-warning btn-lg btn-block">{{createTask}}</button>
         </div>
 
         <div class="col-sm-3 scrollDiv">
@@ -19,7 +19,7 @@
             <app-column [name]="'Done'" [columnName]="'_done'" [notes]="done"> </app-column>
         </div>
 
-        <p-dialog [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
+        <p-dialog [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
             <createTask [board]="board" (notify)="closeDialog()"></createTask>
         </p-dialog>
 
