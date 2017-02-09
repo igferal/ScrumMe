@@ -1,3 +1,4 @@
+import { BoardColumn } from './../../model/boardColumn';
 import { Board } from './../../model/board';
 import { User } from './../../model/user';
 import { Injectable } from '@angular/core';
@@ -86,6 +87,20 @@ export class FirebaseService implements Database {
         this.incializateBoardColumns(boardKey, '_done');
     }
 
+    public add() {
+        let board = new Board("Sprint 1", new Date());
+        let ref = this.getCollection('boards/').push(board).key;
+        console.log(board);
+        let boardInfo = {
+            name: board.name,
+            date: board.date,
+            boardOwner: this.currentUser
+        }
+        this.getCollection('board_info'+'/' + ref).push(boardInfo);
+        this.getCollection('board_columns'+'/' + ref).push(board.boardColumns);
+        //this.getCollection('column')
+
+    }
 
     /**
        * Metodo que crea los objetos asociados a las tareas vacias
@@ -194,7 +209,7 @@ export class FirebaseService implements Database {
 
         if (toCollection !== '/_todo') {
             postIt.progamador = programmer;
-        }  else {
+        } else {
             postIt.progamador = '';
         }
     }

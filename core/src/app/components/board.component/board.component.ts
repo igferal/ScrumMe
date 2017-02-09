@@ -1,3 +1,4 @@
+import { Board } from './../../model/board';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
@@ -20,10 +21,7 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 @DestroySubscribers()
 export class BoardComponent implements OnInit, OnDestroy {
 
-    private todos: PostIt[];
-    private inprogress: PostIt[];
-    private testing: PostIt[];
-    private done: PostIt[];
+    private myBoard : Board;
     private createTask: string;
     private currentUser: User;
     private board: string;
@@ -142,21 +140,13 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     private inicializateCollections() {
 
+        
 
         this.subscribers.subscription = this.firebaseService.getCollection(`boards/${this.board}/_todo`).subscribe(
-            (items) => this.todos = items
+            (items) => {
+                console.log(items);
+            }
         );
-
-        this.subscribers.subscription2 = this.firebaseService.getCollection(`boards/${this.board}/_inprogress`).subscribe(
-            (items) => this.inprogress = items
-        );
-        this.subscribers.subscription3 = this.firebaseService.getCollection(`boards/${this.board}/_testing`).subscribe(
-            (items) => this.testing = items
-        );
-        this.subscribers.subscription4 = this.firebaseService.getCollection(`boards/${this.board}/_done`).subscribe(
-            (items) => this.done = items
-        );
-
 
     }
 

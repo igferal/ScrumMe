@@ -1,3 +1,4 @@
+import { BoardColumn } from './boardColumn';
 import { PostIt } from './post.it';
 export class Board {
 
@@ -5,32 +6,27 @@ export class Board {
 
     private _name: string;
     private _date: Date;
-    private _todo: PostIt[];
-    private _inprogress: PostIt[];
-    private _testing: PostIt[];
-    private _done: PostIt[];
+    private _boardColums: Array<BoardColumn>;
     private _owner: string;
 
-    constructor(name: string, date: Date, todo?: PostIt[], inprogress?: PostIt[], testing?: PostIt[], done?: PostIt[]) {
+    constructor(name: string, date: Date) {
 
         this._name = name;
         this._date = date;
-        this.inicializateBoard(this._todo, todo);
-        this.inicializateBoard(this._inprogress, inprogress);
-        this.inicializateBoard(this._testing, testing);
-        this.inicializateBoard(this._done, done);
-
+        this.inicializateBoard();
 
     }
 
 
 
-    private inicializateBoard(myBoard: PostIt[], newBoard: PostIt[]) {
+    private inicializateBoard() {
 
-        if (newBoard === null) {
-            myBoard = []
-        }
-        myBoard = newBoard;
+        this._boardColums = new Array<BoardColumn>();
+        let tasks = new Array<PostIt>();
+        tasks.push(new PostIt('none', 'none', 0, 'none'));
+        this._boardColums.push(new BoardColumn(
+            tasks, "To do"
+        ));
 
     }
 
@@ -40,6 +36,11 @@ export class Board {
 
     }
 
+    public get boardColumns() {
+
+        return this._boardColums;
+
+    }
 
 
     public get name() {
@@ -50,20 +51,6 @@ export class Board {
         return this._date;
     }
 
-    public get todo() {
-        return this._todo;
-    }
 
-    public get inprogress() {
-        return this._inprogress;
-    }
-
-    public get testing() {
-        return this._testing;
-    }
-
-    public get done() {
-        return this._done;
-    }
 
 }
