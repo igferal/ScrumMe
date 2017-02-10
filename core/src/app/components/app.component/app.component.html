@@ -1,18 +1,18 @@
 <ul class="topnav">
-
-    <li> <a routerLink="/">ScrumMe</a> </li>
-    <li *ngIf="auth!=null">
-        <a routerLink="/dashboard">Dashboard</a>
-    </li>
-    <li *ngIf="auth==null">
-        <a routerLink="/login" href="# ">Iniciar sesión</a>
-    </li>
-    <li *ngIf="auth==null ">
-        <a class="nav-link" routerLink="/signup">Crear usuario</a>
-    </li>
-    <li *ngIf="auth!=null">
+    <li style="float:right" *ngIf="auth!=null">
         <a (click)="logout()" routerLink="/">Cerrar sesión</a>
     </li>
+    <li> <a routerLink="/">ScrumMe</a> </li>
+    <li style="float:right" *ngIf="auth!=null">
+        <a routerLink="/dashboard">Dashboard</a>
+    </li>
+    <li style="float:right" *ngIf="auth==null">
+        <a routerLink="/login" href="# ">Iniciar sesión</a>
+    </li>
+    <li style="float:right" *ngIf="auth==null ">
+        <a class="nav-link" routerLink="/signup">Crear usuario</a>
+    </li>
+
 </ul>
 
 <div class="main">

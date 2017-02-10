@@ -53,3 +53,43 @@
     border-bottom: 20px solid #D4A464;
 }
 */
+
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    max-width: 300px;
+    min-height: 150px;
+    min-width: 300px;
+    margin: 10px;
+    border-radius: 2%;
+    border-left: purple 4px;
+}
+
+.card-header {
+    background: #f5a70a;
+    height: 50px;
+    text-align: center;
+    color: white;
+}
+
+.card-content {
+    padding: 2%;
+    min-height: 100px;
+    background: #F8F8F8;
+}
+
+.card-footer {
+    background: #F8F8F8;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.card-buttons {
+    float: right;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}

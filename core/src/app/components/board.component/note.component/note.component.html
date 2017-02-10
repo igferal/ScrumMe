@@ -1,5 +1,22 @@
+<!--
+
 <div class="note">
     <a (click)="deleteItem()" class="close-classic"></a>
     <span class="tag tag-warning">{{note._programador}}</span>
     <br/> {{note._contenido}}
 </div>
+
+-->
+
+<section class="card" draggable="true">
+    <header class="card-header">{{note._programador}}</header>
+    <div class="card-content">
+        {{note._contenido}}
+    </div>
+    <footer class="card-footer">
+        <div class="card-buttons">
+            <a href="/"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+            <a (click)="deleteItem()"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        </div>
+    </footer>
+</section>
