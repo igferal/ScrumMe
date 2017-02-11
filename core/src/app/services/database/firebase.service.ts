@@ -65,14 +65,19 @@ export class FirebaseService implements Database {
             boardOwner: this.currentUser
         }
 
+        let colKeys = new Array<String>();
+        
 
         this.getCollection('board_info' + '/' + ref).push(boardInfo);
         board.boardColumns.forEach((col) => {
             let keyCol = this.getCollection('board_columns' + '/' + ref).push(col).key;
+            colKeys.push(keyCol);
             col.tasks.forEach((task) =>
                 this.getCollection("column_tasks" + '/' + keyCol).push(task)
-            )
+            );
         });
+
+        this.getCollection('board_col_keys'+ '/' + ref).push(colKeys);
 
 
         this.af.database.object(`user_board/${this.currentUser}/${ref}`).set(boardInfo);

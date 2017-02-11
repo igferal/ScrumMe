@@ -22,14 +22,13 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 @DestroySubscribers()
 export class BoardComponent implements OnInit, OnDestroy {
 
-    private myBoard : Board;
+    private myBoard: Board;
     private createTask: string;
     private currentUser: User;
     private board: string;
     public subscribers: any = {};
     private showModal: boolean;
-    private currentBoard : Board;
-    private columns: Array<BoardColumn> ;
+    private columns: Array<String>;
 
 
 
@@ -143,16 +142,12 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     private inicializateCollections() {
 
-        
 
-        this.subscribers.subscription = this.firebaseService.getCollection(`boards/${this.board}/`).subscribe(
+
+        this.subscribers.subscription = this.firebaseService.getCollection(`board_col_keys/${this.board}/`).subscribe(
             (items) => {
-                this.currentBoard=items;
+                console.log(items);
                 this.columns = items[0];
-                console.log(this.columns);
-                console.log(this.columns.length);
-                this.columns.forEach((elem) => console.log(elem))
-                
             }
         );
 

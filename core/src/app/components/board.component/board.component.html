@@ -4,7 +4,7 @@
         <div *ngFor="let column of columns">
 
             <div class="scrollDiv">
-                <app-column [name]="column._columnName" [columnName]="column._columnName" [notes]="column._tasks"> </app-column>
+                <app-column [colKey]="column"> </app-column>
             </div>
         </div>
     </section>

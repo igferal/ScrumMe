@@ -1,3 +1,4 @@
+import { FirebaseService } from './../../../services/database/firebase.service';
 import { PostIt } from './../../../model/post.it';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -6,22 +7,29 @@ import { Component, OnInit, Input } from '@angular/core';
     selector: 'app-column',
     templateUrl: 'column.component.html',
     styleUrls: ['./column.component.css'],
+    providers: [FirebaseService]
 
 
 })
 export class ColumnComponent implements OnInit {
 
-    @Input() private notes: PostIt[];
+    private notes: PostIt[];
 
-    @Input() private columnName: string;
-
-    @Input() private name : string;
+    @Input() private colKey: string;
 
 
 
-    constructor() {
+    constructor(private firebaseService: FirebaseService) {
     }
 
     ngOnInit() {
+
+        this.firebaseService.getCollection(`column_tasks/${this.colKey}`).subscribe((notes) => {
+
+            this.notes = notes;
+            console.log(notes);
+
+        });
+
     }
 }
