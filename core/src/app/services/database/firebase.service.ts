@@ -56,18 +56,30 @@ export class FirebaseService implements Database {
      */
     public saveBoard(board: Board, collabs: string[]) {
         board.owner = this.currentUser;
-        let key = this.af.database.list("boards/").push(board).key;
+
+        let ref = this.getCollection('boards/').push(board).key;
+
         let boardInfo = {
             name: board.name,
             date: board.date,
             boardOwner: this.currentUser
         }
-        this.af.database.object(`user_board/${this.currentUser}/${key}`).set(boardInfo);
-        this.inicializateBoard(key);
+
+
+        this.getCollection('board_info' + '/' + ref).push(boardInfo);
+        board.boardColumns.forEach((col) => {
+            let keyCol = this.getCollection('board_columns' + '/' + ref).push(col).key;
+            col.tasks.forEach((task) =>
+                this.getCollection("column_tasks" + '/' + keyCol).push(task)
+            )
+        });
+
+
+        this.af.database.object(`user_board/${this.currentUser}/${ref}`).set(boardInfo);
 
 
         if (collabs !== undefined) {
-            this.addColaborators(collabs, boardInfo, key);
+            this.addColaborators(collabs, boardInfo, ref);
         }
 
     }
@@ -79,25 +91,11 @@ export class FirebaseService implements Database {
       * Metodo auxiliar que nos crea tareas vacias en las columnas del tablon para 
       * poder usar una directiva ngFor en el componete del tablero
       */
-    private inicializateBoard(boardKey: string) {
-
-        this.incializateBoardColumns(boardKey, '_todo');
-        this.incializateBoardColumns(boardKey, '_inprogress');
-        this.incializateBoardColumns(boardKey, '_testing');
-        this.incializateBoardColumns(boardKey, '_done');
-    }
+    
 
     public add() {
-        let board = new Board("Sprint 1", new Date());
-        let ref = this.getCollection('boards/').push(board).key;
-        console.log(board);
-        let boardInfo = {
-            name: board.name,
-            date: board.date,
-            boardOwner: this.currentUser
-        }
-        this.getCollection('board_info'+'/' + ref).push(boardInfo);
-        this.getCollection('board_columns'+'/' + ref).push(board.boardColumns);
+
+
         //this.getCollection('column')
 
     }

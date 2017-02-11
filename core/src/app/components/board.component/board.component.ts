@@ -1,3 +1,4 @@
+import { BoardColumn } from './../../model/boardColumn';
 import { Board } from './../../model/board';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -27,6 +28,8 @@ export class BoardComponent implements OnInit, OnDestroy {
     private board: string;
     public subscribers: any = {};
     private showModal: boolean;
+    private currentBoard : Board;
+    private columns: Array<BoardColumn> ;
 
 
 
@@ -142,9 +145,14 @@ export class BoardComponent implements OnInit, OnDestroy {
 
         
 
-        this.subscribers.subscription = this.firebaseService.getCollection(`boards/${this.board}/_todo`).subscribe(
+        this.subscribers.subscription = this.firebaseService.getCollection(`boards/${this.board}/`).subscribe(
             (items) => {
-                console.log(items);
+                this.currentBoard=items;
+                this.columns = items[0];
+                console.log(this.columns);
+                console.log(this.columns.length);
+                this.columns.forEach((elem) => console.log(elem))
+                
             }
         );
 

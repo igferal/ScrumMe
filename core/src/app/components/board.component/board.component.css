@@ -5,6 +5,14 @@ h3 {
 body {
     height: 100%;
     background-size: cover;
+     overflow:hidden;
+}
+
+.scrollLateral {
+   overflow:hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .dragHere {
@@ -25,8 +33,6 @@ body {
     text-align: center
 }
 
-
-
 .noteContainer {
     min-width: 284px;
     min-height: 20vh;
@@ -34,8 +40,9 @@ body {
 }
 
 .scrollDiv {
-    overflow-x: hidden;
-    overflow-y: hidden;
-    overflow: scroll;
+     overflow:scroll;
     height: 80vh;
+}
+::-webkit-scrollbar {
+display: none;
 }

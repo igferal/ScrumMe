@@ -1,28 +1,19 @@
-<div class="blackboard">
-    <div class="row">
+<div>
+    <section class="scrollLateral">
 
-        <div class="col-sm-3 scrollDiv">
-            <app-column [name]="'To Do'" [columnName]="'_todo'" [notes]="todos"> </app-column>
-            <hr/>
-            <button (click)="showDialog()" class="btn btn-warning btn-lg btn-block">{{createTask}}</button>
+        <div *ngFor="let column of columns">
+
+            <div class="scrollDiv">
+                <app-column [name]="column._columnName" [columnName]="column._columnName" [notes]="column._tasks"> </app-column>
+            </div>
         </div>
+    </section>
 
-        <div class="col-sm-3 scrollDiv">
-            <app-column [name]="'In Progress'" [columnName]="'_inprogress'" [notes]="inprogress"> </app-column>
-        </div>
+<button (click)="showDialog()" class="btn btn-warning btn-lg btn-block">{{createTask}}</button>
+<p-dialog [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
+    <createTask [board]="board" (notify)="closeDialog()"></createTask>
+</p-dialog>
 
-        <div class="col-sm-3 scrollDiv">
-            <app-column [name]="'Testing'" [columnName]="'_testing'" [notes]="testing"> </app-column>
-        </div>
 
-        <div class="col-sm-3 scrollDiv">
-            <app-column [name]="'Done'" [columnName]="'_done'" [notes]="done"> </app-column>
-        </div>
-
-        <p-dialog [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
-            <createTask [board]="board" (notify)="closeDialog()"></createTask>
-        </p-dialog>
-
-    </div>
 </div>
 <router-outlet></router-outlet>

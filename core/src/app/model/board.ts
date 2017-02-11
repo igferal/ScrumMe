@@ -24,8 +24,22 @@ export class Board {
         this._boardColums = new Array<BoardColumn>();
         let tasks = new Array<PostIt>();
         tasks.push(new PostIt('none', 'none', 0, 'none'));
+
+
         this._boardColums.push(new BoardColumn(
             tasks, "To do"
+        ));
+
+        this._boardColums.push(new BoardColumn(
+            tasks, "in progress"
+        ));
+
+        this._boardColums.push(new BoardColumn(
+            tasks, "testing"
+        ));
+
+        this._boardColums.push(new BoardColumn(
+            tasks, "done"
         ));
 
     }
