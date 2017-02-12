@@ -144,10 +144,10 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 
 
-        this.subscribers.subscription = this.firebaseService.getCollection(`board_col_keys/${this.board}/`).subscribe(
+        this.subscribers.subscription = this.firebaseService.getCollection(`board_columns/${this.board}/`).subscribe(
             (items) => {
                 console.log(items);
-                this.columns = items[0];
+                this.columns = items;
             }
         );
 

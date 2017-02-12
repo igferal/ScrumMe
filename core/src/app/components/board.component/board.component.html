@@ -2,17 +2,16 @@
     <section class="scrollLateral">
 
         <div *ngFor="let column of columns">
-
             <div class="scrollDiv">
-                <app-column [colKey]="column"> </app-column>
+                <app-column [boardKey]="board" [colKey]="column.$key" [colName]="column._columnName"> </app-column>
             </div>
         </div>
     </section>
 
-<button (click)="showDialog()" class="btn btn-warning btn-lg btn-block">{{createTask}}</button>
-<p-dialog [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
-    <createTask [board]="board" (notify)="closeDialog()"></createTask>
-</p-dialog>
+    <button (click)="showDialog()" class="btn btn-warning btn-lg btn-block">{{createTask}}</button>
+    <p-dialog [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
+        <createTask  [board]="board" (notify)="closeDialog()"></createTask>
+    </p-dialog>
 
 
 </div>

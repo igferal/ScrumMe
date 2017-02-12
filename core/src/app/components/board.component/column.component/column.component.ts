@@ -16,18 +16,17 @@ export class ColumnComponent implements OnInit {
     private notes: PostIt[];
 
     @Input() private colKey: string;
-
-
+    @Input() private colName: string;
+    @Input() private boardKey: string;
 
     constructor(private firebaseService: FirebaseService) {
     }
 
     ngOnInit() {
 
-        this.firebaseService.getCollection(`column_tasks/${this.colKey}`).subscribe((notes) => {
+        this.firebaseService.getCollection(`column_tasks/${this.boardKey}/${this.colKey}`).subscribe((notes) => {
 
             this.notes = notes;
-            console.log(notes);
 
         });
 

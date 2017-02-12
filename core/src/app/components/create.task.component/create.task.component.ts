@@ -38,7 +38,7 @@ export class CreateTaskComponent {
             this.incorrect = false;
             let postIt = new PostIt(this.contenido, '', this.horas, '');
             this.contenido = '';
-            this.firebaseService.saveTask(postIt, `boards/${this.board}/_todo`);
+            this.firebaseService.saveTask(postIt, `column_tasks/${this.board}/todo`);
             this.notify.emit(false);
         } else {
             this.incorrect = true;

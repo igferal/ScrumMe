@@ -1,6 +1,9 @@
 .col-header {
-    background: #F8F8F8;
+    display: flex;
+    justify-content: space-around;
+}
+
+.col-header-buttons {
     display: flex;
     flex-direction: row-reverse;
 }
-

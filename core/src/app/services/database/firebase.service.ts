@@ -65,22 +65,26 @@ export class FirebaseService implements Database {
             boardOwner: this.currentUser
         }
 
-        let colKeys = new Array<String>();
-        
+        let first = true;
+        let keyCol = "todo";
+
 
         this.getCollection('board_info' + '/' + ref).push(boardInfo);
+
         board.boardColumns.forEach((col) => {
-            let keyCol = this.getCollection('board_columns' + '/' + ref).push(col).key;
-            colKeys.push(keyCol);
-            col.tasks.forEach((task) =>
-                this.getCollection("column_tasks" + '/' + keyCol).push(task)
-            );
+
+            if (first) {
+                this.af.database.object('board_columns/' + ref + '/todo').set(col);
+                first = false;
+            } else {
+                keyCol = this.getCollection('board_columns' + '/' + ref).push(col).key;
+            }
+
+            col.tasks.forEach((task) => {
+                this.getCollection("column_tasks/" + ref + '/' + keyCol).push(task)
+
+            });
         });
-
-       
-
-        this.getCollection('board_col_keys'+ '/' + ref).push(colKeys);
-
 
         this.af.database.object(`user_board/${this.currentUser}/${ref}`).set(boardInfo);
 
@@ -98,7 +102,7 @@ export class FirebaseService implements Database {
       * Metodo auxiliar que nos crea tareas vacias en las columnas del tablon para 
       * poder usar una directiva ngFor en el componete del tablero
       */
-    
+
 
     public add() {
 

@@ -1,11 +1,14 @@
-<h3>{{name}}</h3>
-<div id="{{columnName}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
-    <header class="col-header">
+<header class="col-header">
+    <h3>{{colName}}</h3>
+    <div class="col-header-buttons">
         <a href="/"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
         <a (click)="deleteItem()"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-    </header>
+    </div>
+</header>
+<div id="{{columnName}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
+
     <div class="dragHereTodo" *ngIf="item.$key==='none' && notes.length ==1">
         Drag Here!<br/>
     </div>
-    <note id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify(columnName,$event)" [note]="item"></note>
+    <note  id="{{item.$key}}" *ngIf="item.$key!='none'" (notify)="onNotify(columnName,$event)" [note]="item"></note>
 </div>
