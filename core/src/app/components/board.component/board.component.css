@@ -15,23 +15,6 @@ body {
     flex-wrap: wrap;
 }
 
-.dragHere {
-    margin: 5px 5px 5px 5px;
-    height: 70vh;
-    border: dashed;
-    color: gray;
-    border-color: gray;
-    text-align: center
-}
-
-.dragHereTodo {
-    margin: 5px 5px 5px 5px;
-    height: 60vh;
-    border: dashed;
-    color: gray;
-    border-color: gray;
-    text-align: center
-}
 
 .noteContainer {
     min-width: 284px;

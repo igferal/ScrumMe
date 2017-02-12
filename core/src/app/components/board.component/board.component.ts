@@ -70,6 +70,13 @@ export class BoardComponent implements OnInit, OnDestroy {
         let postItId: string = args[0].id;
         let fromCollection: string = args[2].id;
         let toCollection: string = args[1].id;
+
+        console.log(`Post it: ${postItId}`);
+        console.log(`To collection : ${toCollection}`);
+        console.log(`From collection : ${fromCollection}`);
+
+
+
         this.addToAnotherBag(postItId, `/${fromCollection}`, `/${toCollection}`);
 
     }
@@ -83,12 +90,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
 
 
-    /**
-     * Metodo que nos gestiona el borrado de notas
-     */
-    public onNotify(collection: string, key: string) {
-        this.firebaseService.delete(key, `boards/${this.board}/${collection}`);
-    }
+
 
 
 

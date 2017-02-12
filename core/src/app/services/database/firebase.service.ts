@@ -179,8 +179,8 @@ export class FirebaseService implements Database {
 
         let postit = this.findById(board, postItId, fromCollection);
         this.addProgrammerLabel(postit, toCollection, programmer);
-        this.delete(postItId, `boards/${board}${fromCollection}`);
-        this.saveTask(postit, `boards/${board}${toCollection}`);
+        this.delete(postItId, `column_tasks/${board}${fromCollection}`);
+        this.saveTask(postit, `column_tasks/${board}${toCollection}`);
 
     }
 
@@ -193,7 +193,7 @@ export class FirebaseService implements Database {
         let element: any;
         let subscription: any;
 
-        subscription = this.af.database.object(`boards/${board}${collection}/${key}`).subscribe((item) => {
+        subscription = this.af.database.object(`column_tasks/${board}${collection}/${key}`).subscribe((item) => {
             element = item;
             console.log(item);
         });
