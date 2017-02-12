@@ -77,6 +77,8 @@ export class FirebaseService implements Database {
             );
         });
 
+       
+
         this.getCollection('board_col_keys'+ '/' + ref).push(colKeys);
 
 

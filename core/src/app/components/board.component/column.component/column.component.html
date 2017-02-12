@@ -1,5 +1,9 @@
 <h3>{{name}}</h3>
 <div id="{{columnName}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
+    <header class="col-header">
+        <a href="/"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+        <a (click)="deleteItem()"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+    </header>
     <div class="dragHereTodo" *ngIf="item.$key==='none' && notes.length ==1">
         Drag Here!<br/>
     </div>

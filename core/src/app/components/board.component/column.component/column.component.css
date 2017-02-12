@@ -1,0 +1,6 @@
+.col-header {
+    background: #F8F8F8;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
