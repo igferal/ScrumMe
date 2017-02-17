@@ -21,8 +21,22 @@ export class ColumnComponent implements OnInit {
     @Input() private colName: string;
     @Input() private boardKey: string;
     public subscribers: any = {};
+    public options: any[]
 
     constructor(private firebaseService: FirebaseService) {
+
+        this.options = [
+            {
+                label: 'Editar', icon: 'fa fa-pencil-square-o', command: () => {
+                    this.edit();
+                }
+            },
+            {
+                label: 'Delete', icon: 'fa-close', command: () => {
+                    this.delete();
+                }
+            }
+        ];
     }
 
     /**
@@ -30,6 +44,14 @@ export class ColumnComponent implements OnInit {
    */
     public onNotify(collection: string, key: string) {
         this.firebaseService.delete(key, `column_tasks/${this.boardKey}/${this.colKey}`);
+    }
+
+    public edit() {
+
+    }
+
+    public delete() {
+
     }
 
     ngOnInit() {

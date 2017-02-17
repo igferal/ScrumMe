@@ -1,20 +1,14 @@
-h3 {
-    color: black;
-}
-
 body {
     height: 100%;
     background-size: cover;
-     overflow:hidden;
+    overflow: hidden;
 }
 
 .scrollLateral {
-   overflow:hidden;
+    overflow: hidden;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
 }
-
 
 .noteContainer {
     min-width: 284px;
@@ -23,9 +17,13 @@ body {
 }
 
 .scrollDiv {
-     overflow:scroll;
+    background: #F8F8F8;
+    overflow: scroll;
     height: 80vh;
+    margin: 10px;
+    min-width: 320px;
 }
+
 ::-webkit-scrollbar {
-display: none;
+    display: none;
 }

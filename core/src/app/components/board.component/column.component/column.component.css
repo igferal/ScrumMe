@@ -1,6 +1,9 @@
 .col-header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin: 2px;
+    min-height: 10px;
+    height: 20px;
 }
 
 .col-header-buttons {

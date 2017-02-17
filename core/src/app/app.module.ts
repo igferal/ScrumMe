@@ -17,6 +17,8 @@ import { DragulaModule } from '../../node_modules/ng2-dragula/ng2-dragula';
 import { NoteComponent } from './components/board.component/note.component/note.component';
 import { MessagesModule} from 'primeng/primeng';
 import { DialogModule }  from 'primeng/primeng';
+import { SplitButtonModule } from 'primeng/primeng';
+
 
 
 
@@ -45,7 +47,7 @@ const myFirebaseAuthConfig = {
         NoteComponent,
         UserDashboardComponent,
         CreateBoardComponent,
-        ColumnComponent,
+        ColumnComponent
         
     ],
     imports: [
@@ -56,6 +58,7 @@ const myFirebaseAuthConfig = {
         AppRoutingModule,
         MessagesModule,
         DialogModule,
+        SplitButtonModule,
         AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
 
     ],
