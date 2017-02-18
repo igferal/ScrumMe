@@ -24,6 +24,7 @@ export class CreateBoardComponent {
 
     constructor(private firebaseService: FirebaseService) {
         this.mails = '';
+        this.columns = '';
     }
 
 
@@ -36,20 +37,20 @@ export class CreateBoardComponent {
         let boardCol: BoardColumn;
         let colsSplitted: string[];
 
+
         if (this.mails.length > 0) {
             splitted = this.mails.split(",");
         }
 
+
         if (this.columns.length > 0) {
             colsSplitted = this.columns.split(",");
+            colsSplitted.forEach((colName) => {
+
+                boardCol = new BoardColumn(new Array<PostIt>(), colName);
+                board.boardColumns.push(boardCol);
+            });
         }
-
-
-        colsSplitted.forEach((colName) => {
-
-            boardCol = new BoardColumn(new Array<PostIt>(), colName);
-            board.boardColumns.push(boardCol);
-        });
         new Board(this.name, this.date);
         this.firebaseService.saveBoard(board, splitted);
         this.notify.emit(true);

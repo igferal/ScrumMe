@@ -31,6 +31,7 @@ body {
     overflow: scroll;
     height: 90vh;
     margin: 10px;
+    padding: 10px;
     min-width: 320px;
     border: green dashed 1px;
     display: flex;
