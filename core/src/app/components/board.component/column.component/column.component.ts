@@ -21,7 +21,9 @@ export class ColumnComponent implements OnInit {
     @Input() private colName: string;
     @Input() private boardKey: string;
     public subscribers: any = {};
-    public options: any[]
+    public options: any[];
+    private showModal: boolean;
+
 
     constructor(private firebaseService: FirebaseService) {
 
@@ -35,6 +37,11 @@ export class ColumnComponent implements OnInit {
                 label: 'Delete', icon: 'fa-close', command: () => {
                     this.delete();
                 }
+            },
+            {
+                label: 'Add task', icon: 'fa fa-plus', command: () => {
+                    this.showDialog();
+                }
             }
         ];
     }
@@ -46,11 +53,25 @@ export class ColumnComponent implements OnInit {
         this.firebaseService.delete(key, `column_tasks/${this.boardKey}/${this.colKey}`);
     }
 
+    private showDialog() {
+        this.showModal = true;
+    }
+
+    private closeDialog() {
+        this.showModal = false;
+    }
+
+
+
     public edit() {
+
 
     }
 
     public delete() {
+
+        this.firebaseService.delete(this.colKey, `column_tasks/${this.boardKey}/`);
+        this.firebaseService.delete(this.colKey, `board_columns/${this.boardKey}/`);
 
     }
 

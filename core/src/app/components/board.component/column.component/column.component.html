@@ -2,7 +2,7 @@
     <h4>{{colName}}</h4>
     <div class="col-header-buttons">
 
-        <p-splitButton class="ui-splitbutton-button" label="Opciones" [model]="options"></p-splitButton>
+        <p-splitButton class="ui-splitbutton-button" iconPos="left" label="Opciones" [model]="options"></p-splitButton>
 
     </div>
 </header>
@@ -12,6 +12,8 @@
         Drag Here!<br/>
     </div>
     <note id="{{item.$key}}" *ngIf="item._contenido!='none'" (notify)="onNotify(columnName,$event)" [note]="item"></note>
-
-
 </div>
+
+<p-dialog [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
+        <createTask [colKey]="colKey" [board]="boardKey" (notify)="closeDialog()"></createTask>
+</p-dialog>

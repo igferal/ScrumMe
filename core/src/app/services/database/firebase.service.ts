@@ -158,6 +158,9 @@ export class FirebaseService implements Database {
 
         this.af.database.list('boards').remove(key)
         this.af.database.list(`user_board/${this.currentUser}`).remove(key);
+        this.getCollection("column_tasks/").remove(key);
+        this.getCollection('board_columns').remove(key);
+        this.getCollection('board_info').remove(key);
 
     }
 

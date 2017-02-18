@@ -21,7 +21,7 @@ body {
     overflow: scroll;
     height: 80vh;
     margin: 10px;
-    min-width: 320px;
+    min-width: 220px;
 }
 
 ::-webkit-scrollbar {

@@ -9,4 +9,10 @@
 .col-header-buttons {
     display: flex;
     flex-direction: row-reverse;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.ui-menu {
+    width: 9em;
 }
