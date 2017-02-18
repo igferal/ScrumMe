@@ -65,20 +65,15 @@ export class FirebaseService implements Database {
             boardOwner: this.currentUser
         }
 
-        let first = true;
-        let keyCol = "todo";
 
+        let keyCol;
 
         this.getCollection('board_info' + '/' + ref).push(boardInfo);
 
         board.boardColumns.forEach((col) => {
 
-            if (first) {
-                this.af.database.object('board_columns/' + ref + '/todo').set(col);
-                first = false;
-            } else {
-                keyCol = this.getCollection('board_columns' + '/' + ref).push(col).key;
-            }
+            keyCol = this.getCollection('board_columns' + '/' + ref).push(col).key;
+
 
             col.tasks.forEach((task) => {
                 this.getCollection("column_tasks/" + ref + '/' + keyCol).push(task)

@@ -7,9 +7,12 @@ export class BoardColumn {
     constructor(tasks: Array<PostIt>, columnName: string) {
 
         this._tasks = tasks;
+        tasks.push(new PostIt("none","none",0,"none"));
         this._columnName = columnName;
 
     }
+
+
 
     get columnName(): string {
 

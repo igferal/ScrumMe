@@ -5,9 +5,11 @@ body {
 }
 
 .scrollLateral {
-    overflow: hidden;
     display: flex;
-    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 .noteContainer {
@@ -19,9 +21,9 @@ body {
 .scrollDiv {
     background: #F8F8F8;
     overflow: scroll;
-    height: 80vh;
+    height: 90vh;
     margin: 10px;
-    min-width: 220px;
+    min-width: 320px;
 }
 
 ::-webkit-scrollbar {

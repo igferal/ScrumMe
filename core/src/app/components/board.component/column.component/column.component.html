@@ -9,7 +9,7 @@
 <hr/>
 <div id="{{colKey}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
     <div class="dragHere" *ngIf="item._contenido==='none' && notes.length ==1">
-        Drag Here!<br/>
+        Drag Here! or create new task<br/>
     </div>
     <note id="{{item.$key}}" *ngIf="item._contenido!='none'" (notify)="onNotify(columnName,$event)" [note]="item"></note>
 </div>
