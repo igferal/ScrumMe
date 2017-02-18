@@ -26,6 +26,18 @@ body {
     min-width: 320px;
 }
 
+.scrollDiv-new {
+    background: #F8F8F8;
+    overflow: scroll;
+    height: 90vh;
+    margin: 10px;
+    min-width: 320px;
+    border: green dashed 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
 ::-webkit-scrollbar {
     display: none;
 }

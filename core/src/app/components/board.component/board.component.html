@@ -6,9 +6,15 @@
                 <app-column [boardKey]="board" [colKey]="column.$key" [colName]="column._columnName"> </app-column>
             </div>
         </div>
-        
+        <div class="scrollDiv-new">
+            <button (click)="showDialog()">Create Column</button>
+        </div>
     </section>
 
-    
+
+    <p-dialog [width]="600" height="250" [draggable]="false" [modal]="true" header="Crear Columna" [(visible)]="showModal">
+        <createColumn [board]="board" (notify)="closeDialog()"></createColumn>
+    </p-dialog>
+
 </div>
 <router-outlet></router-outlet>

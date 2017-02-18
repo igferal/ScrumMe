@@ -28,7 +28,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     private board: string;
     public subscribers: any = {};
     private columns: Array<String>;
-
+    private showModal: boolean;
 
 
 
@@ -50,6 +50,13 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     }
 
+    private showDialog() {
+        this.showModal = true;
+    }
+
+    private closeDialog() {
+        this.showModal = false;
+    }
 
 
 

@@ -72,13 +72,7 @@ export class FirebaseService implements Database {
 
         board.boardColumns.forEach((col) => {
 
-            keyCol = this.getCollection('board_columns' + '/' + ref).push(col).key;
-
-
-            col.tasks.forEach((task) => {
-                this.getCollection("column_tasks/" + ref + '/' + keyCol).push(task)
-
-            });
+            this.saveColumn(ref, col);
         });
 
         this.af.database.object(`user_board/${this.currentUser}/${ref}`).set(boardInfo);
@@ -91,6 +85,20 @@ export class FirebaseService implements Database {
     }
 
 
+    public saveColumn(boardKey: string, boardCol: BoardColumn) {
+        let keyCol;
+        console.log(boardCol);
+        keyCol = this.getCollection('board_columns' + '/' + boardKey).push(boardCol).key;
+
+        boardCol.tasks.forEach((task) => {
+            this.getCollection("column_tasks/" + boardKey + '/' + keyCol).push(task)
+
+        });
+
+
+
+
+    }
 
 
     /**

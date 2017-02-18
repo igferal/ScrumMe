@@ -1,3 +1,4 @@
+import { CreateColumnComponent } from './components/create.column.component/create.column.component';
 import { ColumnComponent } from './components/board.component/column.component/column.component';
 import { NgModule } from '@angular/core';
 import { CreateBoardComponent } from './components/user.dashboard.component/create.board.component/create.board.component';
@@ -47,7 +48,8 @@ const myFirebaseAuthConfig = {
         NoteComponent,
         UserDashboardComponent,
         CreateBoardComponent,
-        ColumnComponent
+        ColumnComponent,
+        CreateColumnComponent
         
     ],
     imports: [
