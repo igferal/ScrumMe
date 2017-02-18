@@ -22,8 +22,16 @@ export class CreateColumnComponent {
     @Input() board: any;
     @Output() notify = new EventEmitter<boolean>();
     private name: string;
+    @Input() colName;
 
     constructor(private firebaseService: FirebaseService, public router: Router) {
+
+
+
+        if (this.colName !== '') {
+            this.name = this.colName;
+        }
+
     }
 
 

@@ -47,6 +47,9 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.subscribers.dragulaSubscription = dragulaService.dropModel.subscribe((value) => {
             this.onDropModel(value.slice(1));
         });
+        dragulaService.setOptions('bag-one', {
+            moves: (el, source, handle, sibling) => !el.classList.contains('dragHere')
+        });
 
     }
 
@@ -112,6 +115,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
 
         // currently withoutUse
+        if (!!this.dragulaService.find('bag-one')) {
+            this.dragulaService.destroy('bag-one');
+        }
 
     }
 
@@ -144,11 +150,8 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     private inicializateCollections() {
 
-
-
         this.subscribers.subscription = this.firebaseService.getCollection(`board_columns/${this.board}/`).subscribe(
             (items) => {
-                console.log(items);
                 this.columns = items;
             }
         );

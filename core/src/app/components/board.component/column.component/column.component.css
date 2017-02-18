@@ -13,6 +13,14 @@
     margin-right: 10px;
 }
 
-.ui-menu {
-    width: 9em;
+
+
+.dragHere{
+
+    border: gray dashed 1px;
+    padding: 1em;
+    text-align: center;
+    height: 82vh;
+
+
 }

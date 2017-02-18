@@ -7,13 +7,15 @@
             </div>
         </div>
         <div class="scrollDiv-new">
-            <button class="btn btn-warning " (click)="showDialog()">Create Column</button>
+            <div class="scrollDive-new-content">
+                <button class="btn btn-warning " (click)="showDialog()">Create Column</button>
+            </div>
         </div>
     </section>
 
 
     <p-dialog [width]="600" height="250" [draggable]="false" [modal]="true" header="Crear Columna" [(visible)]="showModal">
-        <createColumn [board]="board" (notify)="closeDialog()"></createColumn>
+        <createColumn [colName]="" [board]="board" (notify)="closeDialog()"></createColumn>
     </p-dialog>
 
 </div>

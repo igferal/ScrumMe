@@ -57,7 +57,7 @@ export class FirebaseService implements Database {
     public saveBoard(board: Board, collabs: string[]) {
         board.owner = this.currentUser;
 
-        let ref = this.getCollection('boards/').push(board).key;
+
 
         let boardInfo = {
             name: board.name,
@@ -69,8 +69,7 @@ export class FirebaseService implements Database {
         let keyCol;
 
 
-
-        this.getCollection('board_info' + '/' + ref).push(boardInfo);
+        let ref = this.getCollection('boards/').push(boardInfo).key;
 
         if (board.boardColumns.length > 0) {
             board.boardColumns.forEach((col) => {
@@ -92,7 +91,8 @@ export class FirebaseService implements Database {
     public saveColumn(boardKey: string, boardCol: BoardColumn) {
         let keyCol;
         console.log(boardCol);
-        keyCol = this.getCollection('board_columns' + '/' + boardKey).push(boardCol).key;
+        keyCol = this.getCollection('board_columns' + '/' + boardKey).push(
+            new BoardColumn(new Array<PostIt>(), boardCol.columnName)).key;
 
         boardCol.tasks.forEach((task) => {
             this.getCollection("column_tasks/" + boardKey + '/' + keyCol).push(task)
@@ -167,7 +167,6 @@ export class FirebaseService implements Database {
         this.af.database.list(`user_board/${this.currentUser}`).remove(key);
         this.getCollection("column_tasks/").remove(key);
         this.getCollection('board_columns').remove(key);
-        this.getCollection('board_info').remove(key);
 
     }
 

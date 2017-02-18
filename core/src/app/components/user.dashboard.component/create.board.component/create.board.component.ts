@@ -37,11 +37,9 @@ export class CreateBoardComponent {
         let boardCol: BoardColumn;
         let colsSplitted: string[];
 
-
         if (this.mails.length > 0) {
             splitted = this.mails.split(",");
         }
-
 
         if (this.columns.length > 0) {
             colsSplitted = this.columns.split(",");

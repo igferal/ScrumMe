@@ -27,16 +27,20 @@ body {
 }
 
 .scrollDiv-new {
-    background: #F8F8F8;
-    overflow: scroll;
-    height: 90vh;
-    margin: 10px;
-    padding: 10px;
-    min-width: 320px;
-    border: green dashed 1px;
     display: flex;
     align-items: center;
     justify-content: center
+}
+
+.scrollDive-new-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25vh;
+    margin: 10px;
+    padding: 10px;
+    min-width: 160px;
+    border: #F7B733 dashed 2px;
 }
 
 ::-webkit-scrollbar {

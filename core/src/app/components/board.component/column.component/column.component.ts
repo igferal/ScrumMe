@@ -23,6 +23,7 @@ export class ColumnComponent implements OnInit {
     public subscribers: any = {};
     public options: any[];
     private showModal: boolean;
+    private showModalCol: boolean;
 
 
     constructor(private firebaseService: FirebaseService) {
@@ -30,7 +31,7 @@ export class ColumnComponent implements OnInit {
         this.options = [
             {
                 label: 'Editar', icon: 'fa fa-pencil-square-o', command: () => {
-                    this.edit();
+                    this.showDialogCol();
                 }
             },
             {
@@ -59,6 +60,14 @@ export class ColumnComponent implements OnInit {
 
     private closeDialog() {
         this.showModal = false;
+    }
+
+    private showDialogCol() {
+        this.showModalCol = true;
+    }
+
+    private closeDialogCol() {
+        this.showModalCol = false;
     }
 
 
