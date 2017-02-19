@@ -13,14 +13,17 @@
     margin-right: 10px;
 }
 
+.ui-menu {
+    min-width: 8em;
+}
 
+.ui-splitbutton {
+    min-width: 8em;
+}
 
-.dragHere{
-
+.dragHere {
     border: gray dashed 1px;
     padding: 1em;
     text-align: center;
     height: 82vh;
-
-
 }

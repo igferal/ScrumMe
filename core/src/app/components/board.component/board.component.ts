@@ -114,7 +114,6 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     ngOnDestroy() {
 
-        // currently withoutUse
         if (!!this.dragulaService.find('bag-one')) {
             this.dragulaService.destroy('bag-one');
         }

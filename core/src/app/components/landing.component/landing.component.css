@@ -43,3 +43,62 @@
     }
 }
 
+
+/*  */
+
+body {
+    font-family: helvetica, arial, sans-serif;
+    text-transform: uppercase;
+    color: white;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    zoom: 1;
+}
+
+h1 {
+    text-align: center;
+    position: relative;
+    z-index: 10000;
+    font-size: 6.6em;
+    color: #f5a70a;
+}
+
+p {
+    text-transform: none;
+    text-align: center;
+    font-weight: bold;
+    color: #f5a70a;
+}
+
+
+/* Rotating stars header background animation */
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.section-header {
+    background: #38202e url(http://www.officelayouts.org/wp-content/uploads/2012/12/enterprise-office-design.jpg) no-repeat;
+    background-size: cover;
+    padding: 190px 0;
+    overflow: hidden;
+}
+
+
+/* Gonna be testing more transitions e.g, to scale it over time */
+
+img {
+    transition: width 1s, height 1s;
+    -moz-transition: width 1s, height 1s, -moz-transform 1s;
+    /* Firefox 4 */
+    -webkit-transition: width 1s, height 1s, -webkit-transform 1s;
+    /* Safari and Chrome */
+    -o-transition: width 1s, height 1s, -o-transform 1s;
+    /* Opera */
+}
