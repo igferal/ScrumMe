@@ -111,13 +111,6 @@ export class FirebaseService implements Database {
       */
 
 
-    public add() {
-
-
-        //this.getCollection('column')
-
-    }
-
     /**
        * Metodo que crea los objetos asociados a las tareas vacias
        */
@@ -274,6 +267,11 @@ export class FirebaseService implements Database {
 
     }
 
+    public updateObject( key: string, item: any ){
+
+        this.af.database.object(key).set(item);    
+        
+    }
 
 
 }

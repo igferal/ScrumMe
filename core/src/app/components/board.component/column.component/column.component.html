@@ -8,7 +8,7 @@
 </header>
 <hr/>
 <div id="{{colKey}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
-    
+
     <div class="dragHere" *ngIf="item._contenido==='none' && notes.length ==1">
         Drag Here! or create new task<br/>
     </div>
@@ -16,6 +16,14 @@
     <note id="{{item.$key}}" *ngIf="item._contenido!='none'" (notify)="onNotify(columnName,$event)" [note]="item"></note>
 </div>
 
-<p-dialog [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
+<p-dialog [width]="600" height="250" [draggable]="false" [modal]="true" header="Editar Columna" [(visible)]="showModalCol">
+    <createColumn [colKey]="colKey" [editing]="true" [colName]="colName" [board]="boardKey" (notify)="closeDialogCol()"></createColumn>
+</p-dialog>
+
+
+<p-dialog  [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
     <createTask [colKey]="colKey" [board]="boardKey" (notify)="closeDialog()"></createTask>
 </p-dialog>
+
+
+

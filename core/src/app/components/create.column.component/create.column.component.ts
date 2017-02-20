@@ -1,5 +1,5 @@
 import { BoardColumn } from './../../model/boardColumn';
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { FirebaseService } from '../../services/database/firebase.service';
 import { Router } from '@angular/router';
@@ -15,22 +15,21 @@ import { Router } from '@angular/router';
 })
 
 
-export class CreateColumnComponent {
+export class CreateColumnComponent implements OnInit {
 
 
 
     @Input() board: any;
     @Output() notify = new EventEmitter<boolean>();
     private name: string;
-    @Input() colName;
+    @Input() colName: string;
+    private action: string;
+    @Input() editing: boolean;
+    @Input() colKey: string;
 
     constructor(private firebaseService: FirebaseService, public router: Router) {
 
 
-
-        if (this.colName !== '') {
-            this.name = this.colName;
-        }
 
     }
 
@@ -40,13 +39,38 @@ export class CreateColumnComponent {
      * tablero de que la tarea ha sido creada
      */
     public onSubmit() {
+
+        (this.editing) ? this.edit() : this.save();
+
+    }
+
+    private edit() {
+
+        this.firebaseService.updateObject(`board_columns/${this.board}/${this.colKey}/_columnName`, this.name);
+
+    }
+
+
+    private save() {
+
         let colBoard = new BoardColumn(new Array<PostIt>(), this.name);
         this.firebaseService.saveColumn(this.board, colBoard);
         this.name = '';
         this.notify.emit(false);
-
     }
 
+    ngOnInit() {
+
+        if (this.colName !== undefined) {
+            this.name = this.colName;
+            this.action = 'Editar Columna';
+        }
+        else {
+            this.action = 'Crear Columna';
+        }
+
+
+    }
 
 }
 
