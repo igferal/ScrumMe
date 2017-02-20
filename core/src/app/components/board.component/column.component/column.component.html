@@ -21,8 +21,8 @@
 </p-dialog>
 
 
-<p-dialog  [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear tarea" [(visible)]="showModal">
-    <createTask [colKey]="colKey" [board]="boardKey" (notify)="closeDialog()"></createTask>
+<p-dialog  [width]="600" height="400" [draggable]="false" [modal]="true" header="Tarea" [(visible)]="showModal">
+    <createTask [editing]="true" [colKey]="colKey" [board]="boardKey" (notify)="closeDialog()"></createTask>
 </p-dialog>
 
 

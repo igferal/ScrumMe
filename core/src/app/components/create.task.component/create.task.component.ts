@@ -22,6 +22,7 @@ export class CreateTaskComponent {
     @Input() board: any;
     @Input() colKey: any;
     @Output() notify = new EventEmitter<boolean>();
+    @Input() editing:boolean;
     private incorrect: boolean;
 
     constructor(private firebaseService: FirebaseService, public router: Router) {

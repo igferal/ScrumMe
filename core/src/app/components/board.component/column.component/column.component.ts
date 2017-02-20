@@ -35,12 +35,12 @@ export class ColumnComponent implements OnInit {
                 }
             },
             {
-                label: 'Delete', icon: 'fa-close', command: () => {
+                label: 'Borrar', icon: 'fa-close', command: () => {
                     this.delete();
                 }
             },
             {
-                label: 'Add task', icon: 'fa fa-plus', command: () => {
+                label: 'Añadir tarea', icon: 'fa fa-plus', command: () => {
                     this.showDialog();
                 }
             }

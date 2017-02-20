@@ -47,6 +47,13 @@ export class FirebaseService implements Database {
         this.af.database.list(collection).push(item);
     }
 
+    public editTask(item: PostIt, collection: string) {
+        // this.af.database.list(collection).update(item);
+
+    }
+
+
+
     /**
      * Metodo que nos crea un tablero en firebase 
      * Inserta el tablero en la coleccion de tableros
@@ -267,10 +274,10 @@ export class FirebaseService implements Database {
 
     }
 
-    public updateObject( key: string, item: any ){
+    public updateObject(key: string, item: any) {
 
-        this.af.database.object(key).set(item);    
-        
+        this.af.database.object(key).set(item);
+
     }
 
 
