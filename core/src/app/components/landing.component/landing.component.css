@@ -1,8 +1,8 @@
 .mouse-icon {
-    border: 2px solid #f5a70a;
+    border: 2px solid #DE7A22;
     border-radius: 16px;
     height: 50px;
-    margin: -100px auto 50px;
+    margin: 60vh auto 50px;
     position: relative;
     width: 30px;
     z-index: 10;
@@ -18,7 +18,7 @@
 }
 
 .mouse-icon .scroll {
-    background: #f5a70a none repeat scroll 0 0;
+    background: #DE7A22 none repeat scroll 0 0;
     border-radius: 10px;
     height: 10px;
     margin-left: auto;
@@ -61,14 +61,14 @@ h1 {
     position: relative;
     z-index: 10000;
     font-size: 6.6em;
-    color: #f5a70a;
+    color: #DE7A22;
 }
 
 p {
     text-transform: none;
     text-align: center;
     font-weight: bold;
-    color: #f5a70a;
+    color: #DE7A22;
 }
 
 
@@ -83,11 +83,34 @@ p {
     }
 }
 
+
+/*
+sky #375E97
+sunset #FB6542
+sunflower FFBB00
+grass     3F681C
+
+
+SANDSTONE F4CC70
+BURNT-ORANGE    DE7A22
+SEA:            20948B
+LAGOON:         6AB187;
+
+*/
+
 .section-header {
-    background: #38202e url(http://www.officelayouts.org/wp-content/uploads/2012/12/enterprise-office-design.jpg) no-repeat;
+    background: #F4CC70 no-repeat;
     background-size: cover;
     padding: 190px 0;
     overflow: hidden;
+    height: 96vh;
+}
+
+.section-info {
+    height: 50vh;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
 }
 
 

@@ -29,17 +29,11 @@ body {
 .scrollDiv-new {
     display: flex;
     align-items: center;
-    justify-content: center
-}
-
-.scrollDive-new-content {
-    display: flex;
-    align-items: center;
     justify-content: center;
     height: 25vh;
     margin: 10px;
     padding: 10px;
-    min-width: 160px;
+    min-width: 200px;
     border: #F7B733 dashed 2px;
 }
 

@@ -1,6 +1,5 @@
 .col-header {
     display: flex;
-    justify-content: space-between;
     margin: 2px;
     min-height: 10px;
     height: 20px;
@@ -14,11 +13,16 @@
 }
 
 .ui-menu {
-    min-width: 8em;
+    width: 4em;
+    background: red;
 }
 
 .ui-splitbutton {
-    min-width: 8em;
+    width: 4em;
+}
+
+.ui-splitbutton-button {
+    width: 4em;
 }
 
 .dragHere {

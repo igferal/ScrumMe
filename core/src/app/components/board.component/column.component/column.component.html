@@ -2,14 +2,14 @@
     <h4>{{colName}}</h4>
     <div class="col-header-buttons">
 
-        <p-splitButton iconPos="left" label="Opciones" [model]="options"></p-splitButton>
+        <p-splitButton styleClass="ui-menu" iconPos="left" label="Opciones" [model]="options"></p-splitButton>
 
     </div>
 </header>
 <hr/>
 <div id="{{colKey}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
 
-    <div class="dragHere" *ngIf="item._contenido==='none' && notes.length ==1">
+    <div class="dragHere" *ngIf="item._key==='none' && notes.length <=1">
         Drag Here! or create new task<br/>
     </div>
 
@@ -21,9 +21,6 @@
 </p-dialog>
 
 
-<p-dialog  [width]="600" height="400" [draggable]="false" [modal]="true" header="Tarea" [(visible)]="showModal">
+<p-dialog [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear Tarea" [(visible)]="showModal">
     <createTask [editing]="true" [colKey]="colKey" [board]="boardKey" (notify)="closeDialog()"></createTask>
 </p-dialog>
-
-
-
