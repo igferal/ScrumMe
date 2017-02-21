@@ -1,19 +1,16 @@
 <header class="col-header">
-    <h4>{{colName}}</h4>
-    <div class="col-header-buttons">
-
-        <p-splitButton styleClass="ui-menu" iconPos="left" label="Opciones" [model]="options"></p-splitButton>
-
-    </div>
+    <h5>{{colName}}</h5>
+    <p-splitButton styleClass="ui-menu" iconPos="left" label="Opciones" [model]="options"></p-splitButton>
 </header>
 <hr/>
 <div id="{{colKey}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
 
-    <div class="dragHere" *ngIf="item._key==='none' && notes.length <=1">
+    <div class="dragHere" *ngIf="item._key==='none' && notes.length ===1">
         Drag Here! or create new task<br/>
     </div>
 
     <note id="{{item.$key}}" *ngIf="item._contenido!='none'" (notify)="onNotify(columnName,$event)" [note]="item"></note>
+
 </div>
 
 <p-dialog [width]="600" height="250" [draggable]="false" [modal]="true" header="Editar Columna" [(visible)]="showModalCol">

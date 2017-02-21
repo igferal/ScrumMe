@@ -1,7 +1,5 @@
-body {
-    height: 100%;
-    background-size: cover;
-    overflow: hidden;
+.main {
+    background: #32384D;
 }
 
 .scrollLateral {
@@ -21,9 +19,11 @@ body {
 .scrollDiv {
     background: #F8F8F8;
     overflow: scroll;
-    height: 90vh;
+    height: 91vh;
     margin: 10px;
     min-width: 320px;
+    display: flex;
+    justify-content: center;
 }
 
 .scrollDiv-new {

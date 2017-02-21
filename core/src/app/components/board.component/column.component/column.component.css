@@ -1,6 +1,8 @@
 .col-header {
     display: flex;
+    flex-grow: 1;
     margin: 2px;
+    justify-content: space-between;
     min-height: 10px;
     height: 20px;
 }
@@ -14,7 +16,6 @@
 
 .ui-menu {
     width: 4em;
-    background: red;
 }
 
 .ui-splitbutton {

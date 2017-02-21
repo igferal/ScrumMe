@@ -3,15 +3,14 @@ ul.topnav {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #DE7A22;
+    background-color: #E29930;
     position: fixed;
     /* Set the navbar to fixed position */
     top: 0;
     /* Position the navbar at the top of the page */
     width: 100%;
     /* Full width */
-    z-index: 20;
-    height: 4vh;
+    z-index: 30;
 }
 
 ul.topnav li {
