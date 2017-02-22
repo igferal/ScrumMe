@@ -1,3 +1,5 @@
+import { BoardService } from './../../services/database/board.service';
+import { BoardComponent } from './../board.component/board.component';
 import { FirebaseService } from './../../services/database/firebase.service';
 import { Board } from './../../model/board';
 import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
@@ -9,6 +11,7 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
     selector: 'dashboard',
     templateUrl: './user.dashboard.component.html',
     styleUrls: ['../app.component/app.component.css'],
+    providers: [BoardService]
 })
 @DestroySubscribers()
 export class UserDashboardComponent implements OnInit, OnDestroy {
@@ -17,12 +20,11 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     private createBoard: string;
     private boards: Board[];
     public subscribers: any = {};
-    private currentUser: string;
     private viewContainerRef: ViewContainerRef;
     private showModal: boolean;
 
 
-    constructor(private firebaseService: FirebaseService, private router: Router, viewContainerRef: ViewContainerRef) {
+    constructor(private boardService: BoardService, private router: Router, viewContainerRef: ViewContainerRef) {
 
         this.createBoard = 'Añadir tablero';
         this.viewContainerRef = viewContainerRef;
@@ -53,7 +55,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
      */
     private deleteBoard(key: string) {
 
-        this.firebaseService.deleteBoard(key);
+        this.boardService.deleteBoard(key);
 
     }
 
@@ -62,7 +64,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
      */
     private stopColaboration(key: string) {
 
-        this.firebaseService.deleteColaboration(key);
+        this.boardService.deleteColaboration(key);
     }
 
 
@@ -73,11 +75,10 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
      */
     ngOnInit() {
 
-      // this.firebaseService.add();
-        this.subscribers.subscription = this.firebaseService.getUser_Boards().subscribe(
+        // this.firebaseService.add();
+        this.subscribers.subscription = this.boardService.getUser_Boards().subscribe(
             (boards) => this.boards = boards
         );
-        this.currentUser = this.firebaseService.currentUser;
 
     }
 

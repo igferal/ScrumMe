@@ -1,3 +1,4 @@
+import { BoardService } from './../../../services/database/board.service';
 import { PostIt } from '../../../model/post.it';
 import { BoardColumn } from './../../../model/boardColumn';
 import { Board } from './../../../model/board';
@@ -9,7 +10,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 @Component({
     moduleId: 'createBoard',
     selector: 'createBoard',
-    templateUrl: './create.board.component.html'
+    templateUrl: './create.board.component.html',
+    providers: [BoardService]
 })
 export class CreateBoardComponent {
 
@@ -20,7 +22,7 @@ export class CreateBoardComponent {
     private mails: string;
     private columns: string;
 
-    constructor(private firebaseService: FirebaseService) {
+    constructor(private boardService: BoardService) {
         this.mails = '';
         this.columns = '';
     }
@@ -48,7 +50,7 @@ export class CreateBoardComponent {
             });
         }
         new Board(this.name, this.date);
-        this.firebaseService.saveBoard(board, splitted);
+        this.boardService.saveBoard(board, splitted);
         this.notify.emit(true);
         this.cleanFields();
 

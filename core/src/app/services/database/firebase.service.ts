@@ -21,8 +21,6 @@ export class FirebaseService implements Database {
      */
     constructor(private af: AngularFire) {
 
-        console.log('ME creoo');
-
         this.af.auth.subscribe((user) => {
             if (user != null) {
                 this.currentUser = user.uid;
