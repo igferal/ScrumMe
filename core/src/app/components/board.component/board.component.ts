@@ -18,7 +18,7 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
     selector: 'list',
     templateUrl: './board.component.html',
     styleUrls: ['./board.component.css'],
-    providers: [ColumnService, TaskService]
+    providers: [ColumnService, TaskService,UserService]
 })
 @DestroySubscribers()
 export class BoardComponent implements OnInit, OnDestroy {
@@ -145,7 +145,8 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     private inicializateCollections() {
 
-        this.subscribers.subscription = this.columnService.getColumns(`board_columns/${this.board}/`).subscribe(
+        console.log(this.board);
+        this.subscribers.subscription = this.columnService.getColumns(this.board).subscribe(
             (items) => {
                 this.columns = items;
             }

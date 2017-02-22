@@ -3,7 +3,6 @@ import { BoardColumn } from './../../model/boardColumn';
 import { Board } from './../../model/board';
 import { User } from './../../model/user';
 import { Injectable } from '@angular/core';
-import { Database } from './IDatabase';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, AuthProviders } from 'angularfire2';
 import { PostIt } from '../../model/post.it';
 import { Subject } from 'rxjs/Subject';
@@ -16,9 +15,10 @@ export class ColumnService implements IColumnService {
     /**
     * Me devuelve una coleeccion observable desde firebase
     */
-    public getColumns(name: string): FirebaseListObservable<any> {
+    public getColumns(board: string): FirebaseListObservable<any> {
 
-        return this.af.database.list(name);
+        console.log(board);
+        return this.af.database.list(`board_columns/${board}`);
 
     }
 
@@ -26,11 +26,11 @@ export class ColumnService implements IColumnService {
     public saveColumn(boardKey: string, boardCol: BoardColumn) {
         let keyCol;
         console.log(boardCol);
-        keyCol = this.getColumns('board_columns' + '/' + boardKey).push(
+        keyCol = this.af.database.list('board_columns' + '/' + boardKey).push(
             new BoardColumn(new Array<PostIt>(), boardCol.columnName)).key;
 
         boardCol.tasks.forEach((task) => {
-            this.getColumns("column_tasks/" + boardKey + '/' + keyCol).push(task)
+            this.af.database.list("column_tasks/" + boardKey + '/' + keyCol).push(task)
 
         });
 
@@ -41,8 +41,8 @@ export class ColumnService implements IColumnService {
 
     deleteColumn(boardKey: string, colKey: string) {
 
-        this.getColumns(`column_tasks/${boardKey}/`).remove(colKey);
-        this.getColumns(`board_columns/${boardKey}/`).remove(colKey);
+        this.af.database.list(`column_tasks/${boardKey}/`).remove(colKey);
+        this.af.database.list(`board_columns/${boardKey}/`).remove(colKey);
 
 
     }
@@ -53,7 +53,7 @@ export class ColumnService implements IColumnService {
 
     }
 
-    
+
 
     public currentUser: string;
 

@@ -2,7 +2,6 @@ import { BoardService } from './../../../services/database/board.service';
 import { PostIt } from '../../../model/post.it';
 import { BoardColumn } from './../../../model/boardColumn';
 import { Board } from './../../../model/board';
-import { FirebaseService } from './../../../services/database/firebase.service';
 import { Component, Output, EventEmitter } from '@angular/core';
 
 

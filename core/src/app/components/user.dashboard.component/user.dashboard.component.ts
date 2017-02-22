@@ -1,6 +1,5 @@
 import { BoardService } from './../../services/database/board.service';
 import { BoardComponent } from './../board.component/board.component';
-import { FirebaseService } from './../../services/database/firebase.service';
 import { Board } from './../../model/board';
 import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';

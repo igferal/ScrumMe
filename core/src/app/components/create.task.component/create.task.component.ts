@@ -1,7 +1,6 @@
 import { TaskService } from './../../services/database/task.service';
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { PostIt } from '../../model/post.it';
-import { FirebaseService } from '../../services/database/firebase.service';
 import { Router } from '@angular/router';
 
 
