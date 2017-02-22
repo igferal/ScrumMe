@@ -1,4 +1,4 @@
-import { FirebaseService } from './../../services/database/firebase.service';
+import { UserService } from './../../services/database/user.service';
 import { TaskService } from './../../services/database/task.service';
 import { ColumnService } from './../../services/database/column.service';
 import { BoardColumn } from './../../model/boardColumn';
@@ -35,7 +35,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 
 
-    constructor(private firebaseService: FirebaseService, private taskService: TaskService, private columnService: ColumnService,
+    constructor(private userService: UserService, private taskService: TaskService, private columnService: ColumnService,
         private dragulaService: DragulaService, private route: ActivatedRoute) {
 
         this.createTask = 'Añadir tarea';
@@ -120,7 +120,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      * Método en el que obtemos la información sobre el usuario actual 
      */
     private suscribeUser() {
-        this.subscribers.userSubscription = this.firebaseService.getCurrentDeveloper().subscribe((user) => {
+        this.subscribers.userSubscription = this.userService.getCurrentDeveloper().subscribe((user) => {
             this.currentUser = new User(user._name, user._surname, user._email, user._uid);
         });
 

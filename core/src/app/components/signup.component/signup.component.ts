@@ -1,14 +1,14 @@
+import { UserService } from './../../services/database/user.service';
 import { Component } from '@angular/core';
 import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
 import { Router } from '@angular/router';
 import { User } from '../../model/user';
-import { FirebaseService } from '../../services/database/firebase.service';
 
 
 @Component({
     selector: 'signup',
     templateUrl: './signup.component.html',
-    providers: [FirebaseAuthentication, FirebaseService],
+    providers: [FirebaseAuthentication, UserService],
 
 
 })
@@ -24,7 +24,7 @@ export class SignUpComponent {
     private msgs = [];
 
 
-    constructor(private firebaseAuth: FirebaseAuthentication, private firebaseService: FirebaseService,
+    constructor(private firebaseAuth: FirebaseAuthentication, private userService: UserService,
         private router: Router) {
     }
 
@@ -38,7 +38,7 @@ export class SignUpComponent {
             if (this.passwordMatch()) {
                 this.signUp(this.name, this.surname, this.email, this.password);
             } else {
-                 this.showError("Las contraseñas no coinciden");
+                this.showError("Las contraseñas no coinciden");
             }
         } else {
             this.showError("La contraseña ha de tener una longitud mayor o igual de 6 caracteres")
@@ -97,7 +97,7 @@ export class SignUpComponent {
     private createUser(name: string, surname: string, email: string, uid: string) {
 
         let user: User = new User(name, surname, email, uid);
-        this.firebaseService.createUser(user);
+        this.userService.createUser(user);
 
     }
     /**
