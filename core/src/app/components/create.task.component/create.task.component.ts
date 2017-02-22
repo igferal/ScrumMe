@@ -1,3 +1,4 @@
+import { TaskService } from './../../services/database/task.service';
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { FirebaseService } from '../../services/database/firebase.service';
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
     selector: 'createTask',
     templateUrl: './create.task.component.html',
     styleUrls: ['./create.task.component.css'],
-    providers: [FirebaseService]
+    providers: [TaskService]
 
 })
 
@@ -22,10 +23,10 @@ export class CreateTaskComponent {
     @Input() board: any;
     @Input() colKey: any;
     @Output() notify = new EventEmitter<boolean>();
-    @Input() editing:boolean;
+    @Input() editing: boolean;
     private incorrect: boolean;
 
-    constructor(private firebaseService: FirebaseService, public router: Router) {
+    constructor(private taskService: TaskService, public router: Router) {
         this.horas = 0;
     }
 
@@ -40,7 +41,7 @@ export class CreateTaskComponent {
             this.incorrect = false;
             let postIt = new PostIt(this.contenido, '', this.horas, '');
             this.contenido = '';
-            this.firebaseService.saveTask(postIt, `column_tasks/${this.board}/${this.colKey}`);
+            this.taskService.saveTask(this.colKey, this.board, postIt);
             this.notify.emit(false);
         } else {
             this.incorrect = true;

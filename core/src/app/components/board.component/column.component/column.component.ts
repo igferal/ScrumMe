@@ -1,3 +1,5 @@
+import { TaskService } from '../../../services/database/task.service';
+import { ColumnService } from './../../../services/database/column.service';
 import { DestroySubscribers } from '../../../util/unsuscribe.decorator';
 import { FirebaseService } from './../../../services/database/firebase.service';
 import { PostIt } from './../../../model/post.it';
@@ -8,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
     selector: 'app-column',
     templateUrl: 'column.component.html',
     styleUrls: ['./column.component.css'],
-    providers: [FirebaseService]
+    providers: [ColumnService, TaskService]
 
 
 })
@@ -26,7 +28,7 @@ export class ColumnComponent implements OnInit {
     private showModalCol: boolean;
 
 
-    constructor(private firebaseService: FirebaseService) {
+    constructor(private columnService: ColumnService, public taskService: TaskService) {
 
         this.options = [
             {
@@ -51,7 +53,7 @@ export class ColumnComponent implements OnInit {
    * Metodo que nos gestiona el borrado de notas
    */
     public onNotify(collection: string, key: string) {
-        this.firebaseService.delete(key, `column_tasks/${this.boardKey}/${this.colKey}`);
+        this.taskService.deleteTask(this.boardKey, this.colKey, key);
     }
 
     private showDialog() {
@@ -79,14 +81,14 @@ export class ColumnComponent implements OnInit {
 
     public delete() {
 
-        this.firebaseService.delete(this.colKey, `column_tasks/${this.boardKey}/`);
-        this.firebaseService.delete(this.colKey, `board_columns/${this.boardKey}/`);
+        this.columnService.deleteColumn(this.boardKey, this.colKey);
+
 
     }
 
     ngOnInit() {
 
-        this.subscribers.subscription = this.firebaseService.getCollection(`column_tasks/${this.boardKey}/${this.colKey}`).subscribe((notes) => {
+        this.subscribers.subscription = this.taskService.getTasks(this.colKey, this.boardKey).subscribe((notes) => {
 
             this.notes = notes;
 

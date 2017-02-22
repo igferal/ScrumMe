@@ -9,9 +9,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 @Component({
     moduleId: 'createBoard',
     selector: 'createBoard',
-    templateUrl: './create.board.component.html',
-    providers: [FirebaseService]
-
+    templateUrl: './create.board.component.html'
 })
 export class CreateBoardComponent {
 

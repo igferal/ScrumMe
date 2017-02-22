@@ -1,3 +1,4 @@
+import { FirebaseService } from './services/database/firebase.service';
 import { CreateColumnComponent } from './components/create.column.component/create.column.component';
 import { ColumnComponent } from './components/board.component/column.component/column.component';
 import { NgModule } from '@angular/core';
@@ -64,7 +65,7 @@ const myFirebaseAuthConfig = {
         AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
 
     ],
-    providers: [],
+    providers: [FirebaseService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

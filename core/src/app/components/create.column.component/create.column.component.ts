@@ -1,3 +1,4 @@
+import { ColumnService } from './../../services/database/column.service';
 import { BoardColumn } from './../../model/boardColumn';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { PostIt } from '../../model/post.it';
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
     selector: 'createColumn',
     templateUrl: './create.column.component.html',
     styleUrls: ['./create.column.component.css'],
-    providers: [FirebaseService]
+    providers: [ColumnService]
 
 })
 
@@ -27,9 +28,7 @@ export class CreateColumnComponent implements OnInit {
     @Input() editing: boolean;
     @Input() colKey: string;
 
-    constructor(private firebaseService: FirebaseService, public router: Router) {
-
-
+    constructor(private columnService: ColumnService, public router: Router) {
 
     }
 
@@ -46,7 +45,7 @@ export class CreateColumnComponent implements OnInit {
 
     private edit() {
 
-        this.firebaseService.updateObject(`board_columns/${this.board}/${this.colKey}/_columnName`, this.name);
+        this.columnService.editColumn(`board_columns/${this.board}/${this.colKey}/_columnName`, this.name);
 
     }
 
@@ -54,7 +53,7 @@ export class CreateColumnComponent implements OnInit {
     private save() {
 
         let colBoard = new BoardColumn(new Array<PostIt>(), this.name);
-        this.firebaseService.saveColumn(this.board, colBoard);
+        this.columnService.saveColumn(this.board, colBoard);
         this.name = '';
         this.notify.emit(false);
     }

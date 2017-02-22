@@ -1,3 +1,6 @@
+import { FirebaseService } from './../../services/database/firebase.service';
+import { TaskService } from './../../services/database/task.service';
+import { ColumnService } from './../../services/database/column.service';
 import { BoardColumn } from './../../model/boardColumn';
 import { Board } from './../../model/board';
 import { Observable } from 'rxjs/Observable';
@@ -7,7 +10,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
-import { FirebaseService } from '../../services/database/firebase.service';
 import { User } from './../../model/user';
 import 'rxjs/add/operator/switchMap';
 import { DestroySubscribers } from '../../util/unsuscribe.decorator';
@@ -16,8 +18,7 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
     selector: 'list',
     templateUrl: './board.component.html',
     styleUrls: ['./board.component.css'],
-    providers: [FirebaseService]
-
+    providers: [ColumnService, TaskService]
 })
 @DestroySubscribers()
 export class BoardComponent implements OnInit, OnDestroy {
@@ -34,7 +35,8 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 
 
-    constructor(private firebaseService: FirebaseService, private dragulaService: DragulaService, private route: ActivatedRoute) {
+    constructor(private firebaseService: FirebaseService, private taskService: TaskService, private columnService: ColumnService,
+        private dragulaService: DragulaService, private route: ActivatedRoute) {
 
         this.createTask = 'Añadir tarea';
         this.dragulaSubscriptions(dragulaService);
@@ -80,7 +82,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 
 
-        this.addToAnotherBag(postItId, `/${fromCollection}`, `/${toCollection}`);
+        this.addToAnotherBag(postItId, `${fromCollection}`, `${toCollection}`);
 
     }
     /**
@@ -88,14 +90,8 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     private addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
 
-        this.firebaseService.addToOtherBag(this.board, postItId, fromCollection, toCollection, this.currentUser.name);
-
+        this.taskService.addToOtherBag(this.board, postItId, fromCollection, toCollection, this.currentUser.name);
     }
-
-
-
-
-
 
 
     /**
@@ -149,7 +145,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     private inicializateCollections() {
 
-        this.subscribers.subscription = this.firebaseService.getCollection(`board_columns/${this.board}/`).subscribe(
+        this.subscribers.subscription = this.columnService.getColumns(`board_columns/${this.board}/`).subscribe(
             (items) => {
                 this.columns = items;
             }

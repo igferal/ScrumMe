@@ -9,8 +9,6 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
     selector: 'dashboard',
     templateUrl: './user.dashboard.component.html',
     styleUrls: ['../app.component/app.component.css'],
-
-    providers: [FirebaseService]
 })
 @DestroySubscribers()
 export class UserDashboardComponent implements OnInit, OnDestroy {

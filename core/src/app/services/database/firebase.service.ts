@@ -20,11 +20,15 @@ export class FirebaseService implements Database {
      * Obtengo el ID del usuario actual del sistema
      */
     constructor(private af: AngularFire) {
+
+        console.log('ME creoo');
+
         this.af.auth.subscribe((user) => {
             if (user != null) {
                 this.currentUser = user.uid;
             }
         });
+
 
     }
 
@@ -111,21 +115,6 @@ export class FirebaseService implements Database {
 
     }
 
-
-    /**
-      * Metodo auxiliar que nos crea tareas vacias en las columnas del tablon para 
-      * poder usar una directiva ngFor en el componete del tablero
-      */
-
-
-    /**
-       * Metodo que crea los objetos asociados a las tareas vacias
-       */
-    private incializateBoardColumns(boardKey: string, column: string) {
-
-        this.af.database.object(`boards/${boardKey}/${column}/none`).set(new PostIt('none', 'none', 0, 'none'));
-
-    }
 
 
 
