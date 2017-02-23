@@ -1,23 +1,35 @@
 <header class="col-header">
     <h5>{{colName}}</h5>
-    <p-splitButton styleClass="ui-menu" iconPos="left" label="Opciones" [model]="options"></p-splitButton>
+    <p-menu #menu popup="popup" [model]="options"></p-menu>
+    <i class="fa fa-sort-desc" aria-hidden="true" (click)="menu.toggle($event)"></i>
 </header>
 <hr/>
+
+
 <div id="{{colKey}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
 
     <div class="dragHere" *ngIf="item._key==='none' && notes.length ===1">
         Drag Here! or create new task<br/>
     </div>
 
-    <note id="{{item.$key}}" *ngIf="item._contenido!='none'" (notify)="onNotify(columnName,$event)" [note]="item"></note>
+    <note id="{{item.$key}}" *ngIf="item._contenido!='none'" (notify)="onNotify(columnName,$event) " [board]="boardKey " [colKey]="colKey " [note]="item " [noteKey]="item.$key"></note>
 
 </div>
 
-<p-dialog [width]="600" height="250" [draggable]="false" [modal]="true" header="Editar Columna" [(visible)]="showModalCol">
-    <createColumn [colKey]="colKey" [editing]="true" [colName]="colName" [board]="boardKey" (notify)="closeDialogCol()"></createColumn>
+<p-dialog [width]="600 " height="250 " [draggable]="false " [modal]="true " header="Editar Columna " [(visible)]="showModalCol ">
+    <createColumn [colKey]="colKey " [editing]="true " [colName]="colName " [board]="boardKey " (notify)="closeDialogCol() "></createColumn>
 </p-dialog>
 
 
-<p-dialog [width]="600" height="400" [draggable]="false" [modal]="true" header="Crear Tarea" [(visible)]="showModal">
-    <createTask [editing]="true" [colKey]="colKey" [board]="boardKey" (notify)="closeDialog()"></createTask>
+<p-dialog [width]="600 " height="400 " [draggable]="false " [modal]="true " header="Crear Tarea " [(visible)]="showModal ">
+    <createTask [editing]="true " [colKey]="colKey " [board]="boardKey " (notify)="closeDialog() "></createTask>
 </p-dialog>
+
+
+
+
+
+
+<!--
+<note id="{{item.$key}}" *ngIf="item._contenido!='none'" (notify)="onNotify(columnName,$event)" [note]="item"></note>
+-->

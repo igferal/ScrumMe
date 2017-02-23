@@ -4,6 +4,7 @@ export class PostIt {
   private _programador: string;
   private _horas: number;
   private _key: string;
+  private _workedHours: number;
 
   constructor(contenido: string, programador: string, horas: number, key?: string) {
 
@@ -11,6 +12,7 @@ export class PostIt {
     this._horas = horas;
     this._programador = programador;
     this.setKey(key);
+    this._workedHours =0;
   }
 
 
@@ -39,6 +41,22 @@ export class PostIt {
   get contenido(): string {
 
     return this._contenido;
+  }
+
+  set workedHours(hours: number) {
+
+    this.workedHours = hours;
+
+  }
+
+  get workedHours() {
+    return this._workedHours;
+  }
+
+  public addHours(newHours: number) {
+
+    this.workedHours += newHours;
+
   }
 
   private setKey(key: string) {

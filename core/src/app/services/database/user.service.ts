@@ -20,7 +20,6 @@ export class UserService implements IUserService {
      */
     constructor(private af: AngularFire) {
 
-        console.log("Servicio de tablero");
 
         this.af.auth.subscribe((user) => {
             if (user != null) {

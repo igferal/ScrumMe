@@ -18,7 +18,7 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
     selector: 'list',
     templateUrl: './board.component.html',
     styleUrls: ['./board.component.css'],
-    providers: [ColumnService, TaskService,UserService]
+    providers: [ColumnService, TaskService, UserService]
 })
 @DestroySubscribers()
 export class BoardComponent implements OnInit, OnDestroy {
@@ -76,9 +76,6 @@ export class BoardComponent implements OnInit, OnDestroy {
         let fromCollection: string = args[2].id;
         let toCollection: string = args[1].id;
 
-        console.log(`Post it: ${postItId}`);
-        console.log(`To collection : ${toCollection}`);
-        console.log(`From collection : ${fromCollection}`);
 
 
 
@@ -89,6 +86,11 @@ export class BoardComponent implements OnInit, OnDestroy {
      * Metodo que nos gestiona el cambio de columna
      */
     private addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
+
+        console.log(`Board: ${this.board}`)
+        console.log(`Post it: ${postItId}`);
+        console.log(`To collection : ${toCollection}`);
+        console.log(`From collection : ${fromCollection}`);
 
         this.taskService.addToOtherBag(this.board, postItId, fromCollection, toCollection, this.currentUser.name);
     }

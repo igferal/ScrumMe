@@ -3,6 +3,7 @@ import { ColumnService } from './../../../services/database/column.service';
 import { DestroySubscribers } from '../../../util/unsuscribe.decorator';
 import { PostIt } from './../../../model/post.it';
 import { Component, OnInit, Input } from '@angular/core';
+import {MenuModule,MenuItem} from 'primeng/primeng';
 
 @Component({
     moduleId: 'column.component',

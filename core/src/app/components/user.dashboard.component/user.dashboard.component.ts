@@ -9,7 +9,7 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 @Component({
     selector: 'dashboard',
     templateUrl: './user.dashboard.component.html',
-    styleUrls: ['../app.component/app.component.css'],
+    styleUrls: ['./user.dashboard.component.css'],
     providers: [BoardService]
 })
 @DestroySubscribers()

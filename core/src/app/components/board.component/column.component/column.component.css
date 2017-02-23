@@ -1,17 +1,12 @@
 .col-header {
     display: flex;
-    flex-grow: 1;
-    margin: 2px;
     justify-content: space-between;
     min-height: 10px;
     height: 20px;
 }
 
-.col-header-buttons {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-left: 10px;
-    margin-right: 10px;
+.h5 {
+    color: #211F30;
 }
 
 .ui-menu {
@@ -31,4 +26,8 @@
     padding: 1em;
     text-align: center;
     height: 82vh;
+}
+
+i:hover {
+    box-shadow: 0 10px 0px 0 rgba(0, 0, 0, 0.1);
 }

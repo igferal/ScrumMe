@@ -1,3 +1,4 @@
+import { NoteContent } from './components/board.component/note.content.component/note.content.component';
 import { CreateColumnComponent } from './components/create.column.component/create.column.component';
 import { ColumnComponent } from './components/board.component/column.component/column.component';
 import { NgModule } from '@angular/core';
@@ -16,9 +17,9 @@ import { UserDashboardComponent } from './components/user.dashboard.component/us
 import { LandingComponent } from './components/landing.component/landing.component';
 import { DragulaModule } from '../../node_modules/ng2-dragula/ng2-dragula';
 import { NoteComponent } from './components/board.component/note.component/note.component';
-import { MessagesModule} from 'primeng/primeng';
+import { MessagesModule,  } from 'primeng/primeng';
 import { DialogModule }  from 'primeng/primeng';
-import { SplitButtonModule } from 'primeng/primeng';
+import {MenuModule,MenuItem} from 'primeng/primeng';
 
 
 
@@ -49,7 +50,8 @@ const myFirebaseAuthConfig = {
         UserDashboardComponent,
         CreateBoardComponent,
         ColumnComponent,
-        CreateColumnComponent
+        CreateColumnComponent,
+        NoteContent
         
     ],
     imports: [
@@ -60,7 +62,7 @@ const myFirebaseAuthConfig = {
         AppRoutingModule,
         MessagesModule,
         DialogModule,
-        SplitButtonModule,
+        MenuModule,
         AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
 
     ],

@@ -18,7 +18,6 @@ export class BoardService implements IBoardService {
      */
     constructor(private af: AngularFire) {
 
-        console.log("Servicio de tablero");
 
         this.af.auth.subscribe((user) => {
             if (user != null) {

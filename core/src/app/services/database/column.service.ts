@@ -17,7 +17,6 @@ export class ColumnService implements IColumnService {
     */
     public getColumns(board: string): FirebaseListObservable<any> {
 
-        console.log(board);
         return this.af.database.list(`board_columns/${board}`);
 
     }
@@ -25,7 +24,6 @@ export class ColumnService implements IColumnService {
 
     public saveColumn(boardKey: string, boardCol: BoardColumn) {
         let keyCol;
-        console.log(boardCol);
         keyCol = this.af.database.list('board_columns' + '/' + boardKey).push(
             new BoardColumn(new Array<PostIt>(), boardCol.columnName)).key;
 
@@ -64,7 +62,6 @@ export class ColumnService implements IColumnService {
      */
     constructor(private af: AngularFire) {
 
-        console.log('Servicio de Columna');
 
         this.af.auth.subscribe((user) => {
             if (user != null) {

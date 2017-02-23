@@ -1,12 +1,12 @@
-<section class="card" draggable="true">
-    <header class="card-header">{{note._programador}}</header>
+<section id="noteKey" (click)="showDialog()" class="card" draggable="true">
+    <header class="card-header">{{note._programador}}
+        <a class="hoverA" (click)="deleteItem()"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+    </header>
     <div class="card-content">
         {{note._contenido}}
     </div>
-    <footer class="card-footer">
-        <div class="card-buttons">
-            <a (click)="deleteItem()"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
-            <a> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-        </div>
-    </footer>
 </section>
+
+<p-dialog [width]="600" height="400" [draggable]="false" [modal]="true" header="Información de tarea" [(visible)]="showModal">
+    <noteContent [board]="board" [colKey]="colKey" [note]="note" [noteKey]="noteKey"></noteContent>
+</p-dialog>

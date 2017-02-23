@@ -10,13 +10,21 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class NoteComponent {
 
     @Input() note: any;
-
     @Output() notify = new EventEmitter<string>();
+    @Input() board: any;
+    @Input() colKey: any;
+    @Input() noteKey: string;
 
-    @Input() currentList: string;
+    private showModal: boolean;
 
 
+    private showDialog() {
+        this.showModal = true;
+    }
 
+    private closeDialog() {
+        this.showModal = false;
+    }
 
 
     private deleteItem() {

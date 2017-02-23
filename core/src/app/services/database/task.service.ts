@@ -4,7 +4,6 @@ import { BoardColumn } from './../../model/boardColumn';
 import { Board } from './../../model/board';
 import { User } from './../../model/user';
 import { Injectable } from '@angular/core';
-import { Database } from './IDatabase';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, AuthProviders } from 'angularfire2';
 import { Subject } from 'rxjs/Subject';
 
@@ -21,7 +20,6 @@ export class TaskService implements ITaskService {
      */
     constructor(private af: AngularFire) {
 
-        console.log('Servicio de Tarea');
 
         this.af.auth.subscribe((user) => {
             if (user != null) {
@@ -69,10 +67,10 @@ export class TaskService implements ITaskService {
 
         let element: any;
         let subscription: any;
-
+        console.log(`column_tasks/${board}/${collection}/${key}`);
         subscription = this.af.database.object(`column_tasks/${board}/${collection}/${key}`).subscribe((item) => {
-            element = item;
             console.log(item);
+            element = item;
         });
         subscription.unsubscribe();
 
