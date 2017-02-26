@@ -57,9 +57,15 @@ export class TaskService implements ITaskService {
 
 
         let postit = this.findTaskById(board, postItId, fromCollection);
-        this.addProgrammerLabel(postit, toCollection, programmer);
+
+        postit.programador = programmer;
+
         this.deleteTask(board, fromCollection, postItId);
+
         this.saveTask(toCollection, board, postit);
+
+
+
     }
 
 
@@ -69,7 +75,6 @@ export class TaskService implements ITaskService {
         let subscription: any;
         console.log(`column_tasks/${board}/${collection}/${key}`);
         subscription = this.af.database.object(`column_tasks/${board}/${collection}/${key}`).subscribe((item) => {
-            console.log(item);
             element = item;
         });
         subscription.unsubscribe();
@@ -79,13 +84,6 @@ export class TaskService implements ITaskService {
         return note;
     }
 
-    private addProgrammerLabel(postIt: PostIt, toCollection: string, programmer: string) {
 
-        if (toCollection !== '/_todo') {
-            postIt.progamador = programmer;
-        } else {
-            postIt.progamador = '';
-        }
-    }
 
 }

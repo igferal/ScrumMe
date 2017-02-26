@@ -17,7 +17,7 @@ export class PostIt {
 
 
 
-  set progamador(newProgrammer: string) {
+  set programador(newProgrammer: string) {
     this._programador = newProgrammer;
   }
 

@@ -46,9 +46,11 @@ export class BoardComponent implements OnInit, OnDestroy {
      * Metodo que nos gestiona las suscripciones drag & drop de dragula
      */
     private dragulaSubscriptions(dragulaService: DragulaService) {
+
         this.subscribers.dragulaSubscription = dragulaService.dropModel.subscribe((value) => {
             this.onDropModel(value.slice(1));
         });
+
         dragulaService.setOptions('bag-one', {
             moves: (el, source, handle, sibling) => !el.classList.contains('dragHere')
         });
@@ -64,21 +66,16 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
 
 
-
-
     /**
      * Metodo que nos gestiona el drop de elementos, además nos obtiene el id del postIt a mover
      * el contenedor de inicio y el contenedor de destino
      */
     private onDropModel(args) {
+        
         console.log(args);
         let postItId: string = args[0].id;
         let fromCollection: string = args[2].id;
         let toCollection: string = args[1].id;
-
-
-
-
         this.addToAnotherBag(postItId, `${fromCollection}`, `${toCollection}`);
 
     }
@@ -87,10 +84,6 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     private addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
 
-        console.log(`Board: ${this.board}`)
-        console.log(`Post it: ${postItId}`);
-        console.log(`To collection : ${toCollection}`);
-        console.log(`From collection : ${fromCollection}`);
 
         this.taskService.addToOtherBag(this.board, postItId, fromCollection, toCollection, this.currentUser.name);
     }
@@ -115,6 +108,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         if (!!this.dragulaService.find('bag-one')) {
             this.dragulaService.destroy('bag-one');
         }
+        console.log("On destroy")
 
     }
 
@@ -151,6 +145,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.subscribers.subscription = this.columnService.getColumns(this.board).subscribe(
             (items) => {
                 this.columns = items;
+
             }
         );
 

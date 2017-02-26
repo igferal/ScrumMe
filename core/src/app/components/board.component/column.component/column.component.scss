@@ -1,5 +1,4 @@
 @import "~variables.scss";
-
 .col-header {
     display: flex;
     justify-content: space-between;
@@ -26,8 +25,9 @@ h5 {
 .dragHere {
     border: gray dashed 1px;
     padding: 1em;
-    text-align: center;
-    height: 82vh;
+    height: 100px;
+    width: 280px;
+    margin: 10px;
 }
 
 i:hover {

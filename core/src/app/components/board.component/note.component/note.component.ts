@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 
 @Component({
@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     styleUrls: ['./note.component.scss']
 
 })
-export class NoteComponent {
+export class NoteComponent implements OnInit {
 
     @Input() note: any;
     @Output() notify = new EventEmitter<string>();
@@ -50,13 +50,17 @@ export class NoteComponent {
 
 
     private logHours(hours: number) {
-        alert("Horas: " + hours);
-        console.log(hours);
     }
 
 
     private deleteItem() {
 
         this.notify.emit(this.note.$key);
+    }
+
+    ngOnInit() {
+
+        console.log('Creo una nota');
+
     }
 }
