@@ -1,5 +1,6 @@
+@import "~variables.scss";
 .mouse-icon {
-    border: 2px solid #DE7A22;
+    border: 2px solid $main-color;
     border-radius: 16px;
     height: 50px;
     margin: 5vh auto 50px;
@@ -18,7 +19,7 @@
 }
 
 .mouse-icon .scroll {
-    background: #DE7A22 none repeat scroll 0 0;
+    background: $main-color none repeat scroll 0 0;
     border-radius: 10px;
     height: 10px;
     margin-left: auto;
@@ -49,7 +50,7 @@
 body {
     font-family: helvetica, arial, sans-serif;
     text-transform: uppercase;
-    color: white;
+    color: $bg-white-color;
     z-index: 0;
     margin: 0;
     padding: 0;
@@ -60,17 +61,39 @@ h1 {
     text-align: center;
     position: relative;
     font-size: 6.6em;
-    color: #E29930;
+    color: $main-color;
 }
 
 p {
     text-transform: none;
     text-align: center;
     font-weight: bold;
-    color: #E29930;
+    color: $main-color;
 }
 
+.section-header {
+    background: $bg-color no-repeat;
+    padding: 50px;
+    overflow: hidden;
+    height: 96vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
+.section-info {
+    height: 50vh;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    background: $bg-color no-repeat;
+}
+
+.section-info {
+    h1 {
+        color: $secondary-color;
+    }
+}
 
 
 /*
@@ -92,30 +115,3 @@ asphalt:            32384D;
 shadow:             211F30;
 
 */
-
-.section-header {
-    background: #32384D no-repeat;
-    padding:  50px;
-    overflow: hidden;
-    height: 96vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.section-info {
-    height: 50vh;
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-    background: #32384D no-repeat;
-}
-
-.section-info h1 {
-    color: #217CA3;
-}
-
-
-
-/* Gonna be testing more transitions e.g, to scale it over time */
-

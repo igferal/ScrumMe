@@ -12,7 +12,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class TaskService implements ITaskService {
-    
+
     public currentUser: string;
 
     /**
@@ -74,7 +74,9 @@ export class TaskService implements ITaskService {
         });
         subscription.unsubscribe();
 
-        return new PostIt(element._contenido, element._programador, element._horas, element.$key);
+        let note: PostIt = new PostIt(element._contenido, element._programador, element._horas, element.$key);
+        note.workedHours = element._workedHours;
+        return note;
     }
 
     private addProgrammerLabel(postIt: PostIt, toCollection: string, programmer: string) {

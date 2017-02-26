@@ -1,9 +1,12 @@
+@import "~variables.scss";
+
+
 ul.topnav {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #E29930;
+    background-color: $main-color;
     position: fixed;
     /* Set the navbar to fixed position */
     top: 0;
@@ -28,7 +31,7 @@ ul.topnav li a {
 }
 
 ul.topnav li a:hover {
-    background-color: #f5a70a;
+    background-color: $main-color-dark;
 }
 
 ul.topnav li.icon {

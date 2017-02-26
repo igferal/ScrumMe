@@ -45,7 +45,7 @@ export class PostIt {
 
   set workedHours(hours: number) {
 
-    this.workedHours = hours;
+    this._workedHours = hours;
 
   }
 

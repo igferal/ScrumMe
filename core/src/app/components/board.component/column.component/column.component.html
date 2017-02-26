@@ -1,7 +1,7 @@
 <header class="col-header">
     <h5>{{colName}}</h5>
     <p-menu #menu popup="popup" [model]="options"></p-menu>
-    <i class="fa fa-sort-desc" aria-hidden="true" (click)="menu.toggle($event)"></i>
+    <i class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
 </header>
 <hr/>
 
@@ -21,7 +21,7 @@
 </p-dialog>
 
 
-<p-dialog [width]="600 " height="400 " [draggable]="false " [modal]="true " header="Crear Tarea " [(visible)]="showModal ">
+<p-dialog [width]="600 " height="400 " [draggable]="false " [modal]="true " header="Crear Tarea " [(visible)]="showLogWork ">
     <createTask [editing]="true " [colKey]="colKey " [board]="boardKey " (notify)="closeDialog() "></createTask>
 </p-dialog>
 

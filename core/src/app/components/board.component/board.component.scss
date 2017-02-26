@@ -1,5 +1,7 @@
+@import "~variables.scss";
+
 .main {
-    background: #32384D;
+    background: $bg-color;
 }
 
 .scrollLateral {
@@ -13,7 +15,7 @@
 .noteContainer {
     min-width: 284px;
     min-height: 20vh;
-    border-left: 1% solid #D4A464;
+    border-left: 1% solid $main-color;
 }
 
 .scrollDiv {
@@ -34,7 +36,7 @@
     margin: 10px;
     padding: 10px;
     min-width: 320px;
-    border: #F7B733 dashed 2px;
+    border: $main-color dashed 2px;
 }
 
 ::-webkit-scrollbar {

@@ -17,7 +17,7 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 @Component({
     selector: 'list',
     templateUrl: './board.component.html',
-    styleUrls: ['./board.component.css'],
+    styleUrls: ['./board.component.scss'],
     providers: [ColumnService, TaskService, UserService]
 })
 @DestroySubscribers()

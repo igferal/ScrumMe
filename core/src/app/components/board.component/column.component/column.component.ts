@@ -9,7 +9,7 @@ import {MenuModule,MenuItem} from 'primeng/primeng';
     moduleId: 'column.component',
     selector: 'app-column',
     templateUrl: 'column.component.html',
-    styleUrls: ['./column.component.css'],
+    styleUrls: ['./column.component.scss'],
     providers: [ColumnService, TaskService]
 
 

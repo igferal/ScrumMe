@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
     moduleId: 'createColumn',
     selector: 'createColumn',
     templateUrl: './create.column.component.html',
-    styleUrls: ['./create.column.component.css'],
+    styleUrls: ['./create.column.component.scss'],
     providers: [ColumnService]
 
 })

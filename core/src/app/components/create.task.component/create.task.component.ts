@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
     moduleId: 'createTask',
     selector: 'createTask',
     templateUrl: './create.task.component.html',
-    styleUrls: ['./create.task.component.css'],
+    styleUrls: ['./create.task.component.scss'],
     providers: [TaskService]
 
 })
