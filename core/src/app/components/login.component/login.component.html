@@ -13,14 +13,13 @@
 
         <form (ngSubmit)="onSubmit()" class="form" #login="ngForm">
             <fieldset class="fieldset">
-                <legend>Iniciar sesión</legend>
+                <legend style="color: white">Iniciar sesión</legend>
                 <hr/>
 
                 <p-messages [value]="msgs"></p-messages>
                 <input class="form-control" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
                 <p> </p>
-                <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña"
-                />
+                <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
                 <p> </p>
                 <hr/>
                 <button class="btn btn-warning">Iniciar</button>

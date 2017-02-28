@@ -47,11 +47,11 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     private dragulaSubscriptions(dragulaService: DragulaService) {
 
-        this.subscribers.dragulaSubscription = dragulaService.dropModel.subscribe((value) => {
+        this.subscribers.dragulaSubscription = dragulaService.drop.subscribe((value) => {
             this.onDropModel(value.slice(1));
         });
 
-        dragulaService.setOptions('bag-one', {
+          dragulaService.setOptions('bag-one', {
             moves: (el, source, handle, sibling) => !el.classList.contains('dragHere')
         });
 
@@ -71,8 +71,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      * el contenedor de inicio y el contenedor de destino
      */
     private onDropModel(args) {
-        
-        console.log(args);
+
         let postItId: string = args[0].id;
         let fromCollection: string = args[2].id;
         let toCollection: string = args[1].id;

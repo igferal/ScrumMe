@@ -91,9 +91,15 @@ export class ColumnComponent implements OnInit {
 
         this.subscribers.subscription = this.taskService.getTasks(this.colKey, this.boardKey).subscribe((items) => {
             this.notes = items;
-            if(this.notes){
-            this.size = this.notes.length;}else{
-                this.size=0;
+            console.log(this.colName)
+            console.log(` notes: ${this.notes.length}`);
+            console.log(` notesToDispose: ${this.notesToDispose.length}`);
+
+
+            if (this.notes) {
+                this.size = this.notes.length;
+            } else {
+                this.size = 0;
             }
         });
 

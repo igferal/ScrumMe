@@ -50,6 +50,7 @@ export class NoteComponent implements OnInit {
 
 
     private logHours(hours: number) {
+
     }
 
 
@@ -60,7 +61,6 @@ export class NoteComponent implements OnInit {
 
     ngOnInit() {
 
-        console.log('Creo una nota');
 
     }
 }
