@@ -11,18 +11,18 @@
 
     <div class="ui-g-6">
 
-        <form (ngSubmit)="onSubmit()" class="form" #login="ngForm">
+        <form (ngSubmit)="onSubmit()"  #login="ngForm">
             <fieldset class="fieldset">
                 <legend style="color: white">Iniciar sesión</legend>
                 <hr/>
 
                 <p-messages [value]="msgs"></p-messages>
-                <input class="form-control" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
+                <input required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
                 <p> </p>
-                <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
+                <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
                 <p> </p>
                 <hr/>
-                <button class="btn btn-warning">Iniciar</button>
+                <button class="button -main">Iniciar</button>
                 <a routerLink="/signup" class="btn btn-link"> <small class="form-text text-muted">¿Aún no tienes cuenta? Registrate siguiendo este enlace </small></a>
 
             </fieldset>

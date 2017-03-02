@@ -49,11 +49,11 @@ export class NoteComponent implements OnInit {
 
     }
 
-    private logHours(hours: number) {
+    private logHours(hours: any) {
 
 
-        //this.note._workedHours = this.note._workedHours + hours;
-       // this.note._key = this.noteKey;
+        this.note.workedHours = (this.note.workedHours + parseInt(hours));
+        this.note.key = this.noteKey;
         this.addWork.emit(this.note);
         this.removeLogWorkDialog();
 

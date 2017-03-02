@@ -8,8 +8,8 @@ import { User } from '../../model/user';
 @Component({
     selector: 'signup',
     templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.scss'],
     providers: [FirebaseAuthentication, UserService],
-
 
 })
 

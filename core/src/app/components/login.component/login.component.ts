@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'login',
+    styleUrls : ['./login.component.scss'],
     templateUrl: './login.component.html',
     providers: [FirebaseAuthentication]
 

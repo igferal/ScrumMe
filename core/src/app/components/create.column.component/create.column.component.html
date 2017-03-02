@@ -1,7 +1,7 @@
 <form (ngSubmit)="onSubmit()" container #createColumn="ngForm">
  
     <label>Crear Columna</label>
-    <input class="form-control" required type="text" required [(ngModel)]="name" name="col" placeholder="Nombre Columna">
+    <input required type="text" required [(ngModel)]="name" name="col" placeholder="Nombre Columna">
     <hr/>
-    <button class="btn btn-warning btn-block">{{action}}</button>
+    <button class="button -main">{{action}}</button>
 </form>

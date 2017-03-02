@@ -77,8 +77,9 @@ export class ColumnComponent implements OnInit {
 
     public onLogHours(note: PostIt) {
 
-        this.taskService.updateTask(this.colKey,this.boardKey,note.key,note);
-        
+        console.log(note);
+        this.taskService.updateTask(this.colKey, this.boardKey, note.key, note);
+
     }
 
     public edit() {

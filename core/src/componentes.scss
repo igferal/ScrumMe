@@ -1,0 +1,88 @@
+@import "~variables.scss";
+input {
+    color: $bg-color;
+    background: transparent;
+    font-size: 16px;
+    padding: 10px;
+    display: block;
+    width: 90%;
+    border: none;
+    border-bottom: 1px solid $main-color;
+}
+
+input:focus {
+    outline: none;
+    background: white;
+}
+
+input:hover {
+    outline: 1px;
+}
+
+.button {
+    display: flex;
+    width: 140px;
+    overflow: hidden;
+    margin: 10px;
+    padding: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 60ms ease-in-out;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none !important;
+    text-transform: none;
+    text-transform: capitalize;
+    color: #fff;
+    border: 0 none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 160px;
+    &:hover {
+        transition: all 60ms ease;
+        opacity: .85;
+    }
+    &:active {
+        transition: all 60ms ease;
+        opacity: .75;
+    }
+    &:focus {
+        transition: ease-in-out 60ms ;
+    }
+}
+
+.button.-main {
+    color: #fff;
+    background: $main-color;
+    &:focus {
+        outline: 1px dotted white;
+        outline-offset: -4px;
+    }
+}
+
+.button.-main-block {
+    width: 100%;
+    color: #fff;
+    background: $main-color;
+    &:focus {
+        outline: 1px dotted white;
+        outline-offset: -4px;
+    }
+}
+
+.button.-secondary {
+    color: #fff;
+
+    background: $secondary-color;
+    &:focus {
+        outline: 1px dotted white;
+        outline-offset: -4px;
+    }
+}

@@ -1,24 +1,24 @@
 <section id="noteKey" class="card" draggable="true">
-    <header class="card-header">{{note._programador}}
+    <header class="card-header">{{note.programador}}
         <i class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
     </header>
     <div class="card-content">
-        {{note._contenido}}
+        {{note.contenido}}
     </div>
     <footer class="footer-note">
         <small>Trabajo realizado:</small>
-        <progress value="{{note._workedHours}}" max="{{note._horas}}"></progress>
+        <progress value="{{note.workedHours}}" max="{{note.horas}}"></progress>
     </footer>
 </section>
 <p-menu #menu popup="popup" [model]="options"></p-menu>
 
-<p-dialog [width]="600 " height="300 " [draggable]="false " [modal]="true " header="Cargar horas " [(visible)]="showLogWork ">
-    <label>Horas estimadas:</label> {{note._horas}}
+<p-dialog [width]="600 " height="320 " [draggable]="false " [modal]="true " header="Cargar horas " [(visible)]="showLogWork ">
+    <label>Horas estimadas:</label> {{note.horas}}
     <br>
-    <label>Horas trabajadas:</label> {{note._workedHours}}
+    <label>Horas trabajadas:</label> {{note.workedHours}}
     <br>
     <label>Cargar horas</label>
-    <input type="number" #horas />
+    <input type="number" #horas placeholder="Cargue aquí sus horas" />
     <br>
-    <button (click)="logHours(horas.value)">Cargar horas</button>
+    <button class="button -main" (click)="logHours(horas.value)">Cargar horas</button>
 </p-dialog>

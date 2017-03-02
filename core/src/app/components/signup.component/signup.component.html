@@ -7,24 +7,25 @@
     <div class="ui-g-3"> </div>
 
     <div class="ui-g-6">
-        <form (ngSubmit)="onSubmit()" class="form" #signup="ngForm">
+        <form (ngSubmit)="onSubmit()" #signup="ngForm">
             <fieldset class="fieldset">
                 <legend style="color: white">Registrar usuario</legend>
                 <hr/>
                 <p-messages [value]="msgs"></p-messages>
                 <div column="6">
 
-                    <input class="form-control" required type="text" required [(ngModel)]="name" name="name" placeholder="Nombre" />
+                    <input required type="text" required [(ngModel)]="name" name="name" placeholder="Nombre" />
                     <p> </p>
-                    <input class="form-control" required type="text" required [(ngModel)]="surname" name="surname" placeholder="Apellido" />
+                    <input required type="text" required [(ngModel)]="surname" name="surname" placeholder="Apellido" />
                     <p> </p>
-                    <input class="form-control" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
+                    <input required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
                     <p> </p>
-                    <input class="form-control" required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
+                    <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
                     <p> </p>
-                    <input class="form-control" required type="password" required [(ngModel)]="passwordAgain" name="passwordAgain" placeholder="Repite tu contraseña" />
+                    <input required type="password" required [(ngModel)]="passwordAgain" name="passwordAgain" placeholder="Repite tu contraseña"
+                    />
                     <hr/>
-                    <button class="btn btn-warning">Registrar</button>
+                    <button class="button -main">Registrar</button>
                 </div>
 
             </fieldset>

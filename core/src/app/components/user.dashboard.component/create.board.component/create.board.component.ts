@@ -10,6 +10,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
     moduleId: 'createBoard',
     selector: 'createBoard',
     templateUrl: './create.board.component.html',
+    styleUrls :[ './create.board.component.scss'],
     providers: [BoardService]
 })
 export class CreateBoardComponent {

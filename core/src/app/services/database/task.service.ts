@@ -85,8 +85,8 @@ export class TaskService implements ITaskService {
         });
         subscription.unsubscribe();
 
-        let note: PostIt = new PostIt(element._contenido, element._programador, element._horas, element.$key);
-        note.workedHours = element._workedHours;
+        let note: PostIt = new PostIt(element.contenido, element.programador, element.horas, element.$key);
+        note.workedHours = element.workedHours;
         return note;
     }
 
