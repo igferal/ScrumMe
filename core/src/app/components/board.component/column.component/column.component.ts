@@ -52,9 +52,10 @@ export class ColumnComponent implements OnInit {
     }
 
     /**
-   * Metodo que nos gestiona el borrado de notas
-   */
-    public onNotify(collection: string, key: string) {
+    * Metodo que nos gestiona el borrado de notas
+    */
+    public onNotify(key: string) {
+        console.log(key);
         this.taskService.deleteTask(this.boardKey, this.colKey, key);
     }
 
@@ -74,6 +75,11 @@ export class ColumnComponent implements OnInit {
         this.showModalCol = false;
     }
 
+    public onLogHours(note: PostIt) {
+
+        this.taskService.updateTask(this.colKey,this.boardKey,note.key,note);
+        
+    }
 
     public edit() {
 
@@ -83,8 +89,6 @@ export class ColumnComponent implements OnInit {
     public delete() {
 
         this.columnService.deleteColumn(this.boardKey, this.colKey);
-
-
     }
 
     ngOnInit() {

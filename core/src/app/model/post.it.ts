@@ -1,10 +1,10 @@
 export class PostIt {
 
-  private _contenido: string;
-  private _programador: string;
-  private _horas: number;
-  private _key: string;
-  private _workedHours: number;
+  public _contenido: string;
+  public _programador: string;
+  public _horas: number;
+  public _key: string;
+  public _workedHours: number;
 
   constructor(contenido: string, programador: string, horas: number, key?: string) {
 
@@ -12,7 +12,7 @@ export class PostIt {
     this._horas = horas;
     this._programador = programador;
     this.setKey(key);
-    this._workedHours =0;
+    this._workedHours = 0;
   }
 
 
@@ -59,7 +59,12 @@ export class PostIt {
 
   }
 
-  private setKey(key: string) {
+  set key(key: string) {
+
+    this._key = key;
+  }
+
+  public setKey(key: string) {
 
     if (key !== undefined) {
       this._key = key;
@@ -68,6 +73,8 @@ export class PostIt {
     }
 
   }
+
+
 
 
 

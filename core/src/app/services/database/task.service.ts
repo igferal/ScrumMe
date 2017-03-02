@@ -35,6 +35,12 @@ export class TaskService implements ITaskService {
         return this.af.database.list(`column_tasks/${boardKey}/${colKey}`);
     }
 
+    updateTask(colKey: string, boardKey: string, noteKey: string, postIt: PostIt) {
+
+        this.af.database.list(`column_tasks/${boardKey}/${colKey}`).update(noteKey, postIt);
+
+    }
+
 
 
     saveTask(colKey: string, boardKey: string, postIt: PostIt) {

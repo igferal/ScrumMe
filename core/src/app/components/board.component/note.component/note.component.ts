@@ -1,3 +1,4 @@
+import { PostIt } from './../../../model/post.it';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 
@@ -9,8 +10,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class NoteComponent implements OnInit {
 
-    @Input() note: any;
+    @Input() note: PostIt;
     @Output() notify = new EventEmitter<string>();
+    @Output() addWork = new EventEmitter<any>();
     @Input() board: any;
     @Input() colKey: any;
     @Input() noteKey: string;
@@ -47,16 +49,20 @@ export class NoteComponent implements OnInit {
 
     }
 
-
-
     private logHours(hours: number) {
+
+
+        //this.note._workedHours = this.note._workedHours + hours;
+       // this.note._key = this.noteKey;
+        this.addWork.emit(this.note);
+        this.removeLogWorkDialog();
 
     }
 
 
     private deleteItem() {
 
-        this.notify.emit(this.note.$key);
+        this.notify.emit(this.noteKey);
     }
 
     ngOnInit() {

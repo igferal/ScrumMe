@@ -10,6 +10,8 @@ export interface ITaskService {
 
     saveTask(colKey: string, boardKey: string, postIt: PostIt);
 
+    updateTask(colKey: string, boardKey: string, noteKey: string, postIt: PostIt);
+
     deleteTask(boardKey: string, colKey: string, taskKey: string)
 
     editTask(key: String, newPostIt: PostIt);
