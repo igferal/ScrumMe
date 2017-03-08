@@ -18,7 +18,7 @@
     <label>Horas trabajadas:</label> {{note.workedHours}}
     <br>
     <label>Cargar horas</label>
-    <input type="number" #horas placeholder="Cargue aquí sus horas" />
+    <input class="input-modal" type="number" #horas placeholder="Cargue aquí sus horas" />
     <br>
     <button class="button -main" (click)="logHours(horas.value)">Cargar horas</button>
 </p-dialog>

@@ -1,9 +1,9 @@
 <form (ngSubmit)="onSubmit()" container #createTask="ngForm">
     <label>Estima tu tarea, en horas de trabajo</label>
-    <input  required type="number" required [(ngModel)]="horas" name="horas" placeholder="Horas de trabajo">
+    <input class="input-modal" required type="number" required [(ngModel)]="horas" name="horas" placeholder="Horas de trabajo">
     <p> </p>
     <label>Contenido de la tarea</label>
     <textarea class="form-control form-control-lg" required [(ngModel)]="contenido" name="contenido" placeholder="Contenido de la tarea">  </textarea>
     <hr/>
-    <button href="/board" class="button -main"> Crear Tarea </button>
+    <button href="/board" class="button -default"> Crear Tarea </button>
 </form>

@@ -1,6 +1,6 @@
 @import "~variables.scss";
 input {
-    color: $bg-color;
+    color: #fff;
     background: transparent;
     font-size: 16px;
     padding: 10px;
@@ -13,9 +13,31 @@ input {
 input:focus {
     outline: none;
     background: white;
+    color: $bg-color;
 }
 
 input:hover {
+    outline: 1px;
+}
+
+input-modal {
+    color: $bg-color;
+    background: transparent;
+    font-size: 16px;
+    padding: 10px;
+    display: block;
+    width: 90%;
+    border: none;
+    border-bottom: 1px solid $main-color;
+}
+
+input-modal:focus {
+    outline: none;
+    background: white;
+    color: #fff;
+}
+
+input-modal:hover {
     outline: 1px;
 }
 
@@ -54,7 +76,7 @@ input:hover {
         opacity: .75;
     }
     &:focus {
-        transition: ease-in-out 60ms ;
+        transition: ease-in-out 60ms;
     }
 }
 
@@ -79,7 +101,6 @@ input:hover {
 
 .button.-secondary {
     color: #fff;
-
     background: $secondary-color;
     &:focus {
         outline: 1px dotted white;
