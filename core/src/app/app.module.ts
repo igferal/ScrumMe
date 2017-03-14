@@ -20,7 +20,9 @@ import { NoteComponent } from './components/board.component/note.component/note.
 import { MessagesModule, } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { MenuModule, MenuItem } from 'primeng/primeng';
-import { ChartModule } from 'primeng/primeng';
+import { ChartsModule } from 'ng2-charts';
+
+
 
 
 
@@ -63,7 +65,7 @@ const myFirebaseAuthConfig = {
         MessagesModule,
         DialogModule,
         MenuModule,
-        ChartModule,
+        ChartsModule,
         AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
 
     ],
