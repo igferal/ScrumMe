@@ -40,6 +40,13 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
     }
 
+
+    public goToBurndown(boardId: string) {
+
+        this.router.navigate(['/burndown', boardId]);
+    }
+
+
     private showDialog() {
         this.showModal = true;
     }

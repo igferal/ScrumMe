@@ -1,3 +1,4 @@
+import { BurndownComponent } from './../components/burndown.component/burndown.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from '../components/board.component/board.component';
@@ -19,7 +20,12 @@ const routes: Routes = [
   {
     path: 'dashboard', component: UserDashboardComponent,
     canActivate: [FirebaseAuthentication]
-  }, ];
+  },
+  {
+    path: 'burndown/:id', component: BurndownComponent,
+    canActivate: [FirebaseAuthentication]
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

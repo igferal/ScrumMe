@@ -1,4 +1,3 @@
-<div class="container">
     <div column="10">
         <table class="table">
             <thead class="thead-inverse">
@@ -16,13 +15,14 @@
                 <tr *ngFor="let board of boards">
                     <td>{{board.name}}</td>
                     <td>{{board.date}}</td>
-                    <td> <button (click)="goToBoard(board.$key)" class="button -main">Ir al tablón</button>
-                        <td *ngIf="currentUser === board.boardOwner"> <button (click)="deleteBoard(board.$key)" class="button -secondary">Borrar tablero</button></td>
-                        <td *ngIf="currentUser != board.boardOwner"> <button (click)="stopColaboration(board.$key)" class="button -secondary">Dejar de colaborar</button></td>
-                        <td *ngIf="currentUser === board.boardOwner"><span class="tag tag-primary">Creador</span></td>
-                        <td *ngIf="currentUser != board.boardOwner"><span class="tag tag-info">Colaborador</span></td>
-                        <td *ngIf="currentUser === board.boardOwner">Busca colaboradores </td>
-                        <td *ngIf="currentUser != board.boardOwner">Ya estas colaborando</td>
+                    <td> <button (click)="goToBoard(board.$key)" class="button -main">Ir al tablón</button> </td>
+                    <td> <button (click)="goToBurndown(board.$key)" class="button -main">Burndown chart</button></td>
+                    <td *ngIf="currentUser === board.boardOwner"> <button (click)="deleteBoard(board.$key)" class="button -secondary">Borrar tablero</button></td>
+                    <td *ngIf="currentUser != board.boardOwner"> <button (click)="stopColaboration(board.$key)" class="button -secondary">Dejar de colaborar</button></td>
+                    <td *ngIf="currentUser === board.boardOwner"><span class="tag tag-primary">Creador</span></td>
+                    <td *ngIf="currentUser != board.boardOwner"><span class="tag tag-info">Colaborador</span></td>
+                    <td *ngIf="currentUser === board.boardOwner">Busca colaboradores </td>
+                    <td *ngIf="currentUser != board.boardOwner">Ya estas colaborando</td>
                 </tr>
             </tbody>
         </table>

@@ -5,6 +5,7 @@ export class PostIt {
   public horas: number;
   public key: string;
   public workedHours: number;
+  public closed: boolean;
 
   constructor(contenido: string, programador: string, horas: number, key?: string) {
 
@@ -17,6 +18,7 @@ export class PostIt {
     } else {
       this.key = '';
     } this.workedHours = 0;
+    this.closed = false;
   }
 
 

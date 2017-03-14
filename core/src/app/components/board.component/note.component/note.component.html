@@ -3,9 +3,10 @@
         <i class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
     </header>
     <div class="card-content">
-        {{note.contenido}}
+        <p *ngIf="!note.closed">{{note.contenido}}</p>
+        <del *ngIf="note.closed">{{note.contenido}}</del>
     </div>
-    <footer class="footer-note">
+    <footer *ngIf="!note.closed" class="footer-note">
         <small>Trabajo realizado:</small>
         <progress value="{{note.workedHours}}" max="{{note.horas}}"></progress>
     </footer>

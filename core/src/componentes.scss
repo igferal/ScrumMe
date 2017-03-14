@@ -20,7 +20,7 @@ input:hover {
     outline: 1px;
 }
 
-input-modal {
+.input-modal {
     color: $bg-color;
     background: transparent;
     font-size: 16px;
@@ -31,13 +31,13 @@ input-modal {
     border-bottom: 1px solid $main-color;
 }
 
-input-modal:focus {
+.input-modal:focus {
     outline: none;
     background: white;
-    color: #fff;
+    color: $bg-color;
 }
 
-input-modal:hover {
+.input-modal:hover {
     outline: 1px;
 }
 

@@ -1,3 +1,4 @@
+import { BurndownComponent } from './components/burndown.component/burndown.component';
 import { CreateColumnComponent } from './components/create.column.component/create.column.component';
 import { ColumnComponent } from './components/board.component/column.component/column.component';
 import { NgModule } from '@angular/core';
@@ -16,9 +17,10 @@ import { UserDashboardComponent } from './components/user.dashboard.component/us
 import { LandingComponent } from './components/landing.component/landing.component';
 import { DragulaModule } from '../../node_modules/ng2-dragula/ng2-dragula';
 import { NoteComponent } from './components/board.component/note.component/note.component';
-import { MessagesModule,  } from 'primeng/primeng';
-import { DialogModule }  from 'primeng/primeng';
-import {MenuModule,MenuItem} from 'primeng/primeng';
+import { MessagesModule, } from 'primeng/primeng';
+import { DialogModule } from 'primeng/primeng';
+import { MenuModule, MenuItem } from 'primeng/primeng';
+import { ChartModule } from 'primeng/primeng';
 
 
 
@@ -49,7 +51,8 @@ const myFirebaseAuthConfig = {
         UserDashboardComponent,
         CreateBoardComponent,
         ColumnComponent,
-        CreateColumnComponent        
+        CreateColumnComponent,
+        BurndownComponent
     ],
     imports: [
         BrowserModule,
@@ -60,6 +63,7 @@ const myFirebaseAuthConfig = {
         MessagesModule,
         DialogModule,
         MenuModule,
+        ChartModule,
         AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
 
     ],

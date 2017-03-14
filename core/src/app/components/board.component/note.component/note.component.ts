@@ -13,6 +13,7 @@ export class NoteComponent implements OnInit {
     @Input() note: PostIt;
     @Output() notify = new EventEmitter<string>();
     @Output() addWork = new EventEmitter<any>();
+    @Output() changeTaskState = new EventEmitter<any>();
     @Input() board: any;
     @Input() colKey: any;
     @Input() noteKey: string;
@@ -27,8 +28,16 @@ export class NoteComponent implements OnInit {
         this.showLogWork = false;
     }
 
+
+
     constructor() {
 
+
+
+    }
+
+    private loadMenu() {
+        let label = this.getCloseLabel();
         this.options = [
             {
                 label: 'Editar', icon: 'fa fa-pencil-square-o', command: () => {
@@ -44,8 +53,32 @@ export class NoteComponent implements OnInit {
                 label: 'Cargar horas', icon: 'fa fa-hourglass-o', command: () => {
                     this.showLogWorkDialog();
                 }
+            },
+            {
+                label: label, icon: 'fa fa-calendar-o', command: () => {
+
+                    this.closeTask();
+                }
             }
         ];
+
+
+    }
+
+    private closeTask() {
+
+        this.note.key = this.noteKey;
+        this.note.closed = !this.note.closed;
+        this.changeTaskState.emit(this.note);
+    }
+
+    private getCloseLabel(): string {
+
+        if (this.note.closed) {
+            return 'Abrir tarea';
+        } else {
+            return 'Cerrar tarea';
+        }
 
     }
 
@@ -67,6 +100,6 @@ export class NoteComponent implements OnInit {
 
     ngOnInit() {
 
-
+        this.loadMenu();
     }
 }
