@@ -1,71 +1,114 @@
-import { Component } from '@angular/core';
+import { PostIt } from './../../model/post.it';
+import { ColumnService } from './../../services/database/column.service';
+import { TaskService } from './../../services/database/task.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { DestroySubscribers } from '../../util/unsuscribe.decorator';
+import { Component, OnInit } from '@angular/core';
 import { UIChart } from 'primeng/primeng';
 
 @Component({
-    moduleId: 'burndown',
-    selector: 'burndown',
-    templateUrl: 'burndown.component.html',
-    styleUrls: ['./burndown.component.scss'],
-})
-export class BurndownComponent {
+  moduleId: 'burndown',
+  selector: 'burndown',
+  templateUrl: 'burndown.component.html',
+  styleUrls: ['./burndown.component.scss'],
+  providers: [ColumnService, TaskService]
 
-    // lineChart
-  public lineChartData:Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
-  ];
-  public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChartOptions:any = {
+})
+@DestroySubscribers()
+export class BurndownComponent implements OnInit {
+
+  private columns: Array<any> = [];
+  private board: string;
+  private subscribers: any = {};
+  private estimados: Array<number> = new Array<number>();
+  private realizadas: Array<number> = new Array<number>();
+
+
+  constructor(private route: ActivatedRoute, private taskService: TaskService,
+    private columnService: ColumnService) {
+
+  }
+
+  // lineChart
+  public lineChartData: Array<any> = [
+    { data: this.estimados, label: 'Estimadas' },
+    { data: this.realizadas, label: 'Trabajadas' }];
+
+
+  public lineChartLabels = [];
+  public lineChartOptions: any = {
     responsive: true
   };
-  public lineChartColors:Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+  public lineChartColors: Array<any> = [
+    { // main
+      backgroundColor: 'rgba(226, 153, 48,0.4)',
+      borderColor: 'rgba(226, 153, 48,1)',
+      pointBackgroundColor: 'rgba(226, 153, 48,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      pointHoverBorderColor: 'rgba(226, 153, 48,0.8)',
     },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
+    { // secondary
+      backgroundColor: 'rgba(33, 124, 163,0.2)',
       borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(33, 124, 163,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      pointHoverBorderColor: 'rgba(33, 124, 163,0.8)'
     }
+
   ];
-  public lineChartLegend:boolean = true;
-  public lineChartType:string = 'line';
- 
-  public randomize():void {
-    let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
-    }
+  public lineChartLegend: boolean = true;
+  public lineChartType: string = 'line';
+
+  public randomize(): void {
+    let _lineChartData: Array<any> = this.estimados;
     this.lineChartData = _lineChartData;
   }
- 
+
   // events
-  public chartClicked(e:any):void {
+  public chartClicked(e: any): void {
     console.log(e);
   }
- 
-  public chartHovered(e:any):void {
+
+  public chartHovered(e: any): void {
     console.log(e);
-  } 
-  
+  }
+
+  public ngOnInit() {
+
+    this.inicializateRoute();
+    console.log(this.board);
+    this.subscribers.subscription = this.columnService.getColumns(this.board).subscribe(
+      (items) => {
+        this.columns = items;
+        this.columns.forEach((column) => {
+          console.log(column.$key);
+          this.taskService.getTasks(column.$key, this.board).subscribe(
+            (tarea: Array<PostIt>) => {
+              tarea.forEach((tarea: PostIt) => {
+                this.estimados.push(tarea.horas);
+                this.realizadas.push(tarea.workedHours);
+                this.lineChartLabels.push(tarea.contenido);
+              })
+            })
+        })
+      });
+
+
+
+  }
+
+  /**
+ * Metodo que nos obtiene el id del tablero actual a traves de la url
+ */
+  private inicializateRoute() {
+    this.subscribers.routerSubscription = this.route.params
+      .switchMap((params: Params) => this.board = params['id'])
+      .subscribe((board) => {
+      });
+
+  }
+
+
 }
