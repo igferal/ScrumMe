@@ -40,14 +40,6 @@ export class BurndownComponent implements OnInit {
     responsive: true
   };
   public lineChartColors: Array<any> = [
-    { // main
-      backgroundColor: 'rgba(226, 153, 48,0.4)',
-      borderColor: 'rgba(226, 153, 48,1)',
-      pointBackgroundColor: 'rgba(226, 153, 48,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(226, 153, 48,0.8)',
-    },
     { // secondary
       backgroundColor: 'rgba(33, 124, 163,0.2)',
       borderColor: 'rgba(148,159,177,1)',
@@ -55,16 +47,20 @@ export class BurndownComponent implements OnInit {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(33, 124, 163,0.8)'
+    },
+    { // main
+      backgroundColor: 'rgba(226, 153, 48,0.4)',
+      borderColor: 'rgba(226, 153, 48,1)',
+      pointBackgroundColor: 'rgba(226, 153, 48,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(226, 153, 48,0.8)',
     }
 
   ];
   public lineChartLegend: boolean = true;
   public lineChartType: string = 'line';
 
-  public randomize(): void {
-    let _lineChartData: Array<any> = this.estimados;
-    this.lineChartData = _lineChartData;
-  }
 
   // events
   public chartClicked(e: any): void {
@@ -84,7 +80,7 @@ export class BurndownComponent implements OnInit {
         this.columns = items;
         this.columns.forEach((column) => {
           console.log(column.$key);
-          this.taskService.getTasks(column.$key, this.board).subscribe(
+          this.taskService.getTasksOrderedByEstimatedTime(column.$key, this.board).subscribe(
             (tarea: Array<PostIt>) => {
               tarea.forEach((tarea: PostIt) => {
                 this.estimados.push(tarea.horas);
@@ -92,6 +88,8 @@ export class BurndownComponent implements OnInit {
                 this.lineChartLabels.push(tarea.contenido);
               })
             })
+          console.log(this.estimados.reverse());
+          this.estimados = this.estimados.reverse();
         })
       });
 

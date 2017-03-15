@@ -6,7 +6,7 @@ export interface ITaskService {
 
 
 
-    getTasks(colKey: string, string, boardKey: string): FirebaseListObservable<any>
+    getTasks(colKey: string,  boardKey: string): FirebaseListObservable<any>
 
     saveTask(colKey: string, boardKey: string, postIt: PostIt);
 
@@ -19,5 +19,7 @@ export interface ITaskService {
     addToOtherBag(board: string, postItId: string, fromCollection: string, toCollection: string, programmer: string): void;
 
     findTaskById(board: string, key: string, collection: string);
+
+    getTasksOrderedByEstimatedTime(colKey: string,  boardKey: string): FirebaseListObservable<any>
 
 }

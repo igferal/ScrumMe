@@ -90,6 +90,17 @@ export class TaskService implements ITaskService {
         return note;
     }
 
+    getTasksOrderedByEstimatedTime(colKey: string, boardKey: string): FirebaseListObservable<any> {
+
+        return this.af.database.list(`column_tasks/${boardKey}/${colKey}`, {
+            query: {
+                orderByChild: 'hours',
+            }
+        });
+
+
+    }
+
 
 
 }
