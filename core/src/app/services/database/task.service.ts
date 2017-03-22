@@ -1,3 +1,4 @@
+import { ASTWithSource } from '@angular/compiler/src/expression_parser/ast';
 import { PostIt } from './../../model/post.it';
 import { ITaskService } from './ITaskService';
 import { BoardColumn } from './../../model/boardColumn';
@@ -14,6 +15,8 @@ import { Subject } from 'rxjs/Subject';
 export class TaskService implements ITaskService {
 
     public currentUser: string;
+    public posits: Array<PostIt> = new Array<PostIt>();
+
 
     /**
      * Obtengo el ID del usuario actual del sistema
@@ -30,6 +33,8 @@ export class TaskService implements ITaskService {
 
     }
 
+    get
+
     getTasks(colKey: string, boardKey: string): FirebaseListObservable<any> {
 
         return this.af.database.list(`column_tasks/${boardKey}/${colKey}`);
@@ -38,6 +43,7 @@ export class TaskService implements ITaskService {
     updateTask(colKey: string, boardKey: string, noteKey: string, postIt: PostIt) {
 
         this.af.database.list(`column_tasks/${boardKey}/${colKey}`).update(noteKey, postIt);
+        this.af.database.list(`burndown/${boardKey}/`).update(noteKey, postIt);
 
     }
 
@@ -45,13 +51,18 @@ export class TaskService implements ITaskService {
 
     saveTask(colKey: string, boardKey: string, postIt: PostIt) {
 
-        this.getTasks(colKey, boardKey).push(postIt);
+        let key = this.getTasks(colKey, boardKey).push(postIt).key;
+        console.log(`burndown/${boardKey}/${key}`);
+        this.af.database.object(`burndown/${boardKey}/${key}`).set(postIt);
+
     }
 
 
     deleteTask(boardKey: string, colKey: string, taskKey: string) {
 
         this.getTasks(colKey, boardKey).remove(taskKey);
+        this.af.database.list(`burndown/${boardKey}`).remove(taskKey);
+
     }
 
     editTask(key: String, newTask: PostIt) {
@@ -69,8 +80,6 @@ export class TaskService implements ITaskService {
         this.deleteTask(board, fromCollection, postItId);
 
         this.saveTask(toCollection, board, postit);
-
-
 
     }
 
@@ -90,16 +99,21 @@ export class TaskService implements ITaskService {
         return note;
     }
 
-    getTasksOrderedByEstimatedTime(colKey: string, boardKey: string): FirebaseListObservable<any> {
+    getTasksOrderedByEstimatedTime(boardKey: string): FirebaseListObservable<any> {
 
-        return this.af.database.list(`column_tasks/${boardKey}/${colKey}`, {
+        console.log(`burndown/${boardKey}`);
+
+        return this.af.database.list(`burndown/${boardKey}`, {
             query: {
-                orderByChild: 'hours',
+                orderByChild: 'horas',
             }
         });
 
-
     }
+
+
+
+
 
 
 

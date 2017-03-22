@@ -1,3 +1,7 @@
+import { read } from 'fs';
+import { element } from 'protractor';
+import { FirebaseListObservable } from 'angularfire2';
+import { delay } from 'rxjs/operator/delay';
 import { PostIt } from './../../model/post.it';
 import { ColumnService } from './../../services/database/column.service';
 import { TaskService } from './../../services/database/task.service';
@@ -22,6 +26,7 @@ export class BurndownComponent implements OnInit {
   private subscribers: any = {};
   private estimados: Array<number> = new Array<number>();
   private realizadas: Array<number> = new Array<number>();
+  public lineChartLabels = [];
 
 
   constructor(private route: ActivatedRoute, private taskService: TaskService,
@@ -35,7 +40,6 @@ export class BurndownComponent implements OnInit {
     { data: this.realizadas, label: 'Trabajadas' }];
 
 
-  public lineChartLabels = [];
   public lineChartOptions: any = {
     responsive: true
   };
@@ -71,27 +75,23 @@ export class BurndownComponent implements OnInit {
     console.log(e);
   }
 
-  public ngOnInit() {
+  public async ngOnInit() {
 
     this.inicializateRoute();
-    console.log(this.board);
-    this.subscribers.subscription = this.columnService.getColumns(this.board).subscribe(
-      (items) => {
-        this.columns = items;
-        this.columns.forEach((column) => {
-          console.log(column.$key);
-          this.taskService.getTasksOrderedByEstimatedTime(column.$key, this.board).subscribe(
-            (tarea: Array<PostIt>) => {
-              tarea.forEach((tarea: PostIt) => {
-                this.estimados.push(tarea.horas);
-                this.realizadas.push(tarea.workedHours);
-                this.lineChartLabels.push(tarea.contenido);
-              })
-            })
-          console.log(this.estimados.reverse());
-          this.estimados = this.estimados.reverse();
-        })
-      });
+    let postIts: PostIt[];
+    let _estimados: Array<number> = new Array<number>();
+    let _realizadas: Array<number> = new Array<number>();
+    let _lineChartLabels = [];
+    this.taskService.getTasksOrderedByEstimatedTime(this.board).subscribe((element: PostIt[]) => {
+      postIts = element;
+      postIts.sort((taskA, taskB) => (taskB.horas - taskA.horas));
+      postIts.forEach((postIt: PostIt) => {
+        this.estimados.push(postIt.horas);
+        this.realizadas.push(postIt.workedHours);
+        this.lineChartLabels.push(postIt.contenido);
+      })
+    });
+
 
 
 
@@ -104,6 +104,7 @@ export class BurndownComponent implements OnInit {
     this.subscribers.routerSubscription = this.route.params
       .switchMap((params: Params) => this.board = params['id'])
       .subscribe((board) => {
+
       });
 
   }
