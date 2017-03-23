@@ -21,15 +21,39 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     public subscribers: any = {};
     private viewContainerRef: ViewContainerRef;
     private showModal: boolean;
+    public options: any[];
+    public selectedBoard: string;
+
 
 
     constructor(private boardService: BoardService, private router: Router, viewContainerRef: ViewContainerRef) {
 
         this.createBoard = 'Añadir tablero';
         this.viewContainerRef = viewContainerRef;
+        this.loadMenu();
 
     }
 
+    setBoard(board: any) {
+        console.log(board);
+        this.selectedBoard = board;
+    }
+
+    private loadMenu() {
+        this.options = [
+            {
+                label: 'Burndown', icon: 'fa fa-line-chart', command: () => {
+                    this.goToBurndown(this.selectedBoard);
+                }
+            },
+            {
+                label: 'Trabajo individual', icon: 'fa fa-bar-chart', command: () => {
+                }
+            },
+        ];
+
+
+    }
 
     /**
      * Metodo que nos redirige al tablero que seleccionamos
