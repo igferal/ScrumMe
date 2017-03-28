@@ -6,12 +6,14 @@ export class PostIt {
   public key: string;
   public workedHours: number;
   public closed: boolean;
-
-  constructor(contenido: string, programador: string, horas: number, key?: string) {
+  public titulo: string;
+  public uid : string;
+  constructor(titulo :string,contenido: string, programador: string, horas: number, key?: string) {
 
     this.contenido = contenido;
     this.horas = horas;
     this.programador = programador;
+    this.titulo = titulo;
 
     if (key !== undefined) {
       this.key = key;

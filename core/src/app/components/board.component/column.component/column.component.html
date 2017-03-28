@@ -8,8 +8,7 @@
 
 <div id="{{colKey}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
 
-    <note id="{{item.$key}}" (addWork)="onLogHours($event)"   (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="boardKey " [colKey]="colKey "
-        [note]="item " [noteKey]="item.$key"></note>
+    <note id="{{item.$key}}" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="boardKey " [colKey]="colKey " [note]="item " [noteKey]="item.$key"></note>
 
 </div>
 
@@ -27,15 +26,6 @@
 </p-dialog>
 
 
-<p-dialog [width]="600 " height="400 " [draggable]="false " [modal]="true " header="Crear Tarea " [(visible)]="showModal">
+<p-dialog [width]="600 " height="450 " [draggable]="false " [modal]="true " header="Crear Tarea " [(visible)]="showModal">
     <createTask [editing]="true " [colKey]="colKey " [board]="boardKey " (notify)="closeDialog() "></createTask>
 </p-dialog>
-
-
-
-
-
-
-<!--
-<note id="{{item.$key}}" *ngIf="item._contenido!='none'" (notify)="onNotify(columnName,$event)" [note]="item"></note>
--->

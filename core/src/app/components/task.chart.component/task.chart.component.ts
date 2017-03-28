@@ -11,23 +11,24 @@ import { Component, OnInit } from '@angular/core';
 import { UIChart } from 'primeng/primeng';
 
 @Component({
-  moduleId: 'burndown',
-  selector: 'burndown',
-  templateUrl: 'burndown.component.html',
-  styleUrls: ['./burndown.component.scss'],
+  moduleId: 'task-chart',
+  selector: 'task-chart',
+  templateUrl: './task.chart.component.html',
+  styleUrls: ['./task.chart.component.scss'],
   providers: [ColumnService, TaskService]
 
 })
 @DestroySubscribers()
-export class BurndownComponent implements OnInit {
+export class TaskChartComponent implements OnInit {
 
   private columns: Array<any> = [];
   private board: string;
   private subscribers: any = {};
   private estimados: Array<number> = new Array<number>();
   private realizadas: Array<number> = new Array<number>();
-  public lineChartLabels = [];
+  public barChartLabels = [];
   public isDataAvailable: boolean = false;
+
 
 
   constructor(private route: ActivatedRoute, private taskService: TaskService,
@@ -35,16 +36,16 @@ export class BurndownComponent implements OnInit {
 
   }
 
-  // lineChart
-  public lineChartData: Array<any> = [
+  // barChart
+  public barChartData: Array<any> = [
     { data: this.estimados, label: 'Estimadas' },
     { data: this.realizadas, label: 'Trabajadas' }];
 
 
-  public lineChartOptions: any = {
+  public barChartOptions: any = {
     responsive: true
   };
-  public lineChartColors: Array<any> = [
+  public barChartColors: Array<any> = [
     { // secondary
       backgroundColor: 'rgba(33, 124, 163,0.2)',
       borderColor: 'rgba(148,159,177,1)',
@@ -63,8 +64,8 @@ export class BurndownComponent implements OnInit {
     }
 
   ];
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
+  public barChartLegend: boolean = true;
+  public barChartType: string = 'bar';
 
 
   // events
@@ -80,15 +81,16 @@ export class BurndownComponent implements OnInit {
 
     this.inicializateRoute();
     let postIts: PostIt[];
-    this.taskService.getTasksOrderedByEstimatedTime(this.board).subscribe((element: PostIt[]) => {
+    this.taskService.getMyTask(this.board).subscribe((element: PostIt[]) => {
+
       postIts = element;
       postIts.sort((taskA, taskB) => (taskB.horas - taskA.horas));
       postIts.forEach((postIt: PostIt) => {
         console.log(postIt);
         this.estimados.push(postIt.horas);
         this.realizadas.push(postIt.workedHours);
-        this.lineChartLabels.push(postIt.titulo);
-      });
+        this.barChartLabels.push(postIt.titulo);
+      })
       this.isDataAvailable = true;
     });
 

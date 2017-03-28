@@ -48,7 +48,8 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
             },
             {
                 label: 'Trabajo individual', icon: 'fa fa-bar-chart', command: () => {
-                }
+            this.goToMyCharts(this.selectedBoard);    
+            }
             },
         ];
 
@@ -69,6 +70,11 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
         this.router.navigate(['/burndown', boardId]);
     }
+    public goToMyCharts(boardId: string) {
+
+        this.router.navigate(['/taskchart', boardId]);
+    }
+
 
 
     private showDialog() {

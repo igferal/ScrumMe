@@ -1,3 +1,4 @@
+import { TaskChartComponent } from './../components/task.chart.component/task.chart.component';
 import { BurndownComponent } from './../components/burndown.component/burndown.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -25,6 +26,10 @@ const routes: Routes = [
     path: 'burndown/:id', component: BurndownComponent,
     canActivate: [FirebaseAuthentication]
   },
+  {
+    path: 'taskchart/:id', component: TaskChartComponent,
+    canActivate: [FirebaseAuthentication]
+  }
 ];
 
 @NgModule({

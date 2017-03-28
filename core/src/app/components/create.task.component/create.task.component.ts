@@ -19,6 +19,7 @@ export class CreateTaskComponent {
 
     private contenido: string;
     private horas: number;
+    private name: string;
     @Input() board: any;
     @Input() colKey: any;
     @Output() notify = new EventEmitter<boolean>();
@@ -38,7 +39,7 @@ export class CreateTaskComponent {
 
         if (this.isDataCorrrect()) {
             this.incorrect = false;
-            let postIt = new PostIt(this.contenido, '', this.horas, '');
+            let postIt = new PostIt(this.name, this.contenido, '', this.horas, '');
             this.contenido = '';
             this.taskService.saveTask(this.colKey, this.board, postIt);
             this.notify.emit(false);

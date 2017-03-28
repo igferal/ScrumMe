@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { ASTWithSource } from '@angular/compiler/src/expression_parser/ast';
 import { PostIt } from './../../model/post.it';
 import { ITaskService } from './ITaskService';
@@ -33,7 +34,7 @@ export class TaskService implements ITaskService {
 
     }
 
-    get
+
 
     getTasks(colKey: string, boardKey: string): FirebaseListObservable<any> {
 
@@ -94,8 +95,10 @@ export class TaskService implements ITaskService {
         });
         subscription.unsubscribe();
 
-        let note: PostIt = new PostIt(element.contenido, element.programador, element.horas, element.$key);
+        let note: PostIt = new PostIt(element.titulo, element.contenido, element.programador, element.horas, element.$key);
+
         note.workedHours = element.workedHours;
+        note.uid = this.currentUser;
         return note;
     }
 
@@ -110,6 +113,20 @@ export class TaskService implements ITaskService {
         });
 
     }
+
+    getMyTask(boardKey: string): FirebaseListObservable<any> {
+
+        console.log(`burndown/${boardKey}`);
+
+        return this.af.database.list(`burndown/${boardKey}`, {
+            query: {
+                orderByChild: 'uid',
+                equalTo: this.currentUser
+            }
+        });
+
+    }
+
 
 
 

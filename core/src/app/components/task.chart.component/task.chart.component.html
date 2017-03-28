@@ -1,0 +1,5 @@
+<div *ngIf="isDataAvailable">
+    <div style=" display: block ">
+        <canvas baseChart [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions " [legend]="barChartLegend " [chartType]="barChartType " (chartHover)="chartHovered($event) " (chartClick)="chartClicked($event) "></canvas>
+    </div>
+</div>
