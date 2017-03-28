@@ -10,6 +10,13 @@ input {
     border-bottom: 1px solid $main-color;
 }
 
+.chartDiv {
+    margin: 5%;
+    background: white;
+    padding: 1%;
+    border-radius: 0.5%;
+}
+
 input:focus {
     outline: none;
     background: white;

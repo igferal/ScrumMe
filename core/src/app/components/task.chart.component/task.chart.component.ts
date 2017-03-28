@@ -43,7 +43,8 @@ export class TaskChartComponent implements OnInit {
 
 
   public barChartOptions: any = {
-    responsive: true
+    responsive: true,
+    maintainAspectRatio: false
   };
   public barChartColors: Array<any> = [
     { // secondary

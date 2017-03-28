@@ -42,7 +42,8 @@ export class BurndownComponent implements OnInit {
 
 
   public lineChartOptions: any = {
-    responsive: true
+    responsive: true,
+    maintainAspectRatio: false
   };
   public lineChartColors: Array<any> = [
     { // secondary
@@ -81,10 +82,12 @@ export class BurndownComponent implements OnInit {
     this.inicializateRoute();
     let postIts: PostIt[];
     this.taskService.getTasksOrderedByEstimatedTime(this.board).subscribe((element: PostIt[]) => {
+      console.log('PAsoooo');
+      this.restoreChart();
       postIts = element;
       postIts.sort((taskA, taskB) => (taskB.horas - taskA.horas));
       postIts.forEach((postIt: PostIt) => {
-        console.log(postIt);
+        console.log('cargo');
         this.estimados.push(postIt.horas);
         this.realizadas.push(postIt.workedHours);
         this.lineChartLabels.push(postIt.titulo);
@@ -92,8 +95,18 @@ export class BurndownComponent implements OnInit {
       this.isDataAvailable = true;
     });
 
+  }
 
+  private restoreChart() {
 
+    console.log('restauro');
+    if (this.estimados.length > 0) {
+      this.estimados = new Array<number>();
+      this.lineChartLabels = new Array<string>();
+      this.realizadas = new Array<number>();
+      this.isDataAvailable = false;
+      console.log('restoring');
+    }
 
   }
 
