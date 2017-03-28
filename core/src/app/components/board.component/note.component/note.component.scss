@@ -1,7 +1,5 @@
 @import "~variables.scss";
 @import "~componentes.scss";
-
-
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
@@ -11,7 +9,7 @@
     min-width: 280px;
     margin: 10px;
     border-radius: 2%;
-    border-left: purple 4px;
+    background: $bg-white-color;
 }
 
 .card-header {
@@ -26,12 +24,6 @@
     padding: 2%;
     min-height: 100px;
     background: $bg-white-color;
-}
-
-.card-footer {
-    background: $bg-white-color;
-    display: flex;
-    flex-direction: row-reverse;
 }
 
 .card-buttons {
@@ -56,6 +48,27 @@ i:hover {
 }
 
 .footer-note {
-    display: inline-flex;
+    display: block;
+    margin: 5px;
+    progress {
+        width: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border: solid 0.5px lightgray;
+        border-radius: 0.5%;
+    }
+    progress::-webkit-progress-bar {
+        background: white;
+        border-radius: 5%;
+    }
+    progress::-webkit-progress-value {
+        background-color: $secondary-color;
+        border-radius: 0.5%;
+    }
+    progress::-moz-progress-bar {
+        background-color: $secondary-color;
+        border-radius: 0.5%;
+        background: white;
+    }
+    background: $bg-white-color;
 }
-

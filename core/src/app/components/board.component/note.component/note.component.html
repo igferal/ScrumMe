@@ -7,7 +7,6 @@
         <del *ngIf="note.closed">{{note.contenido}}</del>
     </div>
     <footer *ngIf="!note.closed" class="footer-note">
-        <small>Trabajo realizado:</small>
         <progress value="{{note.workedHours}}" max="{{note.horas}}"></progress>
     </footer>
 </section>
