@@ -21,21 +21,13 @@ import { UIChart } from 'primeng/primeng';
 @DestroySubscribers()
 export class BurndownComponent implements OnInit {
 
-  private columns: Array<any> = [];
+
   private board: string;
   private subscribers: any = {};
   private estimados: Array<number> = new Array<number>();
   private realizadas: Array<number> = new Array<number>();
   public lineChartLabels = [];
   public isDataAvailable: boolean = false;
-
-
-  constructor(private route: ActivatedRoute, private taskService: TaskService,
-    private columnService: ColumnService) {
-
-  }
-
-  // lineChart
   public lineChartData: Array<any> = [
     { data: this.estimados, label: 'Estimadas' },
     { data: this.realizadas, label: 'Trabajadas' }];
@@ -46,7 +38,7 @@ export class BurndownComponent implements OnInit {
     maintainAspectRatio: false
   };
   public lineChartColors: Array<any> = [
-    { // secondary
+    { 
       backgroundColor: 'rgba(33, 124, 163,0.2)',
       borderColor: 'rgba(148,159,177,1)',
       pointBackgroundColor: 'rgba(33, 124, 163,1)',
@@ -54,7 +46,7 @@ export class BurndownComponent implements OnInit {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(33, 124, 163,0.8)'
     },
-    { // main
+    { 
       backgroundColor: 'rgba(226, 153, 48,0.4)',
       borderColor: 'rgba(226, 153, 48,1)',
       pointBackgroundColor: 'rgba(226, 153, 48,1)',
@@ -67,8 +59,12 @@ export class BurndownComponent implements OnInit {
   public lineChartLegend: boolean = true;
   public lineChartType: string = 'line';
 
+  constructor(private route: ActivatedRoute, private taskService: TaskService,
+    private columnService: ColumnService) {
 
-  // events
+  }
+
+
   public chartClicked(e: any): void {
     console.log(e);
   }
@@ -78,20 +74,21 @@ export class BurndownComponent implements OnInit {
   }
 
   public async ngOnInit() {
-
+    let labels: Array<string> = new Array<string>();
     this.inicializateRoute();
     let postIts: PostIt[];
     this.taskService.getTasksOrderedByEstimatedTime(this.board).subscribe((element: PostIt[]) => {
-      console.log('PAsoooo');
       this.restoreChart();
+      console.log(element);
       postIts = element;
       postIts.sort((taskA, taskB) => (taskB.horas - taskA.horas));
       postIts.forEach((postIt: PostIt) => {
-        console.log('cargo');
         this.estimados.push(postIt.horas);
         this.realizadas.push(postIt.workedHours);
         this.lineChartLabels.push(postIt.titulo);
       });
+
+      this.putData();
       this.isDataAvailable = true;
     });
 
@@ -99,14 +96,17 @@ export class BurndownComponent implements OnInit {
 
   private restoreChart() {
 
-    console.log('restauro');
-    if (this.estimados.length > 0) {
-      this.estimados = new Array<number>();
-      this.lineChartLabels = new Array<string>();
-      this.realizadas = new Array<number>();
-      this.isDataAvailable = false;
-      console.log('restoring');
-    }
+    this.estimados = new Array<number>();
+    this.lineChartLabels = new Array<string>();
+    this.realizadas = new Array<number>();
+    this.isDataAvailable = false;
+
+  }
+
+  private putData() {
+    this.lineChartData = [
+      { data: this.estimados, label: 'Estimadas' },
+      { data: this.realizadas, label: 'Trabajadas' }];
 
   }
 

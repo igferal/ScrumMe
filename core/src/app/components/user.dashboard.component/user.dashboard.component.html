@@ -17,9 +17,9 @@
                         <td class="aligned">{{board.name}}</td>
                         <td class="aligned">{{board.date}}</td>
                         <td> <a (click)="goToBoard(board.$key)" class="button -main">Ir al tablón</a> </td>
-                        <td> <a (click)="menu.toggle($event); setBoard(board.$key)" class="button -main">Ver gráfico</a></td>
-                        <td *ngIf="currentUser === board.boardOwner"> <button (click)="deleteBoard(board.$key)" class="button -secondary">Borrar tablero</button></td>
-                        <td *ngIf="currentUser != board.boardOwner"> <button (click)="stopColaboration(board.$key)" class="button -secondary">Dejar de colaborar</button></td>
+                        <td> <a (click)="menu.toggle($event); setBoard(board.$key)" class="button -main">Gráficos</a></td>
+                        <td *ngIf="currentUser !== board.boardOwner"> <button (click)="deleteBoard(board.$key)" class="button -secondary">Borrar tablero</button></td>
+                        <td *ngIf="currentUser === board.boardOwner"> <button (click)="stopColaboration(board.$key)" class="button -secondary">Dejar de colaborar</button></td>
                     </tr>
                 </tbody>
             </table>
