@@ -37,7 +37,7 @@ export class BurndownComponent implements OnInit {
 
   public lineChartOptions: any = {
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: true
   };
   public lineChartColors: Array<any> = [
     {
