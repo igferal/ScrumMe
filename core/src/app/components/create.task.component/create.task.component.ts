@@ -41,6 +41,8 @@ export class CreateTaskComponent {
             this.incorrect = false;
             let postIt = new PostIt(this.name, this.contenido, '', this.horas, '');
             this.contenido = '';
+            this.horas = 0;
+            this.name = '';
             this.taskService.saveTask(this.colKey, this.board, postIt);
             this.notify.emit(false);
         } else {
