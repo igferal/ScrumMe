@@ -7,8 +7,9 @@ import { ColumnService } from './../../services/database/column.service';
 import { TaskService } from './../../services/database/task.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { DestroySubscribers } from '../../util/unsuscribe.decorator';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UIChart } from 'primeng/primeng';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 @Component({
   moduleId: 'task-chart',
@@ -67,6 +68,7 @@ export class TaskChartComponent implements OnInit {
   ];
   public barChartLegend: boolean = true;
   public barChartType: string = 'bar';
+  @ViewChild(BaseChartDirective) myChart: BaseChartDirective;
 
 
   // events
@@ -81,22 +83,40 @@ export class TaskChartComponent implements OnInit {
   public async ngOnInit() {
 
     this.inicializateRoute();
-    let postIts: PostIt[];
     this.taskService.getMyTask(this.board).subscribe((element: PostIt[]) => {
-
-      postIts = element;
-      postIts.sort((taskA, taskB) => (taskB.horas - taskA.horas));
-      postIts.forEach((postIt: PostIt) => {
+      this.restoreChart();
+      element.sort((taskA, taskB) => (taskB.horas - taskA.horas));
+      element.forEach((postIt: PostIt) => {
         console.log(postIt);
         this.estimados.push(postIt.horas);
         this.realizadas.push(postIt.workedHours);
         this.barChartLabels.push(postIt.titulo);
       })
+      if (this.myChart) {
+        this.myChart.chart.config.data.labels = this.barChartLabels;
+      }
+      this.putData();
       this.isDataAvailable = true;
     });
 
 
+  }
 
+  private restoreChart() {
+
+    this.estimados = new Array<number>();
+    this.barChartLabels = new Array<string>();
+    this.realizadas = new Array<number>();
+    this.isDataAvailable = false;
+    //this.myChart.chart.config.data.labels = [];
+
+
+  }
+
+  private putData() {
+    this.barChartData = [
+      { data: this.estimados, label: 'Estimadas' },
+      { data: this.realizadas, label: 'Trabajadas' }];
 
   }
 
