@@ -7,8 +7,10 @@ import { ColumnService } from './../../services/database/column.service';
 import { TaskService } from './../../services/database/task.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { DestroySubscribers } from '../../util/unsuscribe.decorator';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UIChart } from 'primeng/primeng';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
+
 
 @Component({
   moduleId: 'burndown',
@@ -38,7 +40,7 @@ export class BurndownComponent implements OnInit {
     maintainAspectRatio: false
   };
   public lineChartColors: Array<any> = [
-    { 
+    {
       backgroundColor: 'rgba(33, 124, 163,0.2)',
       borderColor: 'rgba(148,159,177,1)',
       pointBackgroundColor: 'rgba(33, 124, 163,1)',
@@ -46,7 +48,7 @@ export class BurndownComponent implements OnInit {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(33, 124, 163,0.8)'
     },
-    { 
+    {
       backgroundColor: 'rgba(226, 153, 48,0.4)',
       borderColor: 'rgba(226, 153, 48,1)',
       pointBackgroundColor: 'rgba(226, 153, 48,1)',
@@ -58,6 +60,8 @@ export class BurndownComponent implements OnInit {
   ];
   public lineChartLegend: boolean = true;
   public lineChartType: string = 'line';
+  @ViewChild(BaseChartDirective) myChart: BaseChartDirective;
+
 
   constructor(private route: ActivatedRoute, private taskService: TaskService,
     private columnService: ColumnService) {
@@ -66,7 +70,9 @@ export class BurndownComponent implements OnInit {
 
 
   public chartClicked(e: any): void {
-    console.log(e);
+    console.log('COSA');
+    console.log(this.myChart);
+
   }
 
   public chartHovered(e: any): void {
@@ -74,19 +80,21 @@ export class BurndownComponent implements OnInit {
   }
 
   public async ngOnInit() {
-    let labels: Array<string> = new Array<string>();
+
     this.inicializateRoute();
     let postIts: PostIt[];
     this.taskService.getTasksOrderedByEstimatedTime(this.board).subscribe((element: PostIt[]) => {
       this.restoreChart();
-      console.log(element);
-      postIts = element;
-      postIts.sort((taskA, taskB) => (taskB.horas - taskA.horas));
-      postIts.forEach((postIt: PostIt) => {
+      element.sort((taskA, taskB) => (taskB.horas - taskA.horas));
+      element.forEach((postIt: PostIt) => {
         this.estimados.push(postIt.horas);
         this.realizadas.push(postIt.workedHours);
         this.lineChartLabels.push(postIt.titulo);
+
       });
+      if (this.myChart) {
+        this.myChart.chart.config.data.labels = this.lineChartLabels;
+      }
 
       this.putData();
       this.isDataAvailable = true;
@@ -100,6 +108,8 @@ export class BurndownComponent implements OnInit {
     this.lineChartLabels = new Array<string>();
     this.realizadas = new Array<number>();
     this.isDataAvailable = false;
+    //this.myChart.chart.config.data.labels = [];
+
 
   }
 

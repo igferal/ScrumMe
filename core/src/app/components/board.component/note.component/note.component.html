@@ -1,6 +1,7 @@
 <section id="noteKey" class="card" draggable="true">
-    <header class="card-header">{{note.titulo}} : {{note.programador}}
-        <i class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
+    <header class="card-header">
+        <div> {{note.titulo}} : {{note.programador}}  </div>
+        <i  style="float: right" class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
     </header>
     <div class="card-content">
         <p *ngIf="!note.closed">{{note.contenido}}</p>
