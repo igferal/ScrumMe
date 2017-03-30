@@ -19,6 +19,7 @@ export class NoteComponent implements OnInit {
     @Input() noteKey: string;
     public options: any[];
     private showLogWork: boolean;
+    private percentage: number;
 
     private showLogWorkDialog() {
         this.showLogWork = true;
@@ -101,5 +102,6 @@ export class NoteComponent implements OnInit {
     ngOnInit() {
 
         this.loadMenu();
+        this.percentage = Math.round(100 * (this.note.workedHours / this.note.horas));
     }
 }

@@ -1,32 +1,42 @@
 @import "~variables.scss";
 @import "~componentes.scss";
 .card {
+    display: inline-flex;
+    flex-direction: column;
+    border-left: 10px solid $secondary-color;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     border-radius: 5px;
-    max-width: 280px;
-    min-height: 150px;
     min-width: 280px;
+    max-width: 280px;
+    height: 130 px;
+    max-height: 130px;
     border-radius: 2%;
     background: $bg-white-color;
-}
-
-.card-header {
-    background: $secondary-color;
-    height: 50px;
-    color: $bg-white-color;
-    display: flex;
-    justify-content: space-between;
-}
-
-.card-content {
-    padding: 2%;
-    min-height: 100px;
-    background: $bg-white-color;
-}
-
-.card-buttons {
-    float: right;
+    header {
+        height: 50px;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: lightgray 1px solid;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    .card-content {
+        margin: 2%;
+        display: flex;
+        justify-content: space-between;
+        vertical-align: middle;
+        align-items: center;
+        height: 150px;
+        .percentage {
+            font-size: 18px;
+        }
+        .percentage:after {
+            content: '%';
+            font-size: 12px;
+        }
+    }
 }
 
 .card:hover {

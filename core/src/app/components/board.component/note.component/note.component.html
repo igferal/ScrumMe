@@ -1,7 +1,7 @@
-<section id="noteKey" class="card" draggable="true">
+<!-- <section id="noteKey" class="card" draggable="true">
     <header class="card-header">
-        <div> {{note.titulo}} : {{note.programador}}  </div>
-        <i  style="float: right" class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
+        <div> {{note.titulo}} : {{note.programador}} </div>
+        <i style="float: right" class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
     </header>
     <div class="card-content">
         <p *ngIf="!note.closed">{{note.contenido}}</p>
@@ -11,7 +11,26 @@
         <progress value="{{note.workedHours}}" max="{{note.horas}}"></progress>
     </footer>
 </section>
+-->
+<div id="noteKey" class="card" draggable="true">
+    <header> <strong> {{note.titulo}} </strong>
+        <i style="float: right" class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
+    </header>
+    <div class="card-content">
+        <p *ngIf="!note.closed">{{note.contenido}}</p>
+        <del *ngIf="note.closed">{{note.contenido}}</del>
+        <div *ngIf="!note.closed">
+            <div class="percentage"> <strong> {{percentage}}   </strong></div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <p-menu #menu popup="popup" [model]="options"></p-menu>
+
+
 
 <p-dialog [width]="600 " height="320 " [draggable]="false " [modal]="true " header="Cargar horas " [(visible)]="showLogWork ">
     <label>Horas estimadas:</label> {{note.horas}}
