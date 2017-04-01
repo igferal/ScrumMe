@@ -1,5 +1,5 @@
-import { TaskChartComponent } from './components/task.chart.component/task.chart.component';
-import { BurndownComponent } from './components/burndown.component/burndown.component';
+import { TaskChartComponent } from './components/charts/task.chart.component/task.chart.component';
+import { BurndownComponent } from './components/charts/burndown.component/burndown.component';
 import { CreateColumnComponent } from './components/create.column.component/create.column.component';
 import { ColumnComponent } from './components/board.component/column.component/column.component';
 import { NgModule } from '@angular/core';

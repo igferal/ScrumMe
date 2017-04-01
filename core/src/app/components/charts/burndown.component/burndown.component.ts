@@ -1,12 +1,13 @@
+import { ChartComponentParent } from './../chart.parent.component';
 import { read } from 'fs';
 import { element } from 'protractor';
 import { FirebaseListObservable } from 'angularfire2';
 import { delay } from 'rxjs/operator/delay';
-import { PostIt } from './../../model/post.it';
-import { ColumnService } from './../../services/database/column.service';
-import { TaskService } from './../../services/database/task.service';
+import { PostIt } from './../../../model/post.it';
+import { ColumnService } from './../../../services/database/column.service';
+import { TaskService } from './../../../services/database/task.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { DestroySubscribers } from '../../util/unsuscribe.decorator';
+import { DestroySubscribers } from '../../../util/unsuscribe.decorator';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UIChart } from 'primeng/primeng';
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
@@ -21,25 +22,13 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 })
 @DestroySubscribers()
-export class BurndownComponent implements OnInit {
+export class BurndownComponent extends ChartComponentParent implements OnInit {
 
 
   private board: string;
   private subscribers: any = {};
-  private estimados: Array<number> = new Array<number>();
-  private realizadas: Array<number> = new Array<number>();
-  public lineChartLabels = [];
-  public isDataAvailable: boolean = false;
-  public lineChartData: Array<any> = [
-    { data: this.estimados, label: 'Estimadas' },
-    { data: this.realizadas, label: 'Trabajadas' }];
-
-
-  public lineChartOptions: any = {
-    responsive: true,
-    maintainAspectRatio: true
-  };
-  public lineChartColors: Array<any> = [
+  public ChartType: string = 'line';
+  public ChartColors: Array<any> = [
     {
       backgroundColor: 'rgba(33, 124, 163,0.2)',
       borderColor: 'rgba(148,159,177,1)',
@@ -58,14 +47,11 @@ export class BurndownComponent implements OnInit {
     }
 
   ];
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
-  @ViewChild(BaseChartDirective) myChart: BaseChartDirective;
 
 
   constructor(private route: ActivatedRoute, private taskService: TaskService,
     private columnService: ColumnService) {
-
+    super();
   }
 
 
@@ -82,43 +68,13 @@ export class BurndownComponent implements OnInit {
   public async ngOnInit() {
 
     this.inicializateRoute();
-    let postIts: PostIt[];
     this.taskService.getTasksOrderedByEstimatedTime(this.board).subscribe((element: PostIt[]) => {
-      this.restoreChart();
-      element.sort((taskA, taskB) => (taskB.horas - taskA.horas));
-      element.forEach((postIt: PostIt) => {
-        this.estimados.push(postIt.horas);
-        this.realizadas.push(postIt.workedHours);
-        this.lineChartLabels.push(postIt.titulo);
+      this.fillChart(element);
 
-      });
-      if (this.myChart) {
-        this.myChart.chart.config.data.labels = this.lineChartLabels;
-      }
-
-      this.putData();
-      this.isDataAvailable = true;
     });
 
   }
 
-  private restoreChart() {
-
-    this.estimados = new Array<number>();
-    this.lineChartLabels = new Array<string>();
-    this.realizadas = new Array<number>();
-    this.isDataAvailable = false;
-    //this.myChart.chart.config.data.labels = [];
-
-
-  }
-
-  private putData() {
-    this.lineChartData = [
-      { data: this.estimados, label: 'Estimadas' },
-      { data: this.realizadas, label: 'Trabajadas' }];
-
-  }
 
   /**
  * Metodo que nos obtiene el id del tablero actual a traves de la url

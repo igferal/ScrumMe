@@ -1,0 +1,6 @@
+<div class="chartDiv" *ngIf="isDataAvailable">
+    <div style=" display: block ">
+        <canvas baseChart [datasets]="ChartData " [labels]="ChartLabels " [options]="ChartOptions " [legend]="ChartLegend " [chartType]="ChartType "
+            (chartHover)="chartHovered($event) " [colors]="ChartColors" (chartClick)="chartClicked($event) "></canvas>
+    </div>
+</div>
