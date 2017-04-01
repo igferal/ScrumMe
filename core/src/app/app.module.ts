@@ -1,3 +1,4 @@
+import { StyleListComponent } from './components/style.list.component/style.list.component';
 import { TaskChartComponent } from './components/charts/task.chart.component/task.chart.component';
 import { BurndownComponent } from './components/charts/burndown.component/burndown.component';
 import { CreateColumnComponent } from './components/create.column.component/create.column.component';
@@ -56,7 +57,8 @@ const myFirebaseAuthConfig = {
         ColumnComponent,
         CreateColumnComponent,
         BurndownComponent,
-        TaskChartComponent
+        TaskChartComponent,
+        StyleListComponent
     ],
     imports: [
         BrowserModule,

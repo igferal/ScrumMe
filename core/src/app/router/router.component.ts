@@ -1,3 +1,4 @@
+import { StyleListComponent } from './../components/style.list.component/style.list.component';
 import { TaskChartComponent } from './../components/charts/task.chart.component/task.chart.component';
 import { BurndownComponent } from './../components/charts/burndown.component/burndown.component';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,7 @@ const routes: Routes = [
     canActivate: [FirebaseAuthentication]
   },
   { path: 'login', component: LoginComponent },
+  { path: 'style', component: StyleListComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'landing', component: LandingComponent },
   {

@@ -13,7 +13,8 @@
 </section>
 -->
 <div id="noteKey" class="card" draggable="true">
-    <header> <strong> {{note.titulo}} </strong>
+    <header>
+        <div><strong> {{note.titulo}} </strong> <small> : {{note.programador}}</small> </div>
         <i style="float: right" class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
     </header>
     <div class="card-content">
@@ -24,14 +25,7 @@
         </div>
     </div>
 </div>
-
-
-
-
 <p-menu #menu popup="popup" [model]="options"></p-menu>
-
-
-
 <p-dialog [width]="600 " height="320 " [draggable]="false " [modal]="true " header="Cargar horas " [(visible)]="showLogWork ">
     <label>Horas estimadas:</label> {{note.horas}}
     <br>
@@ -40,5 +34,5 @@
     <label>Cargar horas</label>
     <input class="input-modal" type="number" #horas placeholder="Cargue aquí sus horas" />
     <br>
-    <button class="button -main" (click)="logHours(horas.value)">Cargar horas</button>
+    <button class="button btn-main" (click)="logHours(horas.value)">Cargar horas</button>
 </p-dialog>

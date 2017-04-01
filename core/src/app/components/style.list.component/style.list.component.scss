@@ -1,0 +1,88 @@
+@import "~variables.scss";
+@import "~componentes.scss";
+.section-main  {
+    background: #f8f8f8;
+    .section-main-in {
+        margin-left: 5%;
+        margin-right: 5%;
+        padding-top: 5%;
+        h1 {
+            color: $main-color;
+        }
+        h3 {
+            color: lightslategray;
+        }
+        .inline {
+            display: inline-flex;
+        }
+        .dark {
+            background: $bg-color;
+        }
+    }
+}
+
+@mixin color($bg) {
+    padding: 20px;
+    margin: 12px;
+    background: $bg;
+    &:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+}
+
+.color-main {
+    @include color($main-color);
+}
+
+.color-main-dark {
+    @include color($main-color-dark);
+}
+
+.color-secondary {
+    @include color($secondary-color);
+}
+
+.color-secondary-dark {
+    @include color($secondary-color-dark);
+}
+
+.color-background {
+    @include color($bg-color);
+}
+
+.color-success {
+    @include color($success-color);
+}
+
+.color-warn {
+    @include color($warn-color);
+}
+
+.color-pink {
+    @include color($pink-color);
+}
+
+$succes-color : #334431;
+$warn-color : #e05038;
+$pink-color : #f2cbbc;
+
+
+.code {
+    background :  $bg-color;
+    padding: 1%;
+    width: auto;
+    max-width: auto;
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    div {
+        margin-left: 5%;
+        margin-right: 5%;
+        color: white;
+        display: inline-flex;
+    }
+    .highlighted{
+        color: $main-color;
+    }
+
+}

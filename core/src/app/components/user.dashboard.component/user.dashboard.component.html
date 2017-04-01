@@ -16,16 +16,16 @@
                     <tr *ngFor="let board of boards">
                         <td class="aligned">{{board.name}}</td>
                         <td class="aligned">{{board.date}}</td>
-                        <td> <a (click)="goToBoard(board.$key)" class="button -main">Ir al tablón</a> </td>
-                        <td> <a (click)="menu.toggle($event); setBoard(board.$key)" class="button -main">Gráficos</a></td>
-                        <td *ngIf="currentUser !== board.boardOwner"> <button (click)="deleteBoard(board.$key)" class="button -secondary">Borrar tablero</button></td>
-                        <td *ngIf="currentUser === board.boardOwner"> <button (click)="stopColaboration(board.$key)" class="button -secondary">Dejar de colaborar</button></td>
+                        <td> <a (click)="goToBoard(board.$key)" class="button btn-main">Ir al tablón</a> </td>
+                        <td> <a (click)="menu.toggle($event); setBoard(board.$key)" class="button btn-main">Gráficos</a></td>
+                        <td *ngIf="currentUser !== board.boardOwner"> <button (click)="deleteBoard(board.$key)" class="button btn-secondary">Borrar tablero</button></td>
+                        <td *ngIf="currentUser === board.boardOwner"> <button (click)="stopColaboration(board.$key)" class="button btn-secondary">Dejar de colaborar</button></td>
                     </tr>
                 </tbody>
             </table>
             <hr>
 
-            <button (click)="showDialog()" class="button -main-block">Crear tablero</button>
+            <button (click)="showDialog()" class="button btn-main-block">Crear tablero</button>
 
             <p-dialog [draggable]="false" [modal]="true" header="Crear tablero" [(visible)]="showModal">
                 <createBoard (notify)="closeDialog()"></createBoard>

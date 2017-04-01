@@ -1,9 +1,15 @@
 /*
-Colo variables;
+Color variables;
 */
 
-$main-color: #E29930;
+$main-color: #FFB400;
 $main-color-dark: darken($main-color, 6.5%);
 $secondary-color: #217CA3;
-$bg-color: #32384D;
-$bg-white-color: #F8F8F8
+$secondary-color-dark: darken($secondary-color, 6.5%);
+$bg-color: #1C3144;
+$bg-white-color: #F8F8F8;
+$success-color : #7FB800;
+$warn-color : #E04A1B;
+$pink-color : #f2cbbc;
+
+
