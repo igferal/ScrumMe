@@ -14,6 +14,7 @@ export class NoteComponent implements OnInit {
     @Output() notify = new EventEmitter<string>();
     @Output() addWork = new EventEmitter<any>();
     @Output() changeTaskState = new EventEmitter<any>();
+    @Output() createIssue = new EventEmitter<any>();
     @Input() board: any;
     @Input() colKey: any;
     @Input() noteKey: string;
@@ -60,10 +61,20 @@ export class NoteComponent implements OnInit {
 
                     this.closeTask();
                 }
+            },
+            {
+                label: 'Crear issueGitHub', icon: 'fa fa-github', command: () => {
+
+                    this.sentToGitHub();
+                }
             }
         ];
 
 
+    }
+
+    private sentToGitHub() {
+        this.createIssue.emit(this.note);
     }
 
     private closeTask() {

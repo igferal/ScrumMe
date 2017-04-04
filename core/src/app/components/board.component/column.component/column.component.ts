@@ -1,3 +1,4 @@
+import { GithubService } from './../../../services/github/github.service';
 import { TaskService } from '../../../services/database/task.service';
 import { ColumnService } from './../../../services/database/column.service';
 import { DestroySubscribers } from '../../../util/unsuscribe.decorator';
@@ -10,7 +11,7 @@ import { MenuModule, MenuItem } from 'primeng/primeng';
     selector: 'app-column',
     templateUrl: 'column.component.html',
     styleUrls: ['./column.component.scss'],
-    providers: [ColumnService, TaskService]
+    providers: [ColumnService, TaskService, GithubService]
 
 
 })
@@ -30,7 +31,7 @@ export class ColumnComponent implements OnInit {
     private size: number;
 
 
-    constructor(private columnService: ColumnService, public taskService: TaskService) {
+    constructor(private columnService: ColumnService, public taskService: TaskService, public githubService: GithubService) {
 
         this.notesToDispose.push({});
         this.options = [
@@ -57,6 +58,8 @@ export class ColumnComponent implements OnInit {
 
         ];
     }
+
+
 
     /**
     * Metodo que nos gestiona el borrado de notas
@@ -100,6 +103,12 @@ export class ColumnComponent implements OnInit {
     public onChangeState(note: PostIt) {
 
         this.taskService.updateTask(this.colKey, this.boardKey, note.key, note);
+    }
+
+    public createGitIssue(postit: PostIt) {
+
+        this.githubService.postIssue('scrumme','nacho1014',postit);
+
     }
 
     public edit() {

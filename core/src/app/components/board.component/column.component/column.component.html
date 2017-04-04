@@ -8,7 +8,7 @@
 
 <div id="{{colKey}}" *ngFor="let item of notes" [dragula]='"bag-one"' [dragulaModel]='notes'>
 
-    <note id="{{item.$key}}" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="boardKey " [colKey]="colKey " [note]="item " [noteKey]="item.$key"></note>
+    <note id="{{item.$key}}" (addWork)="onLogHours($event)" (createIssue)="createGitIssue($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="boardKey " [colKey]="colKey " [note]="item " [noteKey]="item.$key"></note>
 
 </div>
 

@@ -1,3 +1,4 @@
+import { GithubService } from './../../services/github/github.service';
 import { UserService } from './../../services/database/user.service';
 import { TaskService } from './../../services/database/task.service';
 import { ColumnService } from './../../services/database/column.service';
