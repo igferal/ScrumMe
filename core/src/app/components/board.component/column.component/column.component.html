@@ -29,3 +29,7 @@
 <p-dialog [width]="600 " height="450 " [draggable]="false " [modal]="true " header="Crear Tarea " [(visible)]="showModal">
     <createTask [editing]="true " [colKey]="colKey " [board]="boardKey " (notify)="closeDialog() "></createTask>
 </p-dialog>
+
+<p-dialog [width]="600 " height="450 " [draggable]="false " [modal]="true " header="GitHubIssues " [(visible)]="showModalGit">
+    <github-issues [column]="colKey " [board]="boardKey " (notify)="closeDialog() "></github-issues>
+</p-dialog>

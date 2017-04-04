@@ -25,6 +25,7 @@ export class ColumnComponent implements OnInit {
     public options: any[];
     private showModal: boolean;
     private showModalCol: boolean;
+    private showModalGit: boolean;
     notesToDispose = [];
     private size: number;
 
@@ -47,7 +48,13 @@ export class ColumnComponent implements OnInit {
                 label: 'Añadir tarea', icon: 'fa fa-plus', command: () => {
                     this.showDialog();
                 }
+            },
+            {
+                label: 'Añadir issues', icon: 'fa fa-github', command: () => {
+                    this.showDialogGit();
+                }
             }
+
         ];
     }
 
@@ -66,6 +73,15 @@ export class ColumnComponent implements OnInit {
     private closeDialog() {
         this.showModal = false;
     }
+
+    private showDialogGit() {
+        this.showModalGit = true;
+    }
+
+    private closeDialogGit() {
+        this.showModalGit = false;
+    }
+
 
     private showDialogCol() {
         this.showModalCol = true;

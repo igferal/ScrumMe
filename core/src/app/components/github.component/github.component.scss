@@ -1,0 +1,21 @@
+@import "~componentes.scss";
+@import "~variables.scss";
+div {
+    color: $main-color;
+    margin: 5%;
+}
+
+.scrollDiv {
+    background: #F8F8F8;
+    overflow: scroll;
+    height: 91vh;
+    margin: 10px;
+    min-width: 320px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

@@ -23,6 +23,7 @@ import { MessagesModule, } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { MenuModule, MenuItem } from 'primeng/primeng';
 import { ChartsModule } from 'ng2-charts';
+import { GithubComponent } from './components/github.component/github.component';
 
 
 
@@ -58,7 +59,8 @@ const myFirebaseAuthConfig = {
         CreateColumnComponent,
         BurndownComponent,
         TaskChartComponent,
-        StyleListComponent
+        StyleListComponent,
+        GithubComponent
     ],
     imports: [
         BrowserModule,
