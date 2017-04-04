@@ -12,7 +12,7 @@
             <div class="color-pink"></div>
         </div>
         <h3>Colores sobre fondo</h3>
-        
+
         <div class="inline dark">
             <div class="color-main"></div>
             <div class="color-main-dark"></div>
@@ -99,6 +99,7 @@
 
         <h3>Inputs</h3>
         <input class="input-modal" placeholder="Type on me!" />
+        <br/>
         <div class="dark">
             <input placeholder="Type on me!" />
         </div>
@@ -111,6 +112,28 @@
                 <h6 class="highlighted"> &lt;input placeholder="Type on me!"/&gt;</h6>
             </div>
         </section>
+        <h3>Alerts <small> (basadas en ngprime)</small></h3>
+        <p-messages [value]="msgs"></p-messages>
+        <br/>
+        <h3>Tareas</h3>
+        <note id="b" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' "
+            [colKey]="'key' " [note]="p1" [noteKey]="'key'"></note>
+        <note id="a" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' "
+            [colKey]="'key' " [note]="p2" [noteKey]="'key'"></note>
+        <note id="c" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' "
+            [colKey]="'key' " [note]="p3" [noteKey]="'key'"></note>
+
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="wrapper" data-anim="base wrapper">
+            <div class="circle" data-anim="base left"></div>
+            <div class="circle" data-anim="base right"></div>
+        </div>
+
         <br>
     </section>
 </section>

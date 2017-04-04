@@ -1,6 +1,6 @@
 @import "~variables.scss";
 @import "~componentes.scss";
-.section-main  {
+.section-main {
     background: #f8f8f8;
     .section-main-in {
         margin-left: 5%;
@@ -14,6 +14,7 @@
         }
         .inline {
             display: inline-flex;
+            justify-content: space-between;
         }
         .dark {
             background: $bg-color;
@@ -62,13 +63,11 @@
     @include color($pink-color);
 }
 
-$succes-color : #334431;
-$warn-color : #e05038;
-$pink-color : #f2cbbc;
-
-
+$succes-color: #334431;
+$warn-color: #e05038;
+$pink-color: #f2cbbc;
 .code {
-    background :  $bg-color;
+    background: $bg-color;
     padding: 1%;
     width: auto;
     max-width: auto;
@@ -81,8 +80,11 @@ $pink-color : #f2cbbc;
         color: white;
         display: inline-flex;
     }
-    .highlighted{
+    .highlighted {
         color: $main-color;
     }
+}
 
+div .ui-messages .ui-widget .ui-corner-all .ui-messages-error {
+    background: blue!important;
 }
