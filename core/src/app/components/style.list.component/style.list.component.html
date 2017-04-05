@@ -116,15 +116,49 @@
         <p-messages [value]="msgs"></p-messages>
         <br/>
         <h3>Tareas</h3>
-        <note id="b" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' "
-            [colKey]="'key' " [note]="p1" [noteKey]="'key'"></note>
-        <note id="a" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' "
-            [colKey]="'key' " [note]="p2" [noteKey]="'key'"></note>
-        <note id="c" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' "
-            [colKey]="'key' " [note]="p3" [noteKey]="'key'"></note>
+        <note id="b" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' " [colKey]="'key' " [note]="p1" [noteKey]="'key'"></note>
+        <note id="a" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' " [colKey]="'key' " [note]="p2" [noteKey]="'key'"></note>
+        <note id="c" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' " [colKey]="'key' " [note]="p3" [noteKey]="'key'"></note>
 
 
         <br/>
+        <br/>
+        <br/>
+        <section class="tablon">
+            <header class="title">
+                <i class="fa fa-pied-piper delivery" aria-hidden="true"></i>
+                <div class="status">
+                    <i class="fa fa-times " aria-hidden="true" (click)="menu.toggle($event)"></i>
+                </div>
+            </header>
+
+            <div class="body">
+                <h3>Gráficos</h3>
+                <div class="inline">
+                    <button class="button btn-secondary">Burndown </button>
+                    <button class="button btn-secondary">Tareas individuales</button>
+                </div>
+                <h3>Configuración</h3>
+                <button class="button btn-secondary">Configurar</button>
+                <h3>Deadline</h3>
+                <h4>19-16-14</h4>
+            </div>
+            <hr>
+            <footer class="footer">
+                <button class="button btn-secondary">Ir al tablón</button>
+            </footer>
+
+        </section>
+
+        <br/>
+        <br/>
+        <br/><br/>
+        <br/>
+        <br/><br/>
+        <br/>
+        <br/><br/>
+        <br/>
+        <br/><br/>
         <br/>
         <br/>
         <br/>

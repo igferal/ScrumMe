@@ -1,39 +1,45 @@
 <div class="ui-g">
     <div class="ui-g-1"></div>
     <div class="ui-g-10">
-        <div class="custom-table">
-            <table class="table">
-                <thead class="thead-inverse">
-                    <tr>
-                        <th scope="col">Tablero</th>
-                        <th scope="col">Fecha vencimiento</th>
-                        <th scope="col">Ir al tablero</th>
-                        <th scope="col">Gráficos</th>
-                        <th scope="col">Abandonar tablero</th>
-                    </tr>
-                </thead>
-                <tbody class="customTBody">
-                    <tr *ngFor="let board of boards">
-                        <td class="aligned">{{board.name}}</td>
-                        <td class="aligned">{{board.date}}</td>
-                        <td> <a (click)="goToBoard(board.$key)" class="button btn-main">Ir al tablón</a> </td>
-                        <td> <a (click)="menu.toggle($event); setBoard(board.$key)" class="button btn-success">Gráficos</a></td>
-                        <td *ngIf="currentUser !== board.boardOwner"> <button (click)="deleteBoard(board.$key)" class="button btn-warn">Borrar tablero</button></td>
-                        <td *ngIf="currentUser === board.boardOwner"> <button (click)="stopColaboration(board.$key)" class="button btn-warn">Dejar de colaborar</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr>
+        <hr>
 
-            <button (click)="showDialog()" class="button btn-main-block">Crear tablero</button>
+        <section class="layout" *ngFor="let board of boards">
 
-            <p-dialog [draggable]="false" [modal]="true" header="Crear tablero" [(visible)]="showModal">
-                <createBoard (notify)="closeDialog()"></createBoard>
-            </p-dialog>
-            <p-menu #menu popup="popup" [model]="options"></p-menu>
+            <section class="tablon">
+                <header class="title">
+                    <i class="fa fa-pied-piper delivery" aria-hidden="true"></i>
+                    <div class="status">
+                        <i class="fa fa-times " aria-hidden="true" (click)="deleteBoard(board.$key)"></i>
+                    </div>
+                </header>
+
+                <div class="body">
+                    <div class="inline">
+                        <h3>{{board.name}}</h3>
+                        <h3>{{board.date}}</h3>
+                    </div>
+                    <div class="inline">
+                        <a (click)="menu.toggle($event); setBoard(board.$key)" class="button btn-success">Gráficos</a>
+                        <button class="button btn-success">Configurar</button>
+                        <button class="button btn-success">Nada</button>
+                    </div>
+                </div>
+                <hr>
+                <footer class="footer">
+                    <a (click)="goToBoard(board.$key)" class="button btn-success">Ir al tablón</a>
+                </footer>
+
+            </section>
+        </section>
+
+        <button (click)="showDialog()" class="button btn-main-block">Crear tablero</button>
+
+        <p-dialog [draggable]="false" [modal]="true" header="Crear tablero" [(visible)]="showModal">
+            <createBoard (notify)="closeDialog()"></createBoard>
+        </p-dialog>
+        <p-menu #menu popup="popup" [model]="options"></p-menu>
 
 
-        </div>
     </div>
     <div class="ui-g-1"></div>
 
