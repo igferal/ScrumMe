@@ -107,7 +107,7 @@ export class ColumnComponent implements OnInit {
 
     public createGitIssue(postit: PostIt) {
 
-        this.githubService.postIssue('scrumme','nacho1014',postit);
+        this.githubService.postIssue('AplicacionFifa','nacho1014',postit);
 
     }
 
