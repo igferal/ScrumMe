@@ -44,6 +44,7 @@ const myFirebaseAuthConfig = {
     method: AuthMethods.Password
 }
 
+
 @NgModule({
     declarations: [
         AppComponent,

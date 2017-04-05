@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { IAuthentication } from './IAuthentication';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -35,8 +35,8 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
                 let r = { provider: 3, error: err.message };
                 return r;
             }).then(result => {
-                    resolve(result);
-                });
+                resolve(result);
+            });
         });
         return res;
 
@@ -54,6 +54,13 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
             });
         });
         return res;
+    }
+
+    public loginWithGit() {
+        this.af.auth.login({
+            provider: AuthProviders.Github,
+            method: AuthMethods.Popup,
+        });
     }
 
 

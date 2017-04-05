@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'login',
-    styleUrls : ['./login.component.scss'],
+    styleUrls: ['./login.component.scss'],
     templateUrl: './login.component.html',
     providers: [FirebaseAuthentication]
 
@@ -34,15 +34,17 @@ export class LoginComponent {
     */
     public login() {
 
+        //    this.firebaseAuth.loginWithGit();
+
         this.firebaseAuth.login(this.email, this.password).then((res) => {
             this.redirect(res);
         });
-        
+
     }
 
     showInfo() {
         this.msgs = [];
-        this.msgs.push({severity:'error', summary:'Error!', detail:'No existe ese usuario'});
+        this.msgs.push({ severity: 'error', summary: 'Error!', detail: 'No existe ese usuario' });
     }
 
     /**
