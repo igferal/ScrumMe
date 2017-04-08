@@ -24,6 +24,7 @@ import { DialogModule } from 'primeng/primeng';
 import { MenuModule, MenuItem } from 'primeng/primeng';
 import { ChartsModule } from 'ng2-charts';
 import { GithubComponent } from './components/github.component/github.component';
+import { CardBoardComponent } from './components/user.dashboard.component/card.board/card.board.component';
 
 
 
@@ -61,7 +62,8 @@ const myFirebaseAuthConfig = {
         BurndownComponent,
         TaskChartComponent,
         StyleListComponent,
-        GithubComponent
+        GithubComponent,
+        CardBoardComponent
     ],
     imports: [
         BrowserModule,

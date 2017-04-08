@@ -5,43 +5,14 @@
 
         <section class="layout" *ngFor="let board of boards">
 
-            <section class="tablon">
-                <header class="title">
-                    <a href="https://travis-ci.org/Arquisoft/Voting_2b">
-                        <i class="fa fa-pied-piper delivery" aria-hidden="true"></i></a>
-                    <div class="status">
-                        <i class="fa fa-times " aria-hidden="true" (click)="deleteBoard(board.$key)"></i>
-                    </div>
-                </header>
+            <board-card [board]="board" [boardKey]="board.$key"></board-card>
 
-                <div class="body">
-                    <div class="inline">
-                        <h3>{{board.name}}</h3>
-                        <h3>{{board.date}}</h3>
-                    </div>
-
-                    <div class="inline">
-                        <a (click)="goToBurndown(board.$key)"> <i class="fa fa-area-chart iconButton" aria-hidden="true"></i></a>
-                        <a (click)="goToMyCharts(board.$key)"> <i class="fa fa-bar-chart iconButton" aria-hidden="true"></i> </a>
-                        <a (click)="console.log( 'Github')"> <i class="fa fa-github iconButton" aria-hidden="true"></i> </a>
-                        <a (click)="console.log( 'Config')"> <i class="fa fa-wrench iconButton" aria-hidden="true"></i> </a>
-
-                    </div>
-                </div>
-                <hr>
-                <footer class="footer">
-                    <a (click)="goToBoard(board.$key)" class="button btn-success">Ir al tablón</a>
-                </footer>
-
-            </section>
         </section>
-
         <button (click)="showDialog()" class="button btn-main-block">Crear tablero</button>
 
         <p-dialog [draggable]="false" [modal]="true" header="Crear tablero" [(visible)]="showModal">
             <createBoard (notify)="closeDialog()"></createBoard>
         </p-dialog>
-
 
     </div>
     <div class="ui-g-1"></div>

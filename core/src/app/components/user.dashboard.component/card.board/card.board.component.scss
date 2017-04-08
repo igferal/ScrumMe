@@ -1,0 +1,106 @@
+     @import "~componentes.scss";
+     @import "~variables.scss";
+     .inline {
+         display: inline-flex;
+         justify-content: space-between;
+         width: 460px;
+     }
+     
+     .tablon {
+         background: $bg-white-color;
+         width: 480px;
+         border-radius: 2px;
+         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+         transition: all .3s ease;
+         padding: 0 10px;
+         height: 270px;
+         a {
+             color: white;
+         }
+         .title {
+             text-align: center;
+             padding: 10px 0;
+         }
+         h3 {
+             color: darken($success-color, 10%);
+         }
+         .delivery {
+             font-size: 2.5em;
+             line-height: 2em;
+             border-radius: 50%;
+             background-color: $success-color;
+             height: 75px;
+             width: 75px;
+             color: #fff;
+             margin-top: -6em;
+             box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+             &:hover {
+                 animation-name: rotating;
+                 animation-duration: 1s;
+             }
+         }
+         .inline {
+             margin-top: 2%;
+             margin-bottom: 2%;
+             display: inline-flex;
+             justify-content: space-between;
+             width: 460px;
+         }
+         .footer {
+             display: flex;
+             align-items: flex-end;
+             float: right;
+         }
+         .iconButton {
+             padding: 12px;
+             color: white;
+             background: $success-color;
+             border-radius: 50%;
+             font-size: 20px;
+             text-align: center;
+         }
+         .iconButton:hover {
+             animation-name: rotating;
+             animation-duration: 1s;
+         }
+         .status {
+             margin: 1%;
+             display: flex;
+             align-items: flex-end;
+             float: right;
+             i {
+                 float: right;
+                 font-size: 25px;
+                 &:hover {
+                     color: $warn-color;
+                 }
+             }
+         }
+     }
+     
+     @keyframes rotating {
+         13% {
+             transform: rotate(-45deg);
+         }
+         26% {
+             transform: rotate(-90deg);
+         }
+         39% {
+             transform: rotate(-135deg);
+         }
+         50% {
+             transform: rotate(-180deg);
+         }
+         63% {
+             transform: rotate(-225deg);
+         }
+         76% {
+             transform: rotate(-270deg);
+         }
+         88% {
+             transform: rotate(-315deg);
+         }
+         100% {
+             transform: rotate(-360deg);
+         }
+     }

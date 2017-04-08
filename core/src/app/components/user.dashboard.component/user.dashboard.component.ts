@@ -22,44 +22,19 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     private viewContainerRef: ViewContainerRef;
     private showModal: boolean;
     public options: any[];
-    public selectedBoard: string;
 
 
 
-    constructor(private boardService: BoardService, private router: Router, viewContainerRef: ViewContainerRef) {
+    constructor(private boardService: BoardService, viewContainerRef: ViewContainerRef) {
 
         this.createBoard = 'Añadir tablero';
         this.viewContainerRef = viewContainerRef;
     }
 
-    setBoard(board: any) {
-        console.log(board);
-        this.selectedBoard = board;
-    }
+   
 
 
-
-    /**
-     * Metodo que nos redirige al tablero que seleccionamos
-     */
-    public goToBoard(boardId: string) {
-
-        this.router.navigate(['/board', boardId]);
-
-    }
-
-
-    public goToBurndown(boardId: string) {
-
-        this.router.navigate(['/burndown', boardId]);
-    }
-    public goToMyCharts(boardId: string) {
-
-        this.router.navigate(['/taskchart', boardId]);
-    }
-
-
-
+X
     private showDialog() {
         this.showModal = true;
     }
@@ -67,25 +42,6 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     private closeDialog() {
         this.showModal = false;
     }
-
-
-    /**
-     * Metodo que nos borra un tablero del cual se es dueño
-     */
-    private deleteBoard(key: string) {
-
-        this.boardService.deleteBoard(key);
-
-    }
-
-    /**
-     * Metodo que cancela una colaboración en un tablero
-     */
-    private stopColaboration(key: string) {
-
-        this.boardService.deleteColaboration(key);
-    }
-
 
 
     /**
