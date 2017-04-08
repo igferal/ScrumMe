@@ -1,5 +1,5 @@
 <div class="container">
-    <form (ngSubmit)="onSubmit()"  #createBoard="ngForm">
+    <form (ngSubmit)="onSubmit()" #createBoard="ngForm">
         <fieldset class="fieldset">
             <div column="6">
                 <label>Nombre del tablero</label>
@@ -11,13 +11,18 @@
                 <label>Colaboradores (opcional)</label>
                 <input class="input-modal" type="text" [(ngModel)]="mails" name="mails" placeholder="Email(s)" />
                 <small id="emailHelp" class="form-text text-muted">Introduce el email de los colaboradores que desees, separado por comas ej: <strong>pep@scrumme.es,cr7@scrumme.es</strong></small>
+                <label>Columnas (opcional)</label>
                 <input class="input-modal" type="text" [(ngModel)]="columns" name="columns" placeholder="Columna(s)" />
                 <small id="emailHelp" class="form-text text-muted">Introduce separadas por comas las columnas iniciales de tablero</small>
-
-
+                <label>Repositorio de github (opcional)</label>
+                <input class="input-modal" type="text" [(ngModel)]="gitHubRepo" name="gitHubRepo" placeholder="https://github.com/myuser/myrepo" />
+                <small id="emailHelp" class="form-text text-muted">Introduce la url del repositorio asociado : https://github.com/nacho1014/ScrumMe </small>
+                <label>Integración con Travis CI</label>
+                <input class="input-modal" type="text" [(ngModel)]="travisRepo" name="travisRepo" placeholder="https://travis.com/myuser/myrepo" />
+                <small id="emailHelp" class="form-text text-muted">Introduce la url de la build asociada en travis</small>
                 <p> </p>
                 <hr/>
-                <button style="align: center" class="button btn-main">Crear tablero</button>
+                <button class="button btn-main-block">Crear tablero</button>
             </div>
         </fieldset>
     </form>

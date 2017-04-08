@@ -8,20 +8,10 @@ export class TravisService {
 
   constructor(public http: Http) { }
 
-  public getState(): boolean {
+  public getState(repo: string) {
 
-    let result = true;
-    this.http.get(` https://api.travis-ci.org./repos/Arquisoft/Voting_2b/builds`).
-      subscribe((res) => {
-        if (res.json()[0].result === 0) {
-          result = true;
-        } else {
-          result = false;
-        }
+    return this.http.get(` https://api.travis-ci.org./repos/${repo}/builds`);
 
-      });
-      console.log(result);
-    return result;
   }
 
 }

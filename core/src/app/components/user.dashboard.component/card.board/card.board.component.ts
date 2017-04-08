@@ -1,3 +1,4 @@
+import { TravisService } from './../../../services/travis/travis.service';
 import { Router } from '@angular/router';
 import { BoardService } from './../../../services/database/board.service';
 import { Board } from './../../../model/board';
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
   selector: 'board-card',
   templateUrl: './card.board.component.html',
   styleUrls: ['./card.board.component.scss'],
-  providers: [BoardService]
+  providers: [BoardService, TravisService]
 
 })
 export class CardBoardComponent implements OnInit {
@@ -16,8 +17,13 @@ export class CardBoardComponent implements OnInit {
 
   @Input() boardKey: string;
 
+  private travisPass: boolean;
 
-  constructor(private boardService: BoardService, private router: Router) { }
+  private travisStyles;
+
+
+  constructor(private boardService: BoardService, private router: Router,
+    private travisService: TravisService) { }
 
 
   /**
@@ -60,6 +66,19 @@ export class CardBoardComponent implements OnInit {
 
 
   ngOnInit() {
+
+    if (this.board.travisRepo !== '') {
+      this.travisService.getState(this.board.travisRepo).subscribe((res) => {
+        this.travisPass = res.json()[0].result === 0;
+        if (!this.travisPass) {
+          this.travisStyles = {
+            'background': 'red'
+          }
+
+        }
+
+      });
+    }
 
 
 

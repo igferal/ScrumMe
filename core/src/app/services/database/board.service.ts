@@ -43,6 +43,8 @@ export class BoardService implements IBoardService {
         let boardInfo = {
             name: board.name,
             date: board.date,
+            gitHubRepo : board.gitHubRepo,
+            travisRepo : board.travisRepo,
             boardOwner: this.currentUser
         }
 

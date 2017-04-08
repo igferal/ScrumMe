@@ -10,7 +10,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
     moduleId: 'createBoard',
     selector: 'createBoard',
     templateUrl: './create.board.component.html',
-    styleUrls :[ './create.board.component.scss'],
+    styleUrls: ['./create.board.component.scss'],
     providers: [BoardService]
 })
 export class CreateBoardComponent {
@@ -21,6 +21,10 @@ export class CreateBoardComponent {
     @Output() notify = new EventEmitter<boolean>();
     private mails: string;
     private columns: string;
+    private gitHubRepo: string;
+    private travisRepo: string;
+    private red : string = 'red';
+
 
     constructor(private boardService: BoardService) {
         this.mails = '';
@@ -32,8 +36,13 @@ export class CreateBoardComponent {
      * Metodo que gestiona la creación de tablones
      */
     public onSubmit() {
+
+
+
         let splitted: string[];
         let board: Board = new Board(this.name, this.date);
+        board.putGitRepo(this.gitHubRepo);
+        board.putTravisRepo(this.travisRepo);
         let boardCol: BoardColumn;
         let colsSplitted: string[];
 
@@ -49,7 +58,7 @@ export class CreateBoardComponent {
                 board.boardColumns.push(boardCol);
             });
         }
-        new Board(this.name, this.date);
+
         this.boardService.saveBoard(board, splitted);
         this.notify.emit(true);
         this.cleanFields();
@@ -61,6 +70,9 @@ export class CreateBoardComponent {
         this.name = '';
         this.date = null;
         this.mails = '';
+        this.columns = '';
+        this.gitHubRepo = '';
+        this.travisRepo = '';
 
     }
 

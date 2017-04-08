@@ -8,6 +8,8 @@ export class Board {
     private _date: Date;
     private _boardColums: Array<BoardColumn>;
     private _owner: string;
+    public gitHubRepo: string;
+    public travisRepo: string;
 
     constructor(name: string, date: Date) {
 
@@ -18,11 +20,26 @@ export class Board {
     }
 
 
+    public putGitRepo(url: string) {
+        if (url !== "") {
+            let urlSplitted = url.split('/');
+            this.gitHubRepo = `${urlSplitted[urlSplitted.length - 2]}/${urlSplitted[urlSplitted.length -1]}`;
+        }
+
+    }
+
+    public putTravisRepo(url: string) {
+        if (url !== "") {
+            let urlSplitted = url.split('/');
+            this.travisRepo = `${urlSplitted[urlSplitted.length - 2]}/${urlSplitted[urlSplitted.length -1]}`;
+        }
+
+    }
 
     private inicializateBoard() {
 
         this._boardColums = new Array<BoardColumn>();
-        
+
     }
 
     public set owner(owner: string) {

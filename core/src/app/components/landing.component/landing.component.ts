@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   selector: 'landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
-  providers: [TravisService]
+  providers: []
 })
 export class LandingComponent {
 
@@ -13,9 +13,7 @@ export class LandingComponent {
 
   }
 
-  public onclick() {
-    this.travisService.getState();
-  }
+  
 
   /**
    * Componente que actualmente gestiona el html de la página de inicio
