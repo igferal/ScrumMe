@@ -30,8 +30,6 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
         this.createBoard = 'Añadir tablero';
         this.viewContainerRef = viewContainerRef;
-        this.loadMenu();
-
     }
 
     setBoard(board: any) {
@@ -39,22 +37,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
         this.selectedBoard = board;
     }
 
-    private loadMenu() {
-        this.options = [
-            {
-                label: 'Burndown', icon: 'fa fa-line-chart', command: () => {
-                    this.goToBurndown(this.selectedBoard);
-                }
-            },
-            {
-                label: 'Trabajo individual', icon: 'fa fa-bar-chart', command: () => {
-            this.goToMyCharts(this.selectedBoard);    
-            }
-            },
-        ];
 
-
-    }
 
     /**
      * Metodo que nos redirige al tablero que seleccionamos

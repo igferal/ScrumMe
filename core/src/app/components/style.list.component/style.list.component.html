@@ -126,26 +126,29 @@
         <br/>
         <section class="tablon">
             <header class="title">
-                <i class="fa fa-pied-piper delivery" aria-hidden="true"></i>
+                <a href="https://travis-ci.org/Arquisoft/Voting_2b">
+                    <i class="fa fa-pied-piper delivery " aria-hidden="true"></i></a>
                 <div class="status">
-                    <i class="fa fa-times " aria-hidden="true" (click)="menu.toggle($event)"></i>
+                    <i class="fa fa-times " aria-hidden="true" (click)="deleteBoard(board.$key)"></i>
                 </div>
             </header>
 
             <div class="body">
-                <h3>Gráficos</h3>
                 <div class="inline">
-                    <button class="button btn-secondary">Burndown </button>
-                    <button class="button btn-secondary">Tareas individuales</button>
+                    <h3>Board</h3>
+                    <h3>Board</h3>
                 </div>
-                <h3>Configuración</h3>
-                <button class="button btn-secondary">Configurar</button>
-                <h3>Deadline</h3>
-                <h4>19-16-14</h4>
+                <div class="inline">
+                    <i class="fa fa-area-chart iconButton" aria-hidden="true"></i>
+                    <i class="fa fa-bar-chart iconButton" aria-hidden="true"></i>
+                    <i class="fa fa-github iconButton" aria-hidden="true"></i>
+                    <i class="fa fa-wrench iconButton" aria-hidden="true"></i>
+
+                </div>
             </div>
             <hr>
             <footer class="footer">
-                <button class="button btn-secondary">Ir al tablón</button>
+                <a (click)="goToBoard(board.$key)" class="button btn-success">Ir al tablón</a>
             </footer>
 
         </section>

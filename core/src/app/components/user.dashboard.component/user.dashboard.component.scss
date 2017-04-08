@@ -23,7 +23,7 @@
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
         transition: all .3s ease;
         padding: 0 10px;
-        height: 260px;
+        height: 270px;
         a {
             color: white;
         }
@@ -44,11 +44,30 @@
             color: #fff;
             margin-top: -6em;
             box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+            &:hover {
+                transform: rotate(-45deg);
+            }
+        }
+        .inline {
+            margin-top: 2%;
+            margin-bottom: 2%;
+            display: inline-flex;
+            justify-content: space-between;
+            width: 460px;
         }
         .footer {
             display: flex;
             align-items: flex-end;
             float: right;
+        }
+        .iconButton {
+            padding: 12px;
+            color: white;
+            background: $success-color;
+            border-radius: 50%;
+        }
+        .iconButton:hover {
+            transform: rotate(-45deg);
         }
         .status {
             margin: 1%;

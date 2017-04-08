@@ -7,7 +7,8 @@
 
             <section class="tablon">
                 <header class="title">
-                    <i class="fa fa-pied-piper delivery" aria-hidden="true"></i>
+                    <a href="https://travis-ci.org/Arquisoft/Voting_2b">
+                        <i class="fa fa-pied-piper delivery" aria-hidden="true"></i></a>
                     <div class="status">
                         <i class="fa fa-times " aria-hidden="true" (click)="deleteBoard(board.$key)"></i>
                     </div>
@@ -18,10 +19,13 @@
                         <h3>{{board.name}}</h3>
                         <h3>{{board.date}}</h3>
                     </div>
+
                     <div class="inline">
-                        <a (click)="menu.toggle($event); setBoard(board.$key)" class="button btn-success">Gráficos</a>
-                        <button class="button btn-success">Configurar</button>
-                        <button class="button btn-success">Nada</button>
+                        <a (click)="goToBurndown(board.$key)"> <i class="fa fa-area-chart iconButton" aria-hidden="true"></i></a>
+                        <a (click)="goToMyCharts(board.$key)"> <i class="fa fa-bar-chart iconButton" aria-hidden="true"></i> </a>
+                        <a (click)="console.log( 'Github')"> <i class="fa fa-github iconButton" aria-hidden="true"></i> </a>
+                        <a (click)="console.log( 'Config')"> <i class="fa fa-wrench iconButton" aria-hidden="true"></i> </a>
+
                     </div>
                 </div>
                 <hr>
@@ -37,7 +41,6 @@
         <p-dialog [draggable]="false" [modal]="true" header="Crear tablero" [(visible)]="showModal">
             <createBoard (notify)="closeDialog()"></createBoard>
         </p-dialog>
-        <p-menu #menu popup="popup" [model]="options"></p-menu>
 
 
     </div>
