@@ -11,7 +11,7 @@ export class ChartComponentParent {
     public ChartLabels = [];
     public isDataAvailable: boolean = false;
     @ViewChild(BaseChartDirective) myChart: BaseChartDirective;
-   
+
     public ChartOptions: any = {
         responsive: true,
         maintainAspectRatio: true
@@ -45,7 +45,11 @@ export class ChartComponentParent {
             this.ChartLabels.push(postIt.titulo);
         })
         if (this.myChart) {
-            this.myChart.chart.config.data.labels = this.ChartLabels;
+            
+            if (this.myChart.chart) {
+                this.myChart.chart.config.data.labels = this.ChartLabels;
+            }
+
         }
         this.putData();
         this.isDataAvailable = true;

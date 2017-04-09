@@ -27,6 +27,14 @@ export class CardBoardComponent implements OnInit {
 
   private showModal: boolean;
 
+  private showModalColabs: boolean;
+
+  private gitRepoUrl: string;
+
+  private travisRepoUrl: string;
+
+  private mailsToColab: string;
+
   public subscribers: any = {};
 
 
@@ -45,6 +53,8 @@ export class CardBoardComponent implements OnInit {
   }
 
 
+
+
   public goToBurndown() {
 
     this.router.navigate(['/burndown', this.boardKey]);
@@ -59,7 +69,7 @@ export class CardBoardComponent implements OnInit {
    */
   private deleteBoard() {
 
-    this.boardService.deleteBoard(this.boardKey);
+    this.boardService.deleteBoard(this.boardKey, this.board.owner);
 
   }
 
@@ -68,7 +78,7 @@ export class CardBoardComponent implements OnInit {
    */
   private stopColaboration(key: string) {
 
-    this.boardService.deleteColaboration(key);
+    this.boardService.deleteColaboration(key,this.board.owner);
   }
 
 
@@ -80,8 +90,29 @@ export class CardBoardComponent implements OnInit {
     this.showModal = false;
   }
 
+  private showDialogColabs() {
+    this.showModalColabs = true;
+  }
 
-  ngOnInit() {
+  private closeDialogColabs() {
+    this.showModalColabs = false;
+  }
+
+  private addColabs() {
+    console.log(this.mailsToColab);
+    let splitted: string[];
+
+    if (this.mailsToColab.length > 0) {
+      splitted = this.mailsToColab.split(",");
+      this.boardService.addColaborators(splitted, this.board, this.boardKey);
+    }
+
+    this.mailsToColab = '';
+    this.closeDialogColabs();
+  }
+
+
+  private configureTravis() {
 
     if (this.board.travisRepo !== '') {
       this.subscribers.subscription = this.travisService.getState(this.board.travisRepo).subscribe((res) => {
@@ -96,11 +127,16 @@ export class CardBoardComponent implements OnInit {
           }
 
         }
-
       });
     }
 
+  }
 
+  ngOnInit() {
+
+    this.gitRepoUrl = `https://github.com/${this.board.gitHubRepo}`;
+    this.travisRepoUrl = `https://travis-ci.org/${this.board.travisRepo}`;
+    this.configureTravis();
 
   }
 

@@ -1,6 +1,6 @@
 <section class="tablon">
     <header class="title">
-        <a href="https://travis-ci.org/Arquisoft/Voting_2b">
+        <a href="{{travisRepoUrl}}">
             <i [ngStyle]="travisBgStyles" class="fa fa-pied-piper delivery" aria-hidden="true"></i></a>
         <div class="status">
             <i class="fa fa-times " aria-hidden="true" (click)="deleteBoard(board.$key)"></i>
@@ -16,8 +16,8 @@
         <div class="inline">
             <a (click)="goToBurndown()"> <i [ngStyle]="travisBgStyles" class="fa fa-area-chart iconButton" aria-hidden="true"></i></a>
             <a (click)="goToMyCharts()"> <i [ngStyle]="travisBgStyles" class="fa fa-bar-chart iconButton" aria-hidden="true"></i> </a>
-            <a (click)="console.log( 'Github')"> <i [ngStyle]="travisBgStyles" class="fa fa-github iconButton" aria-hidden="true"></i> </a>
-            <a (click)="console.log( 'Github')"> <i [ngStyle]="travisBgStyles" class="fa fa-users iconButton" aria-hidden="true"></i> </a>
+            <a href="{{gitRepoUrl}}"> <i [ngStyle]="travisBgStyles" class="fa fa-github iconButton" aria-hidden="true"></i> </a>
+            <a (click)="showDialogColabs()"> <i [ngStyle]="travisBgStyles" class="fa fa-users iconButton" aria-hidden="true"></i> </a>
             <a (click)="showDialog()"> <i [ngStyle]="travisBgStyles" class="fa fa-wrench iconButton" aria-hidden="true"></i> </a>
         </div>
     </div>
@@ -30,4 +30,12 @@
 
 <p-dialog [draggable]="false" [modal]="true" header="Editar tablero" [(visible)]="showModal">
     <createBoard [board]="board" [boardKey]="boardKey" (notify)="closeDialog()"></createBoard>
+</p-dialog>
+
+
+<p-dialog [draggable]="false" [modal]="true" header="Añadir colaboradores" [(visible)]="showModalColabs">
+    <label>Nuevo(s) colaboador(es)</label>
+    <input class="input-modal" type="text" [(ngModel)]="mailsToColab" name="mails" placeholder="Email(s)" />
+    <small id="emailHelp" class="form-text text-muted">Introduce el email de los colaboradores que desees, separado por comas ej: <strong>pep@scrumme.es,cr7@scrumme.es</strong></small>
+    <button (click)="addColabs()" class="button btn-main">Añadir colaboradores</button>
 </p-dialog>

@@ -40,19 +40,12 @@ export class BoardService implements IBoardService {
 
 
 
-        let boardInfo = {
-            name: board.name,
-            date: board.date,
-            gitHubRepo: board.gitHubRepo,
-            travisRepo: board.travisRepo,
-            boardOwner: this.currentUser
-        }
-
+        let boardInfo = this.transformToBaordInfo(board);
 
         let keyCol;
 
 
-        let ref = this.af.database.list('boards/').push(boardInfo).key;
+        let ref = this.af.database.list(`user_board/${this.currentUser}`).push(boardInfo).key;
 
         if (board.boardColumns.length > 0) {
             board.boardColumns.forEach((col) => {
@@ -61,19 +54,22 @@ export class BoardService implements IBoardService {
             });
         }
 
-        this.af.database.object(`user_board/${this.currentUser}/${ref}`).set(boardInfo);
-
 
         if (collabs !== undefined) {
-            this.addColaborators(collabs, boardInfo, ref);
+            this.addColaborators(collabs, board, ref);
         }
+
+    }
+
+    public addMoreColaborators() {
+
 
     }
 
     public updateBoardInfo(boardKey: string, board: Board) {
 
-        console.log('aaaa' +boardKey);
-        this.af.database.list('boards').update(boardKey, board);
+        console.log('aaaa' + boardKey);
+        this.af.database.list(`user_board/${this.currentUser}`).update(boardKey, board);
 
     }
 
@@ -109,7 +105,7 @@ export class BoardService implements IBoardService {
      * Metodo que nos detiene una colaboracion
      * Pendiente de refactor también
      */
-    public deleteColaboration(key: string) {
+    public deleteColaboration(key: string, boardDeleter: string) {
 
         this.af.database.list(`user_board/${this.currentUser}`).remove(key);
     }
@@ -118,13 +114,14 @@ export class BoardService implements IBoardService {
     /**
      * Pendiente de refactorización
      */
-    public deleteBoard(key: string) {
+    public deleteBoard(key: string, boardOwner: string) {
 
 
-        this.af.database.list('boards').remove(key)
         this.af.database.list(`user_board/${this.currentUser}`).remove(key);
-        this.af.database.list("column_tasks/").remove(key);
-        this.af.database.list('board_columns').remove(key);
+        if (this.currentUser === boardOwner) {
+            this.af.database.list("column_tasks/").remove(key);
+            this.af.database.list('board_columns').remove(key);
+        }
 
     }
 
@@ -138,14 +135,27 @@ export class BoardService implements IBoardService {
     }
 
 
+    private transformToBaordInfo(board: Board) {
+
+        let boardInfo = {
+            name: board.name,
+            date: board.date,
+            gitHubRepo: board.gitHubRepo,
+            travisRepo: board.travisRepo,
+            boardOwner: this.currentUser
+        }
+
+        return boardInfo;
+
+    }
 
     /**
      * Metodo que gestiona la inserción de los colaboradores que le pasamos
      */
-    private addColaborators(email: string[], boardInfo: any, boardKey: string) {
+    public addColaborators(email: string[], board: Board, boardKey: string) {
         let suscription;
         let subject = new Subject();
-
+        let boardInfo = this.transformToBaordInfo(board);
 
 
         suscription = this.af.database.list('users', {
