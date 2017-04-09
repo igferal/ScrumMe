@@ -3,14 +3,16 @@ import { Router } from '@angular/router';
 import { BoardService } from './../../../services/database/board.service';
 import { Board } from './../../../model/board';
 import { Component, OnInit, Input } from '@angular/core';
+import { DestroySubscribers } from "../../../util/unsuscribe.decorator";
 
 @Component({
   selector: 'board-card',
   templateUrl: './card.board.component.html',
   styleUrls: ['./card.board.component.scss'],
-  providers: [BoardService, TravisService]
+  providers: [BoardService]
 
 })
+@DestroySubscribers()
 export class CardBoardComponent implements OnInit {
 
   @Input() board: Board;
@@ -19,7 +21,13 @@ export class CardBoardComponent implements OnInit {
 
   private travisPass: boolean;
 
-  private travisStyles;
+  private travisBgStyles;
+
+  private travisColorStyles;
+
+
+  public subscribers: any = {};
+
 
 
   constructor(private boardService: BoardService, private router: Router,
@@ -68,11 +76,15 @@ export class CardBoardComponent implements OnInit {
   ngOnInit() {
 
     if (this.board.travisRepo !== '') {
-      this.travisService.getState(this.board.travisRepo).subscribe((res) => {
-        this.travisPass = res.json()[0].result === 0;
+      this.subscribers.subscription = this.travisService.getState(this.board.travisRepo).subscribe((res) => {
+        this.travisPass = res.json()[2].result === 0;
         if (!this.travisPass) {
-          this.travisStyles = {
-            'background': 'red'
+          this.travisBgStyles = {
+            'background': '#E04A1B'
+          };
+
+          this.travisColorStyles = {
+            'color': '#E04A1B'
           }
 
         }

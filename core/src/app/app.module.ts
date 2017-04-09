@@ -1,3 +1,4 @@
+import { TravisService } from './services/travis/travis.service';
 import { StyleListComponent } from './components/style.list.component/style.list.component';
 import { TaskChartComponent } from './components/charts/task.chart.component/task.chart.component';
 import { BurndownComponent } from './components/charts/burndown.component/burndown.component';
@@ -78,7 +79,7 @@ const myFirebaseAuthConfig = {
         AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
 
     ],
-    providers: [],
+    providers: [TravisService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,6 +7,10 @@ export class GithubService {
 
   private github: string = 'https://api.github.com';
   protected requestOptions: RequestOptions;
+  private userName: 'nacho1014';
+  private clientId: string = '51f0e2969f345042da1b';
+  private clientSecret: string = '7d09dbef2a9035a987a2d65adefb4a1268d331aa';
+
 
   constructor(private http: Http) {
 
@@ -43,7 +47,7 @@ export class GithubService {
 
   public postIssue(repo: string, user: string, posit: PostIt) {
 
-    
+
     console.log('post');
     let peticion = {
       "title": posit.titulo,
@@ -61,11 +65,6 @@ export class GithubService {
 
   }
 
-  private userName: 'nacho1014';
-  // private clientId: string = '<Client Id>';
-  // private clientSecret: string = '<Client Secret Key>';
-  private clientId: string = '51f0e2969f345042da1b';
-  private clientSecret: string = '7d09dbef2a9035a987a2d65adefb4a1268d331aa';
 
 
 

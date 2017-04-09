@@ -54,20 +54,6 @@ input {
         background: white;
         color: $bg-color;
     }
-    &::-webkit-datetime-edit-month-field {
-        color: black;
-    }
-    &::-webkit-datetime-edit-day-field {
-        color: black
-    }
-    &::-webkit-datetime-edit-year-field {
-        color: black;
-    }
-}
-
- ::-webkit-input-placeholder {
-    /* WebKit, Blink, Edge */
-    color: black;
 }
 
 @mixin button-bg($bg) {
