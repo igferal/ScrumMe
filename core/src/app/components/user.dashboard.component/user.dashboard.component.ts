@@ -32,9 +32,6 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     }
 
    
-
-
-X
     private showDialog() {
         this.showModal = true;
     }

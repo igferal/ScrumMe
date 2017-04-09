@@ -43,8 +43,8 @@ export class BoardService implements IBoardService {
         let boardInfo = {
             name: board.name,
             date: board.date,
-            gitHubRepo : board.gitHubRepo,
-            travisRepo : board.travisRepo,
+            gitHubRepo: board.gitHubRepo,
+            travisRepo: board.travisRepo,
             boardOwner: this.currentUser
         }
 
@@ -67,6 +67,13 @@ export class BoardService implements IBoardService {
         if (collabs !== undefined) {
             this.addColaborators(collabs, boardInfo, ref);
         }
+
+    }
+
+    public updateBoardInfo(boardKey: string, board: Board) {
+
+        console.log('aaaa' +boardKey);
+        this.af.database.list('boards').update(boardKey, board);
 
     }
 

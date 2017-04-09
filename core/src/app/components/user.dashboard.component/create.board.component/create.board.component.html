@@ -6,14 +6,14 @@
                 <input class="input-modal" required type="text" required [(ngModel)]="name" name="name" placeholder="Nombre del tablero" />
                 <p> </p>
                 <label>Fecha vencimiento</label>
-                <input required type="date" required [(ngModel)]="date" name="date" placeholder="Fecha de vencimiento" />
+                <input class="input-modal" required type="date" required [(ngModel)]="date" name="date" placeholder="Fecha de vencimiento" />
                 <p> </p>
-                <label>Colaboradores (opcional)</label>
-                <input class="input-modal" type="text" [(ngModel)]="mails" name="mails" placeholder="Email(s)" />
-                <small id="emailHelp" class="form-text text-muted">Introduce el email de los colaboradores que desees, separado por comas ej: <strong>pep@scrumme.es,cr7@scrumme.es</strong></small>
-                <label>Columnas (opcional)</label>
-                <input class="input-modal" type="text" [(ngModel)]="columns" name="columns" placeholder="Columna(s)" />
-                <small id="emailHelp" class="form-text text-muted">Introduce separadas por comas las columnas iniciales de tablero</small>
+                <label *ngIf="!editing">Colaboradores (opcional)</label>
+                <input *ngIf="!editing" class="input-modal" type="text" [(ngModel)]="mails" name="mails" placeholder="Email(s)" />
+                <small *ngIf="!editing" id="emailHelp" class="form-text text-muted">Introduce el email de los colaboradores que desees, separado por comas ej: <strong>pep@scrumme.es,cr7@scrumme.es</strong></small>
+                <label *ngIf="!editing">Columnas (opcional)</label>
+                <input *ngIf="!editing" class="input-modal" type="text" [(ngModel)]="columns" name="columns" placeholder="Columna(s)" />
+                <small *ngIf="!editing" id="emailHelp" class="form-text text-muted">Introduce separadas por comas las columnas iniciales de tablero</small>
                 <label>Repositorio de github (opcional)</label>
                 <input class="input-modal" type="text" [(ngModel)]="gitHubRepo" name="gitHubRepo" placeholder="https://github.com/myuser/myrepo" />
                 <small id="emailHelp" class="form-text text-muted">Introduce la url del repositorio asociado : https://github.com/nacho1014/ScrumMe </small>
@@ -22,7 +22,7 @@
                 <small id="emailHelp" class="form-text text-muted">Introduce la url de la build asociada en travis</small>
                 <p> </p>
                 <hr/>
-                <button class="button btn-main-block">Crear tablero</button>
+                <button class="button btn-main-block">{{buttonMessage}}</button>
             </div>
         </fieldset>
     </form>

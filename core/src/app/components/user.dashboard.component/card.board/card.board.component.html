@@ -17,8 +17,8 @@
             <a (click)="goToBurndown()"> <i [ngStyle]="travisBgStyles" class="fa fa-area-chart iconButton" aria-hidden="true"></i></a>
             <a (click)="goToMyCharts()"> <i [ngStyle]="travisBgStyles" class="fa fa-bar-chart iconButton" aria-hidden="true"></i> </a>
             <a (click)="console.log( 'Github')"> <i [ngStyle]="travisBgStyles" class="fa fa-github iconButton" aria-hidden="true"></i> </a>
-            <a (click)="console.log( 'Config')"> <i [ngStyle]="travisBgStyles" class="fa fa-wrench iconButton" aria-hidden="true"></i> </a>
-
+            <a (click)="console.log( 'Github')"> <i [ngStyle]="travisBgStyles" class="fa fa-users iconButton" aria-hidden="true"></i> </a>
+            <a (click)="showDialog()"> <i [ngStyle]="travisBgStyles" class="fa fa-wrench iconButton" aria-hidden="true"></i> </a>
         </div>
     </div>
     <hr>
@@ -27,3 +27,7 @@
     </footer>
 
 </section>
+
+<p-dialog [draggable]="false" [modal]="true" header="Editar tablero" [(visible)]="showModal">
+    <createBoard [board]="board" [boardKey]="boardKey" (notify)="closeDialog()"></createBoard>
+</p-dialog>

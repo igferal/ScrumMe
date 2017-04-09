@@ -25,6 +25,7 @@ export class CardBoardComponent implements OnInit {
 
   private travisColorStyles;
 
+  private showModal: boolean;
 
   public subscribers: any = {};
 
@@ -71,6 +72,13 @@ export class CardBoardComponent implements OnInit {
   }
 
 
+  private showDialog() {
+    this.showModal = true;
+  }
+
+  private closeDialog() {
+    this.showModal = false;
+  }
 
 
   ngOnInit() {
