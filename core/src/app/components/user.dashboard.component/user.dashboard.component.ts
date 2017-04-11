@@ -16,27 +16,27 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 export class UserDashboardComponent implements OnInit, OnDestroy {
 
 
-    private createBoard: string;
-    private boards: Board[];
+    public createBoard: string;
+    public boards: Board[];
     public subscribers: any = {};
-    private viewContainerRef: ViewContainerRef;
-    private showModal: boolean;
+    public viewContainerRef: ViewContainerRef;
+    public showModal: boolean;
     public options: any[];
 
 
 
-    constructor(private boardService: BoardService, viewContainerRef: ViewContainerRef) {
+    constructor(public boardService: BoardService, viewContainerRef: ViewContainerRef) {
 
         this.createBoard = 'Añadir tablero';
         this.viewContainerRef = viewContainerRef;
     }
 
    
-    private showDialog() {
+    public showDialog() {
         this.showModal = true;
     }
 
-    private closeDialog() {
+    public closeDialog() {
         this.showModal = false;
     }
 

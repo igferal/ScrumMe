@@ -116,9 +116,6 @@
         <p-messages [value]="msgs"></p-messages>
         <br/>
         <h3>Tareas</h3>
-        <note id="b" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' " [colKey]="'key' " [note]="p1" [noteKey]="'key'"></note>
-        <note id="a" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' " [colKey]="'key' " [note]="p2" [noteKey]="'key'"></note>
-        <note id="c" (addWork)="onLogHours($event)" (changeTaskState)="onChangeState($event)" (notify)="onNotify($event) " [board]="'key' " [colKey]="'key' " [note]="p3" [noteKey]="'key'"></note>
 
 
         <br/>
@@ -129,7 +126,7 @@
                 <a href="https://travis-ci.org/Arquisoft/Voting_2b">
                     <i class="fa fa-pied-piper delivery " aria-hidden="true"></i></a>
                 <div class="status">
-                    <i class="fa fa-times " aria-hidden="true" (click)="deleteBoard(board.$key)"></i>
+                    <i class="fa fa-times " aria-hidden="true"></i>
                 </div>
             </header>
 
@@ -148,7 +145,7 @@
             </div>
             <hr>
             <footer class="footer">
-                <a (click)="goToBoard(board.$key)" class="button btn-success">Ir al tablón</a>
+                <a class="button btn-success">Ir al tablón</a>
             </footer>
 
         </section>

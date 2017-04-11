@@ -17,16 +17,16 @@ import { Router } from '@angular/router';
 export class CreateTaskComponent {
 
 
-    private contenido: string;
-    private horas: number;
-    private name: string;
+    public contenido: string;
+    public horas: number;
+    public name: string;
     @Input() board: any;
     @Input() colKey: any;
     @Output() notify = new EventEmitter<boolean>();
     @Input() editing: boolean;
-    private incorrect: boolean;
+    public incorrect: boolean;
 
-    constructor(private taskService: TaskService, public router: Router) {
+    constructor(public taskService: TaskService, public router: Router) {
         this.horas = 0;
     }
 
@@ -55,7 +55,7 @@ export class CreateTaskComponent {
     /**
      * Metodo auxiliar de comprobación del formulario
      */
-    private isDataCorrrect(): boolean {
+    public isDataCorrrect(): boolean {
 
         return this.horas >= 0 && this.contenido !== '';
     }

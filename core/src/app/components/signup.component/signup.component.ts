@@ -16,16 +16,16 @@ import { User } from '../../model/user';
 
 export class SignUpComponent {
 
-    private email: string;
-    private password: string;
-    private passwordAgain: string;
-    private name: string;
-    private surname: string;
-    private msgs = [];
+    public email: string;
+    public password: string;
+    public passwordAgain: string;
+    public name: string;
+    public surname: string;
+    public msgs = [];
 
 
-    constructor(private firebaseAuth: FirebaseAuthentication, private userService: UserService,
-        private router: Router) {
+    constructor(public firebaseAuth: FirebaseAuthentication, public userService: UserService,
+        public router: Router) {
     }
 
 
@@ -50,7 +50,7 @@ export class SignUpComponent {
     /**
      *  Limpia los campos de contraseñas
      */
-    private clearPassword() {
+    public clearPassword() {
         this.password = '';
         this.passwordAgain = '';
     }
@@ -58,7 +58,7 @@ export class SignUpComponent {
     /**
      * Obtiene si la contraseña tiene la longitud necesaria
      */
-    private passwordLength(): boolean {
+    public passwordLength(): boolean {
 
         return (this.password.length >= 6);
     }
@@ -66,7 +66,7 @@ export class SignUpComponent {
     /**
      * Comprueba si las contraseñas coinciden
      */
-    private passwordMatch(): boolean {
+    public passwordMatch(): boolean {
 
         return (this.password === this.passwordAgain);
     }
@@ -76,7 +76,7 @@ export class SignUpComponent {
      * Si se ha creado nos redirigirá al UserDashboardComponent
      * Si no es posible se nos muestra el error que nos proporciona la base de datos
      */
-    private signUp(name: string, surname: string, email: string, password: string) {
+    public signUp(name: string, surname: string, email: string, password: string) {
         this.email = email;
         this.password = password;
         this.firebaseAuth.signUp(email, password).then((res) => {
@@ -94,7 +94,7 @@ export class SignUpComponent {
     /**
      * Crea el objeto usuario que será llevado a la base de datos
      */
-    private createUser(name: string, surname: string, email: string, uid: string) {
+    public createUser(name: string, surname: string, email: string, uid: string) {
 
         let user: User = new User(name, surname, email, uid);
         this.userService.createUser(user);
@@ -103,12 +103,12 @@ export class SignUpComponent {
     /**
      * Metodo que redirige al dashboard se usuario
      */
-    private redirect(res: any) {
+    public redirect(res: any) {
 
         this.router.navigate(['/dashboard']);
 
     }
-    private showError(errorMessage: string) {
+    public showError(errorMessage: string) {
         this.msgs = [];
         this.msgs.push({ severity: 'error', summary: 'Error!', detail: errorMessage });
     }

@@ -19,28 +19,28 @@ export class CardBoardComponent implements OnInit {
 
   @Input() boardKey: string;
 
-  private travisPass: boolean;
+  public travisPass: boolean;
 
-  private travisBgStyles;
+  public travisBgStyles;
 
-  private travisColorStyles;
+  public travisColorStyles;
 
-  private showModal: boolean;
+  public showModal: boolean;
 
-  private showModalColabs: boolean;
+  public showModalColabs: boolean;
 
-  private gitRepoUrl: string;
+  public gitRepoUrl: string;
 
-  private travisRepoUrl: string;
+  public travisRepoUrl: string;
 
-  private mailsToColab: string;
+  public mailsToColab: string;
 
   public subscribers: any = {};
 
 
 
-  constructor(private boardService: BoardService, private router: Router,
-    private travisService: TravisService) { }
+  constructor(public boardService: BoardService, public router: Router,
+    public travisService: TravisService) { }
 
 
   /**
@@ -67,7 +67,7 @@ export class CardBoardComponent implements OnInit {
   /**
    * Metodo que nos borra un tablero del cual se es dueño
    */
-  private deleteBoard() {
+  public deleteBoard() {
 
     this.boardService.deleteBoard(this.boardKey, this.board.owner);
 
@@ -76,29 +76,29 @@ export class CardBoardComponent implements OnInit {
   /**
    * Metodo que cancela una colaboración en un tablero
    */
-  private stopColaboration(key: string) {
+  public stopColaboration(key: string) {
 
     this.boardService.deleteColaboration(key,this.board.owner);
   }
 
 
-  private showDialog() {
+  public showDialog() {
     this.showModal = true;
   }
 
-  private closeDialog() {
+  public closeDialog() {
     this.showModal = false;
   }
 
-  private showDialogColabs() {
+  public showDialogColabs() {
     this.showModalColabs = true;
   }
 
-  private closeDialogColabs() {
+  public closeDialogColabs() {
     this.showModalColabs = false;
   }
 
-  private addColabs() {
+  public addColabs() {
     console.log(this.mailsToColab);
     let splitted: string[];
 
@@ -112,7 +112,7 @@ export class CardBoardComponent implements OnInit {
   }
 
 
-  private configureTravis() {
+  public configureTravis() {
 
     if (this.board.travisRepo !== '') {
       this.subscribers.subscription = this.travisService.getState(this.board.travisRepo).subscribe((res) => {

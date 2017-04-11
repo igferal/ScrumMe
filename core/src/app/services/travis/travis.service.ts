@@ -1,6 +1,5 @@
 import { element } from 'protractor';
 import { Http } from '@angular/http';
-import * as http from 'http';
 import { Injectable } from '@angular/core';
 
 @Injectable()

@@ -1,12 +1,10 @@
-import { element } from 'protractor';
-import { ASTWithSource } from '@angular/compiler/src/expression_parser/ast';
 import { PostIt } from './../../model/post.it';
 import { ITaskService } from './ITaskService';
 import { BoardColumn } from './../../model/boardColumn';
 import { Board } from './../../model/board';
 import { User } from './../../model/user';
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, AuthProviders } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
 import { Subject } from 'rxjs/Subject';
 
 

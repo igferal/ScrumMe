@@ -9,8 +9,8 @@ import { FirebaseAuthentication } from '../../services/authentication/firebase.a
   providers: [FirebaseAuthentication]
 })
 export class AppComponent implements OnInit {
-  title: string;
-  auth: any;
+  public title: string;
+  public auth: any;
 
   constructor(private authservice: FirebaseAuthentication, private router: Router) { }
 

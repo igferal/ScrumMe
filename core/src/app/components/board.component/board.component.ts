@@ -24,20 +24,20 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 @DestroySubscribers()
 export class BoardComponent implements OnInit, OnDestroy {
 
-    private myBoard: Board;
-    private createTask: string;
-    private currentUser: User;
-    private board: string;
+    public myBoard: Board;
+    public createTask: string;
+    public currentUser: User;
+    public board: string;
     public subscribers: any = {};
-    private columns: Array<String>;
-    private showModal: boolean;
+    public columns: Array<String>;
+    public showModal: boolean;
 
 
 
 
 
-    constructor(private userService: UserService, private taskService: TaskService, private columnService: ColumnService,
-        private dragulaService: DragulaService, private route: ActivatedRoute) {
+    constructor(public userService: UserService, public taskService: TaskService, public columnService: ColumnService,
+        public dragulaService: DragulaService, public route: ActivatedRoute) {
 
         this.createTask = 'Añadir tarea';
         this.dragulaSubscriptions(dragulaService);
@@ -46,7 +46,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     /**
      * Metodo que nos gestiona las suscripciones drag & drop de dragula
      */
-    private dragulaSubscriptions(dragulaService: DragulaService) {
+    public dragulaSubscriptions(dragulaService: DragulaService) {
 
         this.subscribers.dragulaSubscription = dragulaService.drop.subscribe((value) => {
             this.onDropModel(value.slice(1));
@@ -58,11 +58,11 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     }
 
-    private showDialog() {
+    public showDialog() {
         this.showModal = true;
     }
 
-    private closeDialog() {
+    public closeDialog() {
         this.showModal = false;
     }
 
@@ -71,7 +71,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      * Metodo que nos gestiona el drop de elementos, además nos obtiene el id del postIt a mover
      * el contenedor de inicio y el contenedor de destino
      */
-    private onDropModel(args) {
+    public onDropModel(args) {
 
         let postItId: string = args[0].id;
         let fromCollection: string = args[2].id;
@@ -82,7 +82,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     /**
      * Metodo que nos gestiona el cambio de columna
      */
-    private addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
+    public addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
 
 
         this.taskService.addToOtherBag(this.board, postItId, fromCollection, toCollection, this.currentUser.name);
@@ -115,7 +115,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     /**
      * Método en el que obtemos la información sobre el usuario actual 
      */
-    private suscribeUser() {
+    public suscribeUser() {
         this.subscribers.userSubscription = this.userService.getCurrentDeveloper().subscribe((user) => {
             this.currentUser = new User(user._name, user._surname, user._email, user._uid);
         });
@@ -126,7 +126,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     /**
      * Metodo que nos obtiene el id del tablero actual a traves de la url
      */
-    private inicializateRoute() {
+    public inicializateRoute() {
         this.subscribers.routerSubscription = this.route.params
             .switchMap((params: Params) => this.board = params['id'])
             .subscribe((board) => {
@@ -139,7 +139,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      * estos se suscriben a listas observables que nos vienen desde Firebase
      * 
      */
-    private inicializateCollections() {
+    public inicializateCollections() {
 
         console.log(this.board);
         this.subscribers.subscription = this.columnService.getColumns(this.board).subscribe(

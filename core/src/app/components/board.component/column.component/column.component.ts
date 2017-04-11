@@ -4,7 +4,7 @@ import { ColumnService } from './../../../services/database/column.service';
 import { DestroySubscribers } from '../../../util/unsuscribe.decorator';
 import { PostIt } from './../../../model/post.it';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { MenuModule, MenuItem } from 'primeng/primeng';
+import { MenuItem } from 'primeng/primeng';
 
 @Component({
     moduleId: 'column.component',
@@ -18,17 +18,17 @@ import { MenuModule, MenuItem } from 'primeng/primeng';
 @DestroySubscribers()
 export class ColumnComponent implements OnInit {
 
-    private notes: PostIt[];
-    @Input() private colKey: string;
-    @Input() private colName: string;
-    @Input() private boardKey: string;
+    public notes: PostIt[];
+    @Input() public colKey: string;
+    @Input() public colName: string;
+    @Input() public boardKey: string;
     public subscribers: any = {};
     public options: any[];
-    private showModal: boolean;
-    private showModalCol: boolean;
-    private showModalGit: boolean;
-    notesToDispose = [];
-    private size: number;
+    public showModal: boolean;
+    public showModalCol: boolean;
+    public showModalGit: boolean;
+    public notesToDispose = [];
+    public size: number;
 
 
     constructor(private columnService: ColumnService, public taskService: TaskService, public githubService: GithubService) {
@@ -69,28 +69,28 @@ export class ColumnComponent implements OnInit {
         this.taskService.deleteTask(this.boardKey, this.colKey, key);
     }
 
-    private showDialog() {
+    public showDialog() {
         this.showModal = true;
     }
 
-    private closeDialog() {
+    public closeDialog() {
         this.showModal = false;
     }
 
-    private showDialogGit() {
+    public showDialogGit() {
         this.showModalGit = true;
     }
 
-    private closeDialogGit() {
+    public closeDialogGit() {
         this.showModalGit = false;
     }
 
 
-    private showDialogCol() {
+    public showDialogCol() {
         this.showModalCol = true;
     }
 
-    private closeDialogCol() {
+    public closeDialogCol() {
         this.showModalCol = false;
     }
 
@@ -107,7 +107,7 @@ export class ColumnComponent implements OnInit {
 
     public createGitIssue(postit: PostIt) {
 
-        this.githubService.postIssue('AplicacionFifa','nacho1014',postit);
+        this.githubService.postIssue('AplicacionFifa', 'nacho1014', postit);
 
     }
 

@@ -21,13 +21,13 @@ export class CreateColumnComponent implements OnInit {
 
     @Input() board: any;
     @Output() notify = new EventEmitter<boolean>();
-    private name: string;
+    public name: string;
     @Input() colName: string;
-    private action: string;
+    public action: string;
     @Input() editing: boolean;
     @Input() colKey: string;
 
-    constructor(private columnService: ColumnService, public router: Router) {
+    constructor(public columnService: ColumnService, public router: Router) {
 
     }
 
@@ -42,14 +42,14 @@ export class CreateColumnComponent implements OnInit {
 
     }
 
-    private edit() {
+    public edit() {
 
         this.columnService.editColumn(`board_columns/${this.board}/${this.colKey}/_columnName`, this.name);
 
     }
 
 
-    private save() {
+    public save() {
 
         let colBoard = new BoardColumn(new Array<PostIt>(), this.name);
         this.columnService.saveColumn(this.board, colBoard);

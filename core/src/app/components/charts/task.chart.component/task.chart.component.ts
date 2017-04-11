@@ -2,15 +2,10 @@ import { TaskService } from './../../../services/database/task.service';
 import { ColumnService } from './../../../services/database/column.service';
 import { PostIt } from './../../../model/post.it';
 import { ChartComponentParent } from './../chart.parent.component';
-import { read } from 'fs';
-import { element } from 'protractor';
 import { FirebaseListObservable } from 'angularfire2';
-import { delay } from 'rxjs/operator/delay';
 import { ActivatedRoute, Params } from '@angular/router';
 import { DestroySubscribers } from '../../../util/unsuscribe.decorator';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UIChart } from 'primeng/primeng';
-import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 @Component({
   moduleId: 'task-chart',
@@ -23,8 +18,8 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 @DestroySubscribers()
 export class TaskChartComponent extends ChartComponentParent implements OnInit {
 
-  private board: string;
-  private subscribers: any = {};
+  public board: string;
+  public subscribers: any = {};
   public ChartType: string = 'bar';
 
   public ChartColors: Array<any> = [
@@ -47,8 +42,8 @@ export class TaskChartComponent extends ChartComponentParent implements OnInit {
 
   ];
 
-  constructor(private route: ActivatedRoute, private taskService: TaskService,
-    private columnService: ColumnService) {
+  constructor(public route: ActivatedRoute, public taskService: TaskService,
+    public columnService: ColumnService) {
     super();
   }
 
@@ -78,7 +73,7 @@ export class TaskChartComponent extends ChartComponentParent implements OnInit {
   /**
  * Metodo que nos obtiene el id del tablero actual a traves de la url
  */
-  private inicializateRoute() {
+  public inicializateRoute() {
     this.subscribers.routerSubscription = this.route.params
       .switchMap((params: Params) => this.board = params['id'])
       .subscribe((board) => {

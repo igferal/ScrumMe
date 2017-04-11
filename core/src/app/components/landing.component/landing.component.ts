@@ -1,4 +1,3 @@
-import { TravisService } from './../../services/travis/travis.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class LandingComponent {
 
-  constructor(public travisService: TravisService) {
+  constructor() {
 
   }
 

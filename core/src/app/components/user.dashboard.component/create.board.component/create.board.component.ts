@@ -16,20 +16,20 @@ import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 export class CreateBoardComponent implements OnInit {
 
 
-    private name: string;
-    private date: Date;
+    public name: string;
+    public date: Date;
     @Output() notify = new EventEmitter<boolean>();
-    private mails: string;
-    private columns: string;
-    private gitHubRepo: string;
-    private travisRepo: string;
+    public mails: string;
+    public columns: string;
+    public gitHubRepo: string;
+    public travisRepo: string;
     @Input() board: Board;
     @Input() boardKey: string;
-    private editing: boolean;
-    private buttonMessage: string;
+    public editing: boolean;
+    public buttonMessage: string;
 
 
-    constructor(private boardService: BoardService) {
+    constructor(public boardService: BoardService) {
         this.mails = '';
         this.columns = '';
         this.gitHubRepo = '';
@@ -53,7 +53,7 @@ export class CreateBoardComponent implements OnInit {
 
     }
 
-    private edit() {
+    public edit() {
 
 
         this.board.gitHubRepo = this.getRepo(this.gitHubRepo);
@@ -67,7 +67,7 @@ export class CreateBoardComponent implements OnInit {
 
     }
 
-    private getRepo(url: string): string {
+    public getRepo(url: string): string {
         if (url !== "") {
             let urlSplitted = url.split('/');
             return `${urlSplitted[urlSplitted.length - 2]}/${urlSplitted[urlSplitted.length - 1]}`;
@@ -91,7 +91,7 @@ export class CreateBoardComponent implements OnInit {
 
     }
 
-    private save() {
+    public save() {
 
         let splitted: string[];
         let board: Board = new Board(this.name, this.date);
@@ -120,7 +120,7 @@ export class CreateBoardComponent implements OnInit {
 
     }
 
-    private cleanFields() {
+    public cleanFields() {
 
         this.name = '';
         this.date = null;

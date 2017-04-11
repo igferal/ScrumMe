@@ -14,13 +14,13 @@ import { Router } from '@angular/router';
 
 export class LoginComponent {
 
-    private email: string;
-    private password: string;
-    private authed: boolean;
-    private issue: string;
-    private msgs = [];
+    public email: string;
+    public password: string;
+    public authed: boolean;
+    public issue: string;
+    public msgs = [];
 
-    constructor(private firebaseAuth: FirebaseAuthentication, private router: Router) {
+    constructor(public firebaseAuth: FirebaseAuthentication, public router: Router) {
         this.authed = false;
     }
 
@@ -50,7 +50,7 @@ export class LoginComponent {
     /**
      * Metodo que nos gestiona la respuesta que nos devuelve el servicio de autenticación
      */
-    private redirect(res: any) {
+    public redirect(res: any) {
 
         if (res.provider === 4) {
             this.authed = true;

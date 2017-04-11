@@ -19,14 +19,14 @@ export class NoteComponent implements OnInit {
     @Input() colKey: any;
     @Input() noteKey: string;
     public options: any[];
-    private showLogWork: boolean;
-    private percentage: number;
+    public showLogWork: boolean;
+    public percentage: number;
 
-    private showLogWorkDialog() {
+    public showLogWorkDialog() {
         this.showLogWork = true;
     }
 
-    private removeLogWorkDialog() {
+    public removeLogWorkDialog() {
         this.showLogWork = false;
     }
 
@@ -38,7 +38,7 @@ export class NoteComponent implements OnInit {
 
     }
 
-    private loadMenu() {
+    public loadMenu() {
         let label = this.getCloseLabel();
         this.options = [
             {
@@ -73,18 +73,18 @@ export class NoteComponent implements OnInit {
 
     }
 
-    private sentToGitHub() {
+    public sentToGitHub() {
         this.createIssue.emit(this.note);
     }
 
-    private closeTask() {
+    public closeTask() {
 
         this.note.key = this.noteKey;
         this.note.closed = !this.note.closed;
         this.changeTaskState.emit(this.note);
     }
 
-    private getCloseLabel(): string {
+    public getCloseLabel(): string {
 
         if (this.note.closed) {
             return 'Abrir tarea';
@@ -94,7 +94,7 @@ export class NoteComponent implements OnInit {
 
     }
 
-    private logHours(hours: any) {
+    public logHours(hours: any) {
 
 
         this.note.workedHours = (this.note.workedHours + parseInt(hours));
@@ -105,7 +105,7 @@ export class NoteComponent implements OnInit {
     }
 
 
-    private deleteItem() {
+    public deleteItem() {
 
         this.notify.emit(this.noteKey);
     }
