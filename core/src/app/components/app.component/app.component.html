@@ -6,6 +6,10 @@
     <li style="float:right" *ngIf="auth!=null">
         <a routerLink="/dashboard">Dashboard</a>
     </li>
+    <li style="float:right" *ngIf="auth!=null">
+        <a routerLink="/collabs">Invitaciones</a>
+        <i class="fa fa-bell-o bell" aria-hidden="true">  {{numInvitations}} </i>
+    </li>
     <li style="float:right" *ngIf="auth==null">
         <a routerLink="/login" href="# ">Iniciar sesión</a>
     </li>

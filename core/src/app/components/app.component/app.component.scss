@@ -1,6 +1,4 @@
 @import "~variables.scss";
-
-
 ul.topnav {
     list-style-type: none;
     margin: 0;
@@ -30,8 +28,11 @@ ul.topnav li a {
     font-size: 17px;
 }
 
-ul.topnav li a:hover {
-    background-color: $main-color-dark;
+
+.bell{
+
+    
+
 }
 
 ul.topnav li.icon {
@@ -71,4 +72,3 @@ ul.topnav li.icon {
         text-align: left;
     }
 }
-

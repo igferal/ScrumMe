@@ -1,3 +1,5 @@
+import { DestroySubscribers } from '../../util/unsuscribe.decorator';
+import { BoardService } from './../../services/database/board.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
@@ -6,13 +8,17 @@ import { FirebaseAuthentication } from '../../services/authentication/firebase.a
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [FirebaseAuthentication]
+  providers: [FirebaseAuthentication, BoardService]
 })
+@DestroySubscribers()
 export class AppComponent implements OnInit {
   public title: string;
   public auth: any;
+  public numInvitations;
+  public subscribers: any = {};
 
-  constructor(private authservice: FirebaseAuthentication, private router: Router) { }
+
+  constructor(private authservice: FirebaseAuthentication, private router: Router, public boardService: BoardService) { }
 
   /**
    * Método de salida de sesión
@@ -31,6 +37,14 @@ export class AppComponent implements OnInit {
     this.authservice.af.auth.subscribe((user) => {
       this.auth = user;
     });
+
+    this.subscribers.subscription = this.boardService.getInvitationsToCollab().subscribe((invititations) => {
+
+      if (invititations) {
+        this.numInvitations = invititations.length;
+      }
+    })
+
 
   }
 
