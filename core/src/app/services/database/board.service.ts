@@ -12,6 +12,8 @@ import { Board } from './../../model/board';
 export class BoardService implements IBoardService {
 
     private currentUser: string;
+    private currentUserMail: string;
+
 
     /**
      * Obtengo el ID del usuario actual del sistema
@@ -22,6 +24,8 @@ export class BoardService implements IBoardService {
         this.af.auth.subscribe((user) => {
             if (user != null) {
                 this.currentUser = user.uid;
+                this.currentUserMail = user.auth.email;
+
             }
         });
 
@@ -149,6 +153,59 @@ export class BoardService implements IBoardService {
 
     }
 
+
+    public inviteToColab(splitted: String[], board: Board, boardKey: string) {
+
+        splitted.forEach((mail: string) => {
+
+            this.inviteToColaborateIndividual(mail, board, boardKey);
+
+        });
+
+    }
+
+    private inviteToColaborateIndividual(mail: string, board: Board, boardKey: string) {
+
+        let suscription;
+        let boardInfo = this.transformToBaordInfo(board);
+
+
+        suscription = this.af.database.list('users', {
+            query: {
+                orderByChild: '_email',
+                equalTo: mail,
+            }
+        }).subscribe(userToInvite => {
+
+            console.log(userToInvite);
+            if (userToInvite) {
+                this.af.database.list(`collabs/${userToInvite[0]._uid}`).push(this.transformBoardToInvite(board, boardKey));
+            }
+        });
+    }
+
+    private transformBoardToInvite(board: Board, boardKey: string) {
+
+        let boardInfo = {
+            name: board.name,
+            date: board.date,
+            gitHubRepo: board.gitHubRepo,
+            travisRepo: board.travisRepo,
+            boardOwner: this.currentUser,
+            boardOwnerMail: this.currentUserMail,
+            boardKey: boardKey
+        }
+
+        return boardInfo;
+
+    }
+
+    public getInvitationsToCollab(): FirebaseListObservable<any> {
+
+        return this.af.database.list(`collabs/${this.currentUser}`);
+
+    }
+
     /**
      * Metodo que gestiona la inserción de los colaboradores que le pasamos
      */
@@ -176,6 +233,21 @@ export class BoardService implements IBoardService {
             subject.next(element)
         });
         subject.complete();
+
+    }
+
+    public declineCollaboration(collabKey: string) {
+
+        this.af.database.list(`collabs/${this.currentUser}`).remove(collabKey);
+
+    }
+
+    public acceptColab(collabKey: string, board: any, boardKey: string) {
+
+        this.declineCollaboration(collabKey);
+
+
+        this.addColaborator(this.currentUser, board, boardKey);
 
     }
 

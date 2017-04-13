@@ -78,7 +78,7 @@ export class CardBoardComponent implements OnInit {
    */
   public stopColaboration(key: string) {
 
-    this.boardService.deleteColaboration(key,this.board.owner);
+    this.boardService.deleteColaboration(key, this.board.owner);
   }
 
 
@@ -99,12 +99,11 @@ export class CardBoardComponent implements OnInit {
   }
 
   public addColabs() {
-    console.log(this.mailsToColab);
     let splitted: string[];
 
     if (this.mailsToColab.length > 0) {
       splitted = this.mailsToColab.split(",");
-      this.boardService.addColaborators(splitted, this.board, this.boardKey);
+      this.boardService.inviteToColab(splitted, this.board, this.boardKey);
     }
 
     this.mailsToColab = '';

@@ -78,18 +78,8 @@ export class CreateBoardComponent implements OnInit {
 
     }
 
-    public putGitRepo(url: string) {
-
-
-    }
-
-    public putTravisRepo(url: string) {
-        if (url !== "") {
-            let urlSplitted = url.split('/');
-            this.travisRepo = `${urlSplitted[urlSplitted.length - 2]}/${urlSplitted[urlSplitted.length - 1]}`;
-        }
-
-    }
+    
+    
 
     public save() {
 

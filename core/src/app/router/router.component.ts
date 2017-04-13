@@ -1,3 +1,4 @@
+import { CollabComponent } from './../components/collab.component/collab.component';
 import { GithubComponent } from './../components/github.component/github.component';
 import { StyleListComponent } from './../components/style.list.component/style.list.component';
 import { TaskChartComponent } from './../components/charts/task.chart.component/task.chart.component';
@@ -33,6 +34,10 @@ const routes: Routes = [
   },
   {
     path: 'taskchart/:id', component: TaskChartComponent,
+    canActivate: [FirebaseAuthentication]
+  },
+  {
+    path: 'collabs', component: CollabComponent,
     canActivate: [FirebaseAuthentication]
   }
 ];

@@ -1,0 +1,10 @@
+<div class="collabsDiv">
+  <div *ngFor="let invitation of invitations">
+    <div class="inline">
+      <h1> {{invitation.name}} <small>{{invitation.boardOwnerMail}}</small> </h1>
+
+      <button class="button btn-success" (click)="accept(invitation.$key,invitation)">Aceptar colaboracion</button>
+      <button class="button btn-warn" (click)="decline(invitation.$key)">Decline colaboracion</button>
+    </div>
+  </div>
+</div>

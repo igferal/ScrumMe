@@ -245,3 +245,8 @@ div[data-anim~=base] {
         clip: rect(auto, auto, auto, auto);
     }
 }
+
+.inline {
+    display: inline-flex;
+    
+}
