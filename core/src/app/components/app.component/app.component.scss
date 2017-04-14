@@ -31,7 +31,17 @@ ul.topnav li a {
 
 .bell{
 
-    
+    transform: rotate(15deg);
+
+}
+
+small{
+
+ height: 5px;
+ width: 5px;
+ border-radius: 50%;
+ color: black;
+ background: white;
 
 }
 
