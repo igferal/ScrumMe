@@ -8,8 +8,7 @@
     </li>
     <li style="float:right" *ngIf="auth!=null">
         <a routerLink="/collabs">Invitaciones</a>
-        <i class="fa fa-bell-o bell" aria-hidden="true">  </i>
-        <small> {{numInvitations}}</small>
+        <bell [(numInvitations)]="numInvitations"></bell>
     </li>
     <li style="float:right" *ngIf="auth==null">
         <a routerLink="/login" href="# ">Iniciar sesión</a>

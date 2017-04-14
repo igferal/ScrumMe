@@ -35,17 +35,28 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     // Subscripción 
     this.authservice.af.auth.subscribe((user) => {
+
       this.auth = user;
+      if (user) {
+        this.loadBellNotifications();
+      }
+
     });
 
-    this.subscribers.subscription = this.boardService.getInvitationsToCollab().subscribe((invititations) => {
 
-      if (invititations) {
-        this.numInvitations = invititations.length;
+
+
+  }
+
+  loadBellNotifications() {
+    this.subscribers.subscription = this.boardService.getInvitationsToCollab().subscribe((collabs) => {
+
+      console.log(collabs);
+      if (collabs) {
+
+        this.numInvitations = collabs.length;
       }
     })
-
-
   }
 
 }

@@ -27,6 +27,7 @@ import { ChartsModule } from 'ng2-charts';
 import { GithubComponent } from './components/github.component/github.component';
 import { CardBoardComponent } from './components/user.dashboard.component/card.board/card.board.component';
 import { CollabComponent } from './components/collab.component/collab.component';
+import { BellComponent } from './components/app.component/bell/bell.component';
 
 
 
@@ -66,7 +67,8 @@ const myFirebaseAuthConfig = {
         StyleListComponent,
         GithubComponent,
         CardBoardComponent,
-        CollabComponent
+        CollabComponent,
+        BellComponent
     ],
     imports: [
         BrowserModule,

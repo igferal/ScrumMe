@@ -202,6 +202,7 @@ export class BoardService implements IBoardService {
 
     public getInvitationsToCollab(): FirebaseListObservable<any> {
 
+        console.log(this.currentUser);
         return this.af.database.list(`collabs/${this.currentUser}`);
 
     }
