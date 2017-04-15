@@ -1,12 +1,12 @@
 <div class="scrollDiv">
     <div *ngFor="let issue of issues">
+        <div class="inline">
+            <h1> {{issue.title}} <small>{{issue.assignee}}</small> </h1>
+            <p>
+                {{issue.body}}
+            </p>
 
-        <h1> {{issue.title}} <small>{{issue.assignee}}</small> </h1>
-        <p>
-            {{issue.body}}
-        </p>
-
-        <button class="button btn-success" (click)="onclick(issue)">Generate task</button>
-
+            <button class="button btn-success" (click)="onclick(issue)">Generate task</button>
+        </div>
     </div>
 </div>

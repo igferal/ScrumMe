@@ -2,14 +2,13 @@
 @import "~variables.scss";
 div {
     color: $main-color;
-    margin: 5%;
+    margin: 1%;
 }
 
 .scrollDiv {
     background: #F8F8F8;
     overflow: scroll;
-    height: 91vh;
-    margin: 10px;
+    height: 65vh;
     min-width: 320px;
     display: flex;
     justify-content: center;
