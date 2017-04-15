@@ -1,3 +1,4 @@
+import { passBoolean } from 'protractor/built/util';
 import { Injectable } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { IAuthentication } from './IAuthentication';
@@ -63,6 +64,16 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
         });
     }
 
+    public changePassword(password: string, oldPassword: string, email: string) {
+
+
+
+        let creds: any = { email: email, password: oldPassword };
+        this.af.auth.login(creds).then((res) => {
+            this.af.auth.getAuth().auth.updatePassword(password);
+        })
+
+    }
 
 
     public logout() {

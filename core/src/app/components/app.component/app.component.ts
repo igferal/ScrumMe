@@ -51,7 +51,6 @@ export class AppComponent implements OnInit {
   loadBellNotifications() {
     this.subscribers.subscription = this.boardService.getInvitationsToCollab().subscribe((collabs) => {
 
-      console.log(collabs);
       if (collabs) {
 
         this.numInvitations = collabs.length;

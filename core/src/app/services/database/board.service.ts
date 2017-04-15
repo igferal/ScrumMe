@@ -60,7 +60,7 @@ export class BoardService implements IBoardService {
 
 
         if (collabs !== undefined) {
-            this.addColaborators(collabs, board, ref);
+            this.inviteToColab(collabs, board, ref);
         }
 
     }

@@ -1,3 +1,4 @@
+import { LandingComponent } from './../components/landing.component/landing.component';
 import { CollabComponent } from './../components/collab.component/collab.component';
 import { GithubComponent } from './../components/github.component/github.component';
 import { StyleListComponent } from './../components/style.list.component/style.list.component';
@@ -7,7 +8,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from '../components/board.component/board.component';
 import { LoginComponent } from '../components/login.component/login.component';
-import { LandingComponent } from '../components/landing.component/landing.component';
 import { SignUpComponent } from '../components/signup.component/signup.component';
 import { UserDashboardComponent } from '../components/user.dashboard.component/user.dashboard.component';
 import { FirebaseAuthentication } from '../services/authentication/firebase.authentication'
@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'style', component: StyleListComponent },
   { path: 'signup', component: SignUpComponent },
+  { path: '*', component: LandingComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'git', component: GithubComponent },
 

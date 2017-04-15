@@ -4,6 +4,9 @@
     </li>
     <li> <a routerLink="/">ScrumMe</a> </li>
     <li style="float:right" *ngIf="auth!=null">
+        <a routerLink="/signup">Editar Perfil</a>
+    </li>
+    <li style="float:right" *ngIf="auth!=null">
         <a routerLink="/dashboard">Dashboard</a>
     </li>
     <li style="float:right" *ngIf="auth!=null">

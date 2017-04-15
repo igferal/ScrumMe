@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 
 
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
     public email: string;
     public password: string;
@@ -60,6 +60,14 @@ export class LoginComponent {
             this.password = '';
             this.showInfo();
         }
+    }
+
+    ngOnInit(){
+
+      
+        
+        
+
     }
 
 

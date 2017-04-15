@@ -4,5 +4,10 @@
     margin: 5%;
     background: $bg-white-color;
     height: 90vh;
-   
+}
+
+.inline {
+    display: inline-flex;
+    align-content: space-between;
+    margin: 5%;
 }

@@ -1,8 +1,9 @@
+import { User } from './../../model/user';
+import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 import { UserService } from './../../services/database/user.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FirebaseAuthentication } from '../../services/authentication/firebase.authentication'
 import { Router } from '@angular/router';
-import { User } from '../../model/user';
 
 
 @Component({
@@ -13,8 +14,8 @@ import { User } from '../../model/user';
 
 })
 
-
-export class SignUpComponent {
+@DestroySubscribers()
+export class SignUpComponent implements OnInit {
 
     public email: string;
     public password: string;
@@ -22,6 +23,12 @@ export class SignUpComponent {
     public name: string;
     public surname: string;
     public msgs = [];
+    public subscribers: any = {};
+    public isEditing: boolean;
+    public h1Message: string;
+    public buttonMessage: string;
+    public currentUser: any;
+    public oldPassword : string;
 
 
     constructor(public firebaseAuth: FirebaseAuthentication, public userService: UserService,
@@ -36,7 +43,14 @@ export class SignUpComponent {
 
         if (this.passwordLength()) {
             if (this.passwordMatch()) {
-                this.signUp(this.name, this.surname, this.email, this.password);
+
+                if (!this.isEditing) {
+                    this.signUp(this.name, this.surname, this.email, this.password);
+                }
+                else {
+                    this.editUser();
+                }
+
             } else {
                 this.showError("Las contraseñas no coinciden");
             }
@@ -46,6 +60,18 @@ export class SignUpComponent {
         this.clearPassword();
     }
 
+    public editUser() {
+
+        let user = new User(this.name, this.surname, this.currentUser._email, this.currentUser._uid);
+        this.firebaseAuth.changePassword(this.password,this.oldPassword,user.email);
+        this.userService.updatePasword(user);
+        this.redirect()
+
+    }
+
+    public saveUser() {
+
+    }
 
     /**
      *  Limpia los campos de contraseñas
@@ -82,7 +108,7 @@ export class SignUpComponent {
         this.firebaseAuth.signUp(email, password).then((res) => {
             if (res.provider === 4) {
                 this.createUser(name, surname, email, res.uid);
-                this.redirect(res);
+                this.redirect();
             } else {
 
                 this.showError(res.error);
@@ -103,7 +129,7 @@ export class SignUpComponent {
     /**
      * Metodo que redirige al dashboard se usuario
      */
-    public redirect(res: any) {
+    public redirect() {
 
         this.router.navigate(['/dashboard']);
 
@@ -111,6 +137,38 @@ export class SignUpComponent {
     public showError(errorMessage: string) {
         this.msgs = [];
         this.msgs.push({ severity: 'error', summary: 'Error!', detail: errorMessage });
+    }
+
+    ngOnInit() {
+
+        this.subscribers.subscription = this.userService.isRegistered().subscribe((user) => {
+            if (user) {
+                this.subscribers.subscription = this.userService.getCurrentDeveloperById(user.uid).subscribe((suscribedUser) => {
+                    this.setCurrentFields(suscribedUser);
+                    this.putMessages('Editar usuario', 'Editar');
+                    this.isEditing = true;
+                    this.currentUser = suscribedUser;
+                })
+            }
+            else {
+                this.putMessages('Registrar usuario', 'Registrar');
+
+            }
+        });
+
+    }
+
+    private setCurrentFields(user: any) {
+        console.log(user);
+        this.name = user._name;
+        this.surname = user._surmame;
+    }
+
+    private putMessages(h1: string, button: string) {
+
+        this.h1Message = h1;
+        this.buttonMessage = button;
+
     }
 
 }

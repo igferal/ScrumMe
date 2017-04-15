@@ -11,8 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class CollabComponent implements OnInit {
 
   public invitations: any[];
+  public showInfo = true;
 
-  constructor(public boardService: BoardService) { }
+  
+
+  constructor(public boardService: BoardService) { 
+    this.showInfo = true;
+  }
 
   ngOnInit() {
 
@@ -21,6 +26,7 @@ export class CollabComponent implements OnInit {
       if (invitation) {
 
         this.invitations = invitation;
+        this.showInfo = false;
         console.log(this.invitations);
       }
     });

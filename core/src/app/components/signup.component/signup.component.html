@@ -9,7 +9,7 @@
     <div class="ui-g-6">
         <form (ngSubmit)="onSubmit()" #signup="ngForm">
             <fieldset class="fieldset">
-                <legend style="color: white">Registrar usuario</legend>
+                <legend style="color: white">{{h1Message}}</legend>
                 <hr/>
                 <p-messages [value]="msgs"></p-messages>
                 <div column="6">
@@ -18,14 +18,15 @@
                     <p> </p>
                     <input required type="text" required [(ngModel)]="surname" name="surname" placeholder="Apellido" />
                     <p> </p>
-                    <input required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
+                    <input *ngIf="isEditing" required type="password" required [(ngModel)]="oldPassword" name="password" placeholder="Contraseña actual" />
+                    <input *ngIf="!isEditing" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
                     <p> </p>
                     <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
                     <p> </p>
                     <input required type="password" required [(ngModel)]="passwordAgain" name="passwordAgain" placeholder="Repite tu contraseña"
                     />
                     <hr/>
-                    <button class="button btn-main">Registrar</button>
+                    <button class="button btn-main">{{buttonMessage}}</button>
                 </div>
 
             </fieldset>

@@ -76,6 +76,7 @@ export class TaskService implements ITaskService {
 
         postit.programador = programmer;
 
+        
         this.deleteTask(board, fromCollection, postItId);
 
         this.saveTask(toCollection, board, postit);
