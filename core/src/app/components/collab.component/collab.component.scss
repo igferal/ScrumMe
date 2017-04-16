@@ -2,13 +2,18 @@
 @import "~variables.scss";
 .collabsDiv {
     margin: 5%;
-    background: $bg-white-color;
     height: 90vh;
 }
 
 .inline {
     display: inline-flex;
     align-content: space-between;
+}
+
+.title {
+    size: 8em;
+    margin-top: 5%;
+    color: #fff;
 }
 
 .collabCard {
