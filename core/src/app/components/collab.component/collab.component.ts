@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class CollabComponent implements OnInit {
 
   public invitations: any[];
-  public showInfo = true;
+  public showInfo = false;
 
   
 
@@ -26,7 +26,7 @@ export class CollabComponent implements OnInit {
       if (invitation) {
 
         this.invitations = invitation;
-        this.showInfo = false;
+        this.showInfo = true;
         console.log(this.invitations);
       }
     });
