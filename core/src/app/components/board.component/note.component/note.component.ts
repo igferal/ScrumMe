@@ -104,6 +104,26 @@ export class NoteComponent implements OnInit {
 
     }
 
+    
+
+    public titleLimited(): string {
+        if (this.note.titulo.length > 10) {
+            return `${this.note.titulo.substring(0, 10)}...`;
+        }
+        else {
+            return this.note.titulo;
+        }
+
+    }
+
+    public contentLimited(): string {
+        if (this.note.contenido.length > 80) {
+            return `${this.note.contenido.substring(0, 80)}...`;
+        }
+        else {
+            return this.note.contenido;
+        }
+    }
 
     public deleteItem() {
 

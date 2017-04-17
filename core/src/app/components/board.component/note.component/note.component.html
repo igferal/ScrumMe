@@ -1,25 +1,11 @@
-<!-- <section id="noteKey" class="card" draggable="true">
-    <header class="card-header">
-        <div> {{note.titulo}} : {{note.programador}} </div>
-        <i style="float: right" class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
-    </header>
-    <div class="card-content">
-        <p *ngIf="!note.closed">{{note.contenido}}</p>
-        <del *ngIf="note.closed">{{note.contenido}}</del>
-    </div>
-    <footer *ngIf="!note.closed" class="footer-note">
-        <progress value="{{note.workedHours}}" max="{{note.horas}}"></progress>
-    </footer>
-</section>
--->
 <div id="noteKey" class="card" draggable="true">
     <header>
-        <div><strong> {{note.titulo}} </strong> <small> : {{note.programador}}</small> </div>
+        <div><strong> {{titleLimited()}} </strong> <small> : {{note.programador}}</small> </div>
         <i style="float: right" class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
     </header>
     <div class="card-content">
-        <p *ngIf="!note.closed">{{note.contenido}}</p>
-        <del *ngIf="note.closed">{{note.contenido}}</del>
+        <p class="text" *ngIf="!note.closed">{{contentLimited()}}</p>
+        <del class="text" *ngIf="note.closed">{{contentLimited()}}</del>
         <div *ngIf="!note.closed">
             <div class="percentage"> <strong> {{percentage}}   </strong></div>
         </div>

@@ -1,35 +1,27 @@
-<br/>
-<br/>
-<br/>
-
 <div class="ui-g">
 
     <div class="ui-g-2"> </div>
 
     <div class="ui-g-8">
         <form (ngSubmit)="onSubmit()" #signup="ngForm">
-            <fieldset class="fieldset">
-                <legend style="color: white">{{h1Message}}</legend>
+            <h1 class="title">{{h1Message}}</h1>
+            <hr/>
+            <p-messages [value]="msgs"></p-messages>
+            <div column="6">
+
+                <input required type="text" required [(ngModel)]="name" name="name" placeholder="Nombre" />
+                <p> </p>
+                <input required type="text" required [(ngModel)]="surname" name="surname" placeholder="Apellido" />
+                <p> </p>
+                <input *ngIf="isEditing" required type="password" required [(ngModel)]="oldPassword" name="password" placeholder="Contraseña actual" />
+                <input *ngIf="!isEditing" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
+                <p> </p>
+                <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
+                <p> </p>
+                <input required type="password" required [(ngModel)]="passwordAgain" name="passwordAgain" placeholder="Repite tu contraseña" />
                 <hr/>
-                <p-messages [value]="msgs"></p-messages>
-                <div column="6">
-
-                    <input required type="text" required [(ngModel)]="name" name="name" placeholder="Nombre" />
-                    <p> </p>
-                    <input required type="text" required [(ngModel)]="surname" name="surname" placeholder="Apellido" />
-                    <p> </p>
-                    <input *ngIf="isEditing" required type="password" required [(ngModel)]="oldPassword" name="password" placeholder="Contraseña actual" />
-                    <input *ngIf="!isEditing" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
-                    <p> </p>
-                    <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
-                    <p> </p>
-                    <input required type="password" required [(ngModel)]="passwordAgain" name="passwordAgain" placeholder="Repite tu contraseña"
-                    />
-                    <hr/>
-                    <button class="button btn-main">{{buttonMessage}}</button>
-                </div>
-
-            </fieldset>
+                <button class="button btn-main">{{buttonMessage}}</button>
+            </div>
         </form>
     </div>
 </div>

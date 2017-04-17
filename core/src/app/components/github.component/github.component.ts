@@ -27,7 +27,7 @@ export class GithubComponent implements OnInit {
 
   onclick(issue: Issue) {
 
-    let task: PostIt = new PostIt(issue.title, issue.body, issue.assignee, 0, 'none');
+    let task: PostIt = new PostIt(issue.title, issue.body, issue.assignee, 1, 'none');
     this.taskService.saveTask(this.column, this.board, task);
   }
 

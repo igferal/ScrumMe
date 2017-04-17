@@ -10,12 +10,6 @@
     align-content: space-between;
 }
 
-.title {
-    size: 8em;
-    margin-top: 5%;
-    color: #fff;
-}
-
 .collabCard {
     margin: 5%;
     background: $bg-white-color;
@@ -43,4 +37,8 @@
         display: inline-flex;
         justify-content: center;
     }
+}
+
+hr {
+    color: white;
 }

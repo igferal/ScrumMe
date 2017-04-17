@@ -31,10 +31,18 @@
         height: 150px;
         .percentage {
             font-size: 18px;
+            width: 40px;
         }
         .percentage:after {
             content: '%';
             font-size: 12px;
+        }
+        .text {
+            margin: 2%;
+            width: 240px;
+            word-wrap: break-word;
+            display: flex;
+            overflow: hidden;
         }
     }
 }
