@@ -1,4 +1,3 @@
-import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 import { BoardService } from './../../services/database/board.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -10,12 +9,11 @@ import { FirebaseAuthentication } from '../../services/authentication/firebase.a
   styleUrls: ['./app.component.scss'],
   providers: [FirebaseAuthentication, BoardService]
 })
-@DestroySubscribers()
 export class AppComponent implements OnInit {
   public title: string;
   public auth: any;
   public numInvitations;
-  public subscribers: any = {};
+  public subscription: any;
 
 
   constructor(private authservice: FirebaseAuthentication, private router: Router, public boardService: BoardService) { }
@@ -39,6 +37,10 @@ export class AppComponent implements OnInit {
       this.auth = user;
       if (user) {
         this.loadBellNotifications();
+      }else{
+        if(this.subscription){
+          this.subscription.unsubscribe();
+        }
       }
 
     });
@@ -49,7 +51,7 @@ export class AppComponent implements OnInit {
   }
 
   loadBellNotifications() {
-    this.subscribers.subscription = this.boardService.getInvitationsToCollab().subscribe((collabs) => {
+    this.subscription = this.boardService.getInvitationsToCollab().subscribe((collabs) => {
 
       if (collabs) {
 

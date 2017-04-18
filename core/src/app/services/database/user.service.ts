@@ -22,7 +22,6 @@ export class UserService implements IUserService, OnInit {
         this.af.auth.subscribe((user) => {
             if (user != null) {
                 this.currentUser = user.uid;
-                console.log("hey ho");
             }
         });
 

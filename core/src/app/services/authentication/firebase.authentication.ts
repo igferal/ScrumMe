@@ -29,32 +29,37 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
     }
 
 
-    public signUp(email: string, password: string): any {
+    public signUp(email: string, password: string): Observable<any> {
         let creds: any = { email: email, password: password };
-        let res: Promise<boolean> = new Promise((resolve, reject) => {
+        console.log(creds);
+        return new Observable((observer) => {
             this.af.auth.createUser(creds).catch((err) => {
-                let r = { provider: 3, error: err.message };
-                return r;
+                let error = { provider: 3, error: err.message };
+                observer.error(error)
             }).then(result => {
-                resolve(result);
+                observer.next(result);
+                observer.complete();
             });
-        });
-        return res;
-
+        })
     }
 
-    public login(email: string, password: string): any {
+    public login(email: string, password: string): Observable<any> {
         let creds: any = { email: email, password: password };
-        let res: Promise<boolean> = new Promise((resolve, reject) => {
+
+
+        return new Observable((observer) => {
             this.af.auth.login(creds).catch((err) => {
-                let r = { provider: 3, error: err.message };
-                console.log(err);
-                return r;
+                let error = { provider: 3, error: err.message };
+                observer.error(error)
             }).then(result => {
-                resolve(result);
+                observer.next(result);
+                observer.complete();
             });
-        });
-        return res;
+
+
+        })
+
+
     }
 
     public loginWithGit() {

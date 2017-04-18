@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { User } from './../../model/user';
 import { DestroySubscribers } from '../../util/unsuscribe.decorator';
 import { UserService } from './../../services/database/user.service';
@@ -28,7 +29,7 @@ export class SignUpComponent implements OnInit {
     public h1Message: string;
     public buttonMessage: string;
     public currentUser: any;
-    public oldPassword : string;
+    public oldPassword: string;
 
 
     constructor(public firebaseAuth: FirebaseAuthentication, public userService: UserService,
@@ -63,7 +64,7 @@ export class SignUpComponent implements OnInit {
     public editUser() {
 
         let user = new User(this.name, this.surname, this.currentUser._email, this.currentUser._uid);
-        this.firebaseAuth.changePassword(this.password,this.oldPassword,user.email);
+        this.firebaseAuth.changePassword(this.password, this.oldPassword, user.email);
         this.userService.updatePasword(user);
         this.redirect()
 
@@ -105,16 +106,15 @@ export class SignUpComponent implements OnInit {
     public signUp(name: string, surname: string, email: string, password: string) {
         this.email = email;
         this.password = password;
-        this.firebaseAuth.signUp(email, password).then((res) => {
-            if (res.provider === 4) {
-                this.createUser(name, surname, email, res.uid);
+       this.subscribers.subscription = this.firebaseAuth.signUp(email, password).subscribe(
+            (result) => {
+                console.log(result);
+                this.createUser(name, surname, email, result.uid);
                 this.redirect();
-            } else {
-
-                this.showError(res.error);
-            }
-
-        });
+            },
+            (error) => {
+                this.showError(error);
+            });
     }
 
     /**
@@ -123,6 +123,7 @@ export class SignUpComponent implements OnInit {
     public createUser(name: string, surname: string, email: string, uid: string) {
 
         let user: User = new User(name, surname, email, uid);
+        console.log(user);
         this.userService.createUser(user);
 
     }

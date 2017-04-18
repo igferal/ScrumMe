@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 
 
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
     public email: string;
     public password: string;
@@ -36,9 +36,17 @@ export class LoginComponent implements OnInit{
 
         //    this.firebaseAuth.loginWithGit();
 
-        this.firebaseAuth.login(this.email, this.password).then((res) => {
-            this.redirect(res);
-        });
+        this.firebaseAuth.login(this.email, this.password).subscribe(
+            (res) => {
+                this.authed = true;
+                this.router.navigate(['/dashboard']);
+            },
+            (error) => {
+                this.authed = true;
+                this.password = '';
+                this.showInfo();
+                console.log(error);
+            });
 
     }
 
@@ -47,26 +55,10 @@ export class LoginComponent implements OnInit{
         this.msgs.push({ severity: 'error', summary: 'Error!', detail: 'No existe ese usuario' });
     }
 
-    /**
-     * Metodo que nos gestiona la respuesta que nos devuelve el servicio de autenticación
-     */
-    public redirect(res: any) {
 
-        if (res.provider === 4) {
-            this.authed = true;
-            this.router.navigate(['/dashboard']);
-        } else {
-            this.authed = true;
-            this.password = '';
-            this.showInfo();
-        }
-    }
 
-    ngOnInit(){
+    ngOnInit() {
 
-      
-        
-        
 
     }
 
