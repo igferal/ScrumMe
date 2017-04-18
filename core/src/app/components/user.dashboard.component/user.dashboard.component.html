@@ -3,10 +3,10 @@
     <div class="ui-g-10">
         <h1 class="title">Mis tableros</h1>
         <hr>
-
+        <p-messages [value]="msgs"></p-messages>
         <section class="layout" *ngFor="let board of boards">
 
-            <board-card [board]="board" [boardKey]="board.$key"></board-card>
+            <board-card (sendMessage)="processMessage($event)" [board]="board" [boardKey]="board.$key"></board-card>
 
         </section>
         <button (click)="showDialog()" class="button btn-main-block">Crear tablero</button>

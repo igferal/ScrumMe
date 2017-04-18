@@ -2,7 +2,7 @@ import { TravisService } from './../../../services/travis/travis.service';
 import { Router } from '@angular/router';
 import { BoardService } from './../../../services/database/board.service';
 import { Board } from './../../../model/board';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { DestroySubscribers } from "../../../util/unsuscribe.decorator";
 
 @Component({
@@ -37,7 +37,7 @@ export class CardBoardComponent implements OnInit {
 
   public subscribers: any = {};
 
-
+  @Output() sendMessage = new EventEmitter<any>();
 
   constructor(public boardService: BoardService, public router: Router,
     public travisService: TravisService) { }
@@ -103,9 +103,16 @@ export class CardBoardComponent implements OnInit {
 
     if (this.mailsToColab.length > 0) {
       splitted = this.mailsToColab.split(",");
-      this.boardService.inviteToColab(splitted, this.board, this.boardKey);
-    }
+      splitted.forEach((mail: string) => {
+        this.boardService.inviteToColab(mail, this.board, this.boardKey).subscribe(
+          (response) => this.sendMessage.emit({ severity: 'info', summary: 'Completado!', detail: response }),
+          (error) => {
+            this.sendMessage.emit({ severity: 'info', summary: 'Error!', detail: error })
+            return;
+          });
 
+      });
+    }
     this.mailsToColab = '';
     this.closeDialogColabs();
   }

@@ -22,6 +22,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     public viewContainerRef: ViewContainerRef;
     public showModal: boolean;
     public options: any[];
+    public msgs = [];
 
 
 
@@ -31,7 +32,10 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
         this.viewContainerRef = viewContainerRef;
     }
 
-   
+    public processMessage(event){
+        this.msgs.push(event);
+    }
+
     public showDialog() {
         this.showModal = true;
     }

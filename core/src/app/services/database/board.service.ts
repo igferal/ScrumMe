@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Rx';
 import { PostIt } from './../../model/post.it';
 import { BoardColumn } from './../../model/boardColumn';
@@ -60,7 +61,7 @@ export class BoardService implements IBoardService {
 
 
         if (collabs !== undefined) {
-            this.inviteToColab(collabs, board, ref);
+            //this.inviteToColab(collabs, board, ref);
         }
 
     }
@@ -154,35 +155,35 @@ export class BoardService implements IBoardService {
     }
 
 
-    public inviteToColab(splitted: String[], board: Board, boardKey: string) {
+    public inviteToColab(mail: string, board: Board, boardKey: string): Observable<any> {
 
-        splitted.forEach((mail: string) => {
 
-            this.inviteToColaborateIndividual(mail, board, boardKey);
+        return  new Observable((observer) => {
+            let boardInfo = this.transformToBaordInfo(board);
 
-        });
+            this.af.database.list('users', {
+                query: {
+                    orderByChild: '_email',
+                    equalTo: mail,
+                }
+            }).subscribe(userToInvite => {
+                if (userToInvite.length > 0) {
+                    this.af.database.list(`collabs/${userToInvite[0]._uid}`).push(this.transformBoardToInvite(board, boardKey));
+                    observer.next(`Petición de colaboración enviada a ${mail}`)
+                    observer.complete();
+                }
+                else {
+                    observer.error(`${mail} no existe o no se encuentra disponible para compartir`);
+                }
+            });
+        },
+        );
+
+
 
     }
 
-    private inviteToColaborateIndividual(mail: string, board: Board, boardKey: string) {
 
-        let suscription;
-        let boardInfo = this.transformToBaordInfo(board);
-
-
-        suscription = this.af.database.list('users', {
-            query: {
-                orderByChild: '_email',
-                equalTo: mail,
-            }
-        }).subscribe(userToInvite => {
-
-            console.log(userToInvite);
-            if (userToInvite) {
-                this.af.database.list(`collabs/${userToInvite[0]._uid}`).push(this.transformBoardToInvite(board, boardKey));
-            }
-        });
-    }
 
     private transformBoardToInvite(board: Board, boardKey: string) {
 
