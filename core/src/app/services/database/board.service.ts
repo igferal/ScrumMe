@@ -40,7 +40,7 @@ export class BoardService implements IBoardService {
  * user_board, que actua como tabla de realacion 1-n
  * 
  */
-    public saveBoard(board: Board, collabs: string[]) {
+    public saveBoard(board: Board) {
         board.owner = this.currentUser;
 
 
@@ -57,11 +57,6 @@ export class BoardService implements IBoardService {
 
                 this.saveColumn(ref, col);
             });
-        }
-
-
-        if (collabs !== undefined) {
-            //this.inviteToColab(collabs, board, ref);
         }
 
     }

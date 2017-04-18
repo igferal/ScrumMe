@@ -5,9 +5,10 @@ input {
     font-size: 16px;
     padding: 10px;
     display: block;
-    width: 90%;
+    width: 100%;
     border: none;
-    border-bottom: 1px solid $main-color;
+    border-radius: 2%;
+    border: 1px solid $main-color;
     &:hover {
         outline: 1px;
     }
@@ -31,9 +32,10 @@ input {
     font-size: 16px;
     padding: 10px;
     display: block;
-    width: 90%;
+    width: 100%;
     border: none;
-    border-bottom: 1px solid $main-color;
+    border-radius: 2%;
+    border: 1px solid $main-color;
      :-moz-placeholder {
         /* Mozilla Firefox 4 to 18 */
         color: black;

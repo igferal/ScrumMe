@@ -11,6 +11,6 @@ export interface IBoardService {
 
     getUser_Boards(): FirebaseListObservable<any>;
 
-    saveBoard(board: Board, collabs: string[]);
+    saveBoard(board: Board);
 
 }

@@ -90,9 +90,6 @@ export class CreateBoardComponent implements OnInit {
         let boardCol: BoardColumn;
         let colsSplitted: string[];
 
-        if (this.mails.length > 0) {
-            splitted = this.mails.split(",");
-        }
 
         if (this.columns.length > 0) {
             colsSplitted = this.columns.split(",");
@@ -103,7 +100,7 @@ export class CreateBoardComponent implements OnInit {
             });
         }
 
-        this.boardService.saveBoard(board, splitted);
+        this.boardService.saveBoard(board);
         this.notify.emit(true);
         this.cleanFields();
 
