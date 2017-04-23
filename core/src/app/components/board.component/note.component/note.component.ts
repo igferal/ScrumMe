@@ -153,26 +153,26 @@ export class NoteComponent implements OnInit {
         this.update.emit(note);
     }
 
-    public onGit() {
+    public onGit(aotFix : any) {
         this.sentToGitHub();
         this.closeInfoDialog();
 
     }
 
-    public onClose() {
+    public onClose(aotFix : any) {
         this.closeInfoDialog();
         this.closeTask();
 
     }
 
-    public onDelete() {
+    public onDelete(aotFix : any) {
 
         this.closeInfoDialog();
         this.deleteItem();
 
     }
 
-    public onLoad() {
+    public onLoad(aotFix : any) {
 
         this.closeInfoDialog();
         this.showLogWorkDialog();
