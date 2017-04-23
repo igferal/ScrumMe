@@ -111,7 +111,9 @@ export class ColumnComponent implements OnInit {
 
     }
 
-    public edit() {
+    public onUpdate(note: PostIt) {
+
+        this.taskService.updateTask(this.colKey, this.boardKey, note.key, note);
 
 
     }

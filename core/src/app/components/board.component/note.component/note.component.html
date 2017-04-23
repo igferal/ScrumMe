@@ -12,7 +12,14 @@
     </div>
 </div>
 <p-menu #menu popup="popup" [model]="options"></p-menu>
-<p-dialog [width]="600 " height="320 " [draggable]="false " [modal]="true " header="Cargar horas " [(visible)]="showLogWork ">
+
+
+<p-dialog [width]="1200 " height="600 " [draggable]="false " [modal]="true " header="Información Tarea" [(visible)]="showInfo ">
+    <note-extended (close)="onClose($event)" (git)="onGit($event)" (load)="onLoad($event)" (update)="onUpdate($event)" (delete)="onDelete($event)" [note]="note"></note-extended>
+</p-dialog>
+
+
+<p-dialog [width]="600 " height="320 " [draggable]="true " [modal]="true " header="Cargar horas " [(visible)]="showLogWork ">
     <label>Horas estimadas:</label> {{note.horas}}
     <br>
     <label>Horas trabajadas:</label> {{note.workedHours}}

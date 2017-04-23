@@ -1,0 +1,32 @@
+<section class="note-info">
+    <header>
+        <input class="input-modal noborder" required type="text" required [(ngModel)]="note.titulo" name="name" placeholder="Tarea nº1" />
+
+        <span class="badge"> {{note.programador}}</span>
+
+    </header>
+    <div class="contenido">
+        <textarea type="text" required [(ngModel)]="note.contenido"></textarea>
+        <div class="inline contenido">
+            <a (click)="onGit()"> <i class="fa fa-github iconButton blue" aria-hidden="true"></i> </a>
+            <a (click)="onLoad()"> <i class="fa fa-clock-o iconButton blue" aria-hidden="true"></i> </a>
+            <a (click)="onClose()"> <i class="fa fa-calendar-check-o iconButton blue" aria-hidden="true"></i> </a>
+            <a (click)="onDelete()"> <i class="fa fa-times iconButton blue" aria-hidden="true"></i> </a>
+        </div>
+
+        <div class="inline contenido center">
+            <div class="divHoras">
+                <div class="inline">
+                    <h4>Horas planificadas</h4>
+                    <input class="number-input noborder" required type="number" required [(ngModel)]="note.horas" name="hotass" placeholder="100" />
+                </div>
+                <div class="inline">
+                    <h4>Horas trabajadas </h4>
+                    <input class="number-input noborder" required type="number" required [(ngModel)]="note.workedHours" name="hotass" placeholder="100" />
+                </div>
+            </div>
+            <progress value="{{note.workedHours}}" max="{{note.horas}}"></progress>
+        </div>
+        <button (click)="onUpdate()" class="button btn-main-block"> Editar Tarea </button>
+    </div>
+</section>

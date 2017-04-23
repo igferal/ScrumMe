@@ -28,11 +28,7 @@ import { GithubComponent } from './components/github.component/github.component'
 import { CardBoardComponent } from './components/user.dashboard.component/card.board/card.board.component';
 import { CollabComponent } from './components/collab.component/collab.component';
 import { BellComponent } from './components/app.component/bell/bell.component';
-
-
-
-
-
+import { NoteExtendedComponent } from './components/board.component/note.component/note-extended/note-extended.component';
 
 
 export const firebaseConfig = {
@@ -68,7 +64,8 @@ const myFirebaseAuthConfig = {
         GithubComponent,
         CardBoardComponent,
         CollabComponent,
-        BellComponent
+        BellComponent,
+        NoteExtendedComponent
     ],
     imports: [
         BrowserModule,

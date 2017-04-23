@@ -11,16 +11,18 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class NoteComponent implements OnInit {
 
     @Input() note: PostIt;
+    @Input() board: any;
+    @Input() colKey: any;
+    @Input() noteKey: string;
     @Output() notify = new EventEmitter<string>();
     @Output() addWork = new EventEmitter<any>();
     @Output() changeTaskState = new EventEmitter<any>();
     @Output() createIssue = new EventEmitter<any>();
-    @Input() board: any;
-    @Input() colKey: any;
-    @Input() noteKey: string;
+    @Output() update = new EventEmitter<any>();
     public options: any[];
     public showLogWork: boolean;
     public percentage: number;
+    public showInfo: boolean;
 
     public showLogWorkDialog() {
         this.showLogWork = true;
@@ -43,7 +45,7 @@ export class NoteComponent implements OnInit {
         this.options = [
             {
                 label: 'Editar', icon: 'fa fa-pencil-square-o', command: () => {
-
+                    this.showInfoDialog();
                 }
             },
             {
@@ -71,6 +73,16 @@ export class NoteComponent implements OnInit {
         ];
 
 
+    }
+
+
+    public showInfoDialog() {
+        this.showInfo = true;
+    }
+
+
+    public closeInfoDialog() {
+        this.showInfo = false;
     }
 
     public sentToGitHub() {
@@ -104,7 +116,7 @@ export class NoteComponent implements OnInit {
 
     }
 
-    
+
 
     public titleLimited(): string {
         if (this.note.titulo.length > 10) {
@@ -128,7 +140,45 @@ export class NoteComponent implements OnInit {
     public deleteItem() {
 
         this.notify.emit(this.noteKey);
+
     }
+
+
+
+    public onUpdate(note: PostIt) {
+
+        this.closeInfoDialog();
+        note.key = this.noteKey;
+        console.log(note);
+        this.update.emit(note);
+    }
+
+    public onGit() {
+        this.sentToGitHub();
+        this.closeInfoDialog();
+
+    }
+
+    public onClose() {
+        this.closeInfoDialog();
+        this.closeTask();
+
+    }
+
+    public onDelete() {
+
+        this.closeInfoDialog();
+        this.deleteItem();
+
+    }
+
+    public onLoad() {
+
+        this.closeInfoDialog();
+        this.showLogWorkDialog();
+
+    }
+
 
     ngOnInit() {
 
