@@ -29,6 +29,7 @@ import { CardBoardComponent } from './components/user.dashboard.component/card.b
 import { CollabComponent } from './components/collab.component/collab.component';
 import { BellComponent } from './components/app.component/bell/bell.component';
 import { NoteExtendedComponent } from './components/board.component/note.component/note-extended/note-extended.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 export const firebaseConfig = {
@@ -77,6 +78,7 @@ const myFirebaseAuthConfig = {
         DialogModule,
         MenuModule,
         ChartsModule,
+        BrowserAnimationsModule,
         AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
 
     ],
