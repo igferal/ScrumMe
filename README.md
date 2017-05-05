@@ -26,7 +26,7 @@ https://angularintegration-3b520.firebaseapp.com/landing
     $ ng serve
     
 
-###Requisitos despligue local
+### Requisitos despligue local
 * Yarn o npm 
 * Nodejs
 * @angular/cli
