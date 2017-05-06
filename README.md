@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/nacho1014/ScrumMe.svg?branch=master)](https://travis-ci.org/nacho1014/ScrumMe)
-
+[![Greenkeeper badge](https://badges.greenkeeper.io/nacho1014/ScrumMe.svg)](https://greenkeeper.io/)
 # ScrumBoard Online
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/nacho1014/ScrumMe.svg)](https://greenkeeper.io/)
+
 Proyecto base de un tablero de Scrum online.
 Actualmente desplegado en 
 
