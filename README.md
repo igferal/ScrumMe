@@ -1,4 +1,4 @@
-https://travis-ci.org/nacho1014/ScrumMe.svg?branch=master
+[![Build Status](https://travis-ci.org/nacho1014/ScrumMe.svg?branch=master)](https://travis-ci.org/nacho1014/ScrumMe)
 
 # ScrumBoard Online
 Proyecto base de un tablero de Scrum online.
