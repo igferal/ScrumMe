@@ -11,10 +11,8 @@ before_script:
    - npm install -g @angular/cli
 
 script:
-   - cd core/
-   - ls
    - npm install
    - ng build --prod --aot
 
 after_success:
-   - firebase deploy --token "1/-LIF93Mx8FJxJvh-Da7oNnnvw5KEN3afhSRaEJUxQSg"
+   - firebase deploy --token $FIREBASE_TOKEN
