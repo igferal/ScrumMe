@@ -1,3 +1,5 @@
+https://travis-ci.org/nacho1014/ScrumMe.svg?branch=master
+
 # ScrumBoard Online
 Proyecto base de un tablero de Scrum online.
 Actualmente desplegado en 
