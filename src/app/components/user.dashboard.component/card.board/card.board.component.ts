@@ -122,7 +122,7 @@ export class CardBoardComponent implements OnInit {
 
     if (this.board.travisRepo !== '') {
       this.subscribers.subscription = this.travisService.getState(this.board.travisRepo).subscribe((res) => {
-        this.travisPass = res.json()[2].result === 0;
+        this.travisPass = res.json()[0].result === 0;
         if (!this.travisPass) {
           this.travisBgStyles = {
             'background': '#E04A1B'
