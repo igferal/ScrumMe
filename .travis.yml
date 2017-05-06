@@ -12,6 +12,7 @@ before_script:
 
 script:
    - cd core/
+   - npm install
    - ng build --prod --aot
 
 after_success:
