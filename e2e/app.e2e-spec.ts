@@ -1,14 +1,15 @@
-import { FirebasePostItPage } from './app.po';
+import { LandingPage } from './Landing.po';
 
-describe('firebase-post-it App', function() {
-  let page: FirebasePostItPage;
+describe('Landing Page tests', function() {
+  let page: LandingPage;
 
   beforeEach(() => {
-    page = new FirebasePostItPage();
+    
+    page = new LandingPage();
   });
 
-  it('should display message saying app works', () => {
+  it('Debe aparecer un mensaje que diga Scrumme', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('ScrumMe');
   });
 });
