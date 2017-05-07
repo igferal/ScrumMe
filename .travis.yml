@@ -8,12 +8,12 @@ addons:
       - google-chrome-stable
 language: node_js
 node_js:
-   - "7"
+   - 6
+   - 7
  
 branches:
    only:
       - master
-      - /^greenkeeper/.*$/
 
 before_script:
    - rm -rf node_modules/
