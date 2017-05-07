@@ -4,17 +4,17 @@
 
     <div class="ui-g-8">
         <form (ngSubmit)="onSubmit()" #login="ngForm">
-            <h1 class="title">Iniciar sesión</h1>
+            <h1 name="title" class="title">Iniciar sesión</h1>
             <hr/>
 
-            <p-messages [value]="msgs"></p-messages>
+            <p-messages name="error" [value]="msgs"></p-messages>
             <input required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
             <p> </p>
             <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />
             <p> </p>
             <hr/>
             <div class="inline">
-                <button class="button btn-main">Iniciar</button>
+                <button name="sender" class="button btn-main">Iniciar</button>
                 <a routerLink="/signup" class="btn btn-link"> <small class="form-text text-muted">¿Aún no tienes cuenta? Registrate siguiendo este enlace </small></a>
             </div>
         </form>
