@@ -22,7 +22,7 @@ before_script:
    - npm install -g @angular/cli
 
 script:
-   - npm install
+   - yarn install
    - ng e2e
    #- ng build --prod --aot
 
