@@ -32,4 +32,12 @@ export class LoginPage {
 
   }
 
+  login(user: string, password: string){
+
+    this.fillForm(user, password);
+    this.sendForm();
+    browser.driver.sleep(2000);
+
+  }
+
 }

@@ -1,6 +1,7 @@
 import { LoginPage } from './Login.po.';
 import { LandingPage } from './Landing.po';
 import { browser } from 'protractor';
+import { DashboardPage } from "./Dashboard.po";
 
 describe('Landing Page tests', function () {
   let page: LandingPage;
@@ -32,20 +33,54 @@ describe('Login Page tests', function () {
   });
   it('Debe iniciar sesión aparecer un mensaje que diga Mis tableros', () => {
     page.navigateTo();
-    page.fillForm("testuser@scrumme.es", "scrumme");
-    page.sendForm();
-    browser.driver.sleep(2000);
+    page.login("testuser@scrumme.es", "scrumme");
     expect(page.getHeader()).toEqual('Mis tableros');
   });
 
   it('No debe iniciar sesión', () => {
     page.navigateTo();
-    page.fillForm("testuser@scrumme.es", "nocontraseña");
-    page.sendForm();
-    browser.driver.sleep(2000);
+    page.login("testuser@scrumme.es", "nocontraseña");
     page.getErrorElement();
     expect(page.getErrorElement()).toBeTruthy();
     expect(page.getHeader()).toEqual('Iniciar sesión');
   });
 
 });
+
+describe('Dashboard Page tests', function () {
+  let login: LoginPage;
+  let page: DashboardPage;
+
+
+  beforeEach(() => {
+
+    login = new LoginPage();
+    page = new DashboardPage();
+    login.navigateTo();
+    login.login("testuser@scrumme.es", "scrumme");
+    
+
+  });
+
+  it('Debe aparecer una nueva carta de tablon', () => {
+    
+    browser.driver.sleep(500);
+    page.createCard();
+    expect(page.getCard()).toBeTruthy();
+
+  });
+
+
+  it('Debe desaparecer la carta del tablon cuando la borro', () => {
+    
+    browser.driver.sleep(500);
+    page.deleteCard();
+    expect(page.getCard()).toBeTruthy();
+
+  });
+
+
+
+
+});
+
