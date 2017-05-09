@@ -25,7 +25,6 @@ before_script:
 
 script:
    - npm install
-   - ng build --prod --aot
    - ng e2e
 #after_success:
 #   - firebase deploy --token $FIREBASE_TOKEN
