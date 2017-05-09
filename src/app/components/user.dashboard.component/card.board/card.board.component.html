@@ -23,7 +23,7 @@
     </div>
     <hr>
     <footer class="footer">
-        <a [ngStyle]="travisBgStyles" (click)="goToBoard()" class="button btn-success">Ir al tablón</a>
+        <a name="gotoboard{{board.name}}" [ngStyle]="travisBgStyles" (click)="goToBoard()" class="button btn-success">Ir al tablón</a>
     </footer>
 
 </section>

@@ -1,5 +1,5 @@
 <header class="col-header">
-    <h5>{{colName}}</h5>
+    <h5 id="column{{colName}}">{{colName}}</h5>
     <p-menu #menu popup="popup" [model]="options"></p-menu>
     <i class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
 </header>

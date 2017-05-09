@@ -6,7 +6,7 @@
         <p-messages [value]="msgs"></p-messages>
         <section class="layout" *ngFor="let board of boards">
 
-            <board-card name="board.name" (sendMessage)="processMessage($event)" [board]="board" [boardKey]="board.$key"></board-card>
+            <board-card (sendMessage)="processMessage($event)" [board]="board" [boardKey]="board.$key"></board-card>
 
         </section>
         <button (click)="showDialog()" name="createboard" class="button btn-main-block">Crear tablero</button>

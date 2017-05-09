@@ -9,19 +9,25 @@ export class DashboardPage {
 
   createCard() {
 
-
     Utils.clickButton("createboard");
     browser.driver.sleep(500);
     Utils.fillInput("name", "sprint1");
     Utils.fillInput("date", "12/12/2017");
-    Utils.fillInput("columns", "To do");
+    Utils.fillInput("columns", "To do,Done");
     Utils.clickButton("enviar");
+  }
+
+  getElement(name : string) {
+
+    return element(by.name(name)).isPresent();
 
   }
 
-  getCard() {
 
-    return element(by.name("sprint1")) !== null
+  getElementById(name : string) {
+
+
+    return element(by.id(name)).isPresent();
 
   }
 
@@ -29,5 +35,13 @@ export class DashboardPage {
 
     Utils.clickButton("botonborrar");
   }
+
+  goToBoard() {
+
+    Utils.clickButton("gotoboardsprint1");
+
+  }
+
+
 
 }

@@ -66,19 +66,32 @@ describe('Dashboard Page tests', function () {
     
     browser.driver.sleep(500);
     page.createCard();
-    expect(page.getCard()).toBeTruthy();
+    browser.driver.sleep(1000);
+    expect(page.getElement("gotoboardsprint1")).toBeTruthy();
+
+  });
+
+    it('Debe crear un tablero con las columnas indicadas', () => {
+    
+    browser.driver.sleep(1500);
+    page.goToBoard();
+    browser.driver.sleep(1000);
+    expect(page.getElementById("columnTo do")).toBeTruthy();
+        expect(page.getElementById("columnDone")).toBeTruthy();
+
+
 
   });
 
 
   it('Debe desaparecer la carta del tablon cuando la borro', () => {
-    
-    browser.driver.sleep(500);
+
+    browser.driver.sleep(1000);
     page.deleteCard();
-    expect(page.getCard()).toBeTruthy();
+    browser.driver.sleep(1000);
+    expect(page.getElement("sprint1")).toBeFalsy();
 
   });
-
 
 
 
