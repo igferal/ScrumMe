@@ -7,10 +7,17 @@
             <a routerLink="/collabs">Invitaciones</a>
             <bell [(numInvitations)]="numInvitations"></bell>
         </div>
-        <a *ngIf="auth!=null" routerLink="/signup">Editar Perfil</a>
-        <a *ngIf="auth!=null" routerLink="/dashboard">Dashboard</a>
-        <a *ngIf="auth!=null" (click)="logout()" routerLink="/">Cerrar sesión</a>
-
+        <div *ngIf="auth!=null" class="hoverable">
+            <a routerLink="/signup">Editar Perfil</a>
+            <i class="fa fa-user" aria-hidden="true"></i>
+        </div>
+        <div *ngIf="auth!=null" class="hoverable">
+            <a routerLink="/dashboard">Dashboard</a>
+            <i class="fa fa-tachometer" aria-hidden="true"></i>
+        </div>
+        <div *ngIf="auth!=null" class="hoverable">
+            <a (click)="logout()" routerLink="/">Cerrar sesión</a>
+        </div>
         <a *ngIf="auth==null" routerLink="/login" href="# ">Iniciar sesión</a>
         <a *ngIf="auth==null" class="nav-link" routerLink="/signup">Crear usuario</a>
     </div>

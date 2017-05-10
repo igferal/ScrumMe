@@ -8,24 +8,30 @@
     position: fixed;
     display: inline-flex;
     justify-content: space-between;
+    align-content: center;
     top: 0;
     width: 100%;
     z-index: 30;
-    a {
-        display: inline-block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        transition: 0.3s;
-        font-size: 17px;
-        &:hover {
-            background: darken($main-color, 10%);
-        }
-    }
     div {
         display: inline-flex;
         justify-content: space-between;
+        i {
+            vertical-align: middle;
+            align-self: center;
+            color: white;
+        }
+        bell {
+            align-self: center;
+        }
+        a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 17px;
+        }
     }
     .hoverable {
         &:hover {
