@@ -9,7 +9,7 @@
 Proyecto base de un tablero de Scrum online.
 Actualmente desplegado en 
 
-https://angularintegration-3b520.firebaseapp.com/landing
+https://www.scrumme.tk
 
 ## Features
 
@@ -20,10 +20,12 @@ https://angularintegration-3b520.firebaseapp.com/landing
 
 ## Tecnologías
 
-* Angular2
+* Angular & Typescript
 * Firebase
 * Prime-Ng
 * Dragula
+* Scss
+
 
 ## Desplegar en local
 
