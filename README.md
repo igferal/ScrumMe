@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/nacho1014/ScrumMe.svg?branch=master)](https://travis-ci.org/nacho1014/ScrumMe)
 [![Greenkeeper badge](https://badges.greenkeeper.io/nacho1014/ScrumMe.svg)](https://greenkeeper.io/)
+[![Dependency Status](https://david-dm.org/nacho1014/ScrumMe.svg)](https://david-dm.org/)
+
 # ScrumBoard Online
 
 
