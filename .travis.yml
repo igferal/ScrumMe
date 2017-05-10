@@ -26,5 +26,7 @@ before_script:
 script:
    - npm install
    - ng e2e
-#after_success:
+   
+after_success:
+   - npm run codecov
 #   - firebase deploy --token $FIREBASE_TOKEN
