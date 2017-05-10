@@ -1,26 +1,21 @@
-<ul class="topnav">
-    <li style="float:right" *ngIf="auth!=null">
-        <a (click)="logout()" routerLink="/">Cerrar sesión</a>
-    </li>
-    <li> <a routerLink="/">ScrumMe</a> </li>
-    <li style="float:right" *ngIf="auth!=null">
-        <a routerLink="/signup">Editar Perfil</a>
-    </li>
-    <li style="float:right" *ngIf="auth!=null">
-        <a routerLink="/dashboard">Dashboard</a>
-    </li>
-    <li style="float:right" *ngIf="auth!=null">
-        <a routerLink="/collabs">Invitaciones</a>
-        <bell [(numInvitations)]="numInvitations"></bell>
-    </li>
-    <li style="float:right" *ngIf="auth==null">
-        <a routerLink="/login" href="# ">Iniciar sesión</a>
-    </li>
-    <li style="float:right" *ngIf="auth==null ">
-        <a class="nav-link" routerLink="/signup">Crear usuario</a>
-    </li>
+<header class="topnav">
+    <div>
+        <a routerLink="/">ScrumMe</a>
+    </div>
+    <div>
+        <div class="hoverable" *ngIf="auth!=null">
+            <a routerLink="/collabs">Invitaciones</a>
+            <bell [(numInvitations)]="numInvitations"></bell>
+        </div>
+        <a *ngIf="auth!=null" routerLink="/signup">Editar Perfil</a>
+        <a *ngIf="auth!=null" routerLink="/dashboard">Dashboard</a>
+        <a *ngIf="auth!=null" (click)="logout()" routerLink="/">Cerrar sesión</a>
 
-</ul>
+        <a *ngIf="auth==null" routerLink="/login" href="# ">Iniciar sesión</a>
+        <a *ngIf="auth==null" class="nav-link" routerLink="/signup">Crear usuario</a>
+    </div>
+</header>
+
 
 <div class="main">
 

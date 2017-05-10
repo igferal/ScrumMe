@@ -1,86 +1,40 @@
 @import "~variables.scss";
-ul.topnav {
-    list-style-type: none;
+@import "~variables.scss";
+.topnav {
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: $main-color;
     position: fixed;
-    /* Set the navbar to fixed position */
+    display: inline-flex;
+    justify-content: space-between;
     top: 0;
-    /* Position the navbar at the top of the page */
     width: 100%;
-    /* Full width */
     z-index: 30;
-}
-
-ul.topnav li {
-    float: left;
-}
-
-ul.topnav li a {
-    display: inline-block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-ul.topnav li:hover{
-
-    background: darken($main-color,10%);
-
-}
-
- 
-
-
-small{
-
- height: 5px;
- width: 5px;
- border-radius: 50%;
- color: black;
- background: white;
-
-}
-
-ul.topnav li.icon {
-    display: none;
+    a {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: 0.3s;
+        font-size: 17px;
+        &:hover {
+            background: darken($main-color, 10%);
+        }
+    }
+    div {
+        display: inline-flex;
+        justify-content: space-between;
+    }
+    .hoverable {
+        &:hover {
+            background: darken($main-color, 10%);
+        }
+    }
 }
 
 .main {
     margin-top: 50px;
     /* Add a top margin to avoid content overlay */
-}
-
-@media screen and (max-width:680px) {
-    ul.topnav li:not(:first-child) {
-        display: none;
-    }
-    ul.topnav li.icon {
-        float: right;
-        display: inline-block;
-    }
-}
-
-@media screen and (max-width:680px) {
-    ul.topnav.responsive {
-        position: relative;
-    }
-    ul.topnav.responsive li.icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    ul.topnav.responsive li {
-        float: none;
-        display: inline;
-    }
-    ul.topnav.responsive li a {
-        display: block;
-        text-align: left;
-    }
 }

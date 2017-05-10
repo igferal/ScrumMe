@@ -3,3 +3,7 @@
 body {
     font-family: 'Roboto', sans-serif!important;
 }
+
+hr {
+    color: white;
+}
