@@ -1,7 +1,7 @@
  @import "~variables.scss";
  .main {
      height: 60vh;
-     background-color: $main-color;
+     background-color: $bg-color;
      h1 {
          text-align: center;
          font-size: 10em;
@@ -14,30 +14,10 @@
      h5 {
          color: white;
      }
- }
- 
- .angle {
-     background: $main-color;
-     color: #fff;
-     position: relative;
-     z-index: 1;
-     height: 50px;
-     width: 100%;
-     overflow: hidden;
- }
- 
- .angle:after {
-     background: $bg-color;
-     top: 10px;
-     content: '';
-     display: block;
-     height: 100px;
-     left: 0;
-     position: absolute;
-     right: 0;
-     transform: skewY(-1.8deg);
-     transform-origin: 100%;
-     z-index: -1;
+     img {
+         height: 400px;
+         width: 400px;
+     }
  }
  
  .section {
