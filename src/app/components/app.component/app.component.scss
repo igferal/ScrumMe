@@ -35,7 +35,7 @@
     }
     .hoverable {
         &:hover {
-            background: darken($main-color, 10%);
+            border-bottom: 2px solid white;
         }
     }
 }
