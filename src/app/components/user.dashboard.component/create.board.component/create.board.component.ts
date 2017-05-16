@@ -11,7 +11,7 @@ import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
     selector: 'createBoard',
     templateUrl: './create.board.component.html',
     styleUrls: ['./create.board.component.scss'],
-    providers: [BoardService]
+    providers: []
 })
 export class CreateBoardComponent implements OnInit {
 

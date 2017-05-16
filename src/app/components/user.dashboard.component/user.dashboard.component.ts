@@ -10,7 +10,7 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
     selector: 'dashboard',
     templateUrl: './user.dashboard.component.html',
     styleUrls: ['./user.dashboard.component.scss'],
-    providers: [BoardService]
+    providers: []
 })
 @DestroySubscribers()
 export class UserDashboardComponent implements OnInit, OnDestroy {
@@ -32,7 +32,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
         this.viewContainerRef = viewContainerRef;
     }
 
-    public processMessage(event){
+    public processMessage(event) {
         this.msgs.push(event);
     }
 
@@ -65,5 +65,5 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
     }
 
-
+   
 }

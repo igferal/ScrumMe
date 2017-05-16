@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
     selector: 'signup',
     templateUrl: './signup.component.html',
     styleUrls: ['./signup.component.scss'],
-    providers: [FirebaseAuthentication, UserService],
+    providers: [FirebaseAuthentication],
 
 })
 

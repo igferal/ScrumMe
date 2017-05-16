@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
   selector: 'github-issues',
   templateUrl: './github.component.html',
   styleUrls: ['./github.component.scss'],
-  providers: [GithubService, TaskService]
+  providers: [GithubService]
 })
 export class GithubComponent implements OnInit {
 

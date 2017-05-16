@@ -11,7 +11,7 @@ import { MenuItem } from 'primeng/primeng';
     selector: 'app-column',
     templateUrl: 'column.component.html',
     styleUrls: ['./column.component.scss'],
-    providers: [ColumnService, TaskService, GithubService]
+    providers: [GithubService]
 
 
 })

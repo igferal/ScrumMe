@@ -7,7 +7,7 @@ import { FirebaseAuthentication } from '../../services/authentication/firebase.a
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [FirebaseAuthentication, BoardService]
+  providers: [FirebaseAuthentication]
 })
 export class AppComponent implements OnInit {
   public title: string;
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
    */
   public ngOnInit() {
     // Subscripción 
-    this.authservice.af.auth.subscribe((user) => {
+    this.authservice.auth.authState.subscribe((user) => {
 
       this.auth = user;
       if (user) {

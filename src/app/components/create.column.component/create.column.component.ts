@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
     selector: 'createColumn',
     templateUrl: './create.column.component.html',
     styleUrls: ['./create.column.component.scss'],
-    providers: [ColumnService]
+    providers: []
 
 })
 

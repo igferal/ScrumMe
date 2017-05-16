@@ -1,6 +1,6 @@
 import { passBoolean } from 'protractor/built/util';
 import { Injectable } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { IAuthentication } from './IAuthentication';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -18,12 +18,14 @@ import { CanActivate, Router, } from '@angular/router';
 export class FirebaseAuthentication implements IAuthentication, CanActivate {
 
 
-    constructor(public af: AngularFire, public router: Router) { }
+    constructor(public auth: AngularFireAuth, public router: Router) { }
 
 
 
     public getUser() {
-        this.af.auth.subscribe((auth) => {
+
+
+        this.auth.authState.subscribe((auth) => {
             return auth;
         });
     }
@@ -33,7 +35,7 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
         let creds: any = { email: email, password: password };
         console.log(creds);
         return new Observable((observer) => {
-            this.af.auth.createUser(creds).catch((err) => {
+            this.auth.auth.createUserWithEmailAndPassword(email, password).catch((err) => {
                 let error = { provider: 3, error: err.message };
                 observer.error(error)
             }).then(result => {
@@ -48,7 +50,7 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
 
 
         return new Observable((observer) => {
-            this.af.auth.login(creds).catch((err) => {
+            this.auth.auth.signInWithEmailAndPassword(email, password).catch((err) => {
                 let error = { provider: 3, error: err.message };
                 observer.error(error)
             }).then(result => {
@@ -62,31 +64,29 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
 
     }
 
-    public loginWithGit() {
-        this.af.auth.login({
-            provider: AuthProviders.Github,
-            method: AuthMethods.Popup,
-        });
-    }
 
     public changePassword(password: string, oldPassword: string, email: string) {
 
 
 
         let creds: any = { email: email, password: oldPassword };
-        this.af.auth.login(creds).then((res) => {
-            this.af.auth.getAuth().auth.updatePassword(password);
+        this.auth.auth.signInWithEmailAndPassword(email, oldPassword).then((res) => {
+
+            //this.auth.auth.updatePassword(password);
+            this.auth.auth.sendPasswordResetEmail(email);
+
         })
 
     }
 
 
     public logout() {
-        this.af.auth.logout();
+        this.auth.authState
+        this.auth.auth.signOut();
     }
 
     public canActivate(): Observable<boolean> {
-        return this.af.auth.take(1).map(auth => {
+        return this.auth.authState.take(1).map(auth => {
             if (!auth) {
                 this.router.navigateByUrl('/login');
                 return true;

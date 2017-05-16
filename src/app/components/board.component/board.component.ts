@@ -19,7 +19,7 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
     selector: 'list',
     templateUrl: './board.component.html',
     styleUrls: ['./board.component.scss'],
-    providers: [ColumnService, TaskService, UserService]
+    providers: []
 })
 @DestroySubscribers()
 export class BoardComponent implements OnInit, OnDestroy {

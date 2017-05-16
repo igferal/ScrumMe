@@ -9,7 +9,7 @@ import { DestroySubscribers } from "../../../util/unsuscribe.decorator";
   selector: 'board-card',
   templateUrl: './card.board.component.html',
   styleUrls: ['./card.board.component.scss'],
-  providers: [BoardService]
+  providers: []
 
 })
 @DestroySubscribers()

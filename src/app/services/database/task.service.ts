@@ -4,8 +4,9 @@ import { BoardColumn } from './../../model/boardColumn';
 import { Board } from './../../model/board';
 import { User } from './../../model/user';
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
+import {  AngularFireAuth } from 'angularfire2/auth';
 
 
 
@@ -20,10 +21,10 @@ export class TaskService implements ITaskService {
     /**
      * Obtengo el ID del usuario actual del sistema
      */
-    constructor(private af: AngularFire) {
+    constructor(private database: AngularFireDatabase,public auth: AngularFireAuth) {
 
 
-        this.af.auth.subscribe((user) => {
+        this.auth.authState.subscribe((user) => {
             if (user != null) {
                 this.currentUser = user.uid;
             }
@@ -36,13 +37,13 @@ export class TaskService implements ITaskService {
 
     getTasks(colKey: string, boardKey: string): FirebaseListObservable<any> {
 
-        return this.af.database.list(`column_tasks/${boardKey}/${colKey}`);
+        return this.database.list(`column_tasks/${boardKey}/${colKey}`);
     }
 
     updateTask(colKey: string, boardKey: string, noteKey: string, postIt: PostIt) {
 
-        this.af.database.list(`column_tasks/${boardKey}/${colKey}`).update(noteKey, postIt);
-        this.af.database.list(`burndown/${boardKey}/`).update(noteKey, postIt);
+        this.database.list(`column_tasks/${boardKey}/${colKey}`).update(noteKey, postIt);
+        this.database.list(`burndown/${boardKey}/`).update(noteKey, postIt);
 
     }
 
@@ -52,7 +53,7 @@ export class TaskService implements ITaskService {
 
         let key = this.getTasks(colKey, boardKey).push(postIt).key;
         console.log(`burndown/${boardKey}/${key}`);
-        this.af.database.object(`burndown/${boardKey}/${key}`).set(postIt);
+        this.database.object(`burndown/${boardKey}/${key}`).set(postIt);
 
     }
 
@@ -60,7 +61,7 @@ export class TaskService implements ITaskService {
     deleteTask(boardKey: string, colKey: string, taskKey: string) {
 
         this.getTasks(colKey, boardKey).remove(taskKey);
-        this.af.database.list(`burndown/${boardKey}`).remove(taskKey);
+        this.database.list(`burndown/${boardKey}`).remove(taskKey);
 
     }
 
@@ -88,7 +89,7 @@ export class TaskService implements ITaskService {
         let element: any;
         let subscription: any;
         console.log(`column_tasks/${board}/${collection}/${key}`);
-        subscription = this.af.database.object(`column_tasks/${board}/${collection}/${key}`).subscribe((item) => {
+        subscription = this.database.object(`column_tasks/${board}/${collection}/${key}`).subscribe((item) => {
             element = item;
         });
         subscription.unsubscribe();
@@ -104,7 +105,7 @@ export class TaskService implements ITaskService {
 
         console.log(`burndown/${boardKey}`);
 
-        return this.af.database.list(`burndown/${boardKey}`, {
+        return this.database.list(`burndown/${boardKey}`, {
             query: {
                 orderByChild: 'horas',
             }
@@ -116,7 +117,7 @@ export class TaskService implements ITaskService {
 
         console.log(`burndown/${boardKey}`);
 
-        return this.af.database.list(`burndown/${boardKey}`, {
+        return this.database.list(`burndown/${boardKey}`, {
             query: {
                 orderByChild: 'uid',
                 equalTo: this.currentUser

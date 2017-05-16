@@ -2,10 +2,11 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Rx';
 import { PostIt } from './../../model/post.it';
 import { BoardColumn } from './../../model/boardColumn';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 import { IBoardService } from './IBoardService';
 import { Board } from './../../model/board';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 
@@ -14,23 +15,34 @@ export class BoardService implements IBoardService {
 
     private currentUser: string;
     private currentUserMail: string;
+    private subject : Subject<any> = new Subject();
+
+
+
+
 
 
     /**
      * Obtengo el ID del usuario actual del sistema
      */
-    constructor(private af: AngularFire) {
+    constructor(private database: AngularFireDatabase, public auth: AngularFireAuth) {
 
 
-        this.af.auth.subscribe((user) => {
+        this.subject.next("a");
+
+        this.auth.authState.subscribe((user) => {
             if (user != null) {
                 this.currentUser = user.uid;
-                this.currentUserMail = user.auth.email;
-
+                this.currentUserMail = user.email;
             }
         });
 
 
+    }
+
+
+    public filter(filterParams){
+        this.subject.next(filterParams)
     }
 
     /**
@@ -43,14 +55,14 @@ export class BoardService implements IBoardService {
     public saveBoard(board: Board) {
         board.owner = this.currentUser;
 
-
+        this.addColaborator
 
         let boardInfo = this.transformToBaordInfo(board);
 
         let keyCol;
 
 
-        let ref = this.af.database.list(`user_board/${this.currentUser}`).push(boardInfo).key;
+        let ref = this.database.list(`user_board/${this.currentUser}`).push(boardInfo).key;
 
         if (board.boardColumns.length > 0) {
             board.boardColumns.forEach((col) => {
@@ -61,27 +73,22 @@ export class BoardService implements IBoardService {
 
     }
 
-    public addMoreColaborators() {
 
-
-    }
 
     public updateBoardInfo(boardKey: string, board: Board) {
 
-        console.log('aaaa' + boardKey);
-        this.af.database.list(`user_board/${this.currentUser}`).update(boardKey, board);
+        this.database.list(`user_board/${this.currentUser}`).update(boardKey, board);
 
     }
 
 
     public saveColumn(boardKey: string, boardCol: BoardColumn) {
         let keyCol;
-        console.log(boardCol);
-        keyCol = this.af.database.list('board_columns' + '/' + boardKey).push(
+        keyCol = this.database.list('board_columns' + '/' + boardKey).push(
             new BoardColumn(new Array<PostIt>(), boardCol.columnName)).key;
 
         boardCol.tasks.forEach((task) => {
-            this.af.database.list("column_tasks/" + boardKey + '/' + keyCol).push(task)
+            this.database.list("column_tasks/" + boardKey + '/' + keyCol).push(task)
 
         });
 
@@ -97,7 +104,10 @@ export class BoardService implements IBoardService {
      */
     public getUser_Boards(): FirebaseListObservable<any> {
 
-        return this.af.database.list(`user_board/${this.currentUser}`);
+        return this.database.list(`user_board/${this.currentUser}`, {
+            query: {
+                orderByChild: 'name',
+            }});
 
     }
 
@@ -107,7 +117,7 @@ export class BoardService implements IBoardService {
      */
     public deleteColaboration(key: string, boardDeleter: string) {
 
-        this.af.database.list(`user_board/${this.currentUser}`).remove(key);
+        this.database.list(`user_board/${this.currentUser}`).remove(key);
     }
 
 
@@ -117,10 +127,10 @@ export class BoardService implements IBoardService {
     public deleteBoard(key: string, boardOwner: string) {
 
 
-        this.af.database.list(`user_board/${this.currentUser}`).remove(key);
+        this.database.list(`user_board/${this.currentUser}`).remove(key);
         if (this.currentUser === boardOwner) {
-            this.af.database.list("column_tasks/").remove(key);
-            this.af.database.list('board_columns').remove(key);
+            this.database.list("column_tasks/").remove(key);
+            this.database.list('board_columns').remove(key);
         }
 
     }
@@ -130,7 +140,7 @@ export class BoardService implements IBoardService {
  */
     private addColaborator(uid: string, boardInfo: any, key: string) {
 
-        this.af.database.object(`user_board/${uid}/${key}`).set(boardInfo);
+        this.database.object(`user_board/${uid}/${key}`).set(boardInfo);
 
     }
 
@@ -153,17 +163,17 @@ export class BoardService implements IBoardService {
     public inviteToColab(mail: string, board: Board, boardKey: string): Observable<any> {
 
 
-        return  new Observable((observer) => {
+        return new Observable((observer) => {
             let boardInfo = this.transformToBaordInfo(board);
 
-            this.af.database.list('users', {
+            this.database.list('users', {
                 query: {
                     orderByChild: '_email',
                     equalTo: mail,
                 }
             }).subscribe(userToInvite => {
                 if (userToInvite.length > 0) {
-                    this.af.database.list(`collabs/${userToInvite[0]._uid}`).push(this.transformBoardToInvite(board, boardKey));
+                    this.database.list(`collabs/${userToInvite[0]._uid}`).push(this.transformBoardToInvite(board, boardKey));
                     observer.next(`Petición de colaboración enviada a ${mail}`)
                     observer.complete();
                 }
@@ -199,7 +209,7 @@ export class BoardService implements IBoardService {
     public getInvitationsToCollab(): FirebaseListObservable<any> {
 
         console.log(this.currentUser);
-        return this.af.database.list(`collabs/${this.currentUser}`);
+        return this.database.list(`collabs/${this.currentUser}`);
 
     }
 
@@ -212,7 +222,7 @@ export class BoardService implements IBoardService {
         let boardInfo = this.transformToBaordInfo(board);
 
 
-        suscription = this.af.database.list('users', {
+        suscription = this.database.list('users', {
             query: {
                 orderByChild: '_email',
                 equalTo: subject,
@@ -235,7 +245,7 @@ export class BoardService implements IBoardService {
 
     public declineCollaboration(collabKey: string) {
 
-        this.af.database.list(`collabs/${this.currentUser}`).remove(collabKey);
+        this.database.list(`collabs/${this.currentUser}`).remove(collabKey);
 
     }
 

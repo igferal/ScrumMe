@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-collab',
   templateUrl: './collab.component.html',
   styleUrls: ['./collab.component.scss'],
-  providers: [BoardService]
+  providers: []
 })
 export class CollabComponent implements OnInit {
 

@@ -1,3 +1,7 @@
+import { ColumnService } from './services/database/column.service';
+import { UserService } from './services/database/user.service';
+import { TaskService } from './services/database/task.service';
+import { BoardService } from './services/database/board.service';
 import { TravisService } from './services/travis/travis.service';
 import { StyleListComponent } from './components/style.list.component/style.list.component';
 import { TaskChartComponent } from './components/charts/task.chart.component/task.chart.component';
@@ -11,7 +15,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './components/app.component/app.component';
 import { AppRoutingModule } from './router/router.component';
-import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { CreateTaskComponent } from './components/create.task.component/create.task.component';
 import { BoardComponent } from './components/board.component/board.component';
 import { SignUpComponent } from './components/signup.component/signup.component';
@@ -40,10 +46,6 @@ export const firebaseConfig = {
     messagingSenderId: '87154413034'
 };
 
-const myFirebaseAuthConfig = {
-    provider: AuthProviders.Password,
-    method: AuthMethods.Password
-}
 
 
 @NgModule({
@@ -79,10 +81,12 @@ const myFirebaseAuthConfig = {
         MenuModule,
         ChartsModule,
         BrowserAnimationsModule,
-        AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
+        AngularFireModule.initializeApp(firebaseConfig)
 
     ],
-    providers: [TravisService],
+    providers: [TravisService,BoardService,TaskService,UserService,ColumnService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

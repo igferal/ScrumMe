@@ -3,10 +3,11 @@ import { IUserService } from './IUserService';
 import { Observable, Subject } from 'rxjs/Rx';
 import { PostIt } from './../../model/post.it';
 import { BoardColumn } from './../../model/boardColumn';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Injectable, OnInit } from '@angular/core';
 import { IBoardService } from './IBoardService';
 import { Board } from './../../model/board';
+import {  AngularFireAuth } from 'angularfire2/auth';
 
 
 
@@ -18,8 +19,8 @@ export class UserService implements IUserService, OnInit {
     /**
      * Obtengo el ID del usuario actual del sistema
      */
-    constructor(private af: AngularFire) {
-        this.af.auth.subscribe((user) => {
+    constructor(private database: AngularFireDatabase,public auth: AngularFireAuth) {
+        this.auth.authState.subscribe((user) => {
             if (user != null) {
                 this.currentUser = user.uid;
             }
@@ -32,18 +33,18 @@ export class UserService implements IUserService, OnInit {
      */
     public getCurrentDeveloper(): FirebaseObjectObservable<any> {
 
-        return this.af.database.object(`users/${this.currentUser}`);
+        return this.database.object(`users/${this.currentUser}`);
 
     }
 
     public getCurrentDeveloperById(uid: string): FirebaseObjectObservable<any> {
 
-        return this.af.database.object(`users/${uid}`);
+        return this.database.object(`users/${uid}`);
 
     }
 
     public updatePasword(user: User) {
-        this.af.database.object(`users/${user.uid}`).update(user)
+        this.database.object(`users/${user.uid}`).update(user)
     }
 
     /**
@@ -51,13 +52,13 @@ export class UserService implements IUserService, OnInit {
   */
     public createUser(user: User) {
 
-        this.af.database.object(`/users/${user.uid}`).set(user);
+        this.database.object(`/users/${user.uid}`).set(user);
 
     }
 
     public isRegistered(): Observable<any> {
 
-        return this.af.auth;
+        return this.auth.authState;
     }
 
     ngOnInit() {

@@ -1,5 +1,5 @@
 import { PostIt } from './../../model/post.it';
-import { FirebaseListObservable } from 'angularfire2';
+import {FirebaseListObservable } from 'angularfire2/database';
 import { Board } from './../../model/board';
 
 export interface IBoardService {

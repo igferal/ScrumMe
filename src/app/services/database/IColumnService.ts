@@ -1,4 +1,4 @@
-import { FirebaseListObservable } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2/database';
 import { BoardColumn } from './../../model/boardColumn';
 export interface IColumnService {
 

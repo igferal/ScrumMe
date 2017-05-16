@@ -1,5 +1,5 @@
 import { ChartComponentParent } from './../chart.parent.component';
-import { FirebaseListObservable } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2/database';
 import { PostIt } from './../../../model/post.it';
 import { ColumnService } from './../../../services/database/column.service';
 import { TaskService } from './../../../services/database/task.service';
@@ -13,7 +13,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   selector: 'burndown',
   templateUrl: 'burndown.component.html',
   styleUrls: ['./burndown.component.scss'],
-  providers: [ColumnService, TaskService]
+  providers: []
 
 })
 @DestroySubscribers()

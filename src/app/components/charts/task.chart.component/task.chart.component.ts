@@ -1,8 +1,8 @@
+import { FirebaseListObservable } from 'angularfire2/database';
 import { TaskService } from './../../../services/database/task.service';
 import { ColumnService } from './../../../services/database/column.service';
 import { PostIt } from './../../../model/post.it';
 import { ChartComponentParent } from './../chart.parent.component';
-import { FirebaseListObservable } from 'angularfire2';
 import { ActivatedRoute, Params } from '@angular/router';
 import { DestroySubscribers } from '../../../util/unsuscribe.decorator';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -12,7 +12,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   selector: 'task-chart',
   templateUrl: './task.chart.component.html',
   styleUrls: ['./task.chart.component.scss'],
-  providers: [ColumnService, TaskService]
+  providers: []
 
 })
 @DestroySubscribers()
