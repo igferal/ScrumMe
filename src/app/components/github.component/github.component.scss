@@ -5,16 +5,28 @@ div {
     margin: 1%;
 }
 
-.scrollDiv {
-    background: #F8F8F8;
+.header {
+    background: $secondary-color;
+    color: #fff;
+    text-align: center;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.scroll {
     overflow: scroll;
-    height: 65vh;
-    min-width: 320px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    height: 60vh;
 }
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+.asignee {
+    background: $secondary-color;
+    color: #fff;
+    padding: 2%;
+    border-radius: 10%;
 }

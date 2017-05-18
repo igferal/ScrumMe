@@ -1,3 +1,4 @@
+import { BoardService } from './../../services/database/board.service';
 import { GithubService } from './../../services/github/github.service';
 import { UserService } from './../../services/database/user.service';
 import { TaskService } from './../../services/database/task.service';
@@ -31,13 +32,13 @@ export class BoardComponent implements OnInit, OnDestroy {
     public subscribers: any = {};
     public columns: Array<String>;
     public showModal: boolean;
-
+    public gitHubRepo : string;
 
 
 
 
     constructor(public userService: UserService, public taskService: TaskService, public columnService: ColumnService,
-        public dragulaService: DragulaService, public route: ActivatedRoute) {
+        public dragulaService: DragulaService, public route: ActivatedRoute,public boardService : BoardService) {
 
         this.createTask = 'Añadir tarea';
         this.dragulaSubscriptions(dragulaService);
@@ -95,6 +96,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     public ngOnInit() {
         this.suscribeUser();
         this.inicializateRoute();
+        this.getGitHubRepo();
         this.inicializateCollections();
     }
 
@@ -108,7 +110,15 @@ export class BoardComponent implements OnInit, OnDestroy {
         if (!!this.dragulaService.find('bag-one')) {
             this.dragulaService.destroy('bag-one');
         }
-        console.log("On destroy")
+      
+    }
+
+    public getGitHubRepo(){
+
+         this.subscribers.gitHubSuscription = this.boardService.getBoardInfo(this.board).subscribe((boardInfo=>{
+             this.gitHubRepo = boardInfo.gitHubRepo;
+             console.log(this.gitHubRepo)
+         }))
 
     }
 

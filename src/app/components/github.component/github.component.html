@@ -1,12 +1,16 @@
-<div class="scrollDiv">
-    <div *ngFor="let issue of issues">
-        <div class="inline">
-            <h1> {{issue.title}} <small>{{issue.assignee}}</small> </h1>
-            <p>
-                {{issue.body}}
-            </p>
-
-            <button class="button btn-success" (click)="onclick(issue)">Generate task</button>
-        </div>
-    </div>
+<div class="scroll">
+    <table>
+        <tr class="header">
+            <td>Titulo de tarea</td>
+            <td>Programador asignado</td>
+            <td>Descripción</td>
+            <td>Convertir a tarea</td>
+        </tr>
+        <tr *ngFor="let issue of issues">
+            <td> {{issue.title}} </td>
+            <td class="centerText"><span class="asignee"> {{issue.assignee}}</span> </td>
+            <td> {{issue.body}} </td>
+            <td> <button class="button btn-main" (click)="onclick(issue)">Convertir a tarea</button> </td>
+        </tr>
+    </table>
 </div>

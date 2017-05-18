@@ -22,6 +22,7 @@ export class ColumnComponent implements OnInit {
     @Input() public colKey: string;
     @Input() public colName: string;
     @Input() public boardKey: string;
+    @Input() public gitHubRepo: string;
     public subscribers: any = {};
     public options: any[];
     public showModal: boolean;
@@ -52,12 +53,15 @@ export class ColumnComponent implements OnInit {
             },
             {
                 label: 'Añadir issues', icon: 'fa fa-github', command: () => {
-                    this.showDialogGit();
+                    if (this.gitHubRepo) {
+                        this.showDialogGit();
+                    }
                 }
             }
 
         ];
     }
+
 
 
 
@@ -107,8 +111,9 @@ export class ColumnComponent implements OnInit {
 
     public createGitIssue(postit: PostIt) {
 
-        this.githubService.postIssue('AplicacionFifa', 'nacho1014', postit);
-
+        if (this.gitHubRepo) {
+            this.githubService.postIssue(this.gitHubRepo, postit);
+        }
     }
 
     public onUpdate(note: PostIt) {
@@ -127,11 +132,8 @@ export class ColumnComponent implements OnInit {
 
         this.subscribers.subscription = this.taskService.getTasks(this.colKey, this.boardKey).subscribe((items) => {
             this.notes = items;
-            console.log(this.colName)
-            console.log(` notes: ${this.notes.length}`);
-            console.log(` notesToDispose: ${this.notesToDispose.length}`);
-
-
+            console.log("ColumnComponent")
+            console.log(this.gitHubRepo);
             if (this.notes) {
                 this.size = this.notes.length;
             } else {

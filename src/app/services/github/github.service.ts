@@ -7,7 +7,6 @@ export class GithubService {
 
   private github: string = 'https://api.github.com';
   protected requestOptions: RequestOptions;
-  private userName: 'nacho1014';
   private clientId: string = '51f0e2969f345042da1b';
   private clientSecret: string = '7d09dbef2a9035a987a2d65adefb4a1268d331aa';
 
@@ -32,11 +31,12 @@ export class GithubService {
       .get(`https://api.github.com/users/${username}`);
   }
 
-  public getIssues(repo: string, user: string) {
+  public getIssues(repo: string) {
 
     console.log('Por aqui pasar paso');
+    console.log(repo);
     return this.http
-      .get(`https://api.github.com/repos/${user}/${repo}/issues`);
+      .get(`https://api.github.com/repos/${repo}/issues`);
 
   }
 
@@ -45,10 +45,12 @@ export class GithubService {
     this.requestOptions.headers.set('Authorization', 'Basic ' + btoa('scrummebot' + ':' + 'scrumMeb0t'));
   }
 
-  public postIssue(repo: string, user: string, posit: PostIt) {
+  public postIssue(repo: string, posit: PostIt) {
 
 
     console.log('post');
+    console.log(repo
+    )
     let peticion = {
       "title": posit.titulo,
       "body": posit.contenido
@@ -59,7 +61,7 @@ export class GithubService {
     console.log(this.requestOptions);
 
 
-    this.http.post(`https://api.github.com/repos/${user}/${repo}/issues`, peticion, this.requestOptions).subscribe((res) => {
+    this.http.post(`https://api.github.com/repos/${repo}/issues`, peticion, this.requestOptions).subscribe((res) => {
       console.log(res)
     });
 

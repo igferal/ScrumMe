@@ -2,7 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Rx';
 import { PostIt } from './../../model/post.it';
 import { BoardColumn } from './../../model/boardColumn';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 import { IBoardService } from './IBoardService';
 import { Board } from './../../model/board';
@@ -40,6 +40,11 @@ export class BoardService implements IBoardService {
 
     }
 
+
+    public getBoardInfo(boardId : string) : FirebaseObjectObservable<any>{
+
+            return this.database.object(`user_board/${this.currentUser}/${boardId}`);
+    }
 
     public filter(filterParams){
         this.subject.next(filterParams)

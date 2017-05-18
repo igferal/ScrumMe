@@ -3,7 +3,7 @@
 
         <div *ngFor="let column of columns">
             <div class="scrollDiv">
-                <app-column [boardKey]="board" [colKey]="column.$key" [colName]="column._columnName"> </app-column>
+                <app-column [gitHubRepo]="gitHubRepo" [boardKey]="board" [colKey]="column.$key" [colName]="column._columnName"> </app-column>
             </div>
         </div>
         <div class="scrollDiv-new">
