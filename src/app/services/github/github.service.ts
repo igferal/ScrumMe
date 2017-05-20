@@ -34,8 +34,7 @@ export class GithubService {
   public getIssues(repo: string) {
 
 
-    return this.http
-      .get(`https://api.github.com/repos/${repo}/issues`);
+    return this.http.get(`https://api.github.com/repos/${repo}/issues`);
 
   }
 
@@ -47,19 +46,24 @@ export class GithubService {
   public postIssue(repo: string, posit: PostIt) {
 
 
+
+
     let peticion = {
       "title": posit.titulo,
-      "body": posit.contenido
+      "body": posit.contenido,
+      "repo" : repo
     };
 
     this.configGithubHeaders();
     this.authUser();
     console.log(this.requestOptions);
-
-
-    this.http.post(`https://api.github.com/repos/${repo}/issues`, peticion, this.requestOptions).subscribe((res) => {
-      console.log(res)
+    this.http.post("https://us-central1-angularintegration-3b520.cloudfunctions.net/github",peticion).subscribe((res)=>{
+      console.log(res);
     });
+
+    //this.http.post(`https://api.github.com/repos/${repo}/issues`, peticion, this.requestOptions).subscribe((res) => {
+    //  console.log(res)
+    //});
 
   }
 
