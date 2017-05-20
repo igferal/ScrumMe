@@ -18,7 +18,6 @@ export class GithubService {
 
   configGithubHeaders() {
     let headers: Headers = new Headers();
-    headers.set('Accept', 'application/vnd.github.v3+json');
     headers.set('Content-Type', 'application/json;charset=UTF-8');
     this.requestOptions = new RequestOptions({
       headers: headers
@@ -55,15 +54,9 @@ export class GithubService {
     };
 
     this.configGithubHeaders();
-    this.authUser();
-    console.log(this.requestOptions);
-    this.http.post("https://us-central1-angularintegration-3b520.cloudfunctions.net/github",peticion).subscribe((res)=>{
+    this.http.post("https://us-central1-angularintegration-3b520.cloudfunctions.net/github",peticion,this.requestOptions).subscribe((res)=>{
       console.log(res);
     });
-
-    //this.http.post(`https://api.github.com/repos/${repo}/issues`, peticion, this.requestOptions).subscribe((res) => {
-    //  console.log(res)
-    //});
 
   }
 
