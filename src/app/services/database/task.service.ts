@@ -6,7 +6,7 @@ import { User } from './../../model/user';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
-import {  AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 
@@ -14,23 +14,11 @@ import {  AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class TaskService implements ITaskService {
 
-    public currentUser: string;
-    public posits: Array<PostIt> = new Array<PostIt>();
-
 
     /**
      * Obtengo el ID del usuario actual del sistema
      */
-    constructor(private database: AngularFireDatabase,public auth: AngularFireAuth) {
-
-
-        this.auth.authState.subscribe((user) => {
-            if (user != null) {
-                this.currentUser = user.uid;
-            }
-        });
-
-
+    constructor(private database: AngularFireDatabase, public auth: AngularFireAuth) {
     }
 
 
@@ -72,7 +60,7 @@ export class TaskService implements ITaskService {
     addToOtherBag(board: string, postItId: string, fromCollection: string,
         toCollection: string, programmer: string): void {
 
-
+        console.log(programmer);
         let postit = this.findTaskById(board, postItId, fromCollection);
 
         postit.programador = programmer;
@@ -97,7 +85,7 @@ export class TaskService implements ITaskService {
         let note: PostIt = new PostIt(element.titulo, element.contenido, element.programador, element.horas, element.$key);
 
         note.workedHours = element.workedHours;
-        note.uid = this.currentUser;
+        note.uid = this.auth.auth.currentUser.uid;
         return note;
     }
 
@@ -120,7 +108,7 @@ export class TaskService implements ITaskService {
         return this.database.list(`burndown/${boardKey}`, {
             query: {
                 orderByChild: 'uid',
-                equalTo: this.currentUser
+                equalTo:  this.auth.auth.currentUser.uid
             }
         });
 

@@ -1,7 +1,7 @@
 {
     "project": {
         "version": "1.0.0-beta.19-3",
-        "name": "firebase-post-it"
+        "name": "scrumme"
     },
     "apps": [{
         "root": "src",
@@ -17,7 +17,7 @@
         "prefix": "app",
         "mobile": false,
         "styles": [
-            "styles.css",
+            "./styles.scss",
             "../node_modules/dragula/dist/dragula.css",
             "../node_modules/bootstrap/dist/css/bootstrap.min.css",
             "../node_modules/primeng/resources/themes/bootstrap/theme.css",

@@ -13,10 +13,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class BoardService implements IBoardService {
 
-    private currentUser: string;
-    private currentUserMail: string;
-    private subject : Subject<any> = new Subject();
-
 
 
 
@@ -27,28 +23,15 @@ export class BoardService implements IBoardService {
      */
     constructor(private database: AngularFireDatabase, public auth: AngularFireAuth) {
 
-
-        this.subject.next("a");
-
-        this.auth.authState.subscribe((user) => {
-            if (user != null) {
-                this.currentUser = user.uid;
-                this.currentUserMail = user.email;
-            }
-        });
-
-
     }
 
 
     public getBoardInfo(boardId : string) : FirebaseObjectObservable<any>{
 
-            return this.database.object(`user_board/${this.currentUser}/${boardId}`);
+            return this.database.object(`user_board/${this.auth.auth.currentUser.uid}/${boardId}`);
     }
 
-    public filter(filterParams){
-        this.subject.next(filterParams)
-    }
+
 
     /**
  * Metodo que nos crea un tablero en firebase 
@@ -58,7 +41,7 @@ export class BoardService implements IBoardService {
  * 
  */
     public saveBoard(board: Board) {
-        board.owner = this.currentUser;
+        board.owner = this.auth.auth.currentUser.uid;
 
         this.addColaborator
 
@@ -67,7 +50,7 @@ export class BoardService implements IBoardService {
         let keyCol;
 
 
-        let ref = this.database.list(`user_board/${this.currentUser}`).push(boardInfo).key;
+        let ref = this.database.list(`user_board/${this.auth.auth.currentUser.uid}`).push(boardInfo).key;
 
         if (board.boardColumns.length > 0) {
             board.boardColumns.forEach((col) => {
@@ -82,7 +65,7 @@ export class BoardService implements IBoardService {
 
     public updateBoardInfo(boardKey: string, board: Board) {
 
-        this.database.list(`user_board/${this.currentUser}`).update(boardKey, board);
+        this.database.list(`user_board/${this.auth.auth.currentUser.uid}`).update(boardKey, board);
 
     }
 
@@ -109,7 +92,7 @@ export class BoardService implements IBoardService {
      */
     public getUser_Boards(): FirebaseListObservable<any> {
 
-        return this.database.list(`user_board/${this.currentUser}`, {
+        return this.database.list(`user_board/${this.auth.auth.currentUser.uid}`, {
             query: {
                 orderByChild: 'name',
             }});
@@ -122,7 +105,7 @@ export class BoardService implements IBoardService {
      */
     public deleteColaboration(key: string, boardDeleter: string) {
 
-        this.database.list(`user_board/${this.currentUser}`).remove(key);
+        this.database.list(`user_board/${this.auth.auth.currentUser.uid}`).remove(key);
     }
 
 
@@ -132,8 +115,8 @@ export class BoardService implements IBoardService {
     public deleteBoard(key: string, boardOwner: string) {
 
 
-        this.database.list(`user_board/${this.currentUser}`).remove(key);
-        if (this.currentUser === boardOwner) {
+        this.database.list(`user_board/${this.auth.auth.currentUser.uid}`).remove(key);
+        if (this.auth.auth.currentUser.uid === boardOwner) {
             this.database.list("column_tasks/").remove(key);
             this.database.list('board_columns').remove(key);
         }
@@ -157,7 +140,7 @@ export class BoardService implements IBoardService {
             date: board.date,
             gitHubRepo: board.gitHubRepo,
             travisRepo: board.travisRepo,
-            boardOwner: this.currentUser
+            boardOwner: this.auth.auth.currentUser.uid
         }
 
         return boardInfo;
@@ -202,8 +185,8 @@ export class BoardService implements IBoardService {
             date: board.date,
             gitHubRepo: board.gitHubRepo,
             travisRepo: board.travisRepo,
-            boardOwner: this.currentUser,
-            boardOwnerMail: this.currentUserMail,
+            boardOwner: this.auth.auth.currentUser.uid,
+            boardOwnerMail: this.auth.auth.currentUser.email,
             boardKey: boardKey
         }
 
@@ -213,8 +196,7 @@ export class BoardService implements IBoardService {
 
     public getInvitationsToCollab(): FirebaseListObservable<any> {
 
-        console.log(this.currentUser);
-        return this.database.list(`collabs/${this.currentUser}`);
+        return this.database.list(`collabs/${this.auth.auth.currentUser.uid}`);
 
     }
 
@@ -250,7 +232,7 @@ export class BoardService implements IBoardService {
 
     public declineCollaboration(collabKey: string) {
 
-        this.database.list(`collabs/${this.currentUser}`).remove(collabKey);
+        this.database.list(`collabs/${this.auth.auth.currentUser.uid}`).remove(collabKey);
 
     }
 
@@ -259,7 +241,7 @@ export class BoardService implements IBoardService {
         this.declineCollaboration(collabKey);
 
 
-        this.addColaborator(this.currentUser, board, boardKey);
+        this.addColaborator(this.auth.auth.currentUser.uid, board, boardKey);
 
     }
 

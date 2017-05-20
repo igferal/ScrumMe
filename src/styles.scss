@@ -1,7 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "~variables.scss";
 body {
     font-family: 'Roboto', sans-serif!important;
+    background: $bg-color!important;
+}
+
+h1 {
+    color: #fff;
 }
 
 hr {

@@ -40,7 +40,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     constructor(public userService: UserService, public taskService: TaskService, public columnService: ColumnService,
         public dragulaService: DragulaService, public route: ActivatedRoute,public boardService : BoardService) {
 
-        this.createTask = 'Añadir tarea';
+
         this.dragulaSubscriptions(dragulaService);
     }
 
@@ -94,10 +94,13 @@ export class BoardComponent implements OnInit, OnDestroy {
      * Metodo OnInit que se ejecuta al iniciar el componente
      */
     public ngOnInit() {
+
         this.suscribeUser();
         this.inicializateRoute();
         this.getGitHubRepo();
         this.inicializateCollections();
+                
+
     }
 
 
@@ -107,7 +110,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     ngOnDestroy() {
 
-        if (!!this.dragulaService.find('bag-one')) {
+        if (this.dragulaService.find('bag-one')) {
             this.dragulaService.destroy('bag-one');
         }
       
@@ -117,7 +120,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
          this.subscribers.gitHubSuscription = this.boardService.getBoardInfo(this.board).subscribe((boardInfo=>{
              this.gitHubRepo = boardInfo.gitHubRepo;
-             console.log(this.gitHubRepo)
+             console.log("Repo inicializada")
          }))
 
     }
@@ -127,6 +130,7 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     public suscribeUser() {
         this.subscribers.userSubscription = this.userService.getCurrentDeveloper().subscribe((user) => {
+            console.log(user);
             this.currentUser = new User(user._name, user._surname, user._email, user._uid);
         });
 
@@ -140,6 +144,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.subscribers.routerSubscription = this.route.params
             .switchMap((params: Params) => this.board = params['id'])
             .subscribe((board) => {
+                console.log("Ruta inicializada")
             });
 
     }
@@ -155,7 +160,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.subscribers.subscription = this.columnService.getColumns(this.board).subscribe(
             (items) => {
                 this.columns = items;
-
+                 console.log("Columnas inicializada")
             }
         );
 

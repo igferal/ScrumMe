@@ -33,8 +33,7 @@ export class GithubService {
 
   public getIssues(repo: string) {
 
-    console.log('Por aqui pasar paso');
-    console.log(repo);
+
     return this.http
       .get(`https://api.github.com/repos/${repo}/issues`);
 
@@ -48,9 +47,6 @@ export class GithubService {
   public postIssue(repo: string, posit: PostIt) {
 
 
-    console.log('post');
-    console.log(repo
-    )
     let peticion = {
       "title": posit.titulo,
       "body": posit.contenido

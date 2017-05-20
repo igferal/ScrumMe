@@ -7,24 +7,18 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Injectable, OnInit } from '@angular/core';
 import { IBoardService } from './IBoardService';
 import { Board } from './../../model/board';
-import {  AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 
 @Injectable()
 export class UserService implements IUserService, OnInit {
 
-    private currentUser: string;
 
     /**
      * Obtengo el ID del usuario actual del sistema
      */
-    constructor(private database: AngularFireDatabase,public auth: AngularFireAuth) {
-        this.auth.authState.subscribe((user) => {
-            if (user != null) {
-                this.currentUser = user.uid;
-            }
-        });
+    constructor(private database: AngularFireDatabase, public auth: AngularFireAuth) {
 
     }
 
@@ -33,7 +27,8 @@ export class UserService implements IUserService, OnInit {
      */
     public getCurrentDeveloper(): FirebaseObjectObservable<any> {
 
-        return this.database.object(`users/${this.currentUser}`);
+
+        return this.database.object(`users/${this.auth.auth.currentUser.uid}`);
 
     }
 

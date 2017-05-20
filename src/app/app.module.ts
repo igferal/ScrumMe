@@ -1,3 +1,4 @@
+import { InvitationsService } from './services/database/invitations.service';
 import { ColumnService } from './services/database/column.service';
 import { UserService } from './services/database/user.service';
 import { TaskService } from './services/database/task.service';
@@ -86,7 +87,7 @@ export const firebaseConfig = {
         AngularFireModule.initializeApp(firebaseConfig)
 
     ],
-    providers: [TravisService,BoardService,TaskService,UserService,ColumnService],
+    providers: [TravisService,UserService,InvitationsService,BoardService,TaskService,ColumnService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,14 +17,6 @@ export class ColumnService implements IColumnService {
      */
     constructor(private database: AngularFireDatabase, public auth: AngularFireAuth) {
 
-
-        this.auth.authState.subscribe((user) => {
-            if (user != null) {
-                this.currentUser = user.uid;
-            }
-        });
-
-
     }
 
     /**
@@ -67,7 +59,6 @@ export class ColumnService implements IColumnService {
     }
 
 
-    public currentUser: string;
 
 
 }

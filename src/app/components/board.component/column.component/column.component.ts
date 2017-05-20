@@ -69,7 +69,6 @@ export class ColumnComponent implements OnInit {
     * Metodo que nos gestiona el borrado de notas
     */
     public onNotify(key: string) {
-        console.log(key);
         this.taskService.deleteTask(this.boardKey, this.colKey, key);
     }
 
@@ -132,8 +131,7 @@ export class ColumnComponent implements OnInit {
 
         this.subscribers.subscription = this.taskService.getTasks(this.colKey, this.boardKey).subscribe((items) => {
             this.notes = items;
-            console.log("ColumnComponent")
-            console.log(this.gitHubRepo);
+
             if (this.notes) {
                 this.size = this.notes.length;
             } else {
