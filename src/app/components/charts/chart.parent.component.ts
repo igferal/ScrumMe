@@ -31,7 +31,7 @@ export abstract class ChartComponentParent {
 
     public abstract setDataLabels();
 
-    public createchart(){
+    public createChart(){
 
         this.setChartType();
         this.setColors();

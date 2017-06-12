@@ -65,7 +65,7 @@ export class TaskChartComponent extends ChartComponentParent implements OnInit {
   }
 
   public async ngOnInit() {
-
+    this.createChart();
     this.inicializateRoute();
     this.taskService.getMyTask(this.board).subscribe((element: PostIt[]) => {
       this.fillChart(element);

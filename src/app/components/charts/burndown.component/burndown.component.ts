@@ -65,7 +65,7 @@ export class BurndownComponent extends ChartComponentParent implements OnInit {
 
 
   public async ngOnInit() {
-
+    this.createChart();
     this.inicializateRoute();
     this.taskService.getTasksOrderedByEstimatedTime(this.board).subscribe((element: PostIt[]) => {
       this.fillChart(element);
