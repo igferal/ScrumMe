@@ -20,11 +20,45 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class BurndownComponent extends ChartComponentParent implements OnInit {
 
 
-  public board: string;
-  public subscribers: any = {};
-  public ChartType: string = 'line';
-  public ChartColors: Array<any> = [
-    {
+  constructor(public route: ActivatedRoute, public taskService: TaskService,
+    public columnService: ColumnService) {
+    super();
+  }
+
+  public setChartType(type :string){
+    this.ChartType  = type;
+  }
+
+  public setData(data : Array<any>){
+    this.ChartData = data;
+  }
+
+   public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
+
+  public  setColors(data: Array<any>){
+    this.ChartColors = data;
+  }
+
+
+  public async ngOnInit() {
+
+    this.inicializateRoute();
+    this.taskService.getTasksOrderedByEstimatedTime(this.board).subscribe((element: PostIt[]) => {
+      this.fillChart(element);
+
+    });
+    this.setChartType('line');
+    this.setData([
+        { data: this.estimados, label: 'Estimadas' },
+        { data: this.realizadas, label: 'Trabajadas' }]
+    );
+    this.setColors([{
       backgroundColor: 'rgba(33, 124, 163,0.2)',
       borderColor: 'rgba(148,159,177,1)',
       pointBackgroundColor: 'rgba(33, 124, 163,1)',
@@ -39,35 +73,7 @@ export class BurndownComponent extends ChartComponentParent implements OnInit {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(226, 153, 48,0.8)',
-    }
-
-  ];
-
-
-  constructor(public route: ActivatedRoute, public taskService: TaskService,
-    public columnService: ColumnService) {
-    super();
-  }
-
-
-  public chartClicked(e: any): void {
-    console.log('COSA');
-    console.log(this.myChart);
-
-  }
-
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
-  public async ngOnInit() {
-
-    this.inicializateRoute();
-    this.taskService.getTasksOrderedByEstimatedTime(this.board).subscribe((element: PostIt[]) => {
-      this.fillChart(element);
-
-    });
-
+    }]);
   }
 
 
@@ -80,7 +86,6 @@ export class BurndownComponent extends ChartComponentParent implements OnInit {
       .subscribe((board) => {
 
       });
-
   }
 
 

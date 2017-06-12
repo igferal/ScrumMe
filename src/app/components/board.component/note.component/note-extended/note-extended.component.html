@@ -17,12 +17,12 @@
         <div class="inline contenido center">
             <div class="divHoras">
                 <div class="inline">
-                    <h4>Horas planificadas</h4>
-                    <input class="number-input noborder" required type="number" required [(ngModel)]="note.horas" name="hotass" placeholder="100" />
+                    <h4>Horas estimadas</h4>
+                    <input class="number-input noborder" min="0" required type="number" required [(ngModel)]="note.horas" name="hotass" placeholder="100" />
                 </div>
                 <div class="inline">
                     <h4>Horas trabajadas </h4>
-                    <input class="number-input noborder" required type="number" required [(ngModel)]="note.workedHours" name="hotass" placeholder="100" />
+                    <input class="number-input noborder" min="0" required type="number" required [(ngModel)]="note.workedHours" name="hotass" placeholder="100" />
                 </div>
             </div>
             <progress value="{{note.workedHours}}" max="{{note.horas}}"></progress>
