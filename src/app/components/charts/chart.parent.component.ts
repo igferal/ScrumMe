@@ -21,15 +21,27 @@ export abstract class ChartComponentParent {
     };
 
 
-    public abstract setChartType(type: string);
-
     public abstract chartClicked(e: any): void;
 
     public abstract chartHovered(e: any): void;
 
-    public abstract setColors(data: Array<any>);
+    public abstract setChartType();
 
-    public abstract setData(data: Array<any>);
+    public abstract setColors();
+
+    public abstract setDataLabels();
+
+    public createchart(){
+
+        this.setChartType();
+        this.setColors();
+        this.setDataLabels();
+
+
+    }
+
+
+
 
     public restoreChart() {
 
@@ -40,11 +52,7 @@ export abstract class ChartComponentParent {
 
     }
 
-    public putData() {
-        this.ChartData = [
-            { data: this.estimados, label: 'Estimadas' },
-            { data: this.realizadas, label: 'Trabajadas' }];
-    }
+   
 
     public fillChart(element: any) {
         this.restoreChart();
@@ -61,9 +69,7 @@ export abstract class ChartComponentParent {
             }
 
         }
-        this.putData();
         this.isDataAvailable = true;
-
     }
 
 }
