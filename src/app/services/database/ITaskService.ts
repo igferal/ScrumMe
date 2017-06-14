@@ -14,12 +14,12 @@ export interface ITaskService {
 
     deleteTask(boardKey: string, colKey: string, taskKey: string)
 
-    editTask(key: String, newPostIt: PostIt);
-
     addToOtherBag(board: string, postItId: string, fromCollection: string, toCollection: string, programmer: string): void;
 
     findTaskById(board: string, key: string, collection: string);
 
-    getTasksOrderedByEstimatedTime(colKey: string,  boardKey: string): FirebaseListObservable<any>
+    getTasksOrderedByEstimatedTime(colKey: string,  boardKey: string): FirebaseListObservable<any>;
+
+    getMyTasks(boardKey: string): FirebaseListObservable<any>;
 
 }

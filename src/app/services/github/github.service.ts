@@ -1,10 +1,11 @@
+import { IGitHubService } from './IGitHubService';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { PostIt } from './../../model/post.it';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class GithubService {
+export class GithubService implements IGitHubService{
 
   private github: string = 'https://api.github.com';
   protected requestOptions: RequestOptions;
@@ -20,7 +21,7 @@ export class GithubService {
 
   }
 
-  configGithubHeaders() {
+  private configGithubHeaders() {
     let headers: Headers = new Headers();
     headers.set('Accept', 'application/vnd.github.v3+json');
     headers.set('Content-Type', 'application/json;charset=UTF-8');
@@ -29,26 +30,14 @@ export class GithubService {
     });
   }
 
-
-  getUser(username: string) {
-    return this.http
-      .get(`https://api.github.com/users/${username}`);
-  }
-
   public getIssues(repo: string) {
-
 
     return this.http
       .get(`https://api.github.com/repos/${repo}/issues`);
 
   }
 
-  public authUser() {
-
-    this.requestOptions.headers.set('Authorization', 'Basic ' + this.basic);
-  }
-
-  public postIssue(repo: string, posit: PostIt) {
+   public postIssue(repo: string, posit: PostIt) {
 
 
     let peticion = {
@@ -58,16 +47,20 @@ export class GithubService {
 
     this.configGithubHeaders();
     this.authUser();
-    console.log(this.requestOptions);
-
     this.http.post(`https://api.github.com/repos/${repo}/issues`, peticion, this.requestOptions).subscribe((res) => {
       console.log(res)
     });
 
-
-
   }
 
+
+
+  private authUser() {
+
+    this.requestOptions.headers.set('Authorization', 'Basic ' + this.basic);
+  }
+
+ 
 
 
 

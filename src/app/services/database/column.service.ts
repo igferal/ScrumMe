@@ -44,7 +44,7 @@ export class ColumnService implements IColumnService {
 
     }
 
-    deleteColumn(boardKey: string, colKey: string) {
+    public deleteColumn(boardKey: string, colKey: string) {
 
         this.database.list(`column_tasks/${boardKey}/`).remove(colKey);
         this.database.list(`board_columns/${boardKey}/`).remove(colKey);
@@ -52,7 +52,7 @@ export class ColumnService implements IColumnService {
 
     }
 
-    editColumn(key: string, newName: string) {
+    public editColumn(key: string, newName: string) {
 
         this.database.object(key).set(newName);
 

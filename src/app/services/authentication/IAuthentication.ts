@@ -8,4 +8,6 @@ export interface IAuthentication {
 
     getUser(): any;
 
+    changePassword(password: string, oldPassword: string, email: string);
+
 }

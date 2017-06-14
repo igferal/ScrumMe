@@ -33,17 +33,16 @@ export class BoardService implements IBoardService {
 
 
 
-    /**
- * Metodo que nos crea un tablero en firebase 
- * Inserta el tablero en la coleccion de tableros
- * Inserta la informacion de cada tablero en el usuario que se le indica en la coleccion
- * user_board, que actua como tabla de realacion 1-n
- * 
- */
+        /**
+     * Metodo que nos crea un tablero en firebase 
+     * Inserta el tablero en la coleccion de tableros
+     * Inserta la informacion de cada tablero en el usuario que se le indica en la coleccion
+     * user_board, que actua como tabla de realacion 1-n
+     * 
+     */
     public saveBoard(board: Board) {
         board.owner = this.auth.auth.currentUser.uid;
 
-        this.addColaborator
 
         let boardInfo = this.transformToBaordInfo(board);
 
@@ -69,28 +68,11 @@ export class BoardService implements IBoardService {
 
     }
 
-
-    public saveColumn(boardKey: string, boardCol: BoardColumn) {
-        let keyCol;
-        keyCol = this.database.list('board_columns' + '/' + boardKey).push(
-            new BoardColumn(new Array<PostIt>(), boardCol.columnName)).key;
-
-        boardCol.tasks.forEach((task) => {
-            this.database.list("column_tasks/" + boardKey + '/' + keyCol).push(task)
-
-        });
-
-
-    }
-
-
-
-
     /**
      * Metodo que nos devuelve los tableros en los que participa un usuario
      * Pendiente de refactorizar para usar el metodo quedevuelve colecciones
      */
-    public getUser_Boards(): FirebaseListObservable<any> {
+    public getUserBoards(): FirebaseListObservable<any> {
 
         return this.database.list(`user_board/${this.auth.auth.currentUser.uid}`, {
             query: {
@@ -99,14 +81,7 @@ export class BoardService implements IBoardService {
 
     }
 
-    /**
-     * Metodo que nos detiene una colaboracion
-     * Pendiente de refactor también
-     */
-    public deleteColaboration(key: string, boardDeleter: string) {
 
-        this.database.list(`user_board/${this.auth.auth.currentUser.uid}`).remove(key);
-    }
 
 
     /**
@@ -123,29 +98,6 @@ export class BoardService implements IBoardService {
 
     }
 
-    /**
- * Metodo que inserta un nuevo colaborador 
- */
-    private addColaborator(uid: string, boardInfo: any, key: string) {
-
-        this.database.object(`user_board/${uid}/${key}`).set(boardInfo);
-
-    }
-
-
-    private transformToBaordInfo(board: Board) {
-
-        let boardInfo = {
-            name: board.name,
-            date: board.date,
-            gitHubRepo: board.gitHubRepo,
-            travisRepo: board.travisRepo,
-            boardOwner: this.auth.auth.currentUser.uid
-        }
-
-        return boardInfo;
-
-    }
 
 
     public inviteToColab(mail: string, board: Board, boardKey: string): Observable<any> {
@@ -194,54 +146,32 @@ export class BoardService implements IBoardService {
 
     }
 
-    public getInvitationsToCollab(): FirebaseListObservable<any> {
 
-        return this.database.list(`collabs/${this.auth.auth.currentUser.uid}`);
+
+    private transformToBaordInfo(board: Board) {
+
+        let boardInfo = {
+            name: board.name,
+            date: board.date,
+            gitHubRepo: board.gitHubRepo,
+            travisRepo: board.travisRepo,
+            boardOwner: this.auth.auth.currentUser.uid
+        }
+
+        return boardInfo;
 
     }
+    
+    private saveColumn(boardKey: string, boardCol: BoardColumn) {
+        let keyCol;
+        keyCol = this.database.list('board_columns' + '/' + boardKey).push(
+            new BoardColumn(new Array<PostIt>(), boardCol.columnName)).key;
 
-    /**
-     * Metodo que gestiona la inserción de los colaboradores que le pasamos
-     */
-    public addColaborators(email: string[], board: Board, boardKey: string) {
-        let suscription;
-        let subject = new Subject();
-        let boardInfo = this.transformToBaordInfo(board);
+        boardCol.tasks.forEach((task) => {
+            this.database.list("column_tasks/" + boardKey + '/' + keyCol).push(task)
 
-
-        suscription = this.database.list('users', {
-            query: {
-                orderByChild: '_email',
-                equalTo: subject,
-            }
-        }).subscribe(item => {
-
-            if (item != null) {
-                console.log(item);
-                this.addColaborator(item[0]._uid, boardInfo, boardKey);
-            }
         });
 
-
-        email.forEach(element => {
-            subject.next(element)
-        });
-        subject.complete();
-
-    }
-
-    public declineCollaboration(collabKey: string) {
-
-        this.database.list(`collabs/${this.auth.auth.currentUser.uid}`).remove(collabKey);
-
-    }
-
-    public acceptColab(collabKey: string, board: any, boardKey: string) {
-
-        this.declineCollaboration(collabKey);
-
-
-        this.addColaborator(this.auth.auth.currentUser.uid, board, boardKey);
 
     }
 

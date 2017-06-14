@@ -12,7 +12,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @Injectable()
-export class UserService implements IUserService, OnInit {
+export class UserService implements IUserService {
 
 
     /**
@@ -22,23 +22,19 @@ export class UserService implements IUserService, OnInit {
 
     }
 
-    /**
-     * Metodo que nos devuelve al usuario actual de la base da datos
-     */
     public getCurrentDeveloper(): FirebaseObjectObservable<any> {
-
 
         return this.database.object(`users/${this.auth.auth.currentUser.uid}`);
 
     }
 
-    public getCurrentDeveloperById(uid: string): FirebaseObjectObservable<any> {
+    public getDeveloperById(uid: string): FirebaseObjectObservable<any> {
 
         return this.database.object(`users/${uid}`);
 
     }
 
-    public updatePasword(user: User) {
+    public update(user: User) {
         this.database.object(`users/${user.uid}`).update(user)
     }
 
@@ -51,13 +47,11 @@ export class UserService implements IUserService, OnInit {
 
     }
 
-    public isRegistered(): Observable<any> {
+    public isUserLogged(): Observable<any> {
 
         return this.auth.authState;
     }
 
-    ngOnInit() {
 
-    }
 
 }

@@ -1,3 +1,4 @@
+import { IInvitationsService } from './IInvitationsService';
 import { User } from './../../model/user';
 import { IUserService } from './IUserService';
 import { Observable, Subject } from 'rxjs/Rx';
@@ -12,7 +13,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @Injectable()
-export class InvitationsService implements OnInit {
+export class InvitationsService implements IInvitationsService {
 
 
 
@@ -37,6 +38,13 @@ export class InvitationsService implements OnInit {
 
     }
 
+    public getInvitationsToCollab(): FirebaseListObservable<any> {
+
+        return this.database.list(`collabs/${this.auth.auth.currentUser.uid}`);
+
+    }
+
+
 
     private addColaborator(uid: string, boardInfo: any, key: string) {
 
@@ -44,10 +52,8 @@ export class InvitationsService implements OnInit {
 
     }
 
+    
 
-    ngOnInit() {
-
-
-    }
+ 
 
 }

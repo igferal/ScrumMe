@@ -1,16 +1,23 @@
+import { Observable } from 'rxjs/Observable';
 import { PostIt } from './../../model/post.it';
-import {FirebaseListObservable } from 'angularfire2/database';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Board } from './../../model/board';
 
 export interface IBoardService {
 
 
-    deleteBoard(key: string, boardDeleter: string);
-
-    deleteColaboration(key: string, boardDeleter: string);
-
-    getUser_Boards(): FirebaseListObservable<any>;
 
     saveBoard(board: Board);
+
+    deleteBoard(key: string, boardOwnerKey: string);    
+
+    updateBoardInfo(boardKey: string, board: Board);
+
+    getUserBoards(): FirebaseListObservable<any>;
+
+    getBoardInfo(boardId : string) : FirebaseObjectObservable<any>;
+
+    inviteToColab(mail: string, board: Board, boardKey: string): Observable<any>;
+
 
 }

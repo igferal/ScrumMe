@@ -1,3 +1,4 @@
+import { InvitationsService } from './../../services/database/invitations.service';
 import { Board } from './../../model/board';
 import { BoardService } from './../../services/database/board.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +16,7 @@ export class CollabComponent implements OnInit {
 
   
 
-  constructor(public boardService: BoardService) { 
+  constructor(public boardService: InvitationsService,public invitationsService: InvitationsService) { 
     this.showInfo = true;
   }
 
@@ -41,13 +42,13 @@ export class CollabComponent implements OnInit {
 
     console.log(board);
 
-    this.boardService.acceptColab(key, newColab,board.boardKey);
+    this.invitationsService.acceptColab(key, newColab,board.boardKey);
 
   }
 
   public decline(key: string) {
 
-    this.boardService.declineCollaboration(key);
+    this.invitationsService.declineCollaboration(key);
 
   }
 

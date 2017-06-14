@@ -1,3 +1,4 @@
+import { InvitationsService } from './../../services/database/invitations.service';
 import { BoardService } from './../../services/database/board.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
   public subscription: any;
 
 
-  constructor(private authservice: FirebaseAuthentication, private router: Router, public boardService: BoardService) { }
+  constructor(private authservice: FirebaseAuthentication, private router: Router, public boardService: BoardService,public invitationsService : InvitationsService) { }
 
   /**
    * Método de salida de sesión
@@ -46,12 +47,10 @@ export class AppComponent implements OnInit {
     });
 
 
-
-
   }
 
   loadBellNotifications() {
-    this.subscription = this.boardService.getInvitationsToCollab().subscribe((collabs) => {
+    this.subscription = this.invitationsService.getInvitationsToCollab().subscribe((collabs) => {
 
       if (collabs) {
 

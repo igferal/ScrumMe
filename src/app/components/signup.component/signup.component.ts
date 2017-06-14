@@ -65,7 +65,7 @@ export class SignUpComponent implements OnInit {
 
         let user = new User(this.name, this.surname, this.currentUser._email, this.currentUser._uid);
         this.firebaseAuth.changePassword(this.password, this.oldPassword, user.email);
-        this.userService.updatePasword(user);
+        this.userService.update(user);
         this.redirect()
 
     }
@@ -142,9 +142,9 @@ export class SignUpComponent implements OnInit {
 
     ngOnInit() {
 
-        this.subscribers.subscription = this.userService.isRegistered().subscribe((user) => {
+        this.subscribers.subscription = this.userService.isUserLogged().subscribe((user) => {
             if (user) {
-                this.subscribers.subscription = this.userService.getCurrentDeveloperById(user.uid).subscribe((suscribedUser) => {
+                this.subscribers.subscription = this.userService.getDeveloperById(user.uid).subscribe((suscribedUser) => {
                     this.setCurrentFields(suscribedUser);
                     this.putMessages('Editar usuario', 'Editar');
                     this.isEditing = true;

@@ -73,14 +73,6 @@ export class CardBoardComponent implements OnInit {
 
   }
 
-  /**
-   * Metodo que cancela una colaboración en un tablero
-   */
-  public stopColaboration(key: string) {
-
-    this.boardService.deleteColaboration(key, this.board.owner);
-  }
-
 
   public showDialog() {
     this.showModal = true;

@@ -6,8 +6,14 @@ import { BoardColumn } from './../../model/boardColumn';
 export interface IUserService {
 
 
+    getCurrentDeveloper(): FirebaseObjectObservable<any>;
+
+    getDeveloperById(uid: string): FirebaseObjectObservable<any>;
+    
+    update(user: User);
 
     createUser(user: User);
 
-    getCurrentDeveloper(): FirebaseObjectObservable<any>;
+    isUserLogged();
+    
 }

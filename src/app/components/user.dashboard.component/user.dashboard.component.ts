@@ -52,7 +52,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     ngOnInit() {
 
         // this.firebaseService.add();
-        this.subscribers.subscription = this.boardService.getUser_Boards().subscribe(
+        this.subscribers.subscription = this.boardService.getUserBoards().subscribe(
             (boards) => this.boards = boards
         );
 
