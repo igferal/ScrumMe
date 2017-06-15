@@ -1,3 +1,4 @@
+import { ITaskService } from './../../../services/database/ITaskService';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { TaskService } from './../../../services/database/task.service';
 import { ColumnService } from './../../../services/database/column.service';
@@ -20,8 +21,7 @@ export class TaskChartComponent extends ChartComponentParent implements OnInit {
 
 
 
-  constructor(public route: ActivatedRoute, public taskService: TaskService,
-    public columnService: ColumnService) {
+  constructor(public route: ActivatedRoute, public taskService: TaskService) {
     super();
   }
 

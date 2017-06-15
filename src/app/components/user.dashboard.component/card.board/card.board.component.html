@@ -1,7 +1,7 @@
 <section class="tablon">
     <header class="title">
         <a href="{{travisRepoUrl}}">
-            <i [ngStyle]="travisBgStyles" class="fa fa-pied-piper delivery" aria-hidden="true"></i></a>
+            <i [ngStyle]="color.getBackground()" class="fa fa-pied-piper delivery" aria-hidden="true"></i></a>
         <div class="status">
             <i name="botonborrar" class="fa fa-times black" aria-hidden="true" (click)="deleteBoard()"></i>
         </div>
@@ -9,21 +9,21 @@
 
     <div class="body">
         <div class="inline">
-            <h3 [ngStyle]="travisColorStyles">{{board.name}}</h3>
-            <h3 [ngStyle]="travisColorStyles">{{board.date}}</h3>
+            <h3 [ngStyle]="color.getColor()">{{board.name}}</h3>
+            <h3 [ngStyle]="color.getColor()">{{board.date}}</h3>
         </div>
 
         <div class="inline">
-            <a (click)="goToBurndown()"> <i [ngStyle]="travisBgStyles" class="fa fa-area-chart iconButton" aria-hidden="true"></i></a>
-            <a (click)="goToMyCharts()"> <i [ngStyle]="travisBgStyles" class="fa fa-bar-chart iconButton" aria-hidden="true"></i> </a>
-            <a href="{{gitRepoUrl}}"> <i [ngStyle]="travisBgStyles" class="fa fa-github iconButton" aria-hidden="true"></i> </a>
-            <a (click)="showDialogColabs()"> <i [ngStyle]="travisBgStyles" class="fa fa-users iconButton" aria-hidden="true"></i> </a>
-            <a (click)="showDialog()"> <i [ngStyle]="travisBgStyles" class="fa fa-wrench iconButton" aria-hidden="true"></i> </a>
+            <a (click)="goToBurndown()"> <i [ngStyle]="color.getBackground()" class="fa fa-area-chart iconButton" aria-hidden="true"></i></a>
+            <a (click)="goToMyCharts()"> <i [ngStyle]="color.getBackground()" class="fa fa-bar-chart iconButton" aria-hidden="true"></i> </a>
+            <a href="{{gitRepoUrl}}"> <i [ngStyle]="color.getBackground()" class="fa fa-github iconButton" aria-hidden="true"></i> </a>
+            <a (click)="showDialogColabs()"> <i [ngStyle]="color.getBackground()" class="fa fa-users iconButton" aria-hidden="true"></i> </a>
+            <a (click)="showDialog()"> <i [ngStyle]="color.getBackground()" class="fa fa-wrench iconButton" aria-hidden="true"></i> </a>
         </div>
     </div>
     <hr>
     <footer class="footer">
-        <a name="gotoboard{{board.name}}" [ngStyle]="travisBgStyles" (click)="goToBoard()" class="button btn-success">Ir al tablón</a>
+        <a name="gotoboard{{board.name}}" [ngStyle]="color.getBackground()" (click)="goToBoard()" class="button btn-success">Ir al tablón</a>
     </footer>
 
 </section>

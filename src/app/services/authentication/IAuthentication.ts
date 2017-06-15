@@ -10,4 +10,5 @@ export interface IAuthentication {
 
     changePassword(password: string, oldPassword: string, email: string);
 
+    
 }

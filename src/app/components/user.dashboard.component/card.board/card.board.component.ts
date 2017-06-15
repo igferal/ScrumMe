@@ -1,3 +1,7 @@
+import { ErrorColor } from './color/errorColor';
+import { NoTravisColor } from './color/noTravisColor';
+import { SuccessColor } from './color/successColor';
+import { IColor } from './color/IColor';
 import { TravisService } from './../../../services/travis/travis.service';
 import { Router } from '@angular/router';
 import { BoardService } from './../../../services/database/board.service';
@@ -21,9 +25,7 @@ export class CardBoardComponent implements OnInit {
 
   public travisPass: boolean;
 
-  public travisBgStyles;
-
-  public travisColorStyles;
+  public color : IColor;
 
   public showModal: boolean;
 
@@ -116,24 +118,20 @@ export class CardBoardComponent implements OnInit {
       this.subscribers.subscription = this.travisService.getState(this.board.travisRepo).subscribe((res) => {
         this.travisPass = res.json()[0].result === 0;
         if (!this.travisPass) {
-          this.travisBgStyles = {
-            'background': '#E04A1B'
-          };
-
-          this.travisColorStyles = {
-            'color': '#E04A1B'
-          }
-
+            this.color = new ErrorColor();
+        }
+        else{
+            this.color = new SuccessColor();
         }
       });
     }
-
   }
 
   ngOnInit() {
 
     this.gitRepoUrl = `https://github.com/${this.board.gitHubRepo}`;
     this.travisRepoUrl = `https://travis-ci.org/${this.board.travisRepo}`;
+    this.color = new NoTravisColor();
     this.configureTravis();
 
   }

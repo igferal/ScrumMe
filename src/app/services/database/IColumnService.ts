@@ -1,3 +1,4 @@
+import { ColumnService } from './column.service';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { BoardColumn } from './../../model/boardColumn';
 export interface IColumnService {
@@ -11,6 +12,7 @@ export interface IColumnService {
     deleteColumn(boardKey: string, colKey: string)
 
     editColumn(key: String, newName: string);
+
 
 
 }

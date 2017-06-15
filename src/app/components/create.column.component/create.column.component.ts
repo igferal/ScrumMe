@@ -1,6 +1,7 @@
+import { IColumnService } from './../../services/database/IColumnService';
 import { ColumnService } from './../../services/database/column.service';
 import { BoardColumn } from './../../model/boardColumn';
-import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit , Inject  } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { Router } from '@angular/router';
 
@@ -27,7 +28,8 @@ export class CreateColumnComponent implements OnInit {
     @Input() editing: boolean;
     @Input() colKey: string;
 
-    constructor(public columnService: ColumnService, public router: Router) {
+    constructor(  @Inject(ColumnService)
+        public columnService: IColumnService, public router: Router) {
 
     }
 
