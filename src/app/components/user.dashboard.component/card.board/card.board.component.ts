@@ -1,7 +1,4 @@
-import { ErrorColor } from './color/errorColor';
-import { NoTravisColor } from './color/noTravisColor';
-import { SuccessColor } from './color/successColor';
-import { IColor } from './color/IColor';
+import { Color } from './../../../model/color';
 import { TravisService } from './../../../services/travis/travis.service';
 import { Router } from '@angular/router';
 import { BoardService } from './../../../services/database/board.service';
@@ -25,7 +22,7 @@ export class CardBoardComponent implements OnInit {
 
   public travisPass: boolean;
 
-  public color : IColor;
+  public color : Color;
 
   public showModal: boolean;
 
@@ -118,10 +115,10 @@ export class CardBoardComponent implements OnInit {
       this.subscribers.subscription = this.travisService.getState(this.board.travisRepo).subscribe((res) => {
         this.travisPass = res.json()[0].result === 0;
         if (!this.travisPass) {
-            this.color = new ErrorColor();
+            this.color = new Color("#E04A1B","#E04A1B");
         }
         else{
-            this.color = new SuccessColor();
+            this.color = new Color("#7FB800","#7FB800");
         }
       });
     }
@@ -131,7 +128,7 @@ export class CardBoardComponent implements OnInit {
 
     this.gitRepoUrl = `https://github.com/${this.board.gitHubRepo}`;
     this.travisRepoUrl = `https://travis-ci.org/${this.board.travisRepo}`;
-    this.color = new NoTravisColor();
+    this.color = new Color("#217CA3","#217CA3");
     this.configureTravis();
 
   }
