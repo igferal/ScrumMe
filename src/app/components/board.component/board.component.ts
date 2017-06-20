@@ -156,11 +156,9 @@ export class BoardComponent implements OnInit, OnDestroy {
      */
     public inicializateCollections() {
 
-        console.log(this.board);
         this.subscribers.subscription = this.columnService.getColumns(this.board).subscribe(
             (items) => {
                 this.columns = items;
-                 console.log("Columnas inicializada")
             }
         );
 

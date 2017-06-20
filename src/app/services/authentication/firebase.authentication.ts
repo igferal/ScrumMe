@@ -5,26 +5,15 @@ import { IAuthentication } from './IAuthentication';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
+
 import { CanActivate, Router, } from '@angular/router';
 
-
-/**
- * 
- * Clase pendiente de refactorización 
- * Promesas en angular2 => WRONG!  
- * Cambiar para usar observables
- */
 @Injectable()
 export class FirebaseAuthentication implements IAuthentication, CanActivate {
 
-
     constructor(public auth: AngularFireAuth, public router: Router) { }
 
-
-
     public getUser() {
-
-
         this.auth.authState.subscribe((auth) => {
             return auth;
         });
@@ -33,7 +22,6 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
 
     public signUp(email: string, password: string): Observable<any> {
         let creds: any = { email: email, password: password };
-        console.log(creds);
         return new Observable((observer) => {
             this.auth.auth.createUserWithEmailAndPassword(email, password).catch((err) => {
                 let error = { provider: 3, error: err.message };

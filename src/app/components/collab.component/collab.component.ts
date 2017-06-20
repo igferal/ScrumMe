@@ -1,24 +1,35 @@
 import { InvitationsService } from './../../services/database/invitations.service';
 import { Board } from './../../model/board';
 import { BoardService } from './../../services/database/board.service';
+/* ****************** ZONA 1 **************************/
 import { Component, OnInit } from '@angular/core';
-
+/* ****************** ZONA 2 **************************/
 @Component({
   selector: 'app-collab',
   templateUrl: './collab.component.html',
   styleUrls: ['./collab.component.scss'],
   providers: []
 })
+/* ****************** ZONA 3 **************************/
 export class CollabComponent implements OnInit {
 
+/* ****************** ZONA 4 **************************/
   public invitations: any[];
   public showInfo = false;
 
-  
-
+/* ****************** ZONA 5 **************************/
   constructor(public boardService: InvitationsService,public invitationsService: InvitationsService) { 
     this.showInfo = true;
   }
+
+  /* ****************** ZONA 6 **************************/
+    public decline(key: string) {
+
+    this.invitationsService.declineCollaboration(key);
+
+  }
+
+
 
   ngOnInit() {
 
@@ -39,16 +50,7 @@ export class CollabComponent implements OnInit {
     let newColab: Board = new Board(board.name, board.date);
     board.gitHubRepo = this.getRepo(board.gitHubRepo);
     board.travisRepo = this.getRepo(board.travisRepo);
-
-    console.log(board);
-
     this.invitationsService.acceptColab(key, newColab,board.boardKey);
-
-  }
-
-  public decline(key: string) {
-
-    this.invitationsService.declineCollaboration(key);
 
   }
 

@@ -14,10 +14,10 @@
         </div>
 
         <div class="inline">
-            <a (click)="goToBurndown()"> <i [ngStyle]="color.getBackground()" class="fa fa-area-chart iconButton" aria-hidden="true"></i></a>
-            <a (click)="goToMyCharts()"> <i [ngStyle]="color.getBackground()" class="fa fa-bar-chart iconButton" aria-hidden="true"></i> </a>
-            <a href="{{gitRepoUrl}}"> <i [ngStyle]="color.getBackground()" class="fa fa-github iconButton" aria-hidden="true"></i> </a>
-            <a (click)="showDialogColabs()"> <i [ngStyle]="color.getBackground()" class="fa fa-users iconButton" aria-hidden="true"></i> </a>
+            <a name="burndown{{board.name}}" (click)="goToBurndown()"> <i [ngStyle]="color.getBackground()" class="fa fa-area-chart iconButton" aria-hidden="true"></i></a>
+            <a name="mytasks{{board.name}}" (click)="goToMyCharts()"> <i [ngStyle]="color.getBackground()" class="fa fa-bar-chart iconButton" aria-hidden="true"></i> </a>
+            <a name="github{{board.name}}" href="{{gitRepoUrl}}"> <i [ngStyle]="color.getBackground()" class="fa fa-github iconButton" aria-hidden="true"></i> </a>
+            <a name="collabs{{board.name}}" (click)="showDialogColabs()"> <i [ngStyle]="color.getBackground()" class="fa fa-users iconButton" aria-hidden="true"></i> </a>
             <a (click)="showDialog()"> <i [ngStyle]="color.getBackground()" class="fa fa-wrench iconButton" aria-hidden="true"></i> </a>
         </div>
     </div>
@@ -37,5 +37,5 @@
     <label>Nuevo(s) colaboador(es)</label>
     <input class="input-modal" type="text" [(ngModel)]="mailsToColab" name="mails" placeholder="Email(s)" />
     <small id="emailHelp" class="form-text text-muted">Introduce el email de los colaboradores que desees, separado por comas ej: <strong>pep@scrumme.es,cr7@scrumme.es</strong></small>
-    <button (click)="addColabs()" class="button btn-main">Añadir colaboradores</button>
+    <button name="addColab{{board.name}}" (click)="addColabs()" class="button btn-main">Añadir colaboradores</button>
 </p-dialog>

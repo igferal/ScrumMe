@@ -1,19 +1,19 @@
 <div class="ui-g-2"> </div>
 
 <div class="ui-g-8">
-    <h1 class="title">Invitaciones a colaborar</h1>
+    <h1 name="title" class="title">Invitaciones a colaborar</h1>
     <div class="inline" *ngFor="let invitation of invitations">
         <div class="collabCard">
             <header>
-                <h1> {{invitation.name}}</h1>
+                <h1 id="collab{{invitation.name}}"> {{invitation.name}}</h1>
             </header>
             <div class="owner">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <h3>{{invitation.boardOwnerMail}}</h3>
             </div>
             <div class="buttons">
-                <button class="button btn-success" (click)="accept(invitation.$key,invitation)">Aceptar colaboracion</button>
-                <button class="button btn-warn" (click)="decline(invitation.$key)">Declinar colaboracion</button>
+                <button name="accept{{invitation.name}}" class="button btn-success" (click)="accept(invitation.$key,invitation)">Aceptar colaboracion</button>
+                <button name="decline{{invitation.name}}" class="button btn-warn" (click)="decline(invitation.$key)">Declinar colaboracion</button>
             </div>
         </div>
     </div>

@@ -42,6 +42,21 @@ export class DashboardPage {
 
   }
 
+  sendNotification(toWho : string){
+
+      Utils.clickButton("collabssprint1");
+      browser.driver.sleep(1000);
+      Utils.fillInput("mails", toWho);
+      Utils.clickButton("addColabsprint1");
+    
+  }
+
+  removeMessages(){
+
+    element(by.xpath("/html/body/app-root/div/dashboard/div/div[2]/p-messages/div/a")).click();
+
+  }
+
 
 
 }
