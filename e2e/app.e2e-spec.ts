@@ -269,7 +269,15 @@ describe('Board Page tests', function () {
     board.cargarHoras();
     expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/div/div/div/strong  ")).toEqual("50");
 
-    
+  });
+
+  it('Debe cerrar una tarea',() =>{
+
+    board.cerrarTarea();
+    expect(board.getElementByXpath("//*[@id=\"noteKey\"]/div/div/div/strong ")).toBeFalsy();
+    dashboard.navigateTo();
+    browser.driver.sleep(1000);
+    dashboard.deleteCard();
 
   });
 

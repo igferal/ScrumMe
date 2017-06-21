@@ -95,6 +95,12 @@ export class BoardPage {
         Utils.fillInput("inputCargarHoras","5");
         Utils.clickButton("cargarHoras")
 
+    }
+
+    cerrarTarea(){
+
+        Utils.clickByXpath("//*[@id=\"noteKey\"]/header/i");
+        Utils.clickByXpath("//*[@id=\"T1\"]/div/ul/li[3]/a");        
 
     }
 
