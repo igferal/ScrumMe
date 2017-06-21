@@ -17,14 +17,14 @@ export class DashboardPage {
     Utils.clickButton("enviar");
   }
 
-  getElement(name : string) {
+  getElement(name: string) {
 
     return element(by.name(name)).isPresent();
 
   }
 
 
-  getElementById(name : string) {
+  getElementById(name: string) {
 
 
     return element(by.id(name)).isPresent();
@@ -42,16 +42,25 @@ export class DashboardPage {
 
   }
 
-  sendNotification(toWho : string){
+  edit() {
 
-      Utils.clickButton("collabssprint1");
-      browser.driver.sleep(1000);
-      Utils.fillInput("mails", toWho);
-      Utils.clickButton("addColabsprint1");
-    
+    Utils.clickByXpath("/html/body/app-root/div/dashboard/div/div[2]/section/board-card/section/div/div[2]/a[5]/i");
+    Utils.fillInputByXpath("/html/body/app-root/div/dashboard/div/div[2]/section/board-card/p-dialog[1]/div/div[2]/createboard/div/form/fieldset/div/input[1]","sprint2");
+    Utils.clickByXpath("/html/body/app-root/div/dashboard/div/div[2]/section/board-card/p-dialog[1]/div/div[2]/createboard/div/form/fieldset/div/button");
+
+
   }
 
-  removeMessages(){
+  sendNotification(toWho: string) {
+
+    Utils.clickButton("collabssprint1");
+    browser.driver.sleep(1000);
+    Utils.fillInput("mails", toWho);
+    Utils.clickButton("addColabsprint1");
+
+  }
+
+  removeMessages() {
 
     element(by.xpath("/html/body/app-root/div/dashboard/div/div[2]/p-messages/div/a")).click();
 

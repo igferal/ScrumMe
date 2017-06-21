@@ -89,6 +89,17 @@ describe('Dashboard Page tests', function () {
   });
 
 
+
+it('Debo poder editar el tablero', () => {
+
+    page.edit();
+    browser.driver.sleep(1000);
+    expect(page.getElement("gotoboardsprint2")).toBeTruthy();
+
+  });
+
+
+
   it('Debe desaparecer la carta del tablon cuando la borro', () => {
 
     browser.driver.sleep(1000);
