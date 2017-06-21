@@ -1,3 +1,5 @@
+import { Board } from './../src/app/model/board';
+import { BoardPage } from './Board.po';
 import { CollabsPage } from './Collabs.po';
 import { LoginPage } from './Login.po.';
 import { LandingPage } from './Landing.po';
@@ -16,6 +18,8 @@ describe('Landing Page tests', function () {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('ScrumMe');
   });
+
+
 });
 
 
@@ -182,10 +186,92 @@ describe('Collab Page tests', function () {
     expect(dashboard.getElement("gotoboardsprint1")).toBeTruthy();
     dashboard.deleteCard();
 
- 
- });
+
+  });
 
 
+
+
+});
+
+describe('Board Page tests', function () {
+
+  let login = new LoginPage();
+  let dashboard = new DashboardPage();
+  let board = new BoardPage();
+
+  beforeEach(() => {
+
+    login = new LoginPage();
+    dashboard = new DashboardPage();
+    board = new BoardPage();
+    login.navigateTo();
+    login.login("testuser@scrumme.es", "scrumme");
+    browser.driver.sleep(1500);
+    dashboard.goToBoard();
+    browser.driver.sleep(1500);
+
+
+  });
+
+  it('Debemos crear una nueva columna en el tablero', () => {
+
+    board.createCol();
+    browser.driver.sleep(2000);
+    expect(board.getElementById("columnnuevaColumna")).toBeTruthy();
+
+  });
+
+  it('Debe editar el nombre de la nueva columna', () => {
+    board.editColumn();
+    browser.driver.sleep(1500);
+    expect(board.getElementById("columneditada")).toBeTruthy();
+
+  });
+
+  it('Debe borrar la columna', () => {
+
+    browser.driver.sleep(2000);
+    board.deleteColumn();
+    expect(board.getElementById("columneditada")).toBeFalsy();
+
+
+  });
+
+  it('Debe crear una tarea', () => {
+
+    browser.driver.sleep(1500);
+    board.createTask();
+    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("T1");
+
+  });
+
+
+  it('Debe editar una tarea', () => {
+
+    board.editTask();
+    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("T1updated");
+
+  });
+
+  it('Debe borrar una tarea', () => {
+
+    board.deleteTask();
+    expect(board.getElementByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toBeFalsy();
+
+   });
+
+
+  it('Debe cargar Horas en  una tarea', () => {
+
+    browser.driver.sleep(1500);
+    board.createTask();
+    board.cargarHoras();
+    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/div/div/div/strong  ")).toEqual("50");
+
+    
+
+  });
 
 
 });

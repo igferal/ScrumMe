@@ -11,7 +11,7 @@
         </div>
     </div>
 </div>
-<p-menu #menu popup="popup" [model]="options"></p-menu>
+<p-menu id={{titleLimited()}} #menu popup="popup" [model]="options"></p-menu>
 
 
 <p-dialog [width]="1200 " height="600 " [draggable]="false " [modal]="true " header="Información Tarea" [(visible)]="showInfo ">
@@ -25,7 +25,7 @@
     <label>Horas trabajadas:</label> {{note.workedHours}}
     <br>
     <label>Cargar horas</label>
-    <input class="input-modal" type="number" #horas placeholder="Cargue aquí sus horas" />
+    <input name="inputCargarHoras" class="input-modal" type="number" #horas placeholder="Cargue aquí sus horas" />
     <br>
-    <button class="button btn-main" (click)="logHours(horas.value)">Cargar horas</button>
+    <button name="cargarHoras" class="button btn-main" (click)="logHours(horas.value)">Cargar horas</button>
 </p-dialog>

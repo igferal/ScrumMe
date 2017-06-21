@@ -18,5 +18,23 @@ export class Utils {
 
     }
 
+    public static clickByXpath(xpath:string){
+
+        element(by.xpath(xpath)).click();
+        browser.driver.sleep(100);
+    }
+
+    public static  fillInputByXpath(inputName: string, content: string) {
+    
+        let input;
+        input = element(by.xpath(inputName)).click();
+        input.clear();
+        input.sendKeys(content);
+        
+
+    }
+
+
+
 
 }

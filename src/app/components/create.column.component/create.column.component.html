@@ -1,7 +1,8 @@
 <form (ngSubmit)="onSubmit()" container #createColumn="ngForm">
 
-    <label>Nota de la columna</label>
-    <input class="input-modal" required type="text" required [(ngModel)]="name" name="col" placeholder="Nombre Columna">
+    <label>Nombre de la columna</label>
+    <input class="input-modal" required type="text" required [(ngModel)]="name" name="editar{{colName}}" placeholder="Nombre Columna">
     <hr/>
     <button class="button btn-main">{{action}}</button>
+
 </form>
