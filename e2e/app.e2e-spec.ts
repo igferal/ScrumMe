@@ -267,7 +267,7 @@ describe('Board Page tests', function () {
 
   it('Debe borrar una tarea', () => {
 
-    board.deleteTask();
+    board.deleteTask("T1updated");
     expect(board.getElementByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toBeFalsy();
 
    });
@@ -283,14 +283,32 @@ describe('Board Page tests', function () {
   });
 
   it('Debe cerrar una tarea',() =>{
-
     board.cerrarTarea();
     expect(board.getElementByXpath("//*[@id=\"noteKey\"]/div/div/div/strong ")).toBeFalsy();
+
+
+  });
+
+   it('Debe abrir una tarea que había sido cerrada',() =>{
+    browser.driver.sleep(1000);
+    board.cerrarTarea();
+    browser.driver.sleep(1000);
+    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/div/div/div/strong ")).toEqual("50");
+    
+
+  });
+
+  it('Debe mostrar las issues del repositorio',()=>{
+    board.deleteTask("T1");
+    board.abrirIntegracionGit();
+    browser.driver.sleep(1000);
+    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("Testing"); 
     dashboard.navigateTo();
     browser.driver.sleep(1000);
     dashboard.deleteCard();
 
   });
 
+    
 
 });

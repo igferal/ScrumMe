@@ -37,10 +37,7 @@ export abstract class ChartComponentParent {
         this.setColors();
         this.setDataLabels();
 
-
     }
-
-
 
 
     public restoreChart() {

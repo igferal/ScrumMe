@@ -14,6 +14,7 @@ export class DashboardPage {
     Utils.fillInput("name", "sprint1");
     Utils.fillInput("date", "12/12/2017");
     Utils.fillInput("columns", "To do,Done");
+    Utils.fillInput("gitHubRepo","nacho1014/ScrumMe")
     Utils.clickButton("enviar");
   }
 

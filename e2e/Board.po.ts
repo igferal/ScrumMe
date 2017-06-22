@@ -1,6 +1,7 @@
 import { Board } from './../src/app/model/board';
 import { Utils } from './utils';
 import { browser, element, by } from 'protractor';
+import { protractor } from "protractor/built/ptor";
 
 export class BoardPage {
 
@@ -20,11 +21,11 @@ export class BoardPage {
 
     }
 
-    
+
     getElementTextById(name: string) {
 
 
-        console.log( element(by.id(name)).getText());
+        console.log(element(by.id(name)).getText());
 
     }
 
@@ -72,37 +73,48 @@ export class BoardPage {
 
     }
 
- 
+
 
     editTask() {
-        
+
         Utils.clickByXpath("//*[@id=\"noteKey\"]/header/i");
         Utils.clickByXpath("//*[@id=\"T1\"]/div/ul/li[1]/a");
-        Utils.fillInput("name","updated");
+        Utils.fillInput("name", "updated");
         Utils.clickButton("edit")
 
     }
 
-    deleteTask(){
+    deleteTask(taskid :string) {
         Utils.clickByXpath("//*[@id=\"noteKey\"]/header/i");
-        Utils.clickByXpath("//*[@id=\"T1updated\"]/div/ul/li[2]/a");
+        Utils.clickByXpath("//*[@id=\""+taskid+"\"]/div/ul/li[2]/a");
     }
 
-    cargarHoras(){
+    cargarHoras() {
 
         Utils.clickByXpath("//*[@id=\"noteKey\"]/header/i");
         Utils.clickByXpath("//*[@id=\"T1\"]/div/ul/li[3]/a");
-        Utils.fillInput("inputCargarHoras","5");
+        Utils.fillInput("inputCargarHoras", "5");
         Utils.clickButton("cargarHoras")
 
     }
 
-    cerrarTarea(){
+    cerrarTarea() {
 
         Utils.clickByXpath("//*[@id=\"noteKey\"]/header/i");
-        Utils.clickByXpath("//*[@id=\"T1\"]/div/ul/li[3]/a");        
+        Utils.clickByXpath("//*[@id=\"T1\"]/div/ul/li[4]/a");
 
     }
+
+    abrirIntegracionGit(){
+
+        Utils.clickByXpath("/html/body/app-root/div/list/div/section/div[1]/div/app-column/header/i");
+        Utils.clickByXpath("/html/body/app-root/div/list/div/section/div[1]/div/app-column/header/p-menu/div/ul/li[4]/a");
+        browser.driver.sleep(500);
+        Utils.clickByXpath("/html/body/app-root/div/list/div/section/div[1]/div/app-column/p-dialog[3]/div/div[2]/github-issues/div/table/tbody/tr[2]/td[4]/button");
+        Utils.clickByXpath("/html/body/app-root/div/list/div/section/div[1]/div/app-column/p-dialog[3]/div/div[1]/a/span");
+
+    }
+
 
 
 }
