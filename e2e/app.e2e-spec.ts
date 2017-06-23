@@ -304,7 +304,7 @@ describe('Board Page tests', function () {
     browser.driver.sleep(1000);
     expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("Testing"); 
     dashboard.navigateTo();
-    browser.driver.sleep(1500);
+    browser.driver.sleep(2500);
     dashboard.deleteCard();
 
   });
