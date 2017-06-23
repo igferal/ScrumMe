@@ -21,24 +21,6 @@
 </div>
 
 
-
-
-
-
-
 <p-dialog [width]="1200 " height="600 " [draggable]="false " [modal]="true " header="Información Tarea" [(visible)]="showInfo ">
     <note-extended (close)="onClose($event)" (git)="onGit($event)" (load)="onLoad($event)" (update)="onUpdateInfo($event)" (delete)="onDelete($event)" [note]="currentNote"></note-extended>
-</p-dialog>
-
-
-
-<p-dialog [width]="600 " height="320 " [draggable]="true " [modal]="true " header="Cargar horas " [(visible)]="showLogWork ">
-    <label>Horas estimadas&nbsp;:</label> {{currentNote.horas}}
-    <br>
-    <label>Horas trabajadas:</label> {{currentNote.workedHours}}
-    <br>
-    <label>Cargar horas</label>
-    <input name="inputCargarHoras" class="input-modal" type="number" #horas placeholder="Cargue aquí sus horas" />
-    <br>
-    <button name="cargarHoras" class="button btn-main" (click)="logHours(horas.value)">Cargar horas</button>
 </p-dialog>

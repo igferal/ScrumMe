@@ -3,7 +3,8 @@
 
         <div *ngFor="let column of columns">
             <div class="scrollDiv">
-                <app-column (editColName)="onEditCol($event)" (createTaskFromIssue)="onTaskFromIssue($event)" (createTask)="onCreateTask($event)" [gitHubRepo]="gitHubRepo" [boardKey]="board" [colKey]="column.$key" [colName]="column._columnName"> </app-column>
+                <app-column (editColName)="onEditCol($event)" (createTaskFromIssue)="onTaskFromIssue($event)" (createTask)="onCreateTask($event)" (logHoursEmmiter)="onLogHours($event)" [gitHubRepo]="gitHubRepo" [boardKey]="board" [colKey]="column.$key" [colName]="column._columnName">
+                </app-column>
             </div>
         </div>
         <div class="scrollDiv-new">
@@ -11,6 +12,7 @@
             <button name="createCol" class="button btn-main" (click)="showDialog()">Create Column</button>
         </div>
     </section>
+
 
 
     <p-dialog [width]="600" height="250" [draggable]="false" [modal]="true" header="Crear Columna" [(visible)]="showModal">
@@ -27,6 +29,17 @@
 
     <p-dialog [width]="600 " height="250 " [draggable]="false " [modal]="true " header="Editar Columna " [(visible)]="showModalCol">
         <createColumn [colKey]="colKey" [editing]="true" [colName]="colName" [board]="board" (notify)="closeDialogCol() "></createColumn>
+    </p-dialog>
+
+    <p-dialog [width]="600 " height="320 " [draggable]="true " [modal]="true " header="Cargar horas " [(visible)]="showLogWork ">
+        <label>Horas estimadas&nbsp;:</label> {{currentNote.horas}}
+        <br>
+        <label>Horas trabajadas:</label> {{currentNote.workedHours}}
+        <br>
+        <label>Cargar horas</label>
+        <input name="inputCargarHoras" class="input-modal" type="number" #horas placeholder="Cargue aquí sus horas" />
+        <br>
+        <button name="cargarHoras" class="button btn-main" (click)="logHours(horas.value)">Cargar horas</button>
     </p-dialog>
 
 </div>

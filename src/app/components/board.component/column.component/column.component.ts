@@ -26,11 +26,11 @@ export class ColumnComponent implements OnInit {
     @Output() public createTask = new EventEmitter<string>();
     @Output() public createTaskFromIssue = new EventEmitter<string>();
     @Output() public editColName = new EventEmitter<any>();
-    public currentNote : PostIt;
+    @Output() public logHoursEmmiter = new EventEmitter<any>();
+    public currentNote: PostIt;
     public subscribers: any = {};
     public options: any[];
     public notesToDispose = [];
-    public showLogWork :boolean;
     public size: number;
     public showInfo: boolean;
 
@@ -43,8 +43,8 @@ export class ColumnComponent implements OnInit {
             {
                 label: 'Editar', icon: 'fa fa-pencil-square-o', command: () => {
                     this.editColName.emit({
-                        colKey : this.colKey,
-                        colName :this.colName
+                        colKey: this.colKey,
+                        colName: this.colName
                     })
                 }
             },
@@ -76,7 +76,7 @@ export class ColumnComponent implements OnInit {
     * Metodo que nos gestiona el borrado de notas
     */
     public onDeleteTask(note: PostIt) {
-        
+
         this.currentNote = note;
         this.taskService.deleteTask(this.boardKey, this.colKey, this.currentNote.key);
         this.inicializateCurrentNote();
@@ -94,19 +94,13 @@ export class ColumnComponent implements OnInit {
 
 
 
-    public showLogWorkDialog() {
-        this.showLogWork = true;
-    }
 
-    public removeLogWorkDialog() {
-        this.showLogWork = false;
-    }
 
 
     public onLogHours(note: PostIt) {
 
         this.currentNote = note;
-        this.showLogWorkDialog();
+        this.logHours();
 
     }
 
@@ -124,7 +118,7 @@ export class ColumnComponent implements OnInit {
     }
 
     public onUpdate(note: PostIt) {
-        
+
         this.currentNote = note;
         this.showInfoDialog();
 
@@ -132,7 +126,7 @@ export class ColumnComponent implements OnInit {
     }
 
 
-    public update(){
+    public update() {
 
         this.taskService.updateTask(this.colKey, this.boardKey, this.currentNote.key, this.currentNote);
 
@@ -143,11 +137,13 @@ export class ColumnComponent implements OnInit {
         this.columnService.deleteColumn(this.boardKey, this.colKey);
     }
 
-    public logHours(hours: any) {
+    public logHours() {
 
-        this.currentNote.workedHours = (this.currentNote.workedHours + parseInt(hours));
-        this.removeLogWorkDialog();
-        this.update();
+        this.logHoursEmmiter.emit({
+            note : this.currentNote,
+            colKey : this.colKey}
+        );
+
 
     }
 
@@ -156,26 +152,26 @@ export class ColumnComponent implements OnInit {
 
         this.update();
         this.closeInfoDialog();
-        
+
     }
 
-    public onGit(aotFix : any) {
-        
+    public onGit(aotFix: any) {
+
         this.createGitIssue(this.currentNote);
         this.closeInfoDialog();
-        
+
 
     }
 
-    public onClose(aotFix : any) {
+    public onClose(aotFix: any) {
         this.closeInfoDialog();
         this.currentNote.closed = !this.currentNote.closed;
-                this.update();
+        this.update();
         this.closeInfoDialog();
 
     }
 
-    public onDelete(aotFix : any) {
+    public onDelete(aotFix: any) {
 
         this.closeInfoDialog();
         this.onDeleteTask(this.currentNote);
@@ -183,10 +179,10 @@ export class ColumnComponent implements OnInit {
 
     }
 
-    public onLoad(aotFix : any) {
+    public onLoad(aotFix: any) {
 
         this.closeInfoDialog();
-        this.showLogWorkDialog();
+        this.logHours();
 
     }
 
@@ -194,17 +190,17 @@ export class ColumnComponent implements OnInit {
 
 
 
-    public inicializateCurrentNote(){
+    public inicializateCurrentNote() {
 
 
-            this.currentNote = new PostIt("",",","",0,"");
-            this.currentNote.workedHours =0;
+        this.currentNote = new PostIt("", ",", "", 0, "");
+        this.currentNote.workedHours = 0;
 
 
     }
 
     ngOnInit() {
-        
+
         this.inicializateCurrentNote();
         this.subscribers.subscription = this.taskService.getTasks(this.colKey, this.boardKey).subscribe((items) => {
             this.notes = items;

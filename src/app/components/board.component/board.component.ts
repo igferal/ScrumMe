@@ -1,3 +1,4 @@
+import { PostIt } from './../../model/post.it';
 import { BoardService } from './../../services/database/board.service';
 import { GithubService } from './../../services/github/github.service';
 import { UserService } from './../../services/database/user.service';
@@ -10,7 +11,6 @@ import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PostIt } from '../../model/post.it';
 import { DragulaService } from '../../../../node_modules/ng2-dragula/ng2-dragula';
 import { User } from './../../model/user';
 import 'rxjs/add/operator/switchMap';
@@ -38,6 +38,8 @@ export class BoardComponent implements OnInit, OnDestroy {
     public gitHubRepo: string;
     public colKey: string;
     public colName: string;
+    public showLogWork :boolean;
+    public currentNote : PostIt;
 
 
 
@@ -100,6 +102,14 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.showModalGit = false;
     }
 
+    public showLogWorkDialog() {
+        this.showLogWork = true;
+    }
+
+    public removeLogWorkDialog() {
+        this.showLogWork = false;
+    }
+
     onCreateTask(colKey: string) {
         this.colKey = colKey;
         this.showCreteTaskDialog();
@@ -118,6 +128,20 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     }
 
+    public onLogHours(note: any) {
+
+        this.currentNote = note.note;
+        this.colKey = note.colKey;
+        this.showLogWorkDialog();
+
+    }
+
+     public update() {
+
+        this.taskService.updateTask(this.colKey, this.board, this.currentNote.key, this.currentNote);
+
+    }
+
 
 
     /**
@@ -132,11 +156,24 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.addToAnotherBag(postItId, `${fromCollection}`, `${toCollection}`);
 
     }
+
+    
+
+
+    public logHours(hours: any) {
+
+        this.currentNote.workedHours = (this.currentNote.workedHours + parseInt(hours));
+        this.removeLogWorkDialog();
+        this.update();
+
+    }
+
+
+
     /**
      * Metodo que nos gestiona el cambio de columna
      */
     public addToAnotherBag(postItId: string, fromCollection: string, toCollection: string) {
-
 
         this.taskService.addToOtherBag(this.board, postItId, fromCollection, toCollection, this.currentUser.name);
     }
@@ -150,10 +187,19 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.suscribeUser();
         this.inicializateRoute();
         this.inicializateCollections();
-                this.getGitHubRepo();
-
+        this.getGitHubRepo();
+        this.inicializateCurrentNote();
 
     }
+
+    public inicializateCurrentNote(){
+
+        this.currentNote = new PostIt("",",","",0,"");
+        this.currentNote.workedHours =0;
+
+    }
+
+
 
 
 
