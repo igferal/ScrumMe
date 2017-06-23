@@ -27,12 +27,12 @@ export class ColumnComponent implements OnInit {
     @Output() public createTaskFromIssue = new EventEmitter<string>();
     @Output() public editColName = new EventEmitter<any>();
     @Output() public logHoursEmmiter = new EventEmitter<any>();
+    @Output() public emmitUpdate = new EventEmitter<any>();
     public currentNote: PostIt;
     public subscribers: any = {};
     public options: any[];
     public notesToDispose = [];
     public size: number;
-    public showInfo: boolean;
 
 
 
@@ -82,21 +82,6 @@ export class ColumnComponent implements OnInit {
         this.inicializateCurrentNote();
     }
 
-
-    public showInfoDialog() {
-        this.showInfo = true;
-    }
-
-
-    public closeInfoDialog() {
-        this.showInfo = false;
-    }
-
-
-
-
-
-
     public onLogHours(note: PostIt) {
 
         this.currentNote = note;
@@ -109,6 +94,8 @@ export class ColumnComponent implements OnInit {
         this.taskService.updateTask(this.colKey, this.boardKey, note.key, note);
     }
 
+
+
     public createGitIssue(postit: PostIt) {
 
         this.currentNote = postit;
@@ -119,9 +106,12 @@ export class ColumnComponent implements OnInit {
 
     public onUpdate(note: PostIt) {
 
-        this.currentNote = note;
-        this.showInfoDialog();
 
+        this.currentNote = note;
+        this.emmitUpdate.emit({
+             note : this.currentNote,
+            colKey : this.colKey}
+        );
 
     }
 
@@ -143,51 +133,7 @@ export class ColumnComponent implements OnInit {
             note : this.currentNote,
             colKey : this.colKey}
         );
-
-
     }
-
-
-    public onUpdateInfo(note: PostIt) {
-
-        this.update();
-        this.closeInfoDialog();
-
-    }
-
-    public onGit(aotFix: any) {
-
-        this.createGitIssue(this.currentNote);
-        this.closeInfoDialog();
-
-
-    }
-
-    public onClose(aotFix: any) {
-        this.closeInfoDialog();
-        this.currentNote.closed = !this.currentNote.closed;
-        this.update();
-        this.closeInfoDialog();
-
-    }
-
-    public onDelete(aotFix: any) {
-
-        this.closeInfoDialog();
-        this.onDeleteTask(this.currentNote);
-        this.closeInfoDialog();
-
-    }
-
-    public onLoad(aotFix: any) {
-
-        this.closeInfoDialog();
-        this.logHours();
-
-    }
-
-
-
 
 
     public inicializateCurrentNote() {

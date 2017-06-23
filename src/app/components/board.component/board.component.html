@@ -3,7 +3,8 @@
 
         <div *ngFor="let column of columns">
             <div class="scrollDiv">
-                <app-column (editColName)="onEditCol($event)" (createTaskFromIssue)="onTaskFromIssue($event)" (createTask)="onCreateTask($event)" (logHoursEmmiter)="onLogHours($event)" [gitHubRepo]="gitHubRepo" [boardKey]="board" [colKey]="column.$key" [colName]="column._columnName">
+                <app-column (editColName)="onEditCol($event)" (createTaskFromIssue)="onTaskFromIssue($event)" (createTask)="onCreateTask($event)" (logHoursEmmiter)="onLogHours($event)" (emmitUpdate)="onEmmitUpdate($event)" [gitHubRepo]="gitHubRepo" [boardKey]="board"
+                    [colKey]="column.$key" [colName]="column._columnName">
                 </app-column>
             </div>
         </div>
@@ -40,6 +41,10 @@
         <input name="inputCargarHoras" class="input-modal" type="number" #horas placeholder="Cargue aquí sus horas" />
         <br>
         <button name="cargarHoras" class="button btn-main" (click)="logHours(horas.value)">Cargar horas</button>
+    </p-dialog>
+
+    <p-dialog [width]="1200 " height="600 " [draggable]="false " [modal]="true " header="Información Tarea" [(visible)]="showInfo ">
+        <note-extended (close)="onClose($event)" (git)="onGit($event)" (load)="onLoad($event)" (update)="onUpdateInfo($event)" (delete)="onDelete($event)" [note]="currentNote"></note-extended>
     </p-dialog>
 
 </div>

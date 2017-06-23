@@ -20,7 +20,7 @@ import { DestroySubscribers } from '../../util/unsuscribe.decorator';
     selector: 'list',
     templateUrl: './board.component.html',
     styleUrls: ['./board.component.scss'],
-    providers: []
+    providers: [GithubService]
 })
 @DestroySubscribers()
 export class BoardComponent implements OnInit, OnDestroy {
@@ -38,15 +38,18 @@ export class BoardComponent implements OnInit, OnDestroy {
     public gitHubRepo: string;
     public colKey: string;
     public colName: string;
-    public showLogWork :boolean;
-    public currentNote : PostIt;
+    public showLogWork: boolean;
+    public showInfo: boolean;
+    public currentNote: PostIt;
+
 
 
 
 
 
     constructor(public userService: UserService, public taskService: TaskService, public columnService: ColumnService,
-        public dragulaService: DragulaService, public route: ActivatedRoute, public boardService: BoardService) {
+        public dragulaService: DragulaService, public route: ActivatedRoute, public boardService: BoardService,
+        public githubService: GithubService) {
 
 
         this.dragulaSubscriptions(dragulaService);
@@ -109,6 +112,16 @@ export class BoardComponent implements OnInit, OnDestroy {
     public removeLogWorkDialog() {
         this.showLogWork = false;
     }
+    public showInfoDialog() {
+        this.showInfo = true;
+    }
+
+
+
+
+    public closeInfoDialog() {
+        this.showInfo = false;
+    }
 
     onCreateTask(colKey: string) {
         this.colKey = colKey;
@@ -120,7 +133,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.showDialogGit();
     }
 
-    public onEditCol(colInfo : any){
+    public onEditCol(colInfo: any) {
 
         this.colKey = colInfo.colKey;
         this.colName = colInfo.colName;
@@ -136,7 +149,54 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     }
 
-     public update() {
+    public onEmmitUpdate(note :any){
+
+        this.currentNote = note.note;
+        this.colKey = note.colKey;
+        this.showInfoDialog();
+    }
+
+    public onUpdateInfo(note: PostIt) {
+
+        this.update();
+        this.closeInfoDialog();
+
+    }
+
+    public onGit(aotFix: any) {
+
+        if (this.gitHubRepo) {
+            this.githubService.postIssue(this.gitHubRepo, this.currentNote);
+        }
+        this.closeInfoDialog();
+
+    }
+
+    public onClose(aotFix: any) {
+        this.closeInfoDialog();
+        this.currentNote.closed = !this.currentNote.closed;
+        this.update();
+        this.closeInfoDialog();
+
+    }
+
+    public onDelete(aotFix: any) {
+
+        this.closeInfoDialog();
+        this.columnService.deleteColumn(this.board, this.colKey);
+        this.closeInfoDialog();
+
+    }
+
+    public onLoad(aotFix: any) {
+
+        this.closeInfoDialog();
+        this.showLogWorkDialog();
+
+    }
+
+
+    public update() {
 
         this.taskService.updateTask(this.colKey, this.board, this.currentNote.key, this.currentNote);
 
@@ -157,7 +217,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     }
 
-    
+
 
 
     public logHours(hours: any) {
@@ -192,10 +252,10 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     }
 
-    public inicializateCurrentNote(){
+    public inicializateCurrentNote() {
 
-        this.currentNote = new PostIt("",",","",0,"");
-        this.currentNote.workedHours =0;
+        this.currentNote = new PostIt("", ",", "", 0, "");
+        this.currentNote.workedHours = 0;
 
     }
 

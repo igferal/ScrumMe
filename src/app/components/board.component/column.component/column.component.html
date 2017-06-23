@@ -19,8 +19,3 @@
     <div id="contenedorvacio" *ngIf="size ===0" class="dragHere"> Arrastra aquí o crea una nueva tarea</div>
 
 </div>
-
-
-<p-dialog [width]="1200 " height="600 " [draggable]="false " [modal]="true " header="Información Tarea" [(visible)]="showInfo ">
-    <note-extended (close)="onClose($event)" (git)="onGit($event)" (load)="onLoad($event)" (update)="onUpdateInfo($event)" (delete)="onDelete($event)" [note]="currentNote"></note-extended>
-</p-dialog>
