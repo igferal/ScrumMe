@@ -3,7 +3,7 @@ import { PostIt } from './../../model/post.it';
 import { TaskService } from './../../services/database/task.service';
 import { Issue } from './../../model/issue';
 import { GithubService } from './../../services/github/github.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./github.component.scss'],
   providers: [GithubService]
 })
-export class GithubComponent implements OnInit {
+export class GithubComponent implements OnInit, OnChanges{
 
   public issues: Array<any> = [];
   @Input() board: string;
@@ -45,11 +45,9 @@ export class GithubComponent implements OnInit {
   }
 
 
+  public getIssues(){
 
-  ngOnInit() {
-
-    console.log(this.gitHubRepo)
-    if (this.gitHubRepo) {
+     if (this.gitHubRepo) {
 
       this.githubService.getIssues(this.gitHubRepo).map((r) => r.json())
         .subscribe((res: Array<any>) => {
@@ -59,6 +57,17 @@ export class GithubComponent implements OnInit {
           });
         });
     }
+  }
+
+  ngOnChanges() {
+    
+    this.getIssues();
+    
+  }
+
+  ngOnInit() {
+
+   this.getIssues();
 
   }
 

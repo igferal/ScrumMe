@@ -3,7 +3,7 @@
 
         <div *ngFor="let column of columns">
             <div class="scrollDiv">
-                <app-column [gitHubRepo]="gitHubRepo" [boardKey]="board" [colKey]="column.$key" [colName]="column._columnName"> </app-column>
+                <app-column (editColName)="onEditCol($event)" (createTaskFromIssue)="onTaskFromIssue($event)" (createTask)="onCreateTask($event)" [gitHubRepo]="gitHubRepo" [boardKey]="board" [colKey]="column.$key" [colName]="column._columnName"> </app-column>
             </div>
         </div>
         <div class="scrollDiv-new">
@@ -15,6 +15,18 @@
 
     <p-dialog [width]="600" height="250" [draggable]="false" [modal]="true" header="Crear Columna" [(visible)]="showModal">
         <createColumn [colName]="" [board]="board" (notify)="closeDialog()"></createColumn>
+    </p-dialog>
+
+    <p-dialog [width]="600 " height="450 " [draggable]="false " [modal]="true " header="Crear Tarea " [(visible)]="showCreateTaskDialog">
+        <createTask [colKey]="colKey" [board]="board" (notify)="closeCreateTaskDialog()"></createTask>
+    </p-dialog>
+
+    <p-dialog [width]="1200" [draggable]=" false " [modal]="true " header="GitHubIssues " [(visible)]="showModalGit ">
+        <github-issues [gitHubRepo]="gitHubRepo " [column]="colKey" [board]="board" (notify)="closeDialog() "></github-issues>
+    </p-dialog>
+
+    <p-dialog [width]="600 " height="250 " [draggable]="false " [modal]="true " header="Editar Columna " [(visible)]="showModalCol">
+        <createColumn [colKey]="colKey" [editing]="true" [colName]="colName" [board]="board" (notify)="closeDialogCol() "></createColumn>
     </p-dialog>
 
 </div>

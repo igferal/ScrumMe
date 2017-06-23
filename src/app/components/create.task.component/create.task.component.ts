@@ -23,7 +23,6 @@ export class CreateTaskComponent {
     @Input() board: any;
     @Input() colKey: any;
     @Output() notify = new EventEmitter<boolean>();
-    @Input() editing: boolean;
     public incorrect: boolean;
 
     constructor(public taskService: TaskService, public router: Router) {
@@ -36,7 +35,6 @@ export class CreateTaskComponent {
      * tablero de que la tarea ha sido creada
      */
     public onSubmit() {
-
         if (this.isDataCorrrect()) {
             this.incorrect = false;
             let postIt = new PostIt(this.name, this.contenido, '', this.horas, '');

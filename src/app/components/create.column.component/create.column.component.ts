@@ -1,7 +1,7 @@
 import { IColumnService } from './../../services/database/IColumnService';
 import { ColumnService } from './../../services/database/column.service';
 import { BoardColumn } from './../../model/boardColumn';
-import { Component, Output, EventEmitter, Input, OnInit , Inject  } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, Inject, OnChanges } from '@angular/core';
 import { PostIt } from '../../model/post.it';
 import { Router } from '@angular/router';
 
@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 
 
-export class CreateColumnComponent implements OnInit {
+export class CreateColumnComponent implements OnInit, OnChanges {
 
 
 
@@ -28,8 +28,8 @@ export class CreateColumnComponent implements OnInit {
     @Input() editing: boolean;
     @Input() colKey: string;
 
-    constructor(  @Inject(ColumnService)
-        public columnService: IColumnService, public router: Router) {
+    constructor( @Inject(ColumnService)
+    public columnService: IColumnService, public router: Router) {
 
     }
 
@@ -42,11 +42,13 @@ export class CreateColumnComponent implements OnInit {
 
         (this.editing) ? this.edit() : this.save();
 
+
     }
 
     public edit() {
 
         this.columnService.editColumn(`board_columns/${this.board}/${this.colKey}/_columnName`, this.name);
+        this.notify.emit(false);
 
     }
 
@@ -57,9 +59,10 @@ export class CreateColumnComponent implements OnInit {
         this.columnService.saveColumn(this.board, colBoard);
         this.name = '';
         this.notify.emit(false);
+
     }
 
-    ngOnInit() {
+    public configure() {
 
         if (this.colName !== undefined) {
             this.name = this.colName;
@@ -69,6 +72,14 @@ export class CreateColumnComponent implements OnInit {
             this.action = 'Crear Columna';
         }
 
+    }
+    ngOnChanges() {
+        this.configure();
+    }
+
+    ngOnInit() {
+
+        this.configure();
 
     }
 

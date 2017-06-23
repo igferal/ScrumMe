@@ -3,7 +3,7 @@ import { TaskService } from '../../../services/database/task.service';
 import { ColumnService } from './../../../services/database/column.service';
 import { DestroySubscribers } from '../../../util/unsuscribe.decorator';
 import { PostIt } from './../../../model/post.it';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, EventEmitter } from '@angular/core';
 import { MenuItem } from 'primeng/primeng';
 
 @Component({
@@ -23,12 +23,12 @@ export class ColumnComponent implements OnInit {
     @Input() public colName: string;
     @Input() public boardKey: string;
     @Input() public gitHubRepo: string;
+    @Output() public createTask = new EventEmitter<string>();
+    @Output() public createTaskFromIssue = new EventEmitter<string>();
+    @Output() public editColName = new EventEmitter<any>();
     public currentNote : PostIt;
     public subscribers: any = {};
     public options: any[];
-    public showModal: boolean;
-    public showModalCol: boolean;
-    public showModalGit: boolean;
     public notesToDispose = [];
     public showLogWork :boolean;
     public size: number;
@@ -42,7 +42,10 @@ export class ColumnComponent implements OnInit {
         this.options = [
             {
                 label: 'Editar', icon: 'fa fa-pencil-square-o', command: () => {
-                    this.showDialogCol();
+                    this.editColName.emit({
+                        colKey : this.colKey,
+                        colName :this.colName
+                    })
                 }
             },
             {
@@ -52,13 +55,13 @@ export class ColumnComponent implements OnInit {
             },
             {
                 label: 'Añadir tarea', icon: 'fa fa-plus', command: () => {
-                    this.showDialog();
+                    this.createTask.emit(this.colKey);
                 }
             },
             {
                 label: 'Añadir issues', icon: 'fa fa-github', command: () => {
                     if (this.gitHubRepo) {
-                        this.showDialogGit();
+                        this.createTaskFromIssue.emit(this.colKey);
                     }
                 }
             }
@@ -79,21 +82,6 @@ export class ColumnComponent implements OnInit {
         this.inicializateCurrentNote();
     }
 
-    public showDialog() {
-        this.showModal = true;
-    }
-
-    public closeDialog() {
-        this.showModal = false;
-    }
-
-    public showDialogGit() {
-        this.showModalGit = true;
-    }
-
-    public closeDialogGit() {
-        this.showModalGit = false;
-    }
 
     public showInfoDialog() {
         this.showInfo = true;
@@ -105,13 +93,6 @@ export class ColumnComponent implements OnInit {
     }
 
 
-    public showDialogCol() {
-        this.showModalCol = true;
-    }
-
-    public closeDialogCol() {
-        this.showModalCol = false;
-    }
 
     public showLogWorkDialog() {
         this.showLogWork = true;

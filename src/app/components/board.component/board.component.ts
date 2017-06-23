@@ -32,13 +32,19 @@ export class BoardComponent implements OnInit, OnDestroy {
     public subscribers: any = {};
     public columns: Array<String>;
     public showModal: boolean;
-    public gitHubRepo : string;
+    public showCreateTaskDialog;
+    public showModalGit: boolean;
+    public showModalCol: boolean;
+    public gitHubRepo: string;
+    public colKey: string;
+    public colName: string;
+
 
 
 
 
     constructor(public userService: UserService, public taskService: TaskService, public columnService: ColumnService,
-        public dragulaService: DragulaService, public route: ActivatedRoute,public boardService : BoardService) {
+        public dragulaService: DragulaService, public route: ActivatedRoute, public boardService: BoardService) {
 
 
         this.dragulaSubscriptions(dragulaService);
@@ -53,11 +59,21 @@ export class BoardComponent implements OnInit, OnDestroy {
             this.onDropModel(value.slice(1));
         });
 
-          dragulaService.setOptions('bag-one', {
+        dragulaService.setOptions('bag-one', {
             moves: (el, source, handle, sibling) => !el.classList.contains('dragHere')
         });
 
     }
+
+
+    public showDialogCol() {
+        this.showModalCol = true;
+    }
+
+    public closeDialogCol() {
+        this.showModalCol = false;
+    }
+
 
     public showDialog() {
         this.showModal = true;
@@ -66,6 +82,42 @@ export class BoardComponent implements OnInit, OnDestroy {
     public closeDialog() {
         this.showModal = false;
     }
+
+    public showCreteTaskDialog() {
+        this.showCreateTaskDialog = true;
+    }
+
+    public closeCreateTaskDialog() {
+        this.showCreateTaskDialog = false;
+    }
+
+    public showDialogGit() {
+        this.getGitHubRepo();
+        this.showModalGit = true;
+    }
+
+    public closeDialogGit() {
+        this.showModalGit = false;
+    }
+
+    onCreateTask(colKey: string) {
+        this.colKey = colKey;
+        this.showCreteTaskDialog();
+    }
+
+    onTaskFromIssue(colKey: string) {
+        this.colKey = colKey;
+        this.showDialogGit();
+    }
+
+    public onEditCol(colInfo : any){
+
+        this.colKey = colInfo.colKey;
+        this.colName = colInfo.colName;
+        this.showDialogCol();
+
+    }
+
 
 
     /**
@@ -97,9 +149,9 @@ export class BoardComponent implements OnInit, OnDestroy {
 
         this.suscribeUser();
         this.inicializateRoute();
-        this.getGitHubRepo();
         this.inicializateCollections();
-                
+                this.getGitHubRepo();
+
 
     }
 
@@ -113,15 +165,14 @@ export class BoardComponent implements OnInit, OnDestroy {
         if (this.dragulaService.find('bag-one')) {
             this.dragulaService.destroy('bag-one');
         }
-      
+
     }
 
-    public getGitHubRepo(){
+    public getGitHubRepo() {
 
-         this.subscribers.gitHubSuscription = this.boardService.getBoardInfo(this.board).subscribe((boardInfo=>{
-             this.gitHubRepo = boardInfo.gitHubRepo;
-             console.log("Repo inicializada")
-         }))
+        this.subscribers.gitHubSuscription = this.boardService.getBoardInfo(this.board).subscribe((boardInfo => {
+            this.gitHubRepo = boardInfo.gitHubRepo;
+        }))
 
     }
 

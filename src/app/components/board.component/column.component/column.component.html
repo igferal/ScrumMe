@@ -22,18 +22,7 @@
 
 
 
-<p-dialog [width]="600 " height="250 " [draggable]="false " [modal]="true " header="Editar Columna " [(visible)]="showModalCol ">
-    <createColumn [colKey]="colKey " [editing]="true " [colName]="colName " [board]="boardKey " (notify)="closeDialogCol() "></createColumn>
-</p-dialog>
 
-
-<p-dialog [width]="600 " height="450 " [draggable]="false " [modal]="true " header="Crear Tarea " [(visible)]="showModal">
-    <createTask [editing]="true " [colKey]="colKey " [board]="boardKey " (notify)="closeDialog() "></createTask>
-</p-dialog>
-
-<p-dialog [width]="1200" [draggable]=" false " [modal]="true " header="GitHubIssues " [(visible)]="showModalGit ">
-    <github-issues [gitHubRepo]="gitHubRepo " [column]="colKey " [board]="boardKey " (notify)="closeDialog() "></github-issues>
-</p-dialog>
 
 
 

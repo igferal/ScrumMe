@@ -93,7 +93,7 @@ describe('Dashboard Page tests', function () {
 it('Debo poder editar el tablero', () => {
 
     page.edit();
-    browser.driver.sleep(1000);
+    browser.driver.sleep(3000);
     expect(page.getElement("gotoboardsprint2")).toBeTruthy();
 
   });
