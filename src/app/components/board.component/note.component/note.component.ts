@@ -14,24 +14,17 @@ export class NoteComponent implements OnInit {
     @Input() board: any;
     @Input() colKey: any;
     @Input() noteKey: string;
-    @Output() notify = new EventEmitter<string>();
+    @Output() notify = new EventEmitter<any>();
     @Output() addWork = new EventEmitter<any>();
     @Output() changeTaskState = new EventEmitter<any>();
     @Output() createIssue = new EventEmitter<any>();
     @Output() update = new EventEmitter<any>();
     public options: any[];
-    public showLogWork: boolean;
     public percentage: number;
-    public showInfo: boolean;
 
-    public showLogWorkDialog() {
-        this.showLogWork = true;
-    }
+    
 
-    public removeLogWorkDialog() {
-        this.showLogWork = false;
-    }
-
+ 
 
 
     constructor() {
@@ -45,7 +38,8 @@ export class NoteComponent implements OnInit {
         this.options = [
             {
                 label: 'Editar', icon: 'fa fa-pencil-square-o', command: () => {
-                    this.showInfoDialog();
+                   this.note.key = this.noteKey;
+                   this.update.emit(this.note);
                 }
             },
             {
@@ -55,7 +49,9 @@ export class NoteComponent implements OnInit {
             },
             {
                 label: 'Cargar horas', icon: 'fa fa-hourglass-o', command: () => {
-                    this.showLogWorkDialog();
+                     this.note.key = this.noteKey;
+                     this.addWork.emit(this.note);
+      
                 }
             },
             {
@@ -76,14 +72,6 @@ export class NoteComponent implements OnInit {
     }
 
 
-    public showInfoDialog() {
-        this.showInfo = true;
-    }
-
-
-    public closeInfoDialog() {
-        this.showInfo = false;
-    }
 
     public sentToGitHub() {
         this.createIssue.emit(this.note);
@@ -106,16 +94,8 @@ export class NoteComponent implements OnInit {
 
     }
 
-    public logHours(hours: any) {
 
-
-        this.note.workedHours = (this.note.workedHours + parseInt(hours));
-        this.note.key = this.noteKey;
-        this.addWork.emit(this.note);
-        this.removeLogWorkDialog();
-
-    }
-
+   
 
 
     public titleLimited(): string {
@@ -138,47 +118,14 @@ export class NoteComponent implements OnInit {
     }
 
     public deleteItem() {
-
-        this.notify.emit(this.noteKey);
-
-    }
-
-
-
-    public onUpdate(note: PostIt) {
-
-        this.closeInfoDialog();
-        note.key = this.noteKey;
-        console.log(note);
-        this.update.emit(note);
-    }
-
-    public onGit(aotFix : any) {
-        this.sentToGitHub();
-        this.closeInfoDialog();
+        this.note.key = this.noteKey;
+        this.notify.emit(this.note);
 
     }
 
-    public onClose(aotFix : any) {
-        this.closeInfoDialog();
-        this.closeTask();
 
-    }
 
-    public onDelete(aotFix : any) {
-
-        this.closeInfoDialog();
-        this.deleteItem();
-
-    }
-
-    public onLoad(aotFix : any) {
-
-        this.closeInfoDialog();
-        this.showLogWorkDialog();
-
-    }
-
+  
 
     ngOnInit() {
 

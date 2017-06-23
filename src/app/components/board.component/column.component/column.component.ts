@@ -23,13 +23,17 @@ export class ColumnComponent implements OnInit {
     @Input() public colName: string;
     @Input() public boardKey: string;
     @Input() public gitHubRepo: string;
+    public currentNote : PostIt;
     public subscribers: any = {};
     public options: any[];
     public showModal: boolean;
     public showModalCol: boolean;
     public showModalGit: boolean;
     public notesToDispose = [];
+    public showLogWork :boolean;
     public size: number;
+    public showInfo: boolean;
+
 
 
     constructor(private columnService: ColumnService, public taskService: TaskService, public githubService: GithubService) {
@@ -68,8 +72,11 @@ export class ColumnComponent implements OnInit {
     /**
     * Metodo que nos gestiona el borrado de notas
     */
-    public onNotify(key: string) {
-        this.taskService.deleteTask(this.boardKey, this.colKey, key);
+    public onDeleteTask(note: PostIt) {
+        
+        this.currentNote = note;
+        this.taskService.deleteTask(this.boardKey, this.colKey, this.currentNote.key);
+        this.inicializateCurrentNote();
     }
 
     public showDialog() {
@@ -88,6 +95,15 @@ export class ColumnComponent implements OnInit {
         this.showModalGit = false;
     }
 
+    public showInfoDialog() {
+        this.showInfo = true;
+    }
+
+
+    public closeInfoDialog() {
+        this.showInfo = false;
+    }
+
 
     public showDialogCol() {
         this.showModalCol = true;
@@ -97,9 +113,19 @@ export class ColumnComponent implements OnInit {
         this.showModalCol = false;
     }
 
+    public showLogWorkDialog() {
+        this.showLogWork = true;
+    }
+
+    public removeLogWorkDialog() {
+        this.showLogWork = false;
+    }
+
+
     public onLogHours(note: PostIt) {
 
-        this.taskService.updateTask(this.colKey, this.boardKey, note.key, note);
+        this.currentNote = note;
+        this.showLogWorkDialog();
 
     }
 
@@ -110,15 +136,24 @@ export class ColumnComponent implements OnInit {
 
     public createGitIssue(postit: PostIt) {
 
+        this.currentNote = postit;
         if (this.gitHubRepo) {
-            this.githubService.postIssue(this.gitHubRepo, postit);
+            this.githubService.postIssue(this.gitHubRepo, this.currentNote);
         }
     }
 
     public onUpdate(note: PostIt) {
+        
+        this.currentNote = note;
+        this.showInfoDialog();
 
-        this.taskService.updateTask(this.colKey, this.boardKey, note.key, note);
 
+    }
+
+
+    public update(){
+
+        this.taskService.updateTask(this.colKey, this.boardKey, this.currentNote.key, this.currentNote);
 
     }
 
@@ -127,11 +162,71 @@ export class ColumnComponent implements OnInit {
         this.columnService.deleteColumn(this.boardKey, this.colKey);
     }
 
-    ngOnInit() {
+    public logHours(hours: any) {
 
+        this.currentNote.workedHours = (this.currentNote.workedHours + parseInt(hours));
+        this.removeLogWorkDialog();
+        this.update();
+
+    }
+
+
+    public onUpdateInfo(note: PostIt) {
+
+        this.update();
+        this.closeInfoDialog();
+        
+    }
+
+    public onGit(aotFix : any) {
+        
+        this.createGitIssue(this.currentNote);
+        this.closeInfoDialog();
+        
+
+    }
+
+    public onClose(aotFix : any) {
+        this.closeInfoDialog();
+        this.currentNote.closed = !this.currentNote.closed;
+                this.update();
+        this.closeInfoDialog();
+
+    }
+
+    public onDelete(aotFix : any) {
+
+        this.closeInfoDialog();
+        this.onDeleteTask(this.currentNote);
+        this.closeInfoDialog();
+
+    }
+
+    public onLoad(aotFix : any) {
+
+        this.closeInfoDialog();
+        this.showLogWorkDialog();
+
+    }
+
+
+
+
+
+    public inicializateCurrentNote(){
+
+
+            this.currentNote = new PostIt("",",","",0,"");
+            this.currentNote.workedHours =0;
+
+
+    }
+
+    ngOnInit() {
+        
+        this.inicializateCurrentNote();
         this.subscribers.subscription = this.taskService.getTasks(this.colKey, this.boardKey).subscribe((items) => {
             this.notes = items;
-
             if (this.notes) {
                 this.size = this.notes.length;
             } else {

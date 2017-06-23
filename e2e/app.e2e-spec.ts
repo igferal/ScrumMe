@@ -69,7 +69,7 @@ describe('Dashboard Page tests', function () {
 
   it('Debe aparecer una nueva carta de tablon', () => {
 
-    browser.driver.sleep(500);
+    browser.driver.sleep(1000);
     page.createCard();
     browser.driver.sleep(1500);
     expect(page.getElement("gotoboardsprint1")).toBeTruthy();
@@ -124,7 +124,7 @@ it('Debo poder editar el tablero', () => {
 
   it('Debe aparecer un mensaje diciendo que se ha enviado la petición', () => {
 
-    browser.driver.sleep(500);
+    browser.driver.sleep(1000);
     page.sendNotification("testuser2@scrumme.es");
     browser.driver.sleep(1000);
     expect(element(by.xpath("/html/body/app-root/div/dashboard/div/div[2]/p-messages/div/ul/li/span[1]")).getText()).toBe("Completado!");
@@ -170,7 +170,7 @@ describe('Collab Page tests', function () {
     collabs.navigateTo();
     browser.driver.sleep(1500);
     collabs.declineCollab();
-    browser.driver.sleep(500);
+    browser.driver.sleep(1000);
     expect(collabs.getCardHeaderTextPresent()).toBeFalsy();
   });
 
@@ -304,7 +304,7 @@ describe('Board Page tests', function () {
     browser.driver.sleep(1000);
     expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("Testing"); 
     dashboard.navigateTo();
-    browser.driver.sleep(1000);
+    browser.driver.sleep(1500);
     dashboard.deleteCard();
 
   });
