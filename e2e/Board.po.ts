@@ -79,9 +79,9 @@ export class BoardPage {
 
         Utils.clickByXpath("//*[@id=\"noteKey\"]/header/i");
         Utils.clickByXpath("//*[@id=\"T1\"]/div/ul/li[1]/a");
-        Utils.fillInputByXpath("/html/body/app-root/div/list/div/section/div[1]/div/app-column/p-dialog[1]/div/div[2]/note-extended/section/header/input", "T1updated");
+        Utils.fillInputByXpath("/html/body/app-root/div/list/div/p-dialog[6]/div/div[2]/note-extended/section/header/input", "T1updated");
         Utils.clickButton("edit")
-
+        
     }
 
     deleteTask(taskid :string) {

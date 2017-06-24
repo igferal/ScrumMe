@@ -299,10 +299,10 @@ describe('Board Page tests', function () {
   });
 
   it('Debe mostrar las issues del repositorio',()=>{
-    board.deleteTask("T1");
-    board.abrirIntegracionGit();
-    browser.driver.sleep(1000);
-    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("Testing"); 
+   // board.deleteTask("T1");
+   // board.abrirIntegracionGit();
+   // browser.driver.sleep(1000);
+   // expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("Testing"); 
     dashboard.navigateTo();
     browser.driver.sleep(2500);
     dashboard.deleteCard();
