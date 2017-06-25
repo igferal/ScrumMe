@@ -303,10 +303,19 @@ describe('Board Page tests', function () {
 
   });
 
+
+   it('No debe crear una tarea', () => {
+
+    browser.driver.sleep(1500);
+    board.createTask("T1","-10","Tarea de Prueba");
+    expect(board.getElementTextByXpath("/html/body/app-root/div/list/div/p-dialog[2]/div/div[1]/span")).toEqual("Crear Tarea");
+
+  });
+
   it('Debe crear una tarea', () => {
 
     browser.driver.sleep(1500);
-    board.createTask();
+    board.createTask("T1",10,"Tarea de Prueba");
     expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("T1");
 
   });
@@ -330,7 +339,7 @@ describe('Board Page tests', function () {
   it('Debe cargar Horas en  una tarea', () => {
 
     browser.driver.sleep(1500);
-    board.createTask();
+    board.createTask("T1",10,"Tarea de Prueba");
     board.cargarHoras();
     expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/div/div/div/strong  ")).toEqual("50");
 

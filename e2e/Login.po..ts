@@ -19,9 +19,6 @@ export class LoginPage {
 
   editUser(oldpass,newpass){
 
-
-    Utils.fillInput("name","testuser");
-    Utils.fillInput("surname","testuser");
     Utils.fillInput("oldpass",oldpass);
     Utils.fillInput("password",newpass);
     Utils.fillInput("passwordAgain",newpass);
@@ -36,6 +33,8 @@ export class LoginPage {
     let text = element(by.name('error')).getText();
     return text !== null;
   }
+
+
 
   fillForm(user: string, password: string) {
     let input;

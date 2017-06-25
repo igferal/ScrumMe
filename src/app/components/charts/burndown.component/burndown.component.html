@@ -1,6 +1,6 @@
 <div class="chartDiv" *ngIf="isDataAvailable">
+    <h1>Trabajo realizado</h1>
     <div style=" display: block ">
-        <canvas baseChart [datasets]="ChartData " [labels]="ChartLabels " [options]="ChartOptions " [legend]="ChartLegend " [chartType]="ChartType "
-          [colors]="ChartColors"  (chartHover)="chartHovered($event) " (chartClick)="chartClicked($event) "></canvas>
+        <canvas baseChart [datasets]="ChartData " [labels]="ChartLabels " [options]="ChartOptions " [legend]="ChartLegend " [chartType]="ChartType " [colors]="ChartColors" (chartHover)="chartHovered($event) " (chartClick)="chartClicked($event) "></canvas>
     </div>
 </div>

@@ -61,13 +61,14 @@ export class BoardPage {
 
     }
 
-    createTask() {
+    
+    createTask(titulo :string, tiempo, descripcion :string) {
 
         Utils.clickByXpath("/html/body/app-root/div/list/div/section/div[1]/div/app-column/header/i");
         Utils.clickByXpath("/html/body/app-root/div/list/div/section/div[1]/div/app-column/header/p-menu/div/ul/li[3]/a");
-        Utils.fillInputByXpath("/html/body/app-root/div/list/div/p-dialog[2]/div/div[2]/createtask/form/input[1]", "T1");
-        Utils.fillInputByXpath("/html/body/app-root/div/list/div/p-dialog[2]/div/div[2]/createtask/form/input[2]", "10");
-        Utils.fillInputByXpath("/html/body/app-root/div/list/div/p-dialog[2]/div/div[2]/createtask/form/textarea", "Tarea de prueba");
+        Utils.fillInputByXpath("/html/body/app-root/div/list/div/p-dialog[2]/div/div[2]/createtask/form/input[1]", titulo);
+        Utils.fillInputByXpath("/html/body/app-root/div/list/div/p-dialog[2]/div/div[2]/createtask/form/input[2]", tiempo);
+        Utils.fillInputByXpath("/html/body/app-root/div/list/div/p-dialog[2]/div/div[2]/createtask/form/textarea", descripcion);
         browser.driver.sleep(500);
         Utils.clickByXpath("/html/body/app-root/div/list/div/p-dialog[2]/div/div[2]/createtask/form/button");
 
