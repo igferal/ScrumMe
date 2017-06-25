@@ -54,11 +54,14 @@ export class FirebaseAuthentication implements IAuthentication, CanActivate {
 
 
     public changePassword(password: string, oldPassword: string, email: string) {
+            console.log(`pass vieja ${oldPassword} pass nueva ${password}` )
 
         let creds: any = { email: email, password: oldPassword };
         this.auth.auth.signInWithEmailAndPassword(email, oldPassword).then((res) => {
-            
-            this.auth.auth.currentUser.updatePassword(email);
+            console.log(res);
+            this.auth.auth.currentUser.updatePassword(password).catch((err)=>{
+                console.log(err);
+            });
 
         })
 

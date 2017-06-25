@@ -36,10 +36,39 @@ describe('Login Page tests', function () {
     expect(page.getHeader()).toEqual('Iniciar sesión');
 
   });
+
   it('Debe iniciar sesión aparecer un mensaje que diga Mis tableros', () => {
     page.navigateTo();
     page.login("testuser@scrumme.es", "scrumme");
     expect(page.getHeader()).toEqual('Mis tableros');
+  });
+
+
+  it('Debe cambiar la contraseña del perfil',()=>{
+    page.navigateTo();
+    page.login("testuser@scrumme.es", "scrumme");
+    browser.driver.sleep(2000);
+    page.navigateToEdit();    
+    browser.driver.sleep(2000);
+    page.editUser("scrumme","pepito");
+    browser.driver.sleep(1000);
+    page.navigateTo();
+    browser.driver.sleep(1000);
+    page.login("testuser@scrumme.es", "scrumme");
+    expect(page.getErrorElement()).toBeTruthy();
+    page.login("testuser@scrumme.es", "pepito");
+    browser.driver.sleep(1000);
+    expect(page.getHeader()).toEqual('Mis tableros');
+    page.navigateToEdit();
+    browser.driver.sleep(1000);
+    page.editUser("pepito","scrumme");
+    browser.driver.sleep(1000);
+
+
+
+    
+
+
   });
 
   it('No debe iniciar sesión', () => {
@@ -49,6 +78,8 @@ describe('Login Page tests', function () {
     expect(page.getErrorElement()).toBeTruthy();
     expect(page.getHeader()).toEqual('Iniciar sesión');
   });
+
+  
 
 });
 
@@ -76,6 +107,29 @@ describe('Dashboard Page tests', function () {
 
   });
 
+
+  it('Debe redirigir a github', () => {
+
+
+    browser.driver.sleep(1000);
+    page.goToGitHub();
+    browser.driver.sleep(1000);
+    expect(browser.driver.getCurrentUrl()).toContain("github.com/nacho1014/ScrumMe")
+
+
+  })
+
+  it('Debe redirigir a Travis', () => {
+
+    browser.driver.sleep(1000);
+    page.goToTravis();
+    browser.driver.sleep(1000);
+    expect(browser.driver.getCurrentUrl()).toContain("travis-ci.org/nacho1014/ScrumMe")
+
+
+  })
+
+
   it('Debe crear un tablero con las columnas indicadas', () => {
 
     browser.driver.sleep(1500);
@@ -90,7 +144,7 @@ describe('Dashboard Page tests', function () {
 
 
 
-it('Debo poder editar el tablero', () => {
+  it('Debo poder editar el tablero', () => {
 
     page.edit();
     browser.driver.sleep(3000);
@@ -270,7 +324,7 @@ describe('Board Page tests', function () {
     board.deleteTask("T1updated");
     expect(board.getElementByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toBeFalsy();
 
-   });
+  });
 
 
   it('Debe cargar Horas en  una tarea', () => {
@@ -282,33 +336,33 @@ describe('Board Page tests', function () {
 
   });
 
-  it('Debe cerrar una tarea',() =>{
+  it('Debe cerrar una tarea', () => {
     board.cerrarTarea();
     expect(board.getElementByXpath("//*[@id=\"noteKey\"]/div/div/div/strong ")).toBeFalsy();
 
 
   });
 
-   it('Debe abrir una tarea que había sido cerrada',() =>{
+  it('Debe abrir una tarea que había sido cerrada', () => {
     browser.driver.sleep(1000);
     board.cerrarTarea();
     browser.driver.sleep(1000);
     expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/div/div/div/strong ")).toEqual("50");
-    
+
 
   });
 
-  it('Debe mostrar las issues del repositorio',()=>{
-   // board.deleteTask("T1");
-   // board.abrirIntegracionGit();
-   // browser.driver.sleep(1000);
-   // expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("Testing"); 
+  it('Debe mostrar las issues del repositorio', () => {
+    // board.deleteTask("T1");
+    // board.abrirIntegracionGit();
+    // browser.driver.sleep(1000);
+    // expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("Testing"); 
     dashboard.navigateTo();
     browser.driver.sleep(2500);
     dashboard.deleteCard();
 
   });
 
-    
+
 
 });

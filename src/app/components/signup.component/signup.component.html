@@ -13,7 +13,7 @@
                 <p> </p>
                 <input required type="text" required [(ngModel)]="surname" name="surname" placeholder="Apellido" />
                 <p> </p>
-                <input *ngIf="isEditing" required type="password" required [(ngModel)]="oldPassword" name="password" placeholder="Contraseña actual" />
+                <input *ngIf="isEditing" required type="password" required [(ngModel)]="oldPassword" name="oldpass" placeholder="Contraseña actual" />
                 <input *ngIf="!isEditing" required type="email" required [(ngModel)]="email" name="email" placeholder="Email" />
                 <p> </p>
                 <input required type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña" />

@@ -14,7 +14,8 @@ export class DashboardPage {
     Utils.fillInput("name", "sprint1");
     Utils.fillInput("date", "12/12/2017");
     Utils.fillInput("columns", "To do,Done");
-    Utils.fillInput("gitHubRepo","nacho1014/ScrumMe")
+    Utils.fillInput("gitHubRepo","nacho1014/ScrumMe");
+    Utils.fillInput("travisRepo","nacho1014/ScrumMe")
     Utils.clickButton("enviar");
   }
 
@@ -41,6 +42,17 @@ export class DashboardPage {
 
     Utils.clickButton("gotoboardsprint1");
 
+  }
+
+  goToGitHub(){
+
+    Utils.clickByXpath("/html/body/app-root/div/dashboard/div/div[2]/section[1]/board-card/section/div/div[2]/a[3]/i");
+
+  }
+
+  goToTravis(){
+
+    Utils.clickByXpath("/html/body/app-root/div/dashboard/div/div[2]/section[1]/board-card/section/header/a");
   }
 
   edit() {
