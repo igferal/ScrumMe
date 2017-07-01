@@ -25,7 +25,10 @@ export class LoginPage {
     browser.driver.sleep(3000);
     Utils.clickByXpath("/html/body/app-root/div/signup/div/div[2]/form/div/button");
 
-    Utils.clickByXpath("/html/body/app-root/header/div[2]/div[4]/a");
+  }
+
+  closeSesion(){
+        Utils.clickByXpath("/html/body/app-root/header/div[2]/div[4]/a");
   }
 
   getErrorElement() {

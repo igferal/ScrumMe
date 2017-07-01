@@ -44,14 +44,16 @@ describe('Login Page tests', function () {
   });
 
 
-  it('Debe cambiar la contraseña del perfil',()=>{
+  it('Debe cambiar la contraseña del perfil', () => {
     page.navigateTo();
     page.login("testuser@scrumme.es", "scrumme");
     browser.driver.sleep(2000);
-    page.navigateToEdit();    
+    page.navigateToEdit();
     browser.driver.sleep(2000);
-    page.editUser("scrumme","pepito");
+    page.editUser("scrumme", "pepito");
     browser.driver.sleep(1000);
+    page.closeSesion();
+    browser.driver.sleep(500);
     page.navigateTo();
     browser.driver.sleep(1000);
     page.login("testuser@scrumme.es", "scrumme");
@@ -61,12 +63,12 @@ describe('Login Page tests', function () {
     expect(page.getHeader()).toEqual('Mis tableros');
     page.navigateToEdit();
     browser.driver.sleep(1000);
-    page.editUser("pepito","scrumme");
+    page.editUser("pepito", "scrumme");
     browser.driver.sleep(1000);
 
 
 
-    
+
 
 
   });
@@ -79,7 +81,7 @@ describe('Login Page tests', function () {
     expect(page.getHeader()).toEqual('Iniciar sesión');
   });
 
-  
+
 
 });
 
@@ -249,8 +251,6 @@ describe('Collab Page tests', function () {
     dashboard.navigateTo();
     browser.driver.sleep(1500);
     expect(dashboard.getElement("gotoboardsprint1")).toBeTruthy();
-    dashboard.deleteCard();
-
 
   });
 
@@ -304,10 +304,10 @@ describe('Board Page tests', function () {
   });
 
 
-   it('No debe crear una tarea', () => {
+  it('No debe crear una tarea', () => {
 
     browser.driver.sleep(1500);
-    board.createTask("T1","-10","Tarea de Prueba");
+    board.createTask("T1", "-10", "Tarea de Prueba");
     expect(board.getElementTextByXpath("/html/body/app-root/div/list/div/p-dialog[2]/div/div[1]/span")).toEqual("Crear Tarea");
 
   });
@@ -315,7 +315,7 @@ describe('Board Page tests', function () {
   it('Debe crear una tarea', () => {
 
     browser.driver.sleep(1500);
-    board.createTask("T1",10,"Tarea de Prueba");
+    board.createTask("T1", 10, "Tarea de Prueba");
     expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("T1");
 
   });
@@ -339,7 +339,7 @@ describe('Board Page tests', function () {
   it('Debe cargar Horas en  una tarea', () => {
 
     browser.driver.sleep(1500);
-    board.createTask("T1",10,"Tarea de Prueba");
+    board.createTask("T1", 10, "Tarea de Prueba");
     board.cargarHoras();
     expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/div/div/div/strong  ")).toEqual("50");
 
@@ -361,11 +361,28 @@ describe('Board Page tests', function () {
 
   });
 
+  it('El usuario que comparte el tablero debe ver los cambios realizados', () => {
+
+    login.closeSesion();
+    browser.driver.sleep(1000);
+    login.navigateTo();
+        browser.driver.sleep(1000);
+    login.login("testuser2@scrumme.es", "scrumme");
+    dashboard.goToBoard();
+    browser.driver.sleep(1000);
+    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/div/div/div/strong ")).toEqual("50");
+    dashboard.navigateTo();
+    browser.driver.sleep(1500);
+    dashboard.deleteCard();
+
+  });
+
+
   it('Debe mostrar las issues del repositorio', () => {
-    // board.deleteTask("T1");
-    // board.abrirIntegracionGit();
-    // browser.driver.sleep(1000);
-    // expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("Testing"); 
+    board.deleteTask("T1");
+    board.abrirIntegracionGit();
+    browser.driver.sleep(1000);
+    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("Testing");
     dashboard.navigateTo();
     browser.driver.sleep(2500);
     dashboard.deleteCard();
@@ -375,3 +392,4 @@ describe('Board Page tests', function () {
 
 
 });
+
