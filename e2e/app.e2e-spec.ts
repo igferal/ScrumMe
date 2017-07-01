@@ -44,34 +44,6 @@ describe('Login Page tests', function () {
   });
 
 
-  it('Debe cambiar la contraseña del perfil', () => {
-    page.navigateTo();
-    page.login("testuser@scrumme.es", "scrumme");
-    browser.driver.sleep(2000);
-    page.navigateToEdit();
-    browser.driver.sleep(2000);
-    page.editUser("scrumme", "pepito");
-    browser.driver.sleep(1000);
-    page.closeSesion();
-    browser.driver.sleep(500);
-    page.navigateTo();
-    browser.driver.sleep(1000);
-    page.login("testuser@scrumme.es", "scrumme");
-    expect(page.getErrorElement()).toBeTruthy();
-    page.login("testuser@scrumme.es", "pepito");
-    browser.driver.sleep(1000);
-    expect(page.getHeader()).toEqual('Mis tableros');
-    page.navigateToEdit();
-    browser.driver.sleep(1000);
-    page.editUser("pepito", "scrumme");
-    browser.driver.sleep(1000);
-
-
-
-
-
-
-  });
 
   it('No debe iniciar sesión', () => {
     page.navigateTo();
@@ -345,6 +317,22 @@ describe('Board Page tests', function () {
 
   });
 
+    it('El usuario que comparte el tablero debe ver los cambios realizados', () => {
+
+    login.closeSesion();
+    browser.driver.sleep(1000);
+    login.navigateTo();
+    browser.driver.sleep(1000);
+    login.login("testuser2@scrumme.es", "scrumme");
+    dashboard.goToBoard();
+    browser.driver.sleep(1000);
+    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/div/div/div/strong ")).toEqual("50");
+    dashboard.navigateTo();
+    browser.driver.sleep(1500);
+    dashboard.deleteCard();
+
+  });
+
   it('Debe cerrar una tarea', () => {
     board.cerrarTarea();
     expect(board.getElementByXpath("//*[@id=\"noteKey\"]/div/div/div/strong ")).toBeFalsy();
@@ -357,38 +345,12 @@ describe('Board Page tests', function () {
     board.cerrarTarea();
     browser.driver.sleep(1000);
     expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/div/div/div/strong ")).toEqual("50");
-
-
-  });
-
-  it('El usuario que comparte el tablero debe ver los cambios realizados', () => {
-
-    login.closeSesion();
-    browser.driver.sleep(1000);
-    login.navigateTo();
-        browser.driver.sleep(1000);
-    login.login("testuser2@scrumme.es", "scrumme");
-    dashboard.goToBoard();
-    browser.driver.sleep(1000);
-    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/div/div/div/strong ")).toEqual("50");
-    dashboard.navigateTo();
-    browser.driver.sleep(1500);
-    dashboard.deleteCard();
-
-  });
-
-
-  it('Debe mostrar las issues del repositorio', () => {
-    board.deleteTask("T1");
-    board.abrirIntegracionGit();
-    browser.driver.sleep(1000);
-    expect(board.getElementTextByXpath("//*[@id=\"noteKey\"]/header/div/strong")).toEqual("Testing");
     dashboard.navigateTo();
     browser.driver.sleep(2500);
     dashboard.deleteCard();
 
-  });
 
+  });
 
 
 });
