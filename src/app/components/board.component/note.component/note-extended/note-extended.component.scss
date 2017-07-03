@@ -2,11 +2,12 @@
 @import "~componentes.scss";
 .note-info {
     height: 600px;
-    width: 1000px;
+    width: 600px;
+    margin-left: 15px;
     display: flex;
     flex-direction: column;
     header {
-        width: 1100px;
+        width: 600px;
         display: inline-flex;
         justify-content: space-between;
         margin-bottom: 2%;
@@ -15,6 +16,15 @@
         border: none;
         &:focus {
             border: 1px solid $main-color;
+        }
+    }
+    i {
+        &:hover {
+            .tooltip {
+                visibility: visible;
+                opacity: 1;
+                transform: translate(-50%, -150%);
+            }
         }
     }
     .badge {
@@ -29,7 +39,7 @@
         align-self: center;
     }
     textarea {
-        width: 1100px;
+        width: 600px;
         height: 150px;
         border: none;
         outline: 0 none;
@@ -51,7 +61,7 @@
         justify-content: space-between;
     }
     .contenido {
-        width: 1100px;
+        width: 600px;
     }
     .center {
         align-items: center;

@@ -8,10 +8,26 @@
     <div class="contenido">
         <textarea type="text" required [(ngModel)]="note.contenido"></textarea>
         <div class="inline contenido">
-            <a (click)="onGit()"> <i class="fa fa-github iconButton blue" aria-hidden="true"></i> </a>
-            <a (click)="onLoad()"> <i class="fa fa-clock-o iconButton blue" aria-hidden="true"></i> </a>
-            <a (click)="onClose()"> <i class="fa fa-calendar-check-o iconButton blue" aria-hidden="true"></i> </a>
-            <a (click)="onDelete()"> <i class="fa fa-times iconButton blue" aria-hidden="true"></i> </a>
+            <a (click)="onGit()">
+                <i class="fa fa-github iconButton blue" aria-hidden="true">
+                     <span  class="tooltip blue">Crear&nbsp;Issue</span>
+                </i>
+            </a>
+            <a (click)="onLoad()">
+                <i class="fa fa-clock-o iconButton blue" aria-hidden="true">
+                     <span  class="tooltip blue">Cargar&nbsp;Horas</span>
+                </i>
+            </a>
+            <a (click)="onClose()">
+                <i class="fa fa-calendar-check-o iconButton blue" aria-hidden="true">
+                     <span  class="tooltip blue">Cerrar&nbsp;tarea</span>
+                 </i>
+            </a>
+            <a (click)="onDelete()">
+                <i class="fa fa-times iconButton blue" aria-hidden="true">
+                    <span  class="tooltip blue">Borrar&nbsp;tarea</span>
+                </i>
+            </a>
         </div>
 
         <div class="inline contenido center">

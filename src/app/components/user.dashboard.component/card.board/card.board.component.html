@@ -1,7 +1,10 @@
 <section class="tablon">
     <header class="title">
         <a href="{{travisRepoUrl}}">
-            <i [ngStyle]="color.getBackground()" class="fa fa-pied-piper delivery" aria-hidden="true"></i></a>
+            <i [ngStyle]="color.getBackground()" class="fa fa-pied-piper delivery" aria-hidden="true">   
+                <span [ngStyle]="color.getBackground()" class="tooltip">Ir&nbsp;a&nbsp;Travis</span>
+            </i>
+        </a>
         <div class="status">
             <i name="botonborrar" class="fa fa-times black" aria-hidden="true" (click)="deleteBoard()"></i>
         </div>
@@ -10,15 +13,36 @@
     <div class="body">
         <div class="inline">
             <h3 [ngStyle]="color.getColor()">{{board.name}}</h3>
-            <h3 [ngStyle]="color.getColor()">{{board.date}}</h3>
+            <h3 [ngStyle]="color.getColor()">{{getDate()}}</h3>
         </div>
 
         <div class="inline">
-            <a name="burndown{{board.name}}" (click)="goToBurndown()"> <i [ngStyle]="color.getBackground()" class="fa fa-area-chart iconButton" aria-hidden="true"></i></a>
-            <a name="mytasks{{board.name}}" (click)="goToMyCharts()"> <i [ngStyle]="color.getBackground()" class="fa fa-bar-chart iconButton" aria-hidden="true"></i> </a>
-            <a name="github{{board.name}}" href="{{gitRepoUrl}}"> <i [ngStyle]="color.getBackground()" class="fa fa-github iconButton" aria-hidden="true"></i> </a>
-            <a name="collabs{{board.name}}" (click)="showDialogColabs()"> <i [ngStyle]="color.getBackground()" class="fa fa-users iconButton" aria-hidden="true"></i> </a>
-            <a (click)="showDialog()"> <i [ngStyle]="color.getBackground()" class="fa fa-wrench iconButton" aria-hidden="true"></i> </a>
+            <a class="tool" name="burndown{{board.name}}" (click)="goToBurndown()">
+                <i [ngStyle]="color.getBackground()" class="fa fa-area-chart iconButton" aria-hidden="true">
+                   <span [ngStyle]="color.getBackground()" class="tooltip">Gráfico&nbsp;tablero</span>
+                </i>
+
+            </a>
+            <a name="mytasks{{board.name}}" (click)="goToMyCharts()">
+                <i [ngStyle]="color.getBackground()" class="fa fa-bar-chart iconButton" aria-hidden="true">
+                    <span  [ngStyle]="color.getBackground()" class="tooltip">Gráfico&nbsp;tareas</span>
+                </i>
+            </a>
+            <a name="github{{board.name}}" href="{{gitRepoUrl}}">
+                <i [ngStyle]="color.getBackground()" class="fa fa-github iconButton" aria-hidden="true">
+                    <span  [ngStyle]="color.getBackground()" class="tooltip">Ir&nbsp;a&nbsp;GitHub</span>
+                </i>
+            </a>
+            <a name="collabs{{board.name}}" (click)="showDialogColabs()">
+                <i [ngStyle]="color.getBackground()" class="fa fa-users iconButton" aria-hidden="true">
+                    <span  [ngStyle]="color.getBackground()" class="tooltip">Invitar&nbsp;a&nbsp;colaborar</span>
+                </i>
+            </a>
+            <a (click)="showDialog()">
+                <i [ngStyle]="color.getBackground()" class="fa fa-wrench iconButton" aria-hidden="true">
+                    <span  [ngStyle]="color.getBackground()" class="tooltip">Editar&nbsp;tarea</span>
+                </i>
+            </a>
         </div>
     </div>
     <hr>

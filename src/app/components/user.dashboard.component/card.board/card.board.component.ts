@@ -51,6 +51,12 @@ export class CardBoardComponent implements OnInit {
 
   }
 
+  public getDate(){
+
+    let  nDate : Date = new Date(this.board.date);
+    return nDate.toLocaleDateString();
+    
+  }
 
 
 
