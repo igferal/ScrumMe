@@ -89,16 +89,16 @@ export class CreateBoardComponent implements OnInit {
         board.travisRepo = this.getRepo(this.travisRepo);
         let boardCol: BoardColumn;
         let colsSplitted: string[];
-
-
-        if (this.columns.length > 0) {
-            colsSplitted = this.columns.split(",");
-            colsSplitted.forEach((colName) => {
-
-                boardCol = new BoardColumn(new Array<PostIt>(), colName);
-                board.boardColumns.push(boardCol);
-            });
+        if (this.columns.length === 0) {
+            this.columns="To Do, In Progress, Testing, Done";
         }
+
+        colsSplitted = this.columns.split(",");
+        colsSplitted.forEach((colName) => {
+            boardCol = new BoardColumn(new Array<PostIt>(), colName);
+            board.boardColumns.push(boardCol);
+        });
+        
 
         this.boardService.saveBoard(board);
         this.notify.emit(true);

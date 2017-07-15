@@ -1,4 +1,4 @@
-<div id="noteKey" class="card" draggable="true">
+<div [ngStyle]="border" id="noteKey" class="card" draggable="true">
     <header>
         <div><strong> {{titleLimited()}} </strong> <small> : {{note.programador}}</small> </div>
         <i style="float: right" class="fa fa-ellipsis-h" aria-hidden="true" (click)="menu.toggle($event)"></i>
@@ -6,8 +6,9 @@
     <div class="card-content">
         <p class="text" *ngIf="!note.closed">{{contentLimited()}}</p>
         <del class="text" *ngIf="note.closed">{{contentLimited()}}</del>
-        <div *ngIf="!note.closed">
-            <div class="percentage"> <strong> {{percentage}}   </strong></div>
+        <div>
+            <div class="percentage" *ngIf="!note.closed"> <strong> {{percentage}}   </strong></div>
+            <div class="done" *ngIf="note.closed"> <i class="fa fa-check" aria-hidden="true"></i></div>
         </div>
     </div>
 </div>

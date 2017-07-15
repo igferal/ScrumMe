@@ -76,6 +76,7 @@ export class TaskService implements ITaskService {
         subscription.unsubscribe();
         let note: PostIt = new PostIt(element.titulo, element.contenido, element.programador, element.horas, element.$key);
         note.workedHours = element.workedHours;
+        note.closed = element.closed;
         note.uid = this.auth.auth.currentUser.uid;
         return note;
     }
