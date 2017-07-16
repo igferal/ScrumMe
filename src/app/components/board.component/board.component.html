@@ -40,7 +40,7 @@
         <label>Cargar horas</label>
         <input name="inputCargarHoras" class="input-modal" type="number" #horas placeholder="Cargue aquí sus horas" />
         <br>
-        <button name="cargarHoras" class="button btn-main" (click)="logHours(horas.value)">Cargar horas</button>
+        <button name="cargarHoras" class="button btn-main" (click)="logHours(horas.value) ; horas.value=0;">Cargar horas</button>
     </p-dialog>
 
     <p-dialog [width]="665 " height="600 " [draggable]="false " [modal]="true " header="Información Tarea" [(visible)]="showInfo ">

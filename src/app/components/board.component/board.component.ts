@@ -149,7 +149,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     }
 
-    public onEmmitUpdate(note :any){
+    public onEmmitUpdate(note: any) {
 
         this.currentNote = note.note;
         this.colKey = note.colKey;
@@ -222,10 +222,11 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     public logHours(hours: any) {
 
-        this.currentNote.workedHours = (this.currentNote.workedHours + parseInt(hours));
-        this.removeLogWorkDialog();
-        this.update();
-
+        if ((this.currentNote.workedHours + parseInt(hours)) >= 0) {
+            this.currentNote.workedHours = (this.currentNote.workedHours + parseInt(hours));
+            this.removeLogWorkDialog();
+            this.update();
+        }
     }
 
 

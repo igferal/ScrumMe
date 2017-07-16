@@ -47,15 +47,17 @@ export class GithubComponent implements OnInit, OnChanges{
 
   public getIssues(){
 
+    let issuesLocal = [];
      if (this.gitHubRepo) {
 
       this.githubService.getIssues(this.gitHubRepo).map((r) => r.json())
         .subscribe((res: Array<any>) => {
           res.forEach((each) => {
-
-            this.issues.push(new Issue(each));
+            issuesLocal.push(new Issue(each));
           });
+          this.issues = issuesLocal;
         });
+
     }
   }
 
